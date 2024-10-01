@@ -46,6 +46,13 @@ public class MainController {
 		return "personList";
 	}
 
+	@RequestMapping(value = { "/Login" }, method = RequestMethod.GET)
+	public String login(Model model) {
+
+		return "Login";
+	}
+
+
 	@RequestMapping(value = { "/addPerson" }, method = RequestMethod.GET)
 	public String showAddPersonPage(Model model) {
 
@@ -73,5 +80,12 @@ public class MainController {
 		model.addAttribute("errorMessage", errorMessage);
 		return "addPerson";
 	}
+
+	@RequestMapping(value = { "/make_appointment" }, method = RequestMethod.GET)
+	public String make_appoint(Model model) {
+
+		return "make_appointment";
+	}
+
 
 }
