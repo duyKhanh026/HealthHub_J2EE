@@ -47,10 +47,9 @@ CREATE TABLE `benhnhan` (
 -- Table structure for table `hosobenhan`
 --
 
-CREATE TABLE `hosobenhan` (
+CREATE TABLE `hosobenhnhan` (
   `MaHS` int(11) NOT NULL,
   `MaLK` int(11) NOT NULL,
-  `MaBN` int(50) NOT NULL,
   `Chuandoan` text NOT NULL,
   `Donthuoc` text NOT NULL,
   `Ghichuthem` text NOT NULL
@@ -73,8 +72,6 @@ CREATE TABLE `lichkham` (
 
 
 
--- --------------------------------------------------------
-
 --
 -- Table structure for table `taikhoan`
 --
@@ -92,9 +89,6 @@ CREATE TABLE `taikhoan` (
 --
 
 --
--- Indexes for table `bacsi`
-
---
 -- Indexes for table `benhnhan`
 --
 ALTER TABLE `benhnhan`
@@ -103,9 +97,8 @@ ALTER TABLE `benhnhan`
 --
 -- Indexes for table `hosobenhan`
 --
-ALTER TABLE `hosobenhan`
+ALTER TABLE `hosobenhnhan`
   ADD PRIMARY KEY (`MaHS`),
-  ADD KEY `MaBN` (`MaBN`),
   ADD KEY `MaLK` (`MaLK`);
 
 --
@@ -130,7 +123,7 @@ ALTER TABLE `taikhoan`
 --
 -- Constraints for table `hosobenhan`
 --
-ALTER TABLE `hosobenhan`
+ALTER TABLE `hosobenhnhan`
   ADD CONSTRAINT `hosobenhan_ibfk_1` FOREIGN KEY (`MaLK`) REFERENCES `lichkham` (`MaLK`);
 
 --
@@ -139,6 +132,9 @@ ALTER TABLE `hosobenhan`
 ALTER TABLE `lichkham`
   ADD CONSTRAINT `lichkham_ibfk_1` FOREIGN KEY (`MaBN`) REFERENCES `benhnhan` (`MaBN`);
 
+
+ALTER TABLE `taikhoan`
+    ADD CONSTRAINT `taikhoan_ibfk_1` FOREIGN KEY (`MaBN`) REFERENCES `benhnhan` (`MaBN`);
 
 COMMIT;
 
