@@ -87,5 +87,15 @@ public class MainController {
 		return "make_appointment";
 	}
 
+	@RequestMapping(value = { "/DangNhap" }, method = RequestMethod.GET)
+	public String Dangnhap(Model model) {
 
+		return "DangNhap";
+	}
+
+	@RequestMapping(value = { "/DSLichKham" }, method = RequestMethod.GET)
+	public String ListLichKham(Model model) {
+
+		return "DSLichKham";
+	}
 }
