@@ -35,7 +35,7 @@ public class MainController {
 
 		model.addAttribute("message", message);
 
-		return "index";
+		return "User/index";
 	}
 
 	@RequestMapping(value = { "/personList" }, method = RequestMethod.GET)
@@ -49,7 +49,7 @@ public class MainController {
 	@RequestMapping(value = { "/Login" }, method = RequestMethod.GET)
 	public String login(Model model) {
 
-		return "Login";
+		return "User/Login";
 	}
 
 
@@ -84,18 +84,37 @@ public class MainController {
 	@RequestMapping(value = { "/make_appointment" }, method = RequestMethod.GET)
 	public String make_appoint(Model model) {
 
-		return "make_appointment";
+		return "User/make_appointment";
 	}
 
 	@RequestMapping(value = { "/DangNhap" }, method = RequestMethod.GET)
 	public String Dangnhap(Model model) {
 
-		return "DangNhap";
+		return "User/DangNhap";
 	}
 
 	@RequestMapping(value = { "/DSLichKham" }, method = RequestMethod.GET)
 	public String ListLichKham(Model model) {
 
-		return "DSLichKham";
+		return "Doctor/DSLichKham";
 	}
+
+	@RequestMapping(value = { "/DSBenhNhan" }, method = RequestMethod.GET)
+	public String ListBenhNhan(Model model) {
+
+		return "Doctor/DSBenhNhan";
+	}
+
+	@RequestMapping(value = { "/HoSoBenhNhan" }, method = RequestMethod.GET)
+	public String HoSoBN(Model model) {
+
+		return "Doctor/HoSoBenhNhan";
+	}
+
+	@RequestMapping(value = { "/ChiTietLichKham" }, method = RequestMethod.GET)
+	public String ChiTietLichKham(Model model) {
+
+		return "Doctor/ChiTietLichKham";
+	}
+
 }
