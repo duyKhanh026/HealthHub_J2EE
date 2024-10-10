@@ -16,7 +16,7 @@ public class BenhNhanDAO extends JdbcDaoSupport{
     }
 	public List<String> getBenhNhan() {
 
-        String sql = "Select b.MaBN from benhnhan b ";
+        String sql = "Select b.Hoten from benhnhan b ";
 
         // queryForList(String sql, Class<T> elementType)
         List<String> list = this.getJdbcTemplate().queryForList(sql, String.class);
