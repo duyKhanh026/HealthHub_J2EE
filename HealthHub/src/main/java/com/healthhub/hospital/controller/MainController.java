@@ -1,4 +1,4 @@
-package com.healthhub.hospital.dao;
+package com.healthhub.hospital.controller;
 
 import java.util.ArrayList;
 import java.util.List;
