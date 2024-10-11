@@ -32,7 +32,7 @@ public class MainController {
 	@RequestMapping(value = { "/Login" }, method = RequestMethod.GET)
 	public String login(Model model) {
 
-		return "User/Login";
+		return "User/DangNhap";
 	}
 
 	@RequestMapping(value = { "/make_appointment" }, method = RequestMethod.GET)
@@ -41,11 +41,6 @@ public class MainController {
 		return "User/make_appointment";
 	}
 
-	@RequestMapping(value = { "/DangNhap" }, method = RequestMethod.GET)
-	public String Dangnhap(Model model) {
-
-		return "User/DangNhap";
-	}
 
 	@RequestMapping(value = { "/DSLichKham" }, method = RequestMethod.GET)
 	public String ListLichKham(Model model) {
