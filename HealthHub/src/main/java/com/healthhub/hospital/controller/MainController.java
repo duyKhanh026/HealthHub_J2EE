@@ -4,11 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.healthhub.hospital.config.AppConfig;
+import com.healthhub.hospital.dao.BenhNhanDAO;
+import com.healthhub.hospital.model.BenhNhan;
 
 @Controller
 public class MainController {
@@ -19,11 +26,23 @@ public class MainController {
 
 	@Value("${error.message}")
 	private String errorMessage;
+	
+	ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
-	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
+	@GetMapping({ "/", "/index" })
 	public String index(Model model) {
-
-		model.addAttribute("message", message);
+		
+		BenhNhanDAO dao = context.getBean(BenhNhanDAO.class);
+		SqlRowSet rowSet = dao.getBenhNhanSqlRowSet();
+		List<BenhNhan> benhnhans = new ArrayList<BenhNhan>();
+		while (rowSet.next()) {
+			BenhNhan bn = new BenhNhan();
+			bn.setMaBN(rowSet.getInt(1));
+			bn.setHoTen(rowSet.getString(2));
+			bn.setNgaySinh(rowSet.getDate(3));
+			benhnhans.add(bn);
+        }
+		model.addAttribute("benhnhans", benhnhans);
 
 		return "User/index";
 	}
@@ -41,29 +60,5 @@ public class MainController {
 		return "User/make_appointment";
 	}
 
-
-	@RequestMapping(value = { "/DSLichKham" }, method = RequestMethod.GET)
-	public String ListLichKham(Model model) {
-
-		return "Doctor/DSLichKham";
-	}
-
-	@RequestMapping(value = { "/DSBenhNhan" }, method = RequestMethod.GET)
-	public String ListBenhNhan(Model model) {
-
-		return "Doctor/DSBenhNhan";
-	}
-
-	@RequestMapping(value = { "/HoSoBenhNhan" }, method = RequestMethod.GET)
-	public String HoSoBN(Model model) {
-
-		return "Doctor/HoSoBenhNhan";
-	}
-
-	@RequestMapping(value = { "/ChiTietLichKham" }, method = RequestMethod.GET)
-	public String ChiTietLichKham(Model model) {
-
-		return "Doctor/ChiTietLichKham";
-	}
 
 }
