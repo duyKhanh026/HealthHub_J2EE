@@ -123,6 +123,9 @@
                                     <a class="btn btn-danger btn-circle btn-lg" onclick="deleteThietBi()">
                                         <i class="fas fa-trash-alt"></i> <!-- Xóa -->
                                     </a>
+                                    <a class="btn btn-primary btn-circle btn-lg" href="them">
+                                        <i class="fas fa-plus"></i> <!-- Thêm -->
+                                    </a>
 
 
                                 </div>
@@ -232,45 +235,45 @@
 <div class="container">
     <div id="addForm" class="add-form">
         <h2>Thêm bệnh nhân</h2>
-        <form id="adddeviceForm">
+        <form th:action="@{/them}" th:object="${benhNhan}" method="post">
             <div class="row">
                 <!-- Cột bên trái -->
                 <div class="col-md-6">
+<!--                    <div class="form-group">-->
+<!--                        <label for="BN_ID">Mã bệnh nhân:</label>-->
+<!--                        <input type="text" class="form-control" id="BN_ID" value="" />-->
+<!--                    </div>-->
                     <div class="form-group">
-                        <label for="BN_ID">Mã bệnh nhân:</label>
-                        <input type="text" class="form-control" id="BN_ID" value="" />
+                        <label for="hoTen">Họ tên:</label>
+                        <input type="text" class="form-control" id="hoTen"  value="" />
                     </div>
                     <div class="form-group">
-                        <label for="BN_Name">Họ tên:</label>
-                        <input type="text" class="form-control" id="BN_Name" value="" />
+                        <label for="ngaySinh">Ngày sinh:</label>
+                        <input type="date" class="form-control" id="ngaySinh"  value="" />
                     </div>
                     <div class="form-group">
-                        <label for="BN_Date">Ngày sinh:</label>
-                        <input type="date" class="form-control" id="BN_Date" value="" />
-                    </div>
-                    <div class="form-group">
-                        <label for="BN_GT">Giới tính:</label>
-                        <input type="text" class="form-control" id="BN_GT" value="" />
+                        <label for="gioitinh">Giới tính:</label>
+                        <input type="text" class="form-control" id="gioitinh"  value="" />
                     </div>
                 </div>
 
                 <!-- Cột bên phải -->
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="BN_Phone">Số điện thoại:</label>
-                        <input type="text" class="form-control" id="BN_Phone" value="" />
+                        <label for="sdt">Số điện thoại:</label>
+                        <input type="text" class="form-control" id="sdt"  value="" />
                     </div>
                     <div class="form-group">
-                        <label for="BN_Email">Email:</label>
-                        <input type="text" class="form-control" id="BN_Email" value="" />
+                        <label for="email">Email:</label>
+                        <input type="text" class="form-control" id="email"  value="" />
                     </div>
                     <div class="form-group">
-                        <label for="BN_ADR">Địa chỉ:</label>
-                        <input type="text" class="form-control" id="BN_ADR" value="" />
+                        <label for="diachi">Địa chỉ:</label>
+                        <input type="text" class="form-control" id="diachi"  value="" />
                     </div>
                     <div class="form-group">
-                        <label for="BN_His">Tiền sử bệnh:</label>
-                        <input type="text" class="form-control" id="BN_His" value="" />
+                        <label for="tiensubenh">Tiền sử bệnh:</label>
+                        <input type="text" class="form-control" id="tiensubenh"  value="" />
                     </div>
                 </div>
             </div>

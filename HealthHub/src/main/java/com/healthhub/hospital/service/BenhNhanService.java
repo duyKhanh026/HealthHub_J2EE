@@ -35,4 +35,8 @@ public class BenhNhanService {
         }
         return benhnhans;
     }
+
+    public void addBenhNhan(BenhNhan benhNhan) {
+        benhNhanDAO.addBenhNhan(benhNhan);
+    }
 }
