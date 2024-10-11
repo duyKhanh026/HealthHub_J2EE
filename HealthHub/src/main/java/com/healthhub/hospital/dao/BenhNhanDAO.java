@@ -23,6 +23,7 @@ public class BenhNhanDAO extends JdbcDaoSupport{
 
         return list;
     }
+
 	public SqlRowSet getBenhNhanSqlRowSet() {
 
 		String sql = "Select e.MaBN,e.Hoten,e.Ngaysinh From benhnhan e ";
@@ -33,5 +34,12 @@ public class BenhNhanDAO extends JdbcDaoSupport{
         return rowSet;
 
     }
+
+    public SqlRowSet getinforBenhNhan() {
+        String sql = "SELECT * FROM benhnhan";
+
+        return this.getJdbcTemplate().queryForRowSet(sql);
+    }
+
 
 }

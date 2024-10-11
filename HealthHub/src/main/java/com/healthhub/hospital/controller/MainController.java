@@ -66,28 +66,4 @@ public class MainController {
 		return "User/DangNhap";
 	}
 
-	@RequestMapping(value = { "/DSLichKham" }, method = RequestMethod.GET)
-	public String ListLichKham(Model model) {
-
-		return "Doctor/DSLichKham";
-	}
-
-	@RequestMapping(value = { "/DSBenhNhan" }, method = RequestMethod.GET)
-	public String ListBenhNhan(Model model) {
-
-		return "Doctor/DSBenhNhan";
-	}
-
-	@RequestMapping(value = { "/HoSoBenhNhan" }, method = RequestMethod.GET)
-	public String HoSoBN(Model model) {
-
-		return "Doctor/HoSoBenhNhan";
-	}
-
-	@RequestMapping(value = { "/ChiTietLichKham" }, method = RequestMethod.GET)
-	public String ChiTietLichKham(Model model) {
-
-		return "Doctor/ChiTietLichKham";
-	}
-
 }

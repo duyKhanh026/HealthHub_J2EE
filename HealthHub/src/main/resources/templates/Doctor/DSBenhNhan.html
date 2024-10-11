@@ -77,8 +77,8 @@
         <hr class="sidebar-divider d-none d-md-block">
 
         <li class="nav-item">
-            <a class="nav-link" href="DSLichKham">
-                <i class="fas fa-fw fa-users"></i>
+            <a class="nav-link" href="">
+                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                 <span>Đăng xuất</span></a>
         </li>
 
@@ -154,37 +154,16 @@
 
                                 <tbody>
 
-                                <tr>
-                                    <td><input type="checkbox" id="checkbox_101" name="selectedItems" value="101" class="checkbox_ID larger-checkbox"/></td>
-                                    <td>101</td>
-                                    <td>Nguyễn Văn A</td>
-                                    <td>01/01/2000</td>
-                                    <td>Nam</td>
-                                    <td>0123456789</td>
-                                    <td>TPHCM</td>
-                                    <td>nguyenvana@gmail.com</td>
-                                    <td>Xi đa</td>
-                                    <td>
-                                        <a class="btn btn-success btn-circle btn-lg openFormButton">
-                                            <i class="fas fa-pencil-alt"></i>  <!-- Sửa -->
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn btn-info btn-circle btn-lg">
-                                            <i class="fas fa-info-circle"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" id="checkbox_102" name="selectedItems" value="101" class="checkbox_ID larger-checkbox"/></td>
-                                    <td>101</td>
-                                    <td>Nguyễn Văn A</td>
-                                    <td>01/01/2000</td>
-                                    <td>Nam</td>
-                                    <td>0123456789</td>
-                                    <td>TPHCM</td>
-                                    <td>nguyenvana@gmail.com</td>
-                                    <td>Xi đa</td>
+                                <tr th:each="benhnhan : ${benhnhans}">
+                                    <td><input type="checkbox"  class="checkbox_ID larger-checkbox"/></td>
+                                    <td th:text="${benhnhan.MaBN} ">1</td>
+                                    <td th:text="${benhnhan.HoTen} ">Nguyễn Văn A</td>
+                                    <td th:text="${benhnhan.NgaySinh} "></td>
+                                    <td th:text="${benhnhan.Gioitinh} ">30</td>
+                                    <td th:text="${benhnhan.SDT} "></td>
+                                    <td th:text="${benhnhan.Email} "></td>
+                                    <td th:text="${benhnhan.Diachi} "></td>
+                                    <td th:text="${benhnhan.Tiensubenh} "></td>
                                     <td>
                                         <a class="btn btn-success btn-circle btn-lg openFormButton">
                                             <i class="fas fa-pencil-alt"></i>  <!-- Sửa -->
