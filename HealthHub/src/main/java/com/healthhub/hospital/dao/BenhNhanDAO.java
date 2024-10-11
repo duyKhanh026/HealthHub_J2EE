@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
@@ -36,9 +37,12 @@ public class BenhNhanDAO extends JdbcDaoSupport{
     }
 
     public SqlRowSet getinforBenhNhan() {
-        String sql = "SELECT * FROM benhnhan";
-
-        return this.getJdbcTemplate().queryForRowSet(sql);
+        try {
+            String sql = "SELECT * FROM benhnhan";
+            return this.getJdbcTemplate().queryForRowSet(sql);
+        }catch (DataAccessException e){
+            throw new RuntimeException("Lỗi khi truy xuất danh sách bệnh nhân", e);
+        }
     }
 
 
