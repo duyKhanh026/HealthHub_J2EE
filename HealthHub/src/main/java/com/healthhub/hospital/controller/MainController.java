@@ -47,6 +47,11 @@ public class MainController {
 		return "User/index";
 	}
 
+	@GetMapping({ "/LichKhamLS" })
+	public String lichKham(Model model) {
+
+		return "User/LichKham";
+	}
 	
 	@RequestMapping(value = { "/Login" }, method = RequestMethod.GET)
 	public String login(Model model) {
