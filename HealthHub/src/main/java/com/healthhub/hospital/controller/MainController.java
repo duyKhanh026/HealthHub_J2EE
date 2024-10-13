@@ -10,8 +10,6 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.healthhub.hospital.config.AppConfig;
 import com.healthhub.hospital.dao.BenhNhanDAO;
@@ -49,17 +47,17 @@ public class MainController {
 
 	@GetMapping({ "/LichKhamLS" })
 	public String lichKham(Model model) {
-
+		// gửi tin nhắn để thông báo khi đc thực thi
 		return "User/LichKham";
 	}
 	
-	@RequestMapping(value = { "/Login" }, method = RequestMethod.GET)
+	@GetMapping({ "/Login" })
 	public String login(Model model) {
 
 		return "User/DangNhap";
 	}
 
-	@RequestMapping(value = { "/make_appointment" }, method = RequestMethod.GET)
+	@GetMapping({ "/make_appointment" })
 	public String make_appoint(Model model) {
 
 		return "User/make_appointment";
