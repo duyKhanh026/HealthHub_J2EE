@@ -245,15 +245,15 @@
 <!--                    </div>-->
                     <div class="form-group">
                         <label for="hoTen">Họ tên:</label>
-                        <input type="text" class="form-control" id="hoTen"  value="" />
+                        <input type="text" class="form-control" id="hoTen" th:field="*{hoTen}" value="" />
                     </div>
                     <div class="form-group">
                         <label for="ngaySinh">Ngày sinh:</label>
-                        <input type="date" class="form-control" id="ngaySinh"  value="" />
+                        <input type="date" class="form-control" id="ngaySinh" th:field="*{ngaySinh}"  value="" />
                     </div>
                     <div class="form-group">
                         <label for="gioitinh">Giới tính:</label>
-                        <input type="text" class="form-control" id="gioitinh"  value="" />
+                        <input type="text" class="form-control" id="gioitinh" th:field="*{gioitinh}" value="" />
                     </div>
                 </div>
 
@@ -261,24 +261,24 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="sdt">Số điện thoại:</label>
-                        <input type="text" class="form-control" id="sdt"  value="" />
+                        <input type="text" class="form-control" id="sdt" th:field="*{SDT}" value="" />
                     </div>
                     <div class="form-group">
                         <label for="email">Email:</label>
-                        <input type="text" class="form-control" id="email"  value="" />
+                        <input type="text" class="form-control" id="email" th:field="*{Email}"  value="" />
                     </div>
                     <div class="form-group">
                         <label for="diachi">Địa chỉ:</label>
-                        <input type="text" class="form-control" id="diachi"  value="" />
+                        <input type="text" class="form-control" id="diachi" th:field="*{Diachi}" value="" />
                     </div>
                     <div class="form-group">
                         <label for="tiensubenh">Tiền sử bệnh:</label>
-                        <input type="text" class="form-control" id="tiensubenh"  value="" />
+                        <input type="text" class="form-control" id="tiensubenh" th:field="*{Tiensubenh}" value="" />
                     </div>
                 </div>
             </div>
 
-            <button type="button" class="btn btn-primary" onclick="saveAdd()">Lưu thay đổi</button>
+            <button type="submit" class="btn btn-primary" onclick="saveAdd()">Lưu thay đổi</button>
             <button type="button" class="btn btn-secondary" onclick="closeFormAdd()">Đóng</button>
         </form>
     </div>

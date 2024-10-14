@@ -30,15 +30,16 @@ public class DSBenhNhanController {
     public String listBenhNhan(Model model) {
         List<BenhNhan> benhnhans = benhNhanService.getAllBenhNhan();
         model.addAttribute("benhnhans", benhnhans);
+        model.addAttribute("benhNhan", new BenhNhan());
         return "Doctor/DSBenhNhan";
     }
 
-    // Hiển thị form thêm bệnh nhân
-    @GetMapping("/them")
-    public String showAddBenhNhanForm(Model model) {
-        model.addAttribute("benhNhan", new BenhNhan());
-        return "Doctor/ThemBenhNhan";
-    }
+//    // Hiển thị form thêm bệnh nhân
+//    @GetMapping("/them")
+//    public String showAddBenhNhanForm(Model model) {
+//        model.addAttribute("benhNhan", new BenhNhan());
+//        return "Doctor/ThemBenhNhan";
+//    }
 
     // Xử lý form thêm bệnh nhân
     @PostMapping("/them")
