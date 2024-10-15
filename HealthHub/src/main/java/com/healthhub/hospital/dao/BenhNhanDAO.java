@@ -16,6 +16,7 @@ public class BenhNhanDAO extends JdbcDaoSupport{
     public BenhNhanDAO(DataSource dataSource) {
         this.setDataSource(dataSource);
     }
+
 	public List<String> getBenhNhan() {
 
         String sql = "Select b.Hoten from benhnhan b ";

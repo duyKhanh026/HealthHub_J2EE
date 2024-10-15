@@ -90,119 +90,63 @@
 
         <!-- Main Content -->
         <div id="content">
-
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" style="margin-top: 2%">
-
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <h2 class="m-0 font-weight-bold text-primary">Thông tin chi tiết bệnh nhân</h2>
-
-                <!-- Topbar Navbar -->
-                <ul class="navbar-nav ml-auto">
-
-                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                    <li class="nav-item dropdown no-arrow d-sm-none">
-                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-search fa-fw"></i>
-                        </a>
-                        <!-- Dropdown - Messages -->
-                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                             aria-labelledby="searchDropdown">
-                            <form class="form-inline mr-auto w-100 navbar-search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control bg-light border-0 small"
-                                           placeholder="Search for..." aria-label="Search"
-                                           aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button">
-                                            <i class="fas fa-search fa-sm"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-
-
-
-                    <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="img-profile rounded-circle"
-                                 src="img/undraw_profile.svg">
-                        </a>
-                        <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                             aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Profile
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Logout
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
             <!-- Begin Page Content -->
-            <div class="container-fluid">
+            <div class="container-fluid mt-4">
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h2 class="m-0 font-weight-bold text-primary">Thông tin chi tiết bệnh nhân</h2>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon-container">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <form>
                             <div class="form-group">
                                 <label>Mã bệnh nhân</label>
-                                <input type="text" id="maTV" class="form-control" >
+                                <input type="text" id="maTV" class="form-control" th:value="${benhnhan.MaBN}">
 
                             </div>
                             <div class="form-group">
                                 <label>Tên</label>
-                                <input type="text" id="ten" class="form-control" th:value="${ten}">
+                                <input type="text" id="ten" class="form-control" th:value="${benhnhan.HoTen}">
                             </div>
                             <div class="form-group">
                                 <label>Ngày sinh</label>
-                                <input type="text" id="khoa" class="form-control" th:value="${khoa}" >
+                                <input type="text" id="khoa" class="form-control" th:value="${benhnhan.NgaySinh}" >
                             </div>
                             <div class="form-group">
                                 <label>Giới tính</label>
-                                <input type="text" id="nganh" class="form-control" th:value="${nganh}" >
+                                <input type="text" id="nganh" class="form-control" th:value="${benhnhan.Gioitinh}" >
                             </div>
                             <div class="form-group">
                                 <label>Số điện thoại</label>
-                                <input type="text" id="sdt" class="form-control" th:value="${sdt}">
+                                <input type="text" id="sdt" class="form-control" th:value="${benhnhan.SDT}">
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" id="email" class="form-control" th:value="${email}">
+                                <input type="email" id="email" class="form-control" th:value="${benhnhan.Email}">
                             </div>
-                            <div class="form-group">
-                                <label>Mật khẩu</label>
-                                <input type="text" id="password" class="form-control" th:value="${password}">
-                            </div>
+
                             <div class="form-group">
                                 <label>Địa chỉ</label>
-                                <input type="text" id="address" class="form-control" th:value="${password}">
+                                <input type="text" id="address" class="form-control" th:value="${benhnhan.Diachi}">
                             </div>
                             <div class="form-group">
                                 <label>Tiền sử bệnh</label>
-                                <input type="text" id="benh" class="form-control" th:value="${password}">
+                                <input type="text" id="benh" class="form-control" th:value="${benhnhan.Tiensubenh}">
                             </div>
-                            <button type="button" class="btn btn-primary" onclick="saveChanges()">Lưu</button>
-                            <button type="button" class="btn btn-secondary" onclick="">Hủy</button>
+                            <button type="button" class="btn btn-primary" onclick="saveChanges()">Chỉnh sửa</button>
+
 
                         </form>
-                        <div>
-                            <button style="margin-top: 20px" class="btn btn-primary">
-                                <a style="color: white" href="LichSuKham">Xem lịch sử khám</a>
-                            </button>
-                        </div>
                     </div>
 
                 </div>
@@ -211,8 +155,76 @@
             </div>
             <!-- /.container-fluid -->
 
+            <div class="container-fluid">
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h2 class="m-0 font-weight-bold text-primary">Lịch sử khám</h2>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon-container">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th style="width: 50px;"><input type="checkbox" name="selectedItems" id="checkAll" class="larger-checkbox" style="margin-top: 5px;"/></th>
+                                    <th>Mã lịch khám</th>
+                                    <th>Ngày giờ đặt khám</th>
+                                    <th>Chuẩn đoán</th>
+                                    <th>Đơn thuốc</th>
+                                    <th>Ghi chú thêm</th>
+
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr>
+                                    <td><input type="checkbox" class="checkbox_ID larger-checkbox"/></td>
+                                    <td>LK001</td>
+                                    <td>2024-10-16 08:30</td>
+                                    <td>Viêm họng</td>
+                                    <td>Paracetamol 500mg, Amoxicillin 500mg</td>
+                                    <td>Uống nhiều nước, nghỉ ngơi</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="checkbox_ID larger-checkbox"/></td>
+                                    <td>LK002</td>
+                                    <td>2024-10-17 14:00</td>
+                                    <td>Đau dạ dày</td>
+                                    <td>Omeprazole 20mg, Metronidazole 500mg</td>
+                                    <td>Tránh ăn đồ cay nóng</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="checkbox_ID larger-checkbox"/></td>
+                                    <td>LK003</td>
+                                    <td>2024-10-18 09:00</td>
+                                    <td>Cảm cúm</td>
+                                    <td>Vitamin C, Ibuprofen 200mg</td>
+                                    <td>Nghỉ ngơi, uống nước ấm</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
         </div>
-        <!-- End of Main Content -->
+
 
         <!-- Footer -->
         <footer class="sticky-footer bg-white">
