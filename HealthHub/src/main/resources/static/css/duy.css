@@ -1,28 +1,77 @@
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  width: 40%;
-  border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	transition: 0.3s;
+	width: 50%;
+	border-radius: 10px;
+	height: 100px;
+	margin: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 img {
-  border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
 }
 
 .container {
-  padding: 2px 16px;
+	padding: 2px 16px;
 }
 
-.listItem {
+.listItem_parent {
+	/* border: 5px solid red; */
     display: flex;
     flex-direction: column; /* Sắp xếp từ trên xuống */
     justify-content: center; /* Căn giữa theo chiều dọc */
     align-items: center; /* Căn giữa theo chiều ngang */
     height: 100vh; /* Chiều cao toàn màn hình */
-    border: 2px solid black;
 }
 
+/* Phong cách cho popup */
+.popup {
+    display: none; /* Ban đầu ẩn popup */
+    position: fixed; 
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 2px solid #888;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 500px;
+    border-radius: 10px;
+}
+
+/* Phong cách cho phần nền mờ */
+.overlay {
+    display: none; /* Ban đầu ẩn overlay */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* Nút đóng popup */
+.close-btn {
+    float: right;
+    cursor: pointer;
+    font-size: 20px;
+    color: red;
+}
+
+/* Nút mở popup */
+.open-popup-btn {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}

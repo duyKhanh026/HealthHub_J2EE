@@ -10,10 +10,14 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.healthhub.hospital.config.AppConfig;
 import com.healthhub.hospital.dao.BenhNhanDAO;
+import com.healthhub.hospital.dao.LichKhamRepository;
 import com.healthhub.hospital.model.BenhNhan;
+import com.healthhub.hospital.model.ChiTietLichKham;
+import com.healthhub.hospital.model.LichKham;
 
 @Controller
 public class MainController {
@@ -47,9 +51,25 @@ public class MainController {
 
 	@GetMapping({ "/LichKhamLS" })
 	public String lichKham(Model model) {
-		// gửi tin nhắn để thông báo khi đc thực thi
+		LichKhamRepository lkrepo = context.getBean(LichKhamRepository.class);
+		List<LichKham> listkham = new ArrayList<>();
+		listkham = lkrepo.getinforLichKham();
+		model.addAttribute("listkham", listkham);
 		return "User/LichKham";
 	}
+	@GetMapping("/LichKhamLS")
+    public String chiTietBenhNhan(@RequestParam("id") Integer id, Model model) {
+        // Lấy thông tin bệnh nhân từ service
+        LichKham benhNhan = benhNhanService.getBenhNhanById(id);
+
+        if (benhNhan == null) {
+            return "error/404";
+        }
+
+        model.addAttribute("benhnhan", benhNhan);
+
+        return "Doctor/ChiTietBenhNhan";
+    }
 	
 	@GetMapping({ "/Login" })
 	public String login(Model model) {
