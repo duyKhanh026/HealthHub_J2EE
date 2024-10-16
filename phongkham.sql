@@ -55,7 +55,7 @@ INSERT INTO `benhnhan` (`MaBN`, `Hoten`, `Ngaysinh`, `Gioitinh`, `SDT`, `Email`,
 -- Table structure for table `hosobenhnhan`
 --
 
-CREATE TABLE `hosobenhnhan` (
+CREATE TABLE `chitietlichkham` (
   `MaHS` int(11) NOT NULL,
   `MaLK` int(11) NOT NULL,
   `Chuandoan` text NOT NULL,
@@ -64,6 +64,12 @@ CREATE TABLE `hosobenhnhan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
+
+INSERT INTO `chitietlichkham` (`MaHS`, `MaLK`, `Chuandoan`, `Donthuoc`, `Ghichuthem`) VALUES
+(201, 101, 'Viêm họng', 'Paracetamol 500mg, Amoxicillin 500mg', 'Uống nhiều nước, nghỉ ngơi'),
+(202, 102, 'Đau dạ dày', 'Omeprazole 20mg, Metronidazole 500mg', 'Tránh ăn đồ cay nóng'),
+(203, 103, 'Cảm cúm', 'Vitamin C, Ibuprofen 200mg', 'Nghỉ ngơi, uống nước ấm');
+
 
 --
 -- Table structure for table `lichkham`
@@ -75,6 +81,12 @@ CREATE TABLE `lichkham` (
   `Ngaygiodatkham` datetime NOT NULL,
   `Trangthai` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO `lichkham` (`MaLK`, `MaBN`, `Ngaygiodatkham`, `Trangthai`) VALUES
+(101, 1, '2024-10-20 09:00:00', 'Completed'),
+(102, 2, '2024-10-21 14:30:00', 'Pending'),
+(103, 1, '2024-10-22 11:15:00', 'Completed');
 
 -- --------------------------------------------------------
 
@@ -110,7 +122,7 @@ ALTER TABLE `benhnhan`
 --
 -- Indexes for table `hosobenhnhan`
 --
-ALTER TABLE `hosobenhnhan`
+ALTER TABLE `chitietlichkham`
   ADD PRIMARY KEY (`MaHS`),
   ADD KEY `MaLK` (`MaLK`);
 
@@ -151,8 +163,8 @@ ALTER TABLE `taikhoan`
 --
 -- Constraints for table `hosobenhnhan`
 --
-ALTER TABLE `hosobenhnhan`
-  ADD CONSTRAINT `hosobenhnhan_ibfk_1` FOREIGN KEY (`MaLK`) REFERENCES `lichkham` (`MaLK`);
+ALTER TABLE `chitietlichkham`
+  ADD CONSTRAINT `chitietlichkham_ibfk_1` FOREIGN KEY (`MaLK`) REFERENCES `lichkham` (`MaLK`);
 
 --
 -- Constraints for table `lichkham`
