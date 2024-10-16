@@ -57,6 +57,12 @@
                 <span>Lịch khám</span></a>
         </li>
 
+        <li class="nav-item active">
+            <a class="nav-link" href="">
+                <i class="fas fa-desktop"></i>
+                <span>Thông tin lịch khám</span></a>
+        </li>
+
         <hr class="sidebar-divider d-none d-md-block">
 
         <!-- Nav Item - Dashboard -->
@@ -64,12 +70,6 @@
             <a class="nav-link" href="DSBenhNhan">
                 <i class="fas fa-fw fa-users"></i>
                 <span>Bệnh nhân</span></a>
-        </li>
-
-        <li class="nav-item active">
-            <a class="nav-link" href="DSBenhNhan">
-                <i class="fas fa-desktop"></i>
-                <span>Chi tiết bệnh nhân</span></a>
         </li>
 
         <!-- Divider -->
@@ -105,7 +105,7 @@
                     <div class="card-header py-3">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h2 class="m-0 font-weight-bold text-primary">Thông tin chi tiết bệnh nhân</h2>
+                                <h2 class="m-0 font-weight-bold text-primary">Thông tin lịch khám</h2>
                             </div>
                             <div class="col-auto">
                                 <div class="icon-container">
@@ -118,42 +118,21 @@
                     <div class="card-body">
                         <form>
                             <div class="form-group">
-                                <label>Mã bệnh nhân</label>
-                                <input type="text" id="maTV" class="form-control" th:value="${benhnhan.MaBN}">
-
+                                <label>Mã lịch khám</label>
+                                <input type="text"  class="form-control" >
                             </div>
                             <div class="form-group">
-                                <label>Tên</label>
-                                <input type="text" id="ten" class="form-control" th:value="${benhnhan.HoTen}">
+                                <label>Tên bệnh nhân</label>
+                                <input type="text"  class="form-control" >
                             </div>
                             <div class="form-group">
-                                <label>Ngày sinh</label>
-                                <input type="text" id="khoa" class="form-control" th:value="${benhnhan.NgaySinh}" >
+                                <label>Ngày khám</label>
+                                <input type="text"  class="form-control"  >
                             </div>
                             <div class="form-group">
-                                <label>Giới tính</label>
-                                <input type="text" id="nganh" class="form-control" th:value="${benhnhan.Gioitinh}" >
+                                <label>Trạng thái</label>
+                                <input type="text"  class="form-control" >
                             </div>
-                            <div class="form-group">
-                                <label>Số điện thoại</label>
-                                <input type="text" id="sdt" class="form-control" th:value="${benhnhan.SDT}">
-                            </div>
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" id="email" class="form-control" th:value="${benhnhan.Email}">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Địa chỉ</label>
-                                <input type="text" id="address" class="form-control" th:value="${benhnhan.Diachi}">
-                            </div>
-                            <div class="form-group">
-                                <label>Tiền sử bệnh</label>
-                                <input type="text" id="benh" class="form-control" th:value="${benhnhan.Tiensubenh}">
-                            </div>
-                            <button type="button" class="btn btn-primary" onclick="saveChanges()">Chỉnh sửa</button>
-
-
                         </form>
                     </div>
 
@@ -163,13 +142,13 @@
             </div>
             <!-- /.container-fluid -->
 
-            <div class="container-fluid">
+            <div class="container-fluid mt-4">
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h2 class="m-0 font-weight-bold text-primary">Lịch sử khám</h2>
+                                <h2 class="m-0 font-weight-bold text-primary">Kết quả khám</h2>
                             </div>
                             <div class="col-auto">
                                 <div class="icon-container">
@@ -179,43 +158,28 @@
                             </div>
                         </div>
                     </div>
-
-
                     <div class="card-body">
-
-                        <div class="table-responsive">
-
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                <tr>
-                                    <th style="width: 50px;"><input type="checkbox" name="selectedItems" id="checkAll" class="larger-checkbox" style="margin-top: 5px;"/></th>
-                                    <th>Mã lịch khám</th>
-                                    <th>Ngày giờ đặt khám</th>
-                                    <th>Chuẩn đoán</th>
-                                    <th>Đơn thuốc</th>
-                                    <th>Ghi chú thêm</th>
-
-                                </tr>
-                                </thead>
-
-                                <tbody>
-
-                                <tr th:each="lichkham : ${lichkhamList}">
-                                    <td><input type="checkbox" class="checkbox_ID larger-checkbox"/></td>
-                                    <td th:text="${lichkham.maLK}"></td>
-                                    <td th:text="${#dates.format(lichkham.ngayGioDatKham, 'yyyy-MM-dd HH:mm')}"></td>
-                                    <td th:text="${lichkham.chiTietLichKham.chuanDoan}"></td>
-                                    <td th:text="${lichkham.chiTietLichKham.donThuoc}"></td>
-                                    <td th:text="${lichkham.chiTietLichKham.ghiChuThem}"></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <form>
+                            <div class="form-group">
+                                <label>Chuẩn đoán</label>
+                                <input type="text"  class="form-control" >
+                            </div>
+                            <div class="form-group">
+                                <label>Đơn thuốc</label>
+                                <input type="text"  class="form-control" >
+                            </div>
+                            <div class="form-group">
+                                <label>Ghi chú thêm</label>
+                                <input type="text"  class="form-control"  >
+                            </div>
+                            <button type="button" class="btn btn-primary" onclick="saveChanges()">Lưu</button>
+                        </form>
                     </div>
+
                 </div>
 
+
             </div>
-            <!-- /.container-fluid -->
 
         </div>
 

@@ -9,6 +9,7 @@ public class LichKham {
     private Date ngayGioDatKham;
     private String trangThai;
     private ChiTietLichKham chiTietLichKham;
+    private BenhNhan benhNhan;
 
     public LichKham() {
     }
@@ -19,6 +20,14 @@ public class LichKham {
         this.ngayGioDatKham = ngayGioDatKham;
         this.trangThai = trangThai;
         this.chiTietLichKham = chiTietLichKham;
+    }
+
+    public BenhNhan getBenhNhan() {
+        return benhNhan;
+    }
+
+    public void setBenhNhan(BenhNhan benhNhan) {
+        this.benhNhan = benhNhan;
     }
 
     public int getMaLK() {

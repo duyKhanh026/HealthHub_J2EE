@@ -47,7 +47,6 @@ public class BenhNhanDAO extends JdbcDaoSupport{
         }catch (DataAccessException e){
             throw new RuntimeException("Lỗi khi truy xuất danh sách bệnh nhân", e);
         }
-
     }
 
     public int addBenhNhan(BenhNhan benhNhan) {

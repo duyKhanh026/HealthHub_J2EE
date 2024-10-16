@@ -11,11 +11,11 @@ public class BenhNhan {
 	String Email;
 	String Diachi;
 	String Tiensubenh;
-	public BenhNhan(int maBN, String moTen, Date ngaySinh, String gioitinh, String sDT, String email, String diachi,
+	public BenhNhan(int maBN, String hoTen, Date ngaySinh, String gioitinh, String sDT, String email, String diachi,
 			String tiensubenh) {
 		super();
 		this.maBN = maBN;
-		HoTen = moTen;
+		HoTen = hoTen;
 		NgaySinh = ngaySinh;
 		Gioitinh = gioitinh;
 		SDT = sDT;
@@ -26,6 +26,13 @@ public class BenhNhan {
 	public BenhNhan() {
 		super();
 	}
+
+	public BenhNhan(int maBN, String hoTen){
+		super();
+		this.maBN = maBN;
+		HoTen = hoTen;
+	}
+
 	public int getMaBN() {
 		return maBN;
 	}

@@ -66,10 +66,11 @@
                 <span>Lịch khám</span></a>
         </li>
 
+        <hr class="sidebar-divider d-none d-md-block">
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
             <a class="nav-link" href="DSBenhNhan">
-                <i class="fas fa-desktop"></i>
+                <i class="fas fa-fw fa-users"></i>
                 <span>Bệnh nhân</span></a>
         </li>
 
@@ -129,15 +130,27 @@
                                 <tr>
                                     <th style="width: 50px;"><input type="checkbox" name="selectedItems" id="checkAll" class="larger-checkbox" style="margin-top: 5px;"/></th>
                                     <th>Mã lịch khám</th>
-                                    <th>Mã bệnh nhân</th>
+                                    <th>Tên bệnh nhân</th>
                                     <th>Ngày khám</th>
                                     <th>Trạng thái</th>
+                                    <th>Chi tiết</th>
 
                                 </tr>
                                 </thead>
 
                                 <tbody>
+                                    <tr th:each="lichkham : ${lichkhamList}"><td><input type="checkbox"  class="checkbox_ID larger-checkbox"/></td>
+                                    <td th:text="${lichkham.maLK}">MaLK</td>
+                                    <td th:text="${lichkham.benhNhan.hoTen}">MaBN</td>
+                                    <td th:text="${#dates.format(lichkham.ngayGioDatKham, 'yyyy-MM-dd HH:mm')}">NgayGioDatKham</td>
+                                    <td th:text="${lichkham.trangThai}">Trangthai</td>
+                                        <td>
+                                            <a class="btn btn-info btn-circle btn-lg">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+                                        </td>
 
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
