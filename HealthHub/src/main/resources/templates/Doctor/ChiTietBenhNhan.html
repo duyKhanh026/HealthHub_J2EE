@@ -176,6 +176,7 @@
                     <div class="card-body">
 
                         <div class="table-responsive">
+
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
@@ -190,29 +191,14 @@
                                 </thead>
 
                                 <tbody>
-                                <tr>
+
+                                <tr th:each="lichkham : ${lichkhamList}">
                                     <td><input type="checkbox" class="checkbox_ID larger-checkbox"/></td>
-                                    <td>LK001</td>
-                                    <td>2024-10-16 08:30</td>
-                                    <td>Viêm họng</td>
-                                    <td>Paracetamol 500mg, Amoxicillin 500mg</td>
-                                    <td>Uống nhiều nước, nghỉ ngơi</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" class="checkbox_ID larger-checkbox"/></td>
-                                    <td>LK002</td>
-                                    <td>2024-10-17 14:00</td>
-                                    <td>Đau dạ dày</td>
-                                    <td>Omeprazole 20mg, Metronidazole 500mg</td>
-                                    <td>Tránh ăn đồ cay nóng</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" class="checkbox_ID larger-checkbox"/></td>
-                                    <td>LK003</td>
-                                    <td>2024-10-18 09:00</td>
-                                    <td>Cảm cúm</td>
-                                    <td>Vitamin C, Ibuprofen 200mg</td>
-                                    <td>Nghỉ ngơi, uống nước ấm</td>
+                                    <td th:text="${lichkham.maLK}"></td>
+                                    <td th:text="${#dates.format(lichkham.ngayGioDatKham, 'yyyy-MM-dd HH:mm')}"></td>
+                                    <td th:text="${lichkham.chiTietLichKham.chuanDoan}"></td>
+                                    <td th:text="${lichkham.chiTietLichKham.donThuoc}"></td>
+                                    <td th:text="${lichkham.chiTietLichKham.ghiChuThem}"></td>
                                 </tr>
                                 </tbody>
                             </table>

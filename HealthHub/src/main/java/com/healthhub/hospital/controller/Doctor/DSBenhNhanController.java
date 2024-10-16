@@ -29,12 +29,6 @@ public class DSBenhNhanController {
         return "Doctor/DSBenhNhan";
     }
 
-//    // Hiển thị form thêm bệnh nhân
-//    @GetMapping("/them")
-//    public String showAddBenhNhanForm(Model model) {
-//        model.addAttribute("benhNhan", new BenhNhan());
-//        return "Doctor/ThemBenhNhan";
-//    }
 
     // Xử lý form thêm bệnh nhân
     @PostMapping("/DSBenhNhan")
@@ -46,16 +40,6 @@ public class DSBenhNhanController {
         return "redirect:/DSBenhNhan";
     }
 
-//    @GetMapping("/benhnhan/{id}")
-//    @ResponseBody
-//    public ResponseEntity<BenhNhan> getBenhNhanById(@PathVariable("id") Integer id) {
-//        BenhNhan benhNhan = benhNhanService.getBenhNhanById(id);
-//        if (benhNhan != null) {
-//            return ResponseEntity.ok(benhNhan);
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
 //
 //    @PostMapping("/edit")
 //    public String updateBenhNhan(@ModelAttribute("benhNhan") BenhNhan benhNhan, BindingResult result, Model model) {

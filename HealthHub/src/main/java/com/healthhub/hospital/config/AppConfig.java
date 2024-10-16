@@ -2,6 +2,8 @@ package com.healthhub.hospital.config;
 
 import javax.sql.DataSource;
 
+import com.healthhub.hospital.dao.ChiTietLichKhamRepository;
+import com.healthhub.hospital.dao.LichKhamRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -24,5 +26,15 @@ public class AppConfig {
     @Bean
     public BenhNhanDAO getBenhNhanDAO() {
         return new BenhNhanDAO(dataSource());
+    }
+
+    @Bean
+    public LichKhamRepository getLichKhamRepository(){
+        return new LichKhamRepository(dataSource());
+    }
+
+    @Bean
+    public ChiTietLichKhamRepository getChiTietLichKhamRepository(){
+        return new ChiTietLichKhamRepository(dataSource());
     }
 }
