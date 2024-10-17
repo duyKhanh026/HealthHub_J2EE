@@ -30,7 +30,7 @@ public class TaiKhoanRepository extends JdbcDaoSupport {
     }
 
     public TaiKhoan getAccountByUserName(String email) {
-        String sql = TaiKhoanMapper.BASE_SQL + " where Email = ?";  // Sử dụng ? làm placeholder
+        String sql = TaiKhoanMapper.BASE_SQL + " where TenDN = ?";  // Sử dụng ? làm placeholder
 
         Object[] params = new Object[]{ email };  // Truyền tham số userName vào mảng params
         TaiKhoanMapper taikhoanMapper = new TaiKhoanMapper();

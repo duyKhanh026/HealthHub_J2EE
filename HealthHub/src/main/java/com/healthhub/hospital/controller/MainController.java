@@ -3,6 +3,7 @@ package com.healthhub.hospital.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -24,6 +25,15 @@ import com.healthhub.hospital.service.LichKhamService;
 
 @Controller
 public class MainController {
+	@Autowired
+	private BenhNhanDAO benhNhanDAO;
+
+	@Autowired
+	private LichKhamService lichKhamService;
+
+	@Autowired
+	private ChiTietLichKhamService chiTietLichKhamService;
+
 
 	// Inject via application.properties
 	@Value("${welcome.message}")
@@ -31,14 +41,12 @@ public class MainController {
 
 	@Value("${error.message}")
 	private String errorMessage;
-	
-	ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+
 
 	@GetMapping({ "/", "/index" })
 	public String index(Model model) {
-		
-		BenhNhanDAO dao = context.getBean(BenhNhanDAO.class);
-		SqlRowSet rowSet = dao.getBenhNhanSqlRowSet();
+
+		SqlRowSet rowSet = benhNhanDAO.getBenhNhanSqlRowSet();
 		List<BenhNhan> benhnhans = new ArrayList<BenhNhan>();
 		while (rowSet.next()) {
 			BenhNhan bn = new BenhNhan();
@@ -55,17 +63,16 @@ public class MainController {
 
 	@GetMapping({ "/LichKhamLS" })
 	public String lichKham(Model model) {
-		LichKhamService lksv = new LichKhamService(context.getBean(LichKhamRepository.class));
+
 		List<LichKham> listkham = new ArrayList<>();
-		listkham = lksv.getAllLichKham();
+		listkham = lichKhamService.getAllLichKham();
 		model.addAttribute("listkham", listkham);
 	    model.addAttribute("lichkhamchitiet", new ChiTietLichKham());
 		return "User/LichKham";
 	}
 	@GetMapping("/LichKhamLS/chiTiet")
 	public String chiTietLichKham(@RequestParam Integer id, Model model) {
-	    ChiTietLichKhamService lksv = new ChiTietLichKhamService(context.getBean(ChiTietLichKhamRepository.class));
-	    ChiTietLichKham lk = lksv.getChiTietLichKhamByMaLK(id).get(0);
+		ChiTietLichKham lk = chiTietLichKhamService.getChiTietLichKhamByMaLK(id).get(0);
 
 	    if (lk == null) {
 	        return "error/404";

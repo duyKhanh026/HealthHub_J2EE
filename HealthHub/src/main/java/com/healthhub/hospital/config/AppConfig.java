@@ -4,7 +4,9 @@ import javax.sql.DataSource;
 
 import com.healthhub.hospital.Repository.ChiTietLichKhamRepository;
 import com.healthhub.hospital.Repository.LichKhamRepository;
+import com.healthhub.hospital.service.ChiTietLichKhamService;
 import com.healthhub.hospital.service.CustomUserDetailsService;
+import com.healthhub.hospital.service.LichKhamService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -24,14 +26,13 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class AppConfig{
- 
+
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/phongkham");
         dataSource.setUsername("root");
-//        dataSource.setPassword("");
         return dataSource;
     }
 
@@ -122,20 +123,30 @@ public class AppConfig{
     //Sử dụng UserDetailsService để tải thông tin người dùng từ cơ sở dữ liệu (hoặc nơi bạn đã cấu hình để lưu trữ người dùng).
     //Nếu người dùng tồn tại, Spring Security sẽ tạo một phiên làm việc mới cho họ mà không cần yêu cầu họ nhập lại thông tin đăng nhập.
 
+
+
     @Bean
     public BenhNhanDAO getBenhNhanDAO() {
         return new BenhNhanDAO(dataSource());
     }
 
-
-
     @Bean
-    public LichKhamRepository getLichKhamRepository(){
+    public LichKhamRepository getLichKhamRepository() {
         return new LichKhamRepository(dataSource());
     }
 
     @Bean
-    public ChiTietLichKhamRepository getChiTietLichKhamRepository(){
+    public ChiTietLichKhamRepository getChiTietLichKhamRepository() {
         return new ChiTietLichKhamRepository(dataSource());
+    }
+
+    @Bean
+    public LichKhamService lichKhamService() {
+        return new LichKhamService(getLichKhamRepository());
+    }
+
+    @Bean
+    public ChiTietLichKhamService chiTietLichKhamService() {
+        return new ChiTietLichKhamService(getChiTietLichKhamRepository());
     }
 }
