@@ -41,21 +41,22 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                 </div>
-                                <form class="user">
+                                <form class="user" method="POST" action="/login">
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user"
-                                               id="exampleInputMaTV" placeholder="Enter Member Code...">
+                                               id="username" name="username" placeholder="Enter Username..." required>
                                     </div>
 
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user"
-                                               id="exampleInputPassword" placeholder="Password">
+                                               id="password" name="password" placeholder="Password" required>
                                     </div>
 
-                                    <a href="#" class="btn btn-primary btn-user btn-block" onclick="login()">
+                                    <button type="submit" class="btn btn-primary btn-user btn-block">
                                         Login
-                                    </a>
+                                    </button>
                                 </form>
+
                                 <hr>
                                 <div class="text-center">
                                     <a class="small" href="QuenMatKhau.html">Forgot Password?</a>
