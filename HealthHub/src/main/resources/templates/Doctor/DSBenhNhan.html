@@ -66,10 +66,12 @@
                 <span>Lịch khám</span></a>
         </li>
 
+        <hr class="sidebar-divider d-none d-md-block">
+
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
             <a class="nav-link" href="DSBenhNhan">
-                <i class="fas fa-desktop"></i>
+                <i class="fas fa-fw fa-users"></i>
                 <span>Bệnh nhân</span></a>
         </li>
 
@@ -98,10 +100,8 @@
     <div id="content-wrapper" class="d-flex flex-column">
 
         <br>
-
         <!-- Main Content -->
         <div id="content">
-
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 <!-- DataTales Example -->
@@ -116,18 +116,9 @@
                                     <a class="btn btn-primary btn-circle btn-lg" id="addButton">
                                         <i class="fas fa-plus"></i> <!-- Thêm -->
                                     </a>
-                                    <!--                                    <label for="excelFileInput" class="btn btn-info btn-circle btn-lg" style="margin-left: 10px;">-->
-                                    <!--                                        <i class="fas fa-file-excel"></i> &lt;!&ndash; Icon file Excel &ndash;&gt;-->
-                                    <!--                                        <input type="file" id="excelFileInput" class="file-input" accept=".xlsx, .xls" />-->
-                                    <!--                                    </label>-->
                                     <a class="btn btn-danger btn-circle btn-lg" onclick="deleteThietBi()">
                                         <i class="fas fa-trash-alt"></i> <!-- Xóa -->
                                     </a>
-                                    <a class="btn btn-primary btn-circle btn-lg" href="them">
-                                        <i class="fas fa-plus"></i> <!-- Thêm -->
-                                    </a>
-
-
                                 </div>
 
                             </div>
@@ -144,13 +135,8 @@
                                     <th style="width: 50px;"><input type="checkbox" name="selectedItems" id="checkAll" class="larger-checkbox" style="margin-top: 5px;"/></th>
                                     <th>Mã Bệnh Nhân</th>
                                     <th>Họ Tên</th>
-                                    <th>Ngày sinh</th>
-                                    <th>Giới tính</th>
                                     <th>Số Điện Thoại</th>
-                                    <th>Email</th>
-                                    <th>Địa chỉ</th>
                                     <th>Tiền sử bệnh</th>
-                                    <th>Sửa</th>
                                     <th>Chi tiết</th>
                                 </tr>
                                 </thead>
@@ -161,19 +147,10 @@
                                     <td><input type="checkbox"  class="checkbox_ID larger-checkbox"/></td>
                                     <td th:text="${benhnhan.MaBN} ">1</td>
                                     <td th:text="${benhnhan.HoTen} ">Nguyễn Văn A</td>
-                                    <td th:text="${benhnhan.NgaySinh} "></td>
-                                    <td th:text="${benhnhan.Gioitinh} ">30</td>
                                     <td th:text="${benhnhan.SDT} "></td>
-                                    <td th:text="${benhnhan.Email} "></td>
-                                    <td th:text="${benhnhan.Diachi} "></td>
                                     <td th:text="${benhnhan.Tiensubenh} "></td>
                                     <td>
-                                        <a class="btn btn-success btn-circle btn-lg openFormButton">
-                                            <i class="fas fa-pencil-alt"></i>  <!-- Sửa -->
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn btn-info btn-circle btn-lg">
+                                        <a th:href="@{/ChiTietBenhNhan(id=${benhnhan.MaBN})}" class="btn btn-info btn-circle btn-lg">
                                             <i class="fas fa-info-circle"></i>
                                         </a>
                                     </td>
@@ -235,7 +212,8 @@
 <div class="container">
     <div id="addForm" class="add-form">
         <h2>Thêm bệnh nhân</h2>
-        <form th:action="@{/them}" th:object="${benhNhan}" method="post">
+        <form th:action="@{/DSBenhNhan}" th:object="${benhNhan}" method="post">
+            <input type="hidden" name="action" value="add" />
             <div class="row">
                 <!-- Cột bên trái -->
                 <div class="col-md-6">
@@ -245,15 +223,15 @@
 <!--                    </div>-->
                     <div class="form-group">
                         <label for="hoTen">Họ tên:</label>
-                        <input type="text" class="form-control" id="hoTen"  value="" />
+                        <input type="text" class="form-control" id="hoTen" th:field="*{hoTen}" value="" />
                     </div>
                     <div class="form-group">
                         <label for="ngaySinh">Ngày sinh:</label>
-                        <input type="date" class="form-control" id="ngaySinh"  value="" />
+                        <input type="date" class="form-control" id="ngaySinh" th:field="*{ngaySinh}"  value="" />
                     </div>
                     <div class="form-group">
                         <label for="gioitinh">Giới tính:</label>
-                        <input type="text" class="form-control" id="gioitinh"  value="" />
+                        <input type="text" class="form-control" id="gioitinh" th:field="*{gioitinh}" value="" />
                     </div>
                 </div>
 
@@ -261,24 +239,24 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="sdt">Số điện thoại:</label>
-                        <input type="text" class="form-control" id="sdt"  value="" />
+                        <input type="text" class="form-control" id="sdt" th:field="*{SDT}" value="" />
                     </div>
                     <div class="form-group">
                         <label for="email">Email:</label>
-                        <input type="text" class="form-control" id="email"  value="" />
+                        <input type="text" class="form-control" id="email" th:field="*{Email}"  value="" />
                     </div>
                     <div class="form-group">
                         <label for="diachi">Địa chỉ:</label>
-                        <input type="text" class="form-control" id="diachi"  value="" />
+                        <input type="text" class="form-control" id="diachi" th:field="*{Diachi}" value="" />
                     </div>
                     <div class="form-group">
                         <label for="tiensubenh">Tiền sử bệnh:</label>
-                        <input type="text" class="form-control" id="tiensubenh"  value="" />
+                        <input type="text" class="form-control" id="tiensubenh" th:field="*{Tiensubenh}" value="" />
                     </div>
                 </div>
             </div>
 
-            <button type="button" class="btn btn-primary" onclick="saveAdd()">Lưu thay đổi</button>
+            <button type="submit" class="btn btn-primary" onclick="saveAdd()">Lưu thay đổi</button>
             <button type="button" class="btn btn-secondary" onclick="closeFormAdd()">Đóng</button>
         </form>
     </div>
@@ -287,51 +265,55 @@
 
 <!--Form sửa thiết bi-->
 <div class="container">
-    <div id="editForm" class="edit-form">
+    <div id="editForm" class="edit-form" style="display: none;">
         <h2>Sửa thông tin bệnh nhân</h2>
-        <form id="deviceForm">
+        <form th:action="@{/edit}" th:object="${benhNhan}" method="post">
+            <input type="hidden" name="action" value="edit" /> <!-- Đối với form sửa -->
             <div class="row">
                 <!-- Cột bên trái -->
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="ED_BN_ID">Mã bệnh nhân:</label>
-                        <input type="text" class="form-control" id="ED_BN_ID" value="" />
+                        <input type="text" class="form-control" id="ED_BN_ID" name="MaBN" readonly />
                     </div>
                     <div class="form-group">
                         <label for="ED_BN_Name">Họ tên:</label>
-                        <input type="text" class="form-control" id="ED_BN_Name" value="" />
+                        <input type="text" class="form-control" id="ED_BN_Name" name="HoTen" />
+                        <div th:if="${#fields.hasErrors('HoTen')}" th:errors="*{HoTen}" class="text-danger"></div>
                     </div>
                     <div class="form-group">
                         <label for="ED_BN_Date">Ngày sinh:</label>
-                        <input type="date" class="form-control" id="ED_BN_Date" value="" />
+                        <input type="date" class="form-control" id="ED_BN_Date" name="NgaySinh" />
                     </div>
                     <div class="form-group">
                         <label for="ED_BN_GT">Giới tính:</label>
-                        <input type="text" class="form-control" id="ED_BN_GT" value="" />
+                        <input type="text" class="form-control" id="ED_BN_GT" name="Gioitinh" />
+                        <div th:if="${#fields.hasErrors('Gioitinh')}" th:errors="*{Gioitinh}" class="text-danger"></div>
                     </div>
                 </div>
-
                 <!-- Cột bên phải -->
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="ED_BN_Phone">Số điện thoại:</label>
-                        <input type="text" class="form-control" id="ED_BN_Phone" value="" />
+                        <input type="text" class="form-control" id="ED_BN_Phone" name="SDT" />
+                        <div th:if="${#fields.hasErrors('SDT')}" th:errors="*{SDT}" class="text-danger"></div>
                     </div>
                     <div class="form-group">
                         <label for="ED_BN_Email">Email:</label>
-                        <input type="text" class="form-control" id="ED_BN_Email" value="" />
+                        <input type="email" class="form-control" id="ED_BN_Email" name="Email" />
+                        <div th:if="${#fields.hasErrors('Email')}" th:errors="*{Email}" class="text-danger"></div>
                     </div>
                     <div class="form-group">
                         <label for="ED_BN_ADR">Địa chỉ:</label>
-                        <input type="text" class="form-control" id="ED_BN_ADR" value="" />
+                        <input type="text" class="form-control" id="ED_BN_ADR" name="Diachi" />
                     </div>
                     <div class="form-group">
                         <label for="ED_BN_His">Tiền sử bệnh:</label>
-                        <input type="text" class="form-control" id="ED_BN_His" value="" />
+                        <input type="text" class="form-control" id="ED_BN_His" name="Tiensubenh" />
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary" onclick="saveChanges()">Lưu thay đổi</button>
+            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
             <button type="button" class="btn btn-secondary" onclick="closeFormEdit()">Đóng</button>
         </form>
     </div>

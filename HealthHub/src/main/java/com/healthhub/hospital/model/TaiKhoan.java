@@ -1,6 +1,7 @@
 package com.healthhub.hospital.model;
 
 public class TaiKhoan {
+
     private int maTK;
     private String tenDN;
     private String matkhau;
@@ -60,4 +61,5 @@ public class TaiKhoan {
     public void setVaitro(String vaitro) {
         this.vaitro = vaitro;
     }
+
 }

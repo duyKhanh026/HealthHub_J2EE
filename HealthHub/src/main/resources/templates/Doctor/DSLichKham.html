@@ -66,20 +66,30 @@
                 <span>Lịch khám</span></a>
         </li>
 
+        <hr class="sidebar-divider d-none d-md-block">
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
             <a class="nav-link" href="DSBenhNhan">
-                <i class="fas fa-desktop"></i>
+                <i class="fas fa-fw fa-users"></i>
                 <span>Bệnh nhân</span></a>
         </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 
+        <li class="nav-item">
+            <a class="nav-link" href="">
+                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                <span>Đăng xuất</span></a>
+        </li>
+
+        <hr class="sidebar-divider d-none d-md-block">
+
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
+
 
     </ul>
     <!-- End of Sidebar -->
@@ -100,22 +110,13 @@
                     <div class="card-header py-3">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h2 class="m-0 font-weight-bold text-primary">Lịch Khám</h2>
+                                <h2 class="m-0 font-weight-bold text-primary">Danh sách lịch khám</h2>
                             </div>
                             <div class="col-auto">
                                 <div class="icon-container">
-                                    <a class="btn btn-primary btn-circle btn-lg" id="addButton">
-                                        <i class="fas fa-plus"></i> <!-- Thêm -->
-                                    </a>
-                                    <!--                                    <label for="excelFileInput" class="btn btn-info btn-circle btn-lg" style="margin-left: 10px;">-->
-                                    <!--                                        <i class="fas fa-file-excel"></i> &lt;!&ndash; Icon file Excel &ndash;&gt;-->
-                                    <!--                                        <input type="file" id="excelFileInput" class="file-input" accept=".xlsx, .xls" />-->
-                                    <!--                                    </label>-->
-                                    <a class="btn btn-danger btn-circle btn-lg" onclick="deleteThietBi()">
-                                        <i class="fas fa-trash-alt"></i> <!-- Xóa -->
-                                    </a>
+                                    <button class="btn btn-primary">Chọn ngày nghỉ</button>
+                                    <button style="margin-left: 20px" class="btn btn-primary">Chọn ngày xem lịch khám</button>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -128,41 +129,27 @@
                                 <thead>
                                 <tr>
                                     <th style="width: 50px;"><input type="checkbox" name="selectedItems" id="checkAll" class="larger-checkbox" style="margin-top: 5px;"/></th>
-                                    <th>Mã Bệnh Nhân</th>
-                                    <th>Họ Tên</th>
-                                    <th>Ngày sinh</th>
-                                    <th>Giới tính</th>
-                                    <th>Số Điện Thoại</th>
-                                    <th>Email</th>
-                                    <th>Địa chỉ</th>
-                                    <th>Tiền sử bệnh</th>
-                                    <th>Sửa</th>
+                                    <th>Mã lịch khám</th>
+                                    <th>Tên bệnh nhân</th>
+                                    <th>Ngày khám</th>
+                                    <th>Trạng thái</th>
                                     <th>Chi tiết</th>
+
                                 </tr>
                                 </thead>
 
                                 <tbody>
+                                    <tr th:each="lichkham : ${lichkhamList}"><td><input type="checkbox"  class="checkbox_ID larger-checkbox"/></td>
+                                    <td th:text="${lichkham.maLK}">MaLK</td>
+                                    <td th:text="${lichkham.benhNhan.hoTen}">MaBN</td>
+                                    <td th:text="${#dates.format(lichkham.ngayGioDatKham, 'yyyy-MM-dd HH:mm')}">NgayGioDatKham</td>
+                                    <td th:text="${lichkham.trangThai}">Trangthai</td>
+                                        <td>
+                                            <a class="btn btn-info btn-circle btn-lg">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+                                        </td>
 
-                                <tr>
-                                    <td><input type="checkbox" id="checkbox_101" name="selectedItems" value="101" class="checkbox_ID larger-checkbox"/></td>
-                                    <td>101</td>
-                                    <td>Nguyễn Văn A</td>
-                                    <td>01/01/2000</td>
-                                    <td>Nam</td>
-                                    <td>0123456789</td>
-                                    <td>TPHCM</td>
-                                    <td>nguyenvana@gmail.com</td>
-                                    <td>Xi đa</td>
-                                    <td>
-                                        <a class="btn btn-success btn-circle btn-lg openFormButton">
-                                            <i class="fas fa-pencil-alt"></i>  <!-- Sửa -->
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-success btn-circle btn-lg openFormButton">
-                                            <i class="fas fa-pencil-alt"></i>  <!-- Sửa -->
-                                        </a>
-                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -217,82 +204,33 @@
     </div>
 </div>
 
-<!--Form them thiết bi-->
-<div class="container">
-    <div id="addForm" class="add-form">
-        <h2>Thêm thiết bị</h2>
-        <form id="adddeviceForm">
-            <div class="form-group">
-                <label for="deviceCode">Loại thiết bị:</label>
-                <select class="form-control" id="adddeviceCode">
-                    <option value="Micro">Micro</option>
-                    <option value="Máy chiếu">Máy chiếu</option>
-                    <option value="Máy ảnh">Máy ảnh</option>
-                    <option value="Cassette">Cassette</option>
-                    <option value="Tivi">Tivi</option>
-                    <option value="Quạt đứng">Quạt đứng</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="deviceName">Tên thiết bị:</label>
-                <input type="text" class="form-control" id="adddeviceName" value="" />
-            </div>
-            <div class="form-group">
-                <label for="deviceDescription">Mô tả thiết bị:</label>
-                <textarea class="form-control" id="adddeviceDescription" rows="3"></textarea>
-            </div>
-            <button type="button" class="btn btn-primary" onclick="saveAdd()">Lưu thay đổi</button>
-            <button type="button" class="btn btn-secondary" onclick="closeFormAdd()">Đóng</button>
-        </form>
-    </div>
-</div>
-
-<!--Form sửa thiết bi-->
-<div class="container">
-    <div id="editForm" class="edit-form">
-        <h2>Sửa thông tin thiết bị</h2>
-        <form id="deviceForm">
-            <div class="form-group">
-                <label for="deviceCode">Mã thiết bị:</label>
-                <input type="text" class="form-control" id="deviceCode" value="Mã thiết bị hiện tại" readonly />
-            </div>
-            <div class="form-group">
-                <label for="deviceName">Tên thiết bị:</label>
-                <input type="text" class="form-control" id="deviceName" value="Tên thiết bị hiện tại" />
-            </div>
-            <div class="form-group">
-                <label for="deviceDescription">Mô tả thiết bị:</label>
-                <textarea class="form-control" id="deviceDescription" rows="3">Mô tả hiện tại của thiết bị</textarea>
-            </div>
-            <button type="button" class="btn btn-primary" onclick="saveChanges()">Lưu thay đổi</button>
-            <button type="button" class="btn btn-secondary" onclick="closeFormEdit()">Đóng</button>
-        </form>
-    </div>
-</div>
 
 
 
-<script src="../vendor/jquery/jquery.min.js"></script>
-<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="assets2/vendor/jquery/jquery.min.js"></script>
+<script src="assets2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="assets2/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="../js/sb-admin-2.min.js"></script>
+<script src="assets2/js/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
-<script src="../vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="assets2/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="assets2/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="../js/demo/datatables-demo.js"></script>
+<script src="assets2/js/demo/datatables-demo.js"></script>
 
-<script src="../js/ThietBi/SuaThietBi.js"></script>
+<script src="assets2/js/ThietBi/SuaThietBi.js"></script>
 
-<script src="../js/ThietBi/FileExcel.js"></script>
+<!--<script src="../js/ThietBi/FileExcel.js"></script>-->
 
-<script src="../js/ThietBi/ThemThietBi.js"></script>
+<script src="assets2/js/ThietBi/ThemThietBi.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

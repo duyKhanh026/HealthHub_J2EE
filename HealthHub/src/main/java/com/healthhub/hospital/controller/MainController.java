@@ -10,12 +10,14 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.healthhub.hospital.config.AppConfig;
 import com.healthhub.hospital.dao.BenhNhanDAO;
+import com.healthhub.hospital.dao.LichKhamRepository;
 import com.healthhub.hospital.model.BenhNhan;
+import com.healthhub.hospital.model.ChiTietLichKham;
+import com.healthhub.hospital.model.LichKham;
 
 @Controller
 public class MainController {
@@ -47,14 +49,35 @@ public class MainController {
 		return "User/index";
 	}
 
+	@GetMapping({ "/LichKhamLS" })
+	public String lichKham(Model model) {
+		LichKhamRepository lkrepo = context.getBean(LichKhamRepository.class);
+		List<LichKham> listkham = new ArrayList<>();
+		listkham = lkrepo.getinforLichKham();
+		model.addAttribute("listkham", listkham);
+		return "User/LichKham";
+	}
+//	@GetMapping("/LichKhamLS")
+//    public String chiTietBenhNhan(@RequestParam("id") Integer id, Model model) {
+//        // Lấy thông tin bệnh nhân từ service
+//        LichKham benhNhan = benhNhanService.getBenhNhanById(id);
+//
+//        if (benhNhan == null) {
+//            return "error/404";
+//        }
+//
+//        model.addAttribute("benhnhan", benhNhan);
+//
+//        return "Doctor/ChiTietBenhNhan";
+//    }
 	
-	@RequestMapping(value = { "/Login" }, method = RequestMethod.GET)
+	@GetMapping({ "/Login" })
 	public String login(Model model) {
 
 		return "User/DangNhap";
 	}
 
-	@RequestMapping(value = { "/make_appointment" }, method = RequestMethod.GET)
+	@GetMapping({ "/make_appointment" })
 	public String make_appoint(Model model) {
 
 		return "User/make_appointment";

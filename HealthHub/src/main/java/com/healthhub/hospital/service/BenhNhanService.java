@@ -39,4 +39,12 @@ public class BenhNhanService {
     public void addBenhNhan(BenhNhan benhNhan) {
         benhNhanDAO.addBenhNhan(benhNhan);
     }
+
+    public BenhNhan getBenhNhanById(Integer id) {
+        return benhNhanDAO.getBenhNhanById(id);
+    }
+
+    public void updateBenhNhan(BenhNhan benhNhan) {
+        benhNhanDAO.updateBenhNhan(benhNhan);
+    }
 }
