@@ -14,10 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.healthhub.hospital.config.AppConfig;
 import com.healthhub.hospital.dao.BenhNhanDAO;
+import com.healthhub.hospital.dao.ChiTietLichKhamRepository;
 import com.healthhub.hospital.dao.LichKhamRepository;
 import com.healthhub.hospital.model.BenhNhan;
 import com.healthhub.hospital.model.ChiTietLichKham;
 import com.healthhub.hospital.model.LichKham;
+import com.healthhub.hospital.service.ChiTietBenhNhanService;
+import com.healthhub.hospital.service.ChiTietLichKhamService;
+import com.healthhub.hospital.service.LichKhamService;
 
 @Controller
 public class MainController {
@@ -51,24 +55,25 @@ public class MainController {
 
 	@GetMapping({ "/LichKhamLS" })
 	public String lichKham(Model model) {
-		LichKhamRepository lkrepo = context.getBean(LichKhamRepository.class);
+		LichKhamService lksv = new LichKhamService(context.getBean(LichKhamRepository.class));
 		List<LichKham> listkham = new ArrayList<>();
-		listkham = lkrepo.getinforLichKham();
+		listkham = lksv.getAllLichKham();
 		model.addAttribute("listkham", listkham);
 		return "User/LichKham";
 	}
 	@GetMapping("/LichKhamLS")
     public String chiTietBenhNhan(@RequestParam("id") Integer id, Model model) {
+		ChiTietLichKhamService lksv = new ChiTietLichKhamService(context.getBean(ChiTietLichKhamRepository.class));
         // Lấy thông tin bệnh nhân từ service
-        LichKham benhNhan = benhNhanService.getBenhNhanById(id);
+        LichKham lk = (LichKham) lksv.getChiTietLichKhamByMaLK(id);
 
-        if (benhNhan == null) {
+        if (lk == null) {
             return "error/404";
         }
 
-        model.addAttribute("benhnhan", benhNhan);
+        model.addAttribute("lickkhamchitiet", lk);
 
-        return "Doctor/ChiTietBenhNhan";
+        return "User/LichKham";
     }
 	
 	@GetMapping({ "/Login" })

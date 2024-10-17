@@ -46,7 +46,8 @@ public class LichKhamRepository extends JdbcDaoSupport {
     }
 
 
-    public List<LichKham> getLichKhamByBenhNhanId(Integer maBN) {
+    @SuppressWarnings("deprecation")
+	public List<LichKham> getLichKhamByBenhNhanId(Integer maBN) {
         String sql = "SELECT MaLK, MaBN, Ngaygiodatkham, Trangthai FROM lichkham WHERE MaBN = ?";
 
         try {
@@ -60,6 +61,25 @@ public class LichKhamRepository extends JdbcDaoSupport {
             });
         } catch (DataAccessException e) {
             logger.error("Không tìm thấy bệnh nhân với MaBN {}: {}");
+
+            return null;
+        }
+    }
+    @SuppressWarnings("deprecation")
+	public List<LichKham> getLichKhamByLichKhamId(Integer maLK) {
+        String sql = "SELECT MaLK, MaBN, Ngaygiodatkham, Trangthai FROM lichkham WHERE MaLK = ?";
+
+        try {
+            return this.getJdbcTemplate().query(sql, new Object[]{maLK}, (rs, rowNum) -> {
+                LichKham dto = new LichKham();
+                dto.setMaLK(rs.getInt("MaLK"));
+                dto.setMaBN(rs.getInt("MaBN"));
+                dto.setNgayGioDatKham(rs.getTimestamp("Ngaygiodatkham"));
+                dto.setTrangThai(rs.getString("Trangthai"));
+                return dto;
+            });
+        } catch (DataAccessException e) {
+            logger.error("Không tìm thấy MaLK {}: {}");
 
             return null;
         }
