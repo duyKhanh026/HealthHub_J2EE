@@ -1,6 +1,6 @@
 package com.healthhub.hospital.service;
 
-import com.healthhub.hospital.dao.BenhNhanDAO;
+import com.healthhub.hospital.Repository.BenhNhanDAO;
 import com.healthhub.hospital.model.BenhNhan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.support.rowset.SqlRowSet;

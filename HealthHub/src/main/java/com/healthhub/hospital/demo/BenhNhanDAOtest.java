@@ -8,7 +8,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import com.healthhub.hospital.config.AppConfig;
-import com.healthhub.hospital.dao.BenhNhanDAO;
+import com.healthhub.hospital.Repository.BenhNhanDAO;
 
 
 public class BenhNhanDAOtest {

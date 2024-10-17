@@ -1,14 +1,13 @@
 package com.healthhub.hospital.controller.Doctor;
 
 import com.healthhub.hospital.config.AppConfig;
-import com.healthhub.hospital.dao.BenhNhanDAO;
-import com.healthhub.hospital.dao.ChiTietLichKhamRepository;
-import com.healthhub.hospital.dao.LichKhamRepository;
+import com.healthhub.hospital.Repository.BenhNhanDAO;
+import com.healthhub.hospital.Repository.ChiTietLichKhamRepository;
+import com.healthhub.hospital.Repository.LichKhamRepository;
 import com.healthhub.hospital.model.BenhNhan;
 import com.healthhub.hospital.model.ChiTietLichKham;
 import com.healthhub.hospital.model.LichKham;
 import com.healthhub.hospital.service.BenhNhanService;
-import com.healthhub.hospital.service.ChiTietBenhNhanService;
 import com.healthhub.hospital.service.ChiTietLichKhamService;
 import com.healthhub.hospital.service.LichKhamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +22,20 @@ import java.util.List;
 @Controller
 public class ChiTietBenhNhanController {
 
-    ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+    private BenhNhanService benhNhanService ;
 
-    private BenhNhanService benhNhanService = new BenhNhanService(context.getBean(BenhNhanDAO.class));
+    private LichKhamService lichKhamService ;
 
-    private LichKhamService lichKhamService = new LichKhamService(context.getBean(LichKhamRepository.class));
+    private ChiTietLichKhamService chiTietLichKhamService;
 
-    private ChiTietLichKhamService chiTietLichKhamService = new ChiTietLichKhamService(context.getBean(ChiTietLichKhamRepository.class));
+
+    @Autowired
+    public ChiTietBenhNhanController(BenhNhanService benhNhanService,LichKhamService lichKhamService, ChiTietLichKhamService chiTietLichKhamService ) {
+        this.benhNhanService = benhNhanService;
+        this.lichKhamService = lichKhamService;
+        this.chiTietLichKhamService = chiTietLichKhamService;
+
+    }
 
 
     @GetMapping("/ChiTietBenhNhan")

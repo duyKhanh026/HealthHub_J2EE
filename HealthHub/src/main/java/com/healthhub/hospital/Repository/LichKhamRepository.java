@@ -1,13 +1,11 @@
-package com.healthhub.hospital.dao;
+package com.healthhub.hospital.Repository;
 
 import com.healthhub.hospital.model.BenhNhan;
 import com.healthhub.hospital.model.LichKham;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
 import java.util.List;
 
 public class LichKhamRepository extends JdbcDaoSupport {

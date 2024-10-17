@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.healthhub.hospital.config.AppConfig;
-import com.healthhub.hospital.dao.BenhNhanDAO;
-import com.healthhub.hospital.dao.ChiTietLichKhamRepository;
-import com.healthhub.hospital.dao.LichKhamRepository;
+import com.healthhub.hospital.Repository.BenhNhanDAO;
+import com.healthhub.hospital.Repository.ChiTietLichKhamRepository;
+import com.healthhub.hospital.Repository.LichKhamRepository;
 import com.healthhub.hospital.model.BenhNhan;
 import com.healthhub.hospital.model.ChiTietLichKham;
 import com.healthhub.hospital.model.LichKham;
-import com.healthhub.hospital.service.ChiTietBenhNhanService;
 import com.healthhub.hospital.service.ChiTietLichKhamService;
 import com.healthhub.hospital.service.LichKhamService;
 
@@ -76,7 +75,7 @@ public class MainController {
 	    return "User/LichKham :: #lichkhamContent";  // Chỉ trả về fragment chứa chi tiết
 	}
 	
-	@GetMapping({ "/Login" })
+	@GetMapping({ "/login" })
 	public String login(Model model) {
 
 		return "User/DangNhap";
