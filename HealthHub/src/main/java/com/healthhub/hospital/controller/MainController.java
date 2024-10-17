@@ -50,6 +50,7 @@ public class MainController {
         }
 		model.addAttribute("benhnhans", benhnhans);
 
+
 		return "User/index";
 	}
 
@@ -59,22 +60,21 @@ public class MainController {
 		List<LichKham> listkham = new ArrayList<>();
 		listkham = lksv.getAllLichKham();
 		model.addAttribute("listkham", listkham);
+	    model.addAttribute("lichkhamchitiet", new ChiTietLichKham());
 		return "User/LichKham";
 	}
-	@GetMapping("/LichKhamLS")
-    public String chiTietBenhNhan(@RequestParam("id") Integer id, Model model) {
-		ChiTietLichKhamService lksv = new ChiTietLichKhamService(context.getBean(ChiTietLichKhamRepository.class));
-        // Lấy thông tin bệnh nhân từ service
-        LichKham lk = (LichKham) lksv.getChiTietLichKhamByMaLK(id);
+	@GetMapping("/LichKhamLS/chiTiet")
+	public String chiTietLichKham(@RequestParam Integer id, Model model) {
+	    ChiTietLichKhamService lksv = new ChiTietLichKhamService(context.getBean(ChiTietLichKhamRepository.class));
+	    ChiTietLichKham lk = lksv.getChiTietLichKhamByMaLK(id).get(0);
 
-        if (lk == null) {
-            return "error/404";
-        }
+	    if (lk == null) {
+	        return "error/404";
+	    }
 
-        model.addAttribute("lickkhamchitiet", lk);
-
-        return "User/LichKham";
-    }
+	    model.addAttribute("lichkhamchitiet", lk);
+	    return "User/LichKham :: #lichkhamContent";  // Chỉ trả về fragment chứa chi tiết
+	}
 	
 	@GetMapping({ "/Login" })
 	public String login(Model model) {

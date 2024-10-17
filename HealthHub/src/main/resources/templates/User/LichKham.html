@@ -21,6 +21,7 @@
   <link th:href="@{assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
   <link th:href="@{assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
   <link th:href="@{css/duy.css}" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <!-- Main CSS File -->
   <link th:href="@{assets/css/main.css}" rel="stylesheet">
@@ -94,7 +95,7 @@
 
   </header>
  	<div class="listItem_parent">
-		<div th:each="kham : ${listkham}" class="card" onclick="openPopup()" th:href="@{/LichKhamLS(id=${kham.maLK})}">
+		<div th:each="kham : ${listkham}" class="card" onclick="openPopup()" th:attr="data-id=${kham.maLK}">
 			<div class="container">
 				<h4><b th:text="${kham.ngayGioDatKham}"></b> <button type="button" class="btn btn-primary myButton" th:text="${kham.trangThai}">Trạng thái</button></h4> 
 				<p>Khám bệnh trĩ</p> 
@@ -125,6 +126,9 @@
         <span class="close-btn" onclick="closePopup()">&times;</span>
         <h2>Form Xem Chi Tiết</h2>
 		<b>Mã Hồ Sơ: <b>001</b></b>
+    	<div id="lichkhamContent">
+			
+		</div>
     </div>
 	<!--<button class="open-popup-btn" onclick="openPopup()">Mở Form</button>-->
     <script>
@@ -133,11 +137,26 @@
             document.getElementById('popupForm').style.display = 'block';
             document.getElementById('overlay').style.display = 'block';
         }
-
         // Hàm đóng popup
         function closePopup() {
             document.getElementById('popupForm').style.display = 'none';
             document.getElementById('overlay').style.display = 'none';
         }
+		$(document).ready(function() {
+	        $('.card').on('click', function(e) {
+	            e.preventDefault();
+	            var id = $(this).data('id');
+	            $.ajax({
+	                url: '/LichKhamLS/chiTiet',
+	                data: { id: id },
+	                success: function(data) {
+	                    $('#lichkhamContent').html(data);
+	                },
+	                error: function() {
+	                    alert('Có lỗi xảy ra khi lấy chi tiết lịch khám.');
+	                }
+	            });
+	        });
+	    });
     </script>
 </body>

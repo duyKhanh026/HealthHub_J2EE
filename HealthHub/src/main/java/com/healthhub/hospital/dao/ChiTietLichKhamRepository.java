@@ -15,7 +15,8 @@ public class ChiTietLichKhamRepository extends JdbcDaoSupport {
 
 
 
-    public List<ChiTietLichKham> getChiTietLichKhamByMaLK(Integer maLK) {
+    @SuppressWarnings("deprecation")
+	public List<ChiTietLichKham> getChiTietLichKhamByMaLK(Integer maLK) {
         String sql = "SELECT MaHS, MaLK, Chuandoan, Donthuoc, Ghichuthem FROM chitietlichkham WHERE MaLK = ?";
 
         try {
