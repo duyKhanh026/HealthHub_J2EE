@@ -88,6 +88,12 @@ public class MainController {
 		return "User/DangNhap";
 	}
 
+//	@GetMapping({ "/logout" })
+//	public String logout(Model model) {
+//		return "User/index";
+//
+//	}
+
 	@GetMapping({ "/make_appointment" })
 	public String make_appoint(Model model) {
 
