@@ -5,18 +5,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.healthhub.hospital.config.AppConfig;
 import com.healthhub.hospital.Repository.BenhNhanDAO;
-import com.healthhub.hospital.Repository.ChiTietLichKhamRepository;
-import com.healthhub.hospital.Repository.LichKhamRepository;
 import com.healthhub.hospital.model.BenhNhan;
 import com.healthhub.hospital.model.ChiTietLichKham;
 import com.healthhub.hospital.model.LichKham;
@@ -81,18 +76,10 @@ public class MainController {
 	    model.addAttribute("lichkhamchitiet", lk);
 	    return "User/LichKham :: #lichkhamContent";  // Chỉ trả về fragment chứa chi tiết
 	}
-	
-	@GetMapping({ "/login" })
-	public String login(Model model) {
 
-		return "User/DangNhap";
-	}
 
-//	@GetMapping({ "/logout" })
-//	public String logout(Model model) {
-//		return "User/index";
-//
-//	}
+
+
 
 	@GetMapping({ "/make_appointment" })
 	public String make_appoint(Model model) {

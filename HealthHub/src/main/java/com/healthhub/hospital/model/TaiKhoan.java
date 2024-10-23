@@ -2,6 +2,7 @@ package com.healthhub.hospital.model;
 
 public class TaiKhoan {
 
+
     private int maTK;
     private String tenDN;
     private String matkhau;

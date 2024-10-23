@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -9,16 +9,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Register</title>
+    <title>Register</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link th:href="@{assets2/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
     <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link th:href="@{assets2/css/sb-admin-2.min.css}" rel="stylesheet">
 
 </head>
 
@@ -36,62 +36,30 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                         </div>
-                        <form class="user">
+                        <form class="user" th:action="@{/register}" method="POST">
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-user" id="exampleFullName"
-                                       placeholder="Họ và tên">
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <select class="form-control" id="exampleKhoa" style="border-radius:10rem">
-                                        <option value="QTKD">QTKD</option>
-                                        <option value="SP KHTN">SP KHTN</option>
-                                        <option value="SP KHXH">SP KHXH</option>
-                                        <option value="Ngoại Ngữ">Ngoại Ngữ</option>
-                                        <option value="QLGD">QLGD</option>
-                                        <option value="Toán UD">Toán UD</option>
-                                        <option value="CNTT">CNTT</option>
-                                        <!-- Thêm các option khác nếu cần -->
-                                    </select>
-                                </div>
-
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <select class="form-control" id="exampleNganh" style="border-radius:10rem">
-                                        <option>QTKD</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <input type="email" class="form-control form-control-user" id="exampleEmail"
-                                       placeholder="Email">
+                                <input type="text" class="form-control form-control-user" id="username" name="username"
+                                       placeholder="Tên đăng nhập">
                             </div>
                             <div class="form-group">
-                                <input type="SDT" class="form-control form-control-user" id="exampleSDT"
-                                       placeholder="Số điện thoại">
+                                <input type="password" class="form-control form-control-user" id="password" name="password"
+                                       placeholder="Mật khẩu">
                             </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="password" class="form-control form-control-user"
-                                           id="examplePassword" placeholder="Mật khẩu">
-                                </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control form-control-user" id="confirmPassword" name="confirmPassword"
+                                       placeholder="Nhập lại mật khẩu">
+                            </div>
 
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="password" class="form-control form-control-user"
-                                           id="exampleRepeat" placeholder="Nhập lại mật khẩu">
-                                </div>
-                            </div>
-                            <a class="btn btn-primary btn-user btn-block " onclick="saveAdd()">
-                                Register Account
-                            </a>
+                            <button type="submit" class="btn btn-primary btn-user btn-block">
+                                Register
+                            </button>
                         </form>
                         <hr>
                         <div class="text-center">
                             <a class="small" href="QuenMatKhau.html">Forgot Password?</a>
                         </div>
                         <div class="text-center">
-                            <a class="small" href="DangNhap.html">Already have an account? Login!</a>
+                            <a class="small" href="/login">Already have an account? Login!</a>
                         </div>
                     </div>
                 </div>
@@ -101,18 +69,6 @@
 
 </div>
 
-<!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
-
-<script src="../js/Login/Register.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
