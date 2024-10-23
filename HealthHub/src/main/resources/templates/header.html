@@ -57,35 +57,32 @@
             <a class="cta-btn d-none d-sm-block" href="/login" sec:authorize="!isAuthenticated()">Login</a>
 
             <!-- Nút Logout -->
-            <a class="cta-btn d-none d-sm-block" href="#" sec:authorize="isAuthenticated()" onclick="showLogoutModal()">Logout</a>
+            <a class="cta-btn d-none d-sm-block"  sec:authorize="isAuthenticated()" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
 
             <!-- Modal Xác Nhận Đăng Xuất -->
-            <div id="logoutModal" class="modal" style="display: none;">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5>Xác Nhận Đăng Xuất</h5>
-                        <span class="close" onclick="hideLogoutModal()">&times;</span>
-                    </div>
-                    <div class="modal-body">
-                        <p>Bạn có chắc chắn muốn đăng xuất?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button onclick="hideLogoutModal()">Hủy</button>
-                        <form th:action="@{/logout}" method="post">
-                            <button type="submit">Đăng Xuất</button>
-                        </form>
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="logoutModalLabel">Xác Nhận Đăng Xuất</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Bạn có chắc chắn muốn đăng xuất không?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                            <a class="btn btn-danger" id="confirmLogout" href="/logout">Đăng xuất</a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-
-
-
             <a class="cta-btn d-none d-sm-block" href="" sec:authorize="isAuthenticated()">Thông tin</a>
-
 
         </div>
 
     </div>
+
 
 </header>
