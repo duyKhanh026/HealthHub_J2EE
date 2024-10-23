@@ -59,7 +59,7 @@ public class AppConfig{
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/index", "/assets2/**", "/css/**", "/assets/**").permitAll()
+                        .requestMatchers("/", "/index", "/assets2/**", "/css/**", "/assets/**", "/DSBenhNhan","DSLichKham","/ChiTietBenhNhan","/ThongTinLichKham").permitAll()
                         .requestMatchers("/forgot_password").permitAll()
                         .anyRequest().authenticated()
                 )
@@ -141,15 +141,5 @@ public class AppConfig{
     @Bean
     public ChiTietLichKhamRepository getChiTietLichKhamRepository() {
         return new ChiTietLichKhamRepository(dataSource());
-    }
-
-    @Bean
-    public LichKhamService lichKhamService() {
-        return new LichKhamService(getLichKhamRepository());
-    }
-
-    @Bean
-    public ChiTietLichKhamService chiTietLichKhamService() {
-        return new ChiTietLichKhamService(getChiTietLichKhamRepository());
     }
 }

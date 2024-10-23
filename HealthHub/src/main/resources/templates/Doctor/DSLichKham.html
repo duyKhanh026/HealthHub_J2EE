@@ -145,7 +145,7 @@
                                     <td th:text="${#dates.format(lichkham.ngayGioDatKham, 'yyyy-MM-dd HH:mm')}">NgayGioDatKham</td>
                                     <td th:text="${lichkham.trangThai}">Trangthai</td>
                                         <td>
-                                            <a class="btn btn-info btn-circle btn-lg">
+                                            <a th:href="@{/ThongTinLichKham(id=${lichkham.maLK}, idbn=${lichkham.benhNhan.maBN})}" class="btn btn-info btn-circle btn-lg">
                                                 <i class="fas fa-info-circle"></i>
                                             </a>
                                         </td>

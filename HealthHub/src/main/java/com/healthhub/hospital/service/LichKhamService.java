@@ -27,4 +27,8 @@ public class LichKhamService {
     public List<LichKham> getLichKhamByLichKhamId(Integer maLK) {
         return lichKhamRepository.getLichKhamByLichKhamId(maLK);
     }
+
+    public LichKham getLichKhambyID(Integer id){
+        return lichKhamRepository.getLichKhambyID(id);
+    }
 }

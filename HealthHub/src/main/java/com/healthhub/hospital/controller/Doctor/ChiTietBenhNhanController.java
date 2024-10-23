@@ -55,7 +55,7 @@ public class ChiTietBenhNhanController {
             List<ChiTietLichKham> chiTietList = chiTietLichKhamService.getChiTietLichKhamByMaLK(lichKham.getMaLK());
             // Giả sử mỗi lịch khám chỉ có một chi tiết, bạn có thể thiết lập thêm nếu cần
             if (!chiTietList.isEmpty()) {
-                lichKham.setChiTietLichKham(chiTietList.get(0));
+                lichKham.setChiTietLichKham(chiTietList.get(0)); // thêm chi tiet lich kham vao lich kham
             }
         }
 

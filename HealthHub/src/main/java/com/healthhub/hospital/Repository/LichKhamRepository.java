@@ -82,4 +82,21 @@ public class LichKhamRepository extends JdbcDaoSupport {
             return null;
         }
     }
+
+    public LichKham getLichKhambyID(Integer id){
+        String sql = "SELECT * FROM lichkham WHERE MaLK = ?";
+        try {
+            return this.getJdbcTemplate().queryForObject(sql, new Object[]{id}, (rs, rowNum) -> {
+                LichKham dto = new LichKham();
+                dto.setMaLK(rs.getInt("MaLK"));
+                dto.setMaBN(rs.getInt("MaBN"));
+                dto.setNgayGioDatKham(rs.getTimestamp("Ngaygiodatkham"));
+                dto.setTrangThai(rs.getString("Trangthai"));
+                return dto;
+            });
+        } catch (DataAccessException e) {
+            logger.error("Không tìm thấy lich kham với MaBN {}: {}");
+            return null;
+        }
+    }
 }

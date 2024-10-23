@@ -119,19 +119,19 @@
                         <form>
                             <div class="form-group">
                                 <label>Mã lịch khám</label>
-                                <input type="text"  class="form-control" >
+                                <input type="text"  class="form-control" th:value="${lichkhams.maLK}" >
                             </div>
                             <div class="form-group">
                                 <label>Tên bệnh nhân</label>
-                                <input type="text"  class="form-control" >
+                                <input type="text"  class="form-control" th:value="${benhNhan.HoTen}">
                             </div>
                             <div class="form-group">
                                 <label>Ngày khám</label>
-                                <input type="text"  class="form-control"  >
+                                <input type="text"  class="form-control"  th:value="${#dates.format(lichkhams.ngayGioDatKham, 'yyyy-MM-dd HH:mm')}">
                             </div>
                             <div class="form-group">
                                 <label>Trạng thái</label>
-                                <input type="text"  class="form-control" >
+                                <input type="text"  class="form-control" th:value="${lichkhams.trangThai}">
                             </div>
                         </form>
                     </div>
@@ -159,18 +159,18 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form th:each="chiTiet : ${chiTietList}">
                             <div class="form-group">
                                 <label>Chuẩn đoán</label>
-                                <input type="text"  class="form-control" >
+                                <input type="text"  class="form-control" th:value="${chiTiet.chuanDoan}" >
                             </div>
                             <div class="form-group">
                                 <label>Đơn thuốc</label>
-                                <input type="text"  class="form-control" >
+                                <input type="text"  class="form-control" th:value="${chiTiet.donThuoc}" >
                             </div>
                             <div class="form-group">
                                 <label>Ghi chú thêm</label>
-                                <input type="text"  class="form-control"  >
+                                <input type="text"  class="form-control" th:value="${chiTiet.ghiChuThem}" >
                             </div>
                             <button type="button" class="btn btn-primary" onclick="saveChanges()">Lưu</button>
                         </form>
