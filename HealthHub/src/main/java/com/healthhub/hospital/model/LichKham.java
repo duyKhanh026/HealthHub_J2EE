@@ -2,6 +2,13 @@ package com.healthhub.hospital.model;
 
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class LichKham {
 
     private int maLK;
@@ -10,63 +17,4 @@ public class LichKham {
     private String trangThai;
     private ChiTietLichKham chiTietLichKham;
     private BenhNhan benhNhan;
-
-    public LichKham() {
-    }
-
-    public LichKham(int maLK, int maBN, Date ngayGioDatKham, String trangThai, ChiTietLichKham chiTietLichKham) {
-        this.maLK = maLK;
-        this.maBN = maBN;
-        this.ngayGioDatKham = ngayGioDatKham;
-        this.trangThai = trangThai;
-        this.chiTietLichKham = chiTietLichKham;
-    }
-
-    public BenhNhan getBenhNhan() {
-        return benhNhan;
-    }
-
-    public void setBenhNhan(BenhNhan benhNhan) {
-        this.benhNhan = benhNhan;
-    }
-
-    public int getMaLK() {
-        return maLK;
-    }
-
-    public void setMaLK(int maLK) {
-        this.maLK = maLK;
-    }
-
-    public int getMaBN() {
-        return maBN;
-    }
-
-    public void setMaBN(int maBN) {
-        this.maBN = maBN;
-    }
-
-    public Date getNgayGioDatKham() {
-        return ngayGioDatKham;
-    }
-
-    public void setNgayGioDatKham(Date ngayGioDatKham) {
-        this.ngayGioDatKham = ngayGioDatKham;
-    }
-
-    public String getTrangThai() {
-        return trangThai;
-    }
-
-    public void setTrangThai(String trangThai) {
-        this.trangThai = trangThai;
-    }
-
-    public ChiTietLichKham getChiTietLichKham() {
-        return chiTietLichKham;
-    }
-
-    public void setChiTietLichKham(ChiTietLichKham chiTietLichKham) {
-        this.chiTietLichKham = chiTietLichKham;
-    }
 }
