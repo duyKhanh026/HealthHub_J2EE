@@ -1,5 +1,5 @@
 package com.healthhub.hospital.Repository;
-import com.healthhub.hospital.model.ChiTietLichKham;
+import com.healthhub.hospital.Entity.ChiTietLichKham;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.support.rowset.SqlRowSet;

@@ -1,7 +1,7 @@
 package com.healthhub.hospital.Repository;
 
-import com.healthhub.hospital.model.BenhNhan;
-import com.healthhub.hospital.model.LichKham;
+import com.healthhub.hospital.Entity.BenhNhan;
+import com.healthhub.hospital.Entity.LichKham;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 

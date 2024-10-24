@@ -1,8 +1,7 @@
 package com.healthhub.hospital.service;
 
 import com.healthhub.hospital.Repository.ChiTietLichKhamRepository;
-import com.healthhub.hospital.model.ChiTietLichKham;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.healthhub.hospital.Entity.ChiTietLichKham;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.List;
 public class ChiTietLichKhamService {
     private final ChiTietLichKhamRepository chiTietLichKhamRepository;
 
-    @Autowired
     public ChiTietLichKhamService(ChiTietLichKhamRepository chiTietLichKhamRepository) {
         this.chiTietLichKhamRepository = chiTietLichKhamRepository;
     }

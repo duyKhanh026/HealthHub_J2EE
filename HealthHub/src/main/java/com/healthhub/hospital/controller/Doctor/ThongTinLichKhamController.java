@@ -1,8 +1,8 @@
 package com.healthhub.hospital.controller.Doctor;
 
-import com.healthhub.hospital.model.BenhNhan;
-import com.healthhub.hospital.model.ChiTietLichKham;
-import com.healthhub.hospital.model.LichKham;
+import com.healthhub.hospital.Entity.BenhNhan;
+import com.healthhub.hospital.Entity.ChiTietLichKham;
+import com.healthhub.hospital.Entity.LichKham;
 import com.healthhub.hospital.service.BenhNhanService;
 import com.healthhub.hospital.service.ChiTietLichKhamService;
 import com.healthhub.hospital.service.LichKhamService;

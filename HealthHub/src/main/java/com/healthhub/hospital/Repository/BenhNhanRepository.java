@@ -4,16 +4,16 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import com.healthhub.hospital.model.BenhNhan;
+import com.healthhub.hospital.Entity.BenhNhan;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class BenhNhanDAO extends JdbcDaoSupport{
+public class BenhNhanRepository extends JdbcDaoSupport{
 	
-    public BenhNhanDAO(DataSource dataSource) {
+    public BenhNhanRepository(DataSource dataSource) {
         this.setDataSource(dataSource);
     }
 

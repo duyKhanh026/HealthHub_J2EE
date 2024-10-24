@@ -1,7 +1,7 @@
 package com.healthhub.hospital.service;
 
 import com.healthhub.hospital.Repository.LichKhamRepository;
-import com.healthhub.hospital.model.LichKham;
+import com.healthhub.hospital.Entity.LichKham;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

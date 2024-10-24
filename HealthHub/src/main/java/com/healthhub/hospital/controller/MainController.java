@@ -11,17 +11,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.healthhub.hospital.Repository.BenhNhanDAO;
-import com.healthhub.hospital.model.BenhNhan;
-import com.healthhub.hospital.model.ChiTietLichKham;
-import com.healthhub.hospital.model.LichKham;
+import com.healthhub.hospital.Repository.BenhNhanRepository;
+import com.healthhub.hospital.Repository.BenhNhanRepository;
+import com.healthhub.hospital.Entity.BenhNhan;
+import com.healthhub.hospital.Entity.ChiTietLichKham;
+import com.healthhub.hospital.Entity.LichKham;
 import com.healthhub.hospital.service.ChiTietLichKhamService;
 import com.healthhub.hospital.service.LichKhamService;
 
 @Controller
 public class MainController {
 	@Autowired
-	private BenhNhanDAO benhNhanDAO;
+	private BenhNhanRepository benhNhanDAO;
 
 	@Autowired
 	private LichKhamService lichKhamService;

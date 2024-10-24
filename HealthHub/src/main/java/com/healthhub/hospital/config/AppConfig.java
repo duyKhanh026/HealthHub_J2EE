@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import com.healthhub.hospital.Repository.BenhNhanDAO;
+import com.healthhub.hospital.Repository.BenhNhanRepository;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -129,8 +129,8 @@ public class AppConfig{
 
 
     @Bean
-    public BenhNhanDAO getBenhNhanDAO() {
-        return new BenhNhanDAO(dataSource());
+    public BenhNhanRepository getBenhNhanDAO() {
+        return new BenhNhanRepository(dataSource());
     }
 
     @Bean

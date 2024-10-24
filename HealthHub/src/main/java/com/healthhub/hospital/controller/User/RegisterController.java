@@ -1,7 +1,7 @@
 package com.healthhub.hospital.controller.User;
 
 import com.healthhub.hospital.Repository.TaiKhoanRepository;
-import com.healthhub.hospital.model.TaiKhoan;
+import com.healthhub.hospital.Entity.TaiKhoan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;

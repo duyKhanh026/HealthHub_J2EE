@@ -1,7 +1,7 @@
 package com.healthhub.hospital.Repository;
 
 import com.healthhub.hospital.Mapper.TaiKhoanMapper;
-import com.healthhub.hospital.model.TaiKhoan;
+import com.healthhub.hospital.Entity.TaiKhoan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;

@@ -1,6 +1,6 @@
 package com.healthhub.hospital.controller.Doctor;
 
-import com.healthhub.hospital.model.BenhNhan;
+import com.healthhub.hospital.Entity.BenhNhan;
 import com.healthhub.hospital.service.BenhNhanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

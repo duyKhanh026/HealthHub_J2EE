@@ -10,9 +10,5 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class HealthHubApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HealthHubApplication.class, args);
-
-
-		
 	}
-
 }

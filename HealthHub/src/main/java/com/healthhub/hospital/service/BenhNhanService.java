@@ -1,7 +1,7 @@
 package com.healthhub.hospital.service;
 
-import com.healthhub.hospital.Repository.BenhNhanDAO;
-import com.healthhub.hospital.model.BenhNhan;
+import com.healthhub.hospital.Repository.BenhNhanRepository;
+import com.healthhub.hospital.Entity.BenhNhan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Service;
@@ -11,10 +11,10 @@ import java.util.List;
 
 @Service
 public class BenhNhanService {
-    private final BenhNhanDAO benhNhanDAO;
+    private final BenhNhanRepository benhNhanDAO;
 
     @Autowired
-    public BenhNhanService(BenhNhanDAO benhNhanDAO) {
+    public BenhNhanService(BenhNhanRepository benhNhanDAO) {
         this.benhNhanDAO = benhNhanDAO;
     }
 

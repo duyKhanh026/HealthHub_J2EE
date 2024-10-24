@@ -1,6 +1,6 @@
 package com.healthhub.hospital.Mapper;
 
-import com.healthhub.hospital.model.TaiKhoan;
+import com.healthhub.hospital.Entity.TaiKhoan;
 import org.springframework.jdbc.core.RowMapper;
 import java.sql.SQLException;
 import java.sql.ResultSet;

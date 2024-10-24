@@ -1,5 +1,5 @@
 package com.healthhub.hospital.service;
-import com.healthhub.hospital.model.TaiKhoan;
+import com.healthhub.hospital.Entity.TaiKhoan;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
