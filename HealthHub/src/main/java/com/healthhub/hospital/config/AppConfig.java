@@ -59,7 +59,7 @@ public class AppConfig{
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/index", "/assets2/**", "/css/**", "/assets/**", "/DSBenhNhan","DSLichKham","/ChiTietBenhNhan","/ThongTinLichKham","/register").permitAll()
+                        .requestMatchers("/","/anhcuatao/**", "/index", "/assets2/**", "/css/**", "/assets/**", "/DSBenhNhan","DSLichKham","/ChiTietBenhNhan","/ThongTinLichKham","/register").permitAll()
                         .requestMatchers("/forgot_password").permitAll()
                         .anyRequest().authenticated()
                 )
