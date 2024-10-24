@@ -56,8 +56,18 @@
             <!-- Hiển thị nút "Login" nếu chưa đăng nhập -->
             <a class="cta-btn d-none d-sm-block" href="/login" sec:authorize="!isAuthenticated()">Login</a>
 
-            <!-- Nút Logout -->
-            <a class="cta-btn d-none d-sm-block"  sec:authorize="isAuthenticated()" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
+            <div class="dropdown" sec:authorize="isAuthenticated()">
+                <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img th:src="@{anhcuatao/User.png}"  class="rounded-circle me-2" alt="User">
+                    <span>Nam</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="userDropdown">
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal" style="cursor: pointer;">Logout</a></li>
+                </ul>
+            </div>
 
             <!-- Modal Xác Nhận Đăng Xuất -->
             <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
@@ -72,13 +82,13 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                            <a class="btn btn-danger" id="confirmLogout" href="/logout">Đăng xuất</a>
+                            <form th:action="@{/logout}" method="post" style="display: inline;">
+                                <input type="submit" class="btn btn-danger" value="Đăng xuất"/>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <a class="cta-btn d-none d-sm-block" href="" sec:authorize="isAuthenticated()">Thông tin</a>
 
         </div>
 
