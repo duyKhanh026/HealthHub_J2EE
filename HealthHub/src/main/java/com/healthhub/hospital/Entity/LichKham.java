@@ -37,7 +37,7 @@ public class LichKham {
     @OneToOne(mappedBy = "lichKham")
     private ChiTietLichKham chiTietLichKham;
 
-    public Integer getMaHS() {
-        return chiTietLichKham != null ? chiTietLichKham.getMaHS() : null;
-    }
+//    public Integer getMaLK() {
+//        return chiTietLichKham != null ? chiTietLichKham.getMaLK() : null;
+//    }
 }

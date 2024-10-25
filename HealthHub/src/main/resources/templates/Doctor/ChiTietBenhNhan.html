@@ -190,6 +190,7 @@
                                 <tr>
                                     <th style="width: 50px;"><input type="checkbox" name="selectedItems" id="checkAll" class="larger-checkbox" style="margin-top: 5px;"/></th>
                                     <th>Mã lịch khám</th>
+                                    <th>Mã chi tiết lịch khám</th>
                                     <th>Ngày giờ đặt khám</th>
                                     <th>Chuẩn đoán</th>
                                     <th>Đơn thuốc</th>
@@ -203,6 +204,7 @@
                                 <tr th:each="lichkham : ${lichkhamList}">
                                     <td><input type="checkbox" class="checkbox_ID larger-checkbox"/></td>
                                     <td th:text="${lichkham.maLK}"></td>
+                                    <td th:text="${lichkham.chiTietLichKham.MaHS}"></td>
                                     <td th:text="${#dates.format(lichkham.ngayGioDatKham, 'yyyy-MM-dd HH:mm')}"></td>
                                     <td th:text="${lichkham.chiTietLichKham.chuanDoan}"></td>
                                     <td th:text="${lichkham.chiTietLichKham.donThuoc}"></td>

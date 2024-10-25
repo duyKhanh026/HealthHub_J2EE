@@ -50,13 +50,13 @@ public class ChiTietBenhNhanController {
         List<LichKham> lichKhamList = lichKhamService.getLichKhamByBenhNhanId(id);
 //
 //        // Lấy chi tiết lịch khám từ từng lịch khám
-        for (LichKham lichKham : lichKhamList) {
-            List<ChiTietLichKham> chiTietList = chiTietLichKhamService.getChiTietLichKhamByMaLK(lichKham.getMaHS());
-            // Giả sử mỗi lịch khám chỉ có một chi tiết, bạn có thể thiết lập thêm nếu cần
-            if (!chiTietList.isEmpty()) {
-                lichKham.setChiTietLichKham(chiTietList.get(0)); // thêm chi tiet lich kham vao lich kham
-            }
-        }
+//        for (LichKham lichKham : lichKhamList) {
+//            List<ChiTietLichKham> chiTietList = chiTietLichKhamService.getChiTietLichKhamByMaLK(lichKham.getMaLK());
+//            // Giả sử mỗi lịch khám chỉ có một chi tiết, bạn có thể thiết lập thêm nếu cần
+//            if (!chiTietList.isEmpty()) {
+//                lichKham.setChiTietLichKham(chiTietList.get(0)); // thêm chi tiet lich kham vao lich kham
+//            }
+//        }
 
         model.addAttribute("benhnhan", benhNhan);
         model.addAttribute("lichkhamList", lichKhamList);
