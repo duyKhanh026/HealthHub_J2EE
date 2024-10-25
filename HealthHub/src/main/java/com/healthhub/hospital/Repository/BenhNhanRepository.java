@@ -10,14 +10,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BenhNhanRepository extends JpaRepository<BenhNhan, Integer>{
 	
-	List<BenhNhan> findByTitle(String title);
+//	List<BenhNhan> findByTitle(String title);
 	
 	
-	@Query("SELECT b.hoten FROM BenhNhan b")
-    List<String> findAllHoten();
-	
-	@Query("SELECT e.maBN, e.hoten, e.ngaySinh FROM BenhNhan e")
-    List<Object[]> getBenhNhanSqlRowSet();
+//	@Query("SELECT b.hoten FROM BenhNhan b")
+//    List<String> findAllHoten();
+//
+//	@Query("SELECT e.maBN, e.hoten, e.ngaySinh FROM BenhNhan e")
+//    List<Object[]> getBenhNhanSqlRowSet();
     
 //  Note:  Sài findALl() thay thế phương thức bên dưới
 //    public SqlRowSet getinforBenhNhan() {

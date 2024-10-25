@@ -1,6 +1,5 @@
 package com.healthhub.hospital.controller.Doctor;
 
-import com.healthhub.hospital.config.AppConfig;
 import com.healthhub.hospital.Repository.BenhNhanRepository;
 import com.healthhub.hospital.Repository.ChiTietLichKhamRepository;
 import com.healthhub.hospital.Repository.LichKhamRepository;
@@ -52,7 +51,7 @@ public class ChiTietBenhNhanController {
 //
 //        // Lấy chi tiết lịch khám từ từng lịch khám
         for (LichKham lichKham : lichKhamList) {
-            List<ChiTietLichKham> chiTietList = chiTietLichKhamService.getChiTietLichKhamByMaLK(lichKham.getMaLK());
+            List<ChiTietLichKham> chiTietList = chiTietLichKhamService.getChiTietLichKhamByMaLK(lichKham.getMaHS());
             // Giả sử mỗi lịch khám chỉ có một chi tiết, bạn có thể thiết lập thêm nếu cần
             if (!chiTietList.isEmpty()) {
                 lichKham.setChiTietLichKham(chiTietList.get(0)); // thêm chi tiet lich kham vao lich kham

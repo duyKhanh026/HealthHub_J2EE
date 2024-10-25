@@ -1,11 +1,8 @@
 package com.healthhub.hospital.Entity;
 
 import java.time.LocalDate; // Sử dụng LocalDate thay cho java.sql.Date
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
+
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "benhnhan") // Hoặc "benhnan" nếu là chữ thường
 public class BenhNhan {
 
     @Id
