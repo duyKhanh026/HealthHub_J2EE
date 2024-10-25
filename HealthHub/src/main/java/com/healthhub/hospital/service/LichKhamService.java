@@ -11,24 +11,19 @@ import java.util.List;
 public class LichKhamService {
     private final LichKhamRepository lichKhamRepository;
 
-    @Autowired
     public LichKhamService(LichKhamRepository lichKhamRepository) {
         this.lichKhamRepository = lichKhamRepository;
     }
 
 
     public List<LichKham> getAllLichKham() {
-        return lichKhamRepository.getinforLichKham();
+        return lichKhamRepository.findAll();
     }
 
     public List<LichKham> getLichKhamByBenhNhanId(Integer maBN) {
-        return lichKhamRepository.getLichKhamByBenhNhanId(maBN);
+        return lichKhamRepository.findByMaBN(maBN);
     }
-    public List<LichKham> getLichKhamByLichKhamId(Integer maLK) {
-        return lichKhamRepository.getLichKhamByLichKhamId(maLK);
-    }
-
     public LichKham getLichKhambyID(Integer id){
-        return lichKhamRepository.getLichKhambyID(id);
+        return lichKhamRepository.findById(id).orElse(null);
     }
 }

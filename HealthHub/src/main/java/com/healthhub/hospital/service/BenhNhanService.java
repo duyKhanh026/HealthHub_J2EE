@@ -11,40 +11,36 @@ import java.util.List;
 
 @Service
 public class BenhNhanService {
-    private final BenhNhanRepository benhNhanDAO;
+    private final BenhNhanRepository benhNhanrepo;
 
-    @Autowired
-    public BenhNhanService(BenhNhanRepository benhNhanDAO) {
-        this.benhNhanDAO = benhNhanDAO;
+    public BenhNhanService(BenhNhanRepository benhNhanrepo) {
+        this.benhNhanrepo = benhNhanrepo;
     }
 
     public List<BenhNhan> getAllBenhNhan() {
-        SqlRowSet rowSet = benhNhanDAO.getinforBenhNhan();
-        List<BenhNhan> benhnhans = new ArrayList<>();
-        while (rowSet.next()) {
-            BenhNhan bn = new BenhNhan();
-            bn.setMaBN(rowSet.getInt("MaBN"));
-            bn.setHoTen(rowSet.getString("Hoten"));
-            bn.setNgaySinh(rowSet.getDate("Ngaysinh"));
-            bn.setGioitinh(rowSet.getString("Gioitinh"));
-            bn.setSDT(rowSet.getString("SDT"));
-            bn.setEmail(rowSet.getString("Email"));
-            bn.setDiachi(rowSet.getString("Diachi"));
-            bn.setTiensubenh(rowSet.getString("Tiensubenh"));
-            benhnhans.add(bn);
-        }
-        return benhnhans;
+    	return benhNhanrepo.findAll();
     }
 
     public void addBenhNhan(BenhNhan benhNhan) {
-        benhNhanDAO.addBenhNhan(benhNhan);
+    	benhNhanrepo.save(benhNhan);
     }
 
     public BenhNhan getBenhNhanById(Integer id) {
-        return benhNhanDAO.getBenhNhanById(id);
+        return benhNhanrepo.findById(id).orElse(null);
     }
 
     public void updateBenhNhan(BenhNhan benhNhan) {
-        benhNhanDAO.updateBenhNhan(benhNhan);
+    	try {
+            // Kiểm tra nếu bệnh nhân đã tồn tại (dựa trên MaBN)
+            if (benhNhanrepo.existsById(benhNhan.getMaBN())) {
+                System.out.println("Cập nhật bệnh nhân thành công");
+                benhNhanrepo.save(benhNhan);
+            } else {
+                throw new RuntimeException("Không tìm thấy bệnh nhân với MaBN: " + benhNhan.getMaBN());
+            }
+        } catch (Exception e) {
+        	// gọi message 
+            throw new RuntimeException("Lỗi khi cập nhật bệnh nhân", e);
+        }
     }
 }

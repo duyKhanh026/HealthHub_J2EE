@@ -15,6 +15,6 @@ public class ChiTietLichKhamService {
     }
 
     public List<ChiTietLichKham> getChiTietLichKhamByMaLK(Integer maLK) {
-        return chiTietLichKhamRepository.getChiTietLichKhamByMaLK(maLK);
+        return chiTietLichKhamRepository.findByMaLK(maLK);
     }
 }
