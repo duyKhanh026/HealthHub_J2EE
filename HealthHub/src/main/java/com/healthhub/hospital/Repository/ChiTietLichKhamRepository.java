@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface ChiTietLichKhamRepository extends JpaRepository<ChiTietLichKham, Integer> {
 
-	List<ChiTietLichKham> findByMaLK(Integer maLK);
+	ChiTietLichKham findByLichKham_MaLK(Integer maLK);
     
 }

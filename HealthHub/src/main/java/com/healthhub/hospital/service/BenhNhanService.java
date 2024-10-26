@@ -21,26 +21,13 @@ public class BenhNhanService {
     	return benhNhanrepo.findAll();
     }
 
-    public void addBenhNhan(BenhNhan benhNhan) {
-    	benhNhanrepo.save(benhNhan);
+    public void updateBenhNhan(BenhNhan benhNhan) {
+        benhNhanrepo.save(benhNhan); // This will update if the entity ID already exists
     }
+
 
     public BenhNhan getBenhNhanById(Integer id) {
         return benhNhanrepo.findById(id).orElse(null);
     }
 
-    public void updateBenhNhan(BenhNhan benhNhan) {
-    	try {
-            // Kiểm tra nếu bệnh nhân đã tồn tại (dựa trên MaBN)
-            if (benhNhanrepo.existsById(benhNhan.getMaBN())) {
-                System.out.println("Cập nhật bệnh nhân thành công");
-                benhNhanrepo.save(benhNhan);
-            } else {
-                throw new RuntimeException("Không tìm thấy bệnh nhân với MaBN: " + benhNhan.getMaBN());
-            }
-        } catch (Exception e) {
-        	// gọi message 
-            throw new RuntimeException("Lỗi khi cập nhật bệnh nhân", e);
-        }
-    }
 }

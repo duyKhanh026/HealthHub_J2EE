@@ -36,18 +36,8 @@ public class DSBenhNhanController {
         if (result.hasErrors()) {
             return "404";
         }
-        benhNhanService.addBenhNhan(benhNhan);
+        benhNhanService.updateBenhNhan(benhNhan);
         return "redirect:/DSBenhNhan";
     }
-
-//
-//    @PostMapping("/edit")
-//    public String updateBenhNhan(@ModelAttribute("benhNhan") BenhNhan benhNhan, BindingResult result, Model model) {
-//        if (result.hasErrors()) {
-//            return "Doctor/edit";
-//        }
-//        benhNhanService.updateBenhNhan(benhNhan);
-//        return "redirect:/DSBenhNhan";
-//    }
 
 }

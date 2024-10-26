@@ -17,9 +17,6 @@ public class ChiTietLichKham {
     @Column(name = "MaHS")
     private int maHS;
 
-    @Column(name = "MaLK", nullable = false)
-    private int maLK;
-
     @Column(name = "Chuandoan", nullable = false)
     private String chuanDoan;
 
@@ -29,8 +26,8 @@ public class ChiTietLichKham {
     @Column(name = "Ghichuthem", nullable = false)
     private String ghiChuThem;
 
-    // One-to-one relationship with LichKham
+    // Quan hệ One-to-One với LichKham
     @OneToOne
-    @JoinColumn(name = "MaLK", insertable = false, updatable = false)
+    @JoinColumn(name = "MaLK", nullable = false) // ánh xạ khóa ngoại MaLK tới LichKham
     private LichKham lichKham;
 }
