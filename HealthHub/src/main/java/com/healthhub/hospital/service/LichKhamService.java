@@ -5,6 +5,7 @@ import com.healthhub.hospital.Entity.LichKham;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -25,5 +26,10 @@ public class LichKhamService {
     }
     public LichKham getLichKhambyID(Integer id){
         return lichKhamRepository.findById(id).orElse(null);
+    }
+
+    public List<LichKham> getLichKhamByDate(LocalDate date) {
+        return lichKhamRepository.findByNgayGioDatKhamBetween(
+                date.atStartOfDay(), date.plusDays(1).atStartOfDay());
     }
 }

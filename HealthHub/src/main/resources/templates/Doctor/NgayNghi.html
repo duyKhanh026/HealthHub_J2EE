@@ -60,7 +60,7 @@
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
-        <li class="nav-item active">
+        <li class="nav-item ">
             <a class="nav-link" href="DSLichKham">
                 <i class="fas fa-fw fa-users"></i>
                 <span>Lịch khám</span></a>
@@ -68,7 +68,7 @@
 
         <hr class="sidebar-divider d-none d-md-block">
 
-        <li class="nav-item">
+        <li class="nav-item active">
             <a class="nav-link" href="NgayNghi">
                 <i class="fas fa-fw fa-users"></i>
                 <span>Ngày nghỉ</span></a>
@@ -118,13 +118,11 @@
                     <div class="card-header py-3">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h2 class="m-0 font-weight-bold text-primary">Danh sách lịch khám</h2>
+                                <h2 class="m-0 font-weight-bold text-primary">Danh sách ngày nghỉ</h2>
                             </div>
-                            <form action="/DSLichKham" method="get" id="dateForm" class="form-inline mr-2">
-                                <label for="selectedDate" class="mr-2">Chọn ngày khám:</label>
-                                <input type="date" id="selectedDate" class="form-control" name="selectedDate"
-                                       th:value="${selectedDate}"
-                                       onchange="document.getElementById('dateForm').submit();" />
+                            <form action="/DSLichKham" method="get" id="dateForm_healing" class="form-inline">
+                                <label for="selectedDate2" class="mr-2">Chọn ngày nghỉ:</label>
+                                <input type="date" id="selectedDate2" class="form-control" name="selectedDate" onchange="document.getElementById('dateForm').submit();" />
                             </form>
                         </div>
                     </div>
@@ -136,26 +134,23 @@
                                 <thead>
                                 <tr>
                                     <th style="width: 50px;"><input type="checkbox" name="selectedItems" id="checkAll" class="larger-checkbox" style="margin-top: 5px;"/></th>
-                                    <th>Mã lịch khám</th>
-                                    <th>Tên bệnh nhân</th>
-                                    <th>Ngày khám</th>
+                                    <th>Mã lịch</th>
+                                    <th>Ngày nghỉ</th>
                                     <th>Trạng thái</th>
-                                    <th>Chi tiết</th>
-
+                                    <th>Xóa</th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
-                                    <tr th:each="lichkham : ${lichkhamList}"><td><input type="checkbox"  class="checkbox_ID larger-checkbox"/></td>
+                                <tr th:each="lichkham : ${lichkhamList}"><td><input type="checkbox"  class="checkbox_ID larger-checkbox"/></td>
                                     <td th:text="${lichkham.maLK}">MaLK</td>
-                                    <td th:text="${lichkham.benhNhan.hoTen}">MaBN</td>
                                     <td th:text="${#dates.format(lichkham.ngayGioDatKham, 'yyyy-MM-dd HH:mm')}">NgayGioDatKham</td>
                                     <td th:text="${lichkham.trangThai}">Trangthai</td>
-                                        <td>
-                                            <a th:href="@{/ThongTinLichKham(id=${lichkham.maLK}, idbn=${lichkham.benhNhan.maBN})}" class="btn btn-info btn-circle btn-lg">
-                                                <i class="fas fa-info-circle"></i>
-                                            </a>
-                                        </td>
+                                    <td>
+                                        <a th:href="" class="btn btn-info btn-circle btn-lg">
+                                            <i class="fas fa-info-circle"></i>
+                                        </a>
+                                    </td>
 
                                 </tr>
                                 </tbody>
@@ -233,11 +228,6 @@
 <!-- Page level custom scripts -->
 <script src="assets2/js/demo/datatables-demo.js"></script>
 
-<script src="assets2/js/ThietBi/SuaThietBi.js"></script>
-
-<!--<script src="../js/ThietBi/FileExcel.js"></script>-->
-
-<script src="assets2/js/ThietBi/ThemThietBi.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
