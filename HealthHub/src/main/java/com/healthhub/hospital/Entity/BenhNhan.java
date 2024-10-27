@@ -41,8 +41,8 @@ public class BenhNhan {
     @Column(name = "Tiensubenh")
     private String tiensubenh;
 
-    @OneToMany(mappedBy = "benhNhan", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<LichKham> lichKhams;
+//    @OneToMany(mappedBy = "benhNhan", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<LichKham> lichKhams;
 
     // Constructor có 2 tham số
     public BenhNhan(int maBN, String hoTen) {
