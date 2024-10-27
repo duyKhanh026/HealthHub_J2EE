@@ -28,20 +28,29 @@ public class DSLichKhamController {
     @GetMapping("/DSLichKham")
     public String ListLichKham(
             @RequestParam(value = "selectedDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate selectedDate,
+            @RequestParam(value = "action", required = false) String action, // Nhận giá trị từ nút bấm
             Model model) {
 
-        // Set default to current date if no date is selected
-        if (selectedDate == null) {
-            selectedDate = LocalDate.now();
+        List<LichKham> lichKhamList;
+
+        // Nếu nhấn nút "Xem toàn bộ lịch khám", lấy tất cả lịch khám
+        if ("viewAll".equals(action)) {
+            lichKhamList = lichKhamService.getAllLichKham();
+        } else {
+            // Nếu không chọn ngày, mặc định là ngày hiện tại
+            if (selectedDate == null) {
+                selectedDate = LocalDate.now();
+            }
+            // Lấy lịch khám theo ngày đã chọn
+            lichKhamList = lichKhamService.getLichKhamByDate(selectedDate);
         }
 
-        List<LichKham> lichKhamList = lichKhamService.getLichKhamByDate(selectedDate);
-
         model.addAttribute("lichkhamList", lichKhamList);
-        model.addAttribute("selectedDate", selectedDate);
+        model.addAttribute("selectedDate", selectedDate); // Để giữ giá trị đã chọn
 
         return "Doctor/DSLichKham";
     }
+
 
 
     @GetMapping({ "/NgayNghi" })

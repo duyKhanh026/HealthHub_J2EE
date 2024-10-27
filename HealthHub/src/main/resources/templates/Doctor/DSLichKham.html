@@ -121,6 +121,7 @@
                                 <h2 class="m-0 font-weight-bold text-primary">Danh sách lịch khám</h2>
                             </div>
                             <form action="/DSLichKham" method="get" id="dateForm" class="form-inline mr-2">
+                                <button type="submit" class="btn btn-primary mr-2" name="action" value="viewAll">Xem toàn bộ lịch khám</button>
                                 <label for="selectedDate" class="mr-2">Chọn ngày khám:</label>
                                 <input type="date" id="selectedDate" class="form-control" name="selectedDate"
                                        th:value="${selectedDate}"
