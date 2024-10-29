@@ -1,16 +1,9 @@
 package com.healthhub.hospital.Entity;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
 
 @Entity
 @Data
@@ -29,10 +22,13 @@ public class TaiKhoan {
     @Column(name = "Matkhau")
     private String matkhau;
 
-    @OneToOne
-    @JoinColumn(name = "MaBN", insertable = false, updatable = false)
-    private BenhNhan maBN;  // Đây là khóa ngoại liên kết với bảng BenhNhan
+
+    @Column(name = "MaBN")
+    private int maBN; // Chỉ lưu trữ mã bệnh nhân (số nguyên)
 
     @Column(name = "Vaitro")
     private String vaitro;
+
+
+
 }

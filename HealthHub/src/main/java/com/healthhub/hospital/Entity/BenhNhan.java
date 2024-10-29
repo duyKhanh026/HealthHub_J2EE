@@ -45,8 +45,6 @@ public class BenhNhan {
 //    private List<LichKham> lichKhams;
 
     // Constructor có 2 tham số
-    public BenhNhan(int maBN, String hoTen) {
-        this.maBN = maBN;
-        this.hoTen = hoTen;
-    }
+
+
 }

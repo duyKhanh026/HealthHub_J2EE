@@ -30,4 +30,7 @@ public class BenhNhanService {
         return benhNhanrepo.findById(id).orElse(null);
     }
 
+
+
+
 }

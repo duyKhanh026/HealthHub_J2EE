@@ -1,5 +1,7 @@
 package com.healthhub.hospital.controller.User;
 
+import com.healthhub.hospital.Entity.BenhNhan;
+import com.healthhub.hospital.Repository.BenhNhanRepository;
 import com.healthhub.hospital.Repository.TaiKhoanRepository;
 import com.healthhub.hospital.Entity.TaiKhoan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class RegisterController {
 
     @Autowired
     private TaiKhoanRepository taiKhoanRepository;
+
+    @Autowired
+    private BenhNhanRepository benhNhanRepository; // Thêm BenhNhanRepository
 
     @GetMapping({ "/register" })
     public String register(Model model) {
@@ -44,12 +49,22 @@ public class RegisterController {
             return "User/DangKy";
         }
 
+        // Tạo và lưu bệnh nhân mới với các trường trống
+        BenhNhan benhNhan = new BenhNhan();
+        benhNhanRepository.save(benhNhan);
+        System.out.println("Mã bệnh nhân: " + benhNhan.getMaBN());
+
+
+
         // Tạo tài khoản mới
         TaiKhoan taiKhoan = new TaiKhoan();
         taiKhoan.setTenDN(username);
         taiKhoan.setMatkhau(passwordEncoder.encode(password)); // Mã hóa mật khẩu
         taiKhoan.setVaitro("user"); // Gán vai trò mặc định
+        taiKhoan.setMaBN(benhNhan.getMaBN()); // Gán mã bệnh nhân
+
         taiKhoanRepository.save(taiKhoan);
+        System.out.println("Mã bệnh nhân đã gán: " + taiKhoan.getMaBN());
 
         // Chuyển hướng tới trang đăng nhập sau khi đăng ký thành công
         return "redirect:/login";
