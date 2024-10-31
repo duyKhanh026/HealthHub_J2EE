@@ -21,17 +21,17 @@ public class LichKham {
     @Column(name = "MaBN", nullable = false)
     private int maBN;
     
-    @Column(name = "HoTen", nullable = false)
-    private int hoTen;
+    @Column(name = "Hoten", nullable = true)
+    private String hoten;
     
-    @Column(name = "Email", nullable = false)
-    private int email;
+    @Column(name = "Email", nullable = true)
+    private String email;
     
-    @Column(name = "SDT", nullable = false)
-    private int sDT;
+    @Column(name = "SDT", nullable = true)
+    private String sDT;
     
-    @Column(name = "Note", nullable = false)
-    private int note;
+    @Column(name = "Note", nullable = true)
+    private String note;
 
     @Column(name = "Ngaygiodatkham", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)

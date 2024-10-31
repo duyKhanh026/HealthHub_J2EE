@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2024 at 01:49 AM
+-- Generation Time: Oct 31, 2024 at 01:57 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -84,7 +84,7 @@ CREATE TABLE `lichkham` (
   `MaBN` int(50) DEFAULT NULL,
   `Ngaygiodatkham` datetime NOT NULL,
   `Trangthai` varchar(20) NOT NULL,
-  `HoTen` varchar(50) DEFAULT NULL,
+  `Hoten` varchar(50) DEFAULT NULL,
   `Email` varchar(255) DEFAULT NULL,
   `SDT` varchar(11) DEFAULT NULL,
   `Note` varchar(255) DEFAULT NULL
@@ -94,7 +94,7 @@ CREATE TABLE `lichkham` (
 -- Dumping data for table `lichkham`
 --
 
-INSERT INTO `lichkham` (`MaLK`, `MaBN`, `Ngaygiodatkham`, `Trangthai`, `HoTen`, `Email`, `SDT`, `Note`) VALUES
+INSERT INTO `lichkham` (`MaLK`, `MaBN`, `Ngaygiodatkham`, `Trangthai`, `Hoten`, `Email`, `SDT`, `Note`) VALUES
 (101, 1, '2024-10-20 09:00:00', 'Đã Khám', NULL, NULL, NULL, NULL),
 (102, 2, '2024-10-21 14:30:00', 'Chưa Khám', NULL, NULL, NULL, NULL),
 (103, 1, '2024-10-22 11:15:00', 'Đã Khám', NULL, NULL, NULL, NULL),
