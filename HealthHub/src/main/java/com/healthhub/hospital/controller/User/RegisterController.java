@@ -61,10 +61,10 @@ public class RegisterController {
         taiKhoan.setTenDN(username);
         taiKhoan.setMatkhau(passwordEncoder.encode(password)); // Mã hóa mật khẩu
         taiKhoan.setVaitro("user"); // Gán vai trò mặc định
-        taiKhoan.setMaBN(benhNhan.getMaBN()); // Gán mã bệnh nhân
+        taiKhoan.setBenhNhan(benhNhan); // Gán mã bệnh nhân
 
         taiKhoanRepository.save(taiKhoan);
-        System.out.println("Mã bệnh nhân đã gán: " + taiKhoan.getMaBN());
+        System.out.println("Mã bệnh nhân đã gán: " + taiKhoan.getBenhNhan().getMaBN());
 
         // Chuyển hướng tới trang đăng nhập sau khi đăng ký thành công
         return "redirect:/login";

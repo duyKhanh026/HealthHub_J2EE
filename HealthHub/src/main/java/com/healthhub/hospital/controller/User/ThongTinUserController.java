@@ -30,7 +30,7 @@ public class ThongTinUserController {
 
         TaiKhoan tk = userRepository.getAccountByTenDN(authentication.getName());
 
-        benhnhan = benhnhanService.getBenhNhanById(tk.getMaBN());
+        benhnhan = benhnhanService.getBenhNhanById(tk.getBenhNhan().getMaBN());
         System.out.println(benhnhan.getSDT());
 
         System.out.println(benhnhan);

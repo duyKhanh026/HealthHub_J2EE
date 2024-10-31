@@ -23,8 +23,9 @@ public class TaiKhoan {
     private String matkhau;
 
 
-    @Column(name = "MaBN")
-    private int maBN; // Chỉ lưu trữ mã bệnh nhân (số nguyên)
+    @OneToOne
+    @JoinColumn(name = "MaBN", insertable = false, updatable = false)
+    private BenhNhan benhNhan;
 
     @Column(name = "Vaitro")
     private String vaitro;
