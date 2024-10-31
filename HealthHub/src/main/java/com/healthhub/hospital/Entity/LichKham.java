@@ -20,6 +20,18 @@ public class LichKham {
 
     @Column(name = "MaBN", nullable = false)
     private int maBN;
+    
+    @Column(name = "HoTen", nullable = false)
+    private int hoTen;
+    
+    @Column(name = "Email", nullable = false)
+    private int email;
+    
+    @Column(name = "SDT", nullable = false)
+    private int sDT;
+    
+    @Column(name = "Note", nullable = false)
+    private int note;
 
     @Column(name = "Ngaygiodatkham", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -36,6 +48,8 @@ public class LichKham {
     // One-to-one relationship with ChiTietLichKham
     @OneToOne(mappedBy = "lichKham")
     private ChiTietLichKham chiTietLichKham;
+    
+    
 
 //    public Integer getMaLK() {
 //        return chiTietLichKham != null ? chiTietLichKham.getMaLK() : null;

@@ -35,12 +35,16 @@
   ======================================================== -->
 </head>
 
-<body class="index-page">
+<body class="index-page" style="background-color: #dfe8f0;">
 
+	
 	<th:block th:replace="header :: headerFragment"></th:block>
 
+	<div class="optionn">
+		this shit is floating
+	</div>
  	<div class="listItem_parent">
-		<div th:each="kham : ${listkham}" class="card" onclick="openPopup()" th:attr="data-id=${kham.maLK}">
+		<div th:each="kham : ${listkham}" class="card" onclick="openChiTiet()" th:attr="data-id=${kham.maLK}">
 			<div class="container">
 				<div style="display: flex;">
 					<div style="width: 88%;">
@@ -48,7 +52,7 @@
 					</div>
 					<div style="width: 12%;">
 
-						<button type="button" class="btn btn-primary myButton" th:text="${kham.trangThai}" style="width: 100%;">Trạng thái</button>
+						<div class="tinhtrang_duy" th:text="${kham.trangThai}" style="width: 100%;">Trạng thái</div>
 					</div>
 				</div>
 				<h4>Mã: <b th:text="${kham.maLK}"></b></h4> 
@@ -56,7 +60,7 @@
 		</div>
 	</div>
 	<script>
-	    const buttons = document.getElementsByClassName('myButton');
+	    const buttons = document.getElementsByClassName('tinhtrang_duy');
 	    
 	    // Chạy vòng lặp để áp dụng màu cho từng button
 	    for (let i = 0; i < buttons.length; i++) {
@@ -64,9 +68,9 @@
 	        const text = button.textContent || button.innerText;
 	        
 	        // Thay đổi màu dựa trên nội dung
-	        if (text === 'Pending') {
+	        if (text === 'Chưa Khám') {
 	            button.style.backgroundColor = 'red';
-	        } else if (text === 'Completed') {
+	        } else if (text === 'Đã Khám') {
 	            button.style.backgroundColor = 'green';
 	        }
 	    }
@@ -76,7 +80,7 @@
 
     <!-- Popup Form -->
     <div class="popup" id="popupForm">
-        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <span class="close-btn" onclick="closeChiTiet()">&times;</span>
         <h2>Form Xem Chi Tiết</h2>
 		<b>Mã Hồ Sơ: <b>001</b></b>
     	<div id="lichkhamContent">
@@ -86,12 +90,12 @@
 	<!--<button class="open-popup-btn" onclick="openPopup()">Mở Form</button>-->
     <script>
         // Hàm mở popup
-        function openPopup() {
+        function openChiTiet() {
             document.getElementById('popupForm').style.display = 'block';
             document.getElementById('overlay').style.display = 'block';
         }
         // Hàm đóng popup
-        function closePopup() {
+        function closeChiTiet() {
             document.getElementById('popupForm').style.display = 'none';
             document.getElementById('overlay').style.display = 'none';
         }

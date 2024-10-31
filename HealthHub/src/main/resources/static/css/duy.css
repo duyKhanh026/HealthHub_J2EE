@@ -8,6 +8,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	background-color: #caeaff;
 }
 
 .card:hover {
@@ -75,3 +76,23 @@ img {
     border: none;
     cursor: pointer;
 }
+.tinhtrang_duy {
+	border: none;
+	color: aliceblue;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 5px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	transition: 0.3s;
+}
+
+.optionn {
+	display: inline-block;
+	margin-left: 15%;
+	position: fixed;
+	width: 15%;
+	overflow: hidden; /* Chặn hình ảnh vượt ra khỏi khung div */
+}
+
