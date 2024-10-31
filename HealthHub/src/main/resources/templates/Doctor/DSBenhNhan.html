@@ -20,17 +20,18 @@
     <!-- Custom styles for this template -->
     <link th:href="@{assets2/css/sb-admin-2.min.css}" rel="stylesheet">
 
-
+	<link th:href="@{assets2/css/Css_BN/FormThemBN.css}" rel="stylesheet">
 
     <!-- Custom styles for this page -->
     <link th:href="@{assets2/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link th:href="@{assets2/css/tablescumtom.css}" rel="stylesheet">
+	
+
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
-
+	
 </head>
 
 <body id="page-top">
@@ -119,12 +120,12 @@
                                         <i class="fas fa-trash-alt"></i> <!-- Xóa -->
                                     </a>
                                 </div>
-
+								
                             </div>
                         </div>
                     </div>
 
-
+					
                     <div class="card-body">
 
                         <div class="table-responsive">
@@ -207,7 +208,7 @@
     </div>
 </div>
 
-<!--Form them thiết bi-->
+<!--Form them benh nhan-->
 <div class="container">
     <div id="addForm" class="add-form">
         <h2>Thêm bệnh nhân</h2>
@@ -261,86 +262,24 @@
     </div>
 </div>
 
-
-<!--Form sửa thiết bi-->
-<div class="container">
-    <div id="editForm" class="edit-form" style="display: none;">
-        <h2>Sửa thông tin bệnh nhân</h2>
-        <form th:action="@{/edit}" th:object="${benhNhan}" method="post">
-            <input type="hidden" name="action" value="edit" /> <!-- Đối với form sửa -->
-            <div class="row">
-                <!-- Cột bên trái -->
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="ED_BN_ID">Mã bệnh nhân:</label>
-                        <input type="text" class="form-control" id="ED_BN_ID" name="MaBN" readonly />
-                    </div>
-                    <div class="form-group">
-                        <label for="ED_BN_Name">Họ tên:</label>
-                        <input type="text" class="form-control" id="ED_BN_Name" name="HoTen" />
-                        <div th:if="${#fields.hasErrors('HoTen')}" th:errors="*{HoTen}" class="text-danger"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="ED_BN_Date">Ngày sinh:</label>
-                        <input type="date" class="form-control" id="ED_BN_Date" name="NgaySinh" />
-                    </div>
-                    <div class="form-group">
-                        <label for="ED_BN_GT">Giới tính:</label>
-                        <input type="text" class="form-control" id="ED_BN_GT" name="Gioitinh" />
-                        <div th:if="${#fields.hasErrors('Gioitinh')}" th:errors="*{Gioitinh}" class="text-danger"></div>
-                    </div>
-                </div>
-                <!-- Cột bên phải -->
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="ED_BN_Phone">Số điện thoại:</label>
-                        <input type="text" class="form-control" id="ED_BN_Phone" name="SDT" />
-                        <div th:if="${#fields.hasErrors('SDT')}" th:errors="*{SDT}" class="text-danger"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="ED_BN_Email">Email:</label>
-                        <input type="email" class="form-control" id="ED_BN_Email" name="Email" />
-                        <div th:if="${#fields.hasErrors('Email')}" th:errors="*{Email}" class="text-danger"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="ED_BN_ADR">Địa chỉ:</label>
-                        <input type="text" class="form-control" id="ED_BN_ADR" name="Diachi" />
-                    </div>
-                    <div class="form-group">
-                        <label for="ED_BN_His">Tiền sử bệnh:</label>
-                        <input type="text" class="form-control" id="ED_BN_His" name="Tiensubenh" />
-                    </div>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
-            <button type="button" class="btn btn-secondary" onclick="closeFormEdit()">Đóng</button>
-        </form>
-    </div>
-</div>
-
-
-
-<script src="assets2/vendor/jquery/jquery.min.js"></script>
-<script src="assets2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{assets2/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{assets2/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="assets2/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script th:src="@{assets2/vendor/jquery-easing/jquery.easing.min.js}"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="assets2/js/sb-admin-2.min.js"></script>
+<script th:src="@{assets2/js/sb-admin-2.min.js}"></script>
 
 <!-- Page level plugins -->
-<script src="assets2/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="assets2/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script th:src="@{assets2/vendor/datatables/jquery.dataTables.min.js}"></script>
+<script th:src="@{assets2/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
 
 <!-- Page level custom scripts -->
-<script src="assets2/js/demo/datatables-demo.js"></script>
+<script th:src="@{assets2/js/demo/datatables-demo.js}"></script>
 
-<script src="assets2/js/ThietBi/SuaThietBi.js"></script>
+<script th:src="@{assets2/js/BenhNhan/ThemBN.js}"></script>
 
-<!--<script src="../js/ThietBi/FileExcel.js"></script>-->
-
-<script src="assets2/js/ThietBi/ThemThietBi.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
