@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2024 at 02:13 AM
+-- Generation Time: Oct 31, 2024 at 01:57 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -83,17 +83,26 @@ CREATE TABLE `lichkham` (
   `MaLK` int(50) NOT NULL,
   `MaBN` int(50) DEFAULT NULL,
   `Ngaygiodatkham` datetime NOT NULL,
-  `Trangthai` varchar(20) NOT NULL
+  `Trangthai` varchar(20) NOT NULL,
+  `Hoten` varchar(50) DEFAULT NULL,
+  `Email` varchar(255) DEFAULT NULL,
+  `SDT` varchar(11) DEFAULT NULL,
+  `Note` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `lichkham`
 --
 
-INSERT INTO `lichkham` (`MaLK`, `MaBN`, `Ngaygiodatkham`, `Trangthai`) VALUES
-(101, 1, '2024-10-20 09:00:00', 'Completed'),
-(102, 2, '2024-10-21 14:30:00', 'Pending'),
-(103, 1, '2024-10-22 11:15:00', 'Completed');
+INSERT INTO `lichkham` (`MaLK`, `MaBN`, `Ngaygiodatkham`, `Trangthai`, `Hoten`, `Email`, `SDT`, `Note`) VALUES
+(101, 1, '2024-10-20 09:00:00', 'Đã Khám', NULL, NULL, NULL, NULL),
+(102, 2, '2024-10-21 14:30:00', 'Chưa Khám', NULL, NULL, NULL, NULL),
+(103, 1, '2024-10-22 11:15:00', 'Đã Khám', NULL, NULL, NULL, NULL),
+(104, 1, '2024-10-31 08:00:00', 'Pending', 'Nguyen Van A', 'nguyenvana@example.com', '0123456789', 'First consultation'),
+(105, 2, '2024-11-01 09:30:00', 'Confirmed', 'Le Thi B', 'lethib@example.com', '0987654321', 'Follow-up visit'),
+(106, 3, '2024-11-02 14:00:00', 'Pending', 'Tran Van C', 'tranvanc@example.com', '0912345678', 'Routine check-up'),
+(107, 4, '2024-11-03 10:00:00', 'Confirmed', 'Pham Thi D', 'phamthid@example.com', '0901234567', 'Monthly health check'),
+(108, 5, '2024-11-04 16:30:00', 'Cancelled', 'Hoang Van E', 'hoangvane@example.com', '0981234567', 'Consultation rescheduled');
 
 -- --------------------------------------------------------
 
@@ -157,6 +166,12 @@ ALTER TABLE `taikhoan`
 --
 ALTER TABLE `benhnhan`
   MODIFY `MaBN` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `lichkham`
+--
+ALTER TABLE `lichkham`
+  MODIFY `MaLK` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT for table `taikhoan`
