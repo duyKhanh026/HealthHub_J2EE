@@ -27,8 +27,14 @@ public class ThongTinUserController {
     @GetMapping
     public String getUserInfo(Model model, Authentication authentication) {
         System.out.println(authentication.getName());
+
         TaiKhoan tk = userRepository.getAccountByTenDN(authentication.getName());
+
         benhnhan = benhnhanService.getBenhNhanById(tk.getMaBN());
+        System.out.println(benhnhan.getSDT());
+
+        System.out.println(benhnhan);
+
         model.addAttribute("benhnhan", benhnhan);
 
         // Trả về tên view
@@ -36,6 +42,8 @@ public class ThongTinUserController {
     }
     @PostMapping
     public String updateUser(@ModelAttribute("benhnhan") BenhNhan bn, RedirectAttributes redirectAttributes) {
+
+
         benhnhan.setHoTen(bn.getHoTen());
         benhnhan.setNgaySinh(bn.getNgaySinh());
         benhnhan.setGioitinh(bn.getGioitinh());

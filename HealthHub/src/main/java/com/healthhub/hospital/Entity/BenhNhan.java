@@ -7,12 +7,13 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "benhnhan") // Hoặc "benhnan" nếu là chữ thường
+@Table(name = "benhnhan")
 public class BenhNhan {
 
     @Id
@@ -24,6 +25,7 @@ public class BenhNhan {
     private String hoTen;
 
     @Column(name = "Ngaysinh")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate ngaySinh; // Sử dụng LocalDate
 
     @Column(name = "Gioitinh")
@@ -41,10 +43,7 @@ public class BenhNhan {
     @Column(name = "Tiensubenh")
     private String tiensubenh;
 
-//    @OneToMany(mappedBy = "benhNhan", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<LichKham> lichKhams;
 
-    // Constructor có 2 tham số
 
 
 }
