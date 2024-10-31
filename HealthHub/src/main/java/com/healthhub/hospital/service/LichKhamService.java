@@ -22,7 +22,7 @@ public class LichKhamService {
     }
 
     public List<LichKham> getLichKhamByBenhNhanId(Integer maBN) {
-        return lichKhamRepository.findByMaBN(maBN);
+        return lichKhamRepository.findByBenhNhan_MaBN(maBN);
     }
     public LichKham getLichKhambyID(Integer id){
         return lichKhamRepository.findById(id).orElse(null);

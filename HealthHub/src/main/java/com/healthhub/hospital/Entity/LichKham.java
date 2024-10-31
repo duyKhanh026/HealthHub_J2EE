@@ -17,9 +17,6 @@ public class LichKham {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MaLK")
     private int maLK;
-
-    @Column(name = "MaBN", nullable = false)
-    private int maBN;
     
     @Column(name = "Hoten", nullable = true)
     private String hoten;
