@@ -20,17 +20,18 @@
     <!-- Custom styles for this template -->
     <link th:href="@{assets2/css/sb-admin-2.min.css}" rel="stylesheet">
 
-
+	<link th:href="@{assets2/css/Css_TB/FormThemTB.css}" rel="stylesheet">
 
     <!-- Custom styles for this page -->
     <link th:href="@{assets2/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link th:href="@{assets2/css/tablescumtom.css}" rel="stylesheet">
+	
+
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
-
+	
 </head>
 
 <body id="page-top">
@@ -119,12 +120,12 @@
                                         <i class="fas fa-trash-alt"></i> <!-- Xóa -->
                                     </a>
                                 </div>
-
+								
                             </div>
                         </div>
                     </div>
 
-
+					
                     <div class="card-body">
 
                         <div class="table-responsive">
@@ -206,6 +207,8 @@
         </div>
     </div>
 </div>
+
+
 
 <!--Form them thiết bi-->
 <div class="container">
@@ -319,28 +322,28 @@
 </div>
 
 
-
-<script src="assets2/vendor/jquery/jquery.min.js"></script>
-<script src="assets2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{assets2/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{assets2/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="assets2/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script th:src="@{assets2/vendor/jquery-easing/jquery.easing.min.js}"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="assets2/js/sb-admin-2.min.js"></script>
+<script th:src="@{assets2/js/sb-admin-2.min.js}"></script>
 
 <!-- Page level plugins -->
-<script src="assets2/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="assets2/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script th:src="@{assets2/vendor/datatables/jquery.dataTables.min.js}"></script>
+<script th:src="@{assets2/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
 
 <!-- Page level custom scripts -->
-<script src="assets2/js/demo/datatables-demo.js"></script>
+<script th:src="@{assets2/js/demo/datatables-demo.js}"></script>
 
-<script src="assets2/js/ThietBi/SuaThietBi.js"></script>
+<script th:src="@{assets2/js/ThietBi/SuaThietBi.js}"></script>
 
-<!--<script src="../js/ThietBi/FileExcel.js"></script>-->
+<!--<script src="../js/ThietBi/FileExcel.js}"></script>-->
 
-<script src="assets2/js/ThietBi/ThemThietBi.js"></script>
+<script th:src="@{assets2/js/ThietBi/ThemThietBi.js}"></script>
+
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

@@ -27,7 +27,6 @@ public class LichKhamUserController {
 	
 	@GetMapping({ "/LichKhamLS" })
 	public String lichKham(Model model) {
-
 		List<LichKham> listkham = new ArrayList<>();
 		listkham = lichKhamService.getAllLichKham();
 		model.addAttribute("listkham", listkham);
