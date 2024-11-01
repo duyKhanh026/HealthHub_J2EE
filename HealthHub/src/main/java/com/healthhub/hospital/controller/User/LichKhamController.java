@@ -3,6 +3,7 @@ package com.healthhub.hospital.controller.User;
 import com.healthhub.hospital.Entity.LichKham;
 import com.healthhub.hospital.service.LichKhamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,17 +11,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 @Controller
-public class LichKhamBenhController {
+public class LichKhamController {
     @Autowired
     private LichKhamService LKBService;
 
     @GetMapping("/lichkhambenh")
     public String danhSachLichKham(Model model) {
-        System.out.println("Method danhSachLichKham is called.");
         int currentUserId = 9; // Tôi để 9 có sẵn trong database để test
         List<LichKham> lichKhamList = LKBService.getLichKhamByMaBN(currentUserId);
-        System.out.println("Test:");
-        System.out.println(lichKhamList);
+
         model.addAttribute("lichKhamList", lichKhamList);
         return "User/LichKhamBenh"; // Tên của view HTML bạn muốn render
     }

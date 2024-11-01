@@ -5,6 +5,7 @@ import com.healthhub.hospital.Entity.TaiKhoan;
 import com.healthhub.hospital.Repository.TaiKhoanRepository;
 import com.healthhub.hospital.service.BenhNhanService;
 
+import com.healthhub.hospital.service.TaiKhoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -21,19 +22,16 @@ public class ThongTinUserController {
     @Autowired
     private BenhNhanService benhnhanService;
     @Autowired
-    private TaiKhoanRepository userRepository;
+    private TaiKhoanService taiKhoanService;
+
 
     private BenhNhan benhnhan;
     @GetMapping
     public String getUserInfo(Model model, Authentication authentication) {
-        System.out.println(authentication.getName());
 
-        TaiKhoan tk = userRepository.getAccountByTenDN(authentication.getName());
+        TaiKhoan tk = taiKhoanService.GetTKByID(authentication.getName());
 
         benhnhan = benhnhanService.getBenhNhanById(tk.getBenhNhan().getMaBN());
-        System.out.println(benhnhan.getSDT());
-
-        System.out.println(benhnhan);
 
         model.addAttribute("benhnhan", benhnhan);
 
