@@ -1,12 +1,10 @@
 package com.healthhub.hospital.controller.User;
 
-<<<<<<< HEAD
-=======
 import com.healthhub.hospital.Entity.BenhNhan;
-import com.healthhub.hospital.Entity.ChiTietLichKham;
 import com.healthhub.hospital.Entity.LichKham;
->>>>>>> a25d90485dd947fa78b6ba9db260ae762c86d886
 import com.healthhub.hospital.service.ChiTietLichKhamService;
+import com.healthhub.hospital.service.LichKhamService;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,15 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-<<<<<<< HEAD
-=======
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
->>>>>>> a25d90485dd947fa78b6ba9db260ae762c86d886
 @Controller
 public class DatLichKhamController {
     private LichKhamService lichKhamService;

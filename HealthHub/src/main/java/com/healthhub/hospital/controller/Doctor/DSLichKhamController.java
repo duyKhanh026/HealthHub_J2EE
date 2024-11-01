@@ -1,6 +1,8 @@
 package com.healthhub.hospital.controller.Doctor;
 
 import com.healthhub.hospital.Entity.LichKham;
+import com.healthhub.hospital.service.LichKhamService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;

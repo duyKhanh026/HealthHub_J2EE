@@ -5,6 +5,8 @@ import com.healthhub.hospital.Entity.ChiTietLichKham;
 import com.healthhub.hospital.Entity.LichKham;
 import com.healthhub.hospital.service.BenhNhanService;
 import com.healthhub.hospital.service.ChiTietLichKhamService;
+import com.healthhub.hospital.service.LichKhamService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
