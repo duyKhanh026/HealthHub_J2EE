@@ -3,6 +3,7 @@ package com.healthhub.hospital.controller.User;
 import com.healthhub.hospital.Entity.LichKham;
 import com.healthhub.hospital.service.LichKhamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 @Controller
-public class LichKhamBenhController {
+public class LichKhamController {
     @Autowired
     private LichKhamService LKBService;
 
