@@ -72,7 +72,8 @@
         <div class="list-group-item">
           <div class="d-flex justify-content-between align-items-center">
             <div>
-              <h5 th:text="${#dates.format(lichKham.ngayGioDatKham, 'yyyy-MM-dd HH:mm:ss')}">Ngày giờ đặt khám</h5>
+              <h5 th:text="${#temporals.format(lichKham.ngayGioDatKham, 'yyyy-MM-dd HH:mm:ss')}">Ngày giờ đặt khám</h5>
+
               <p>Mã: <span th:text="${lichKham.maLK}">Mã Lịch Khám</span></p>
             </div>
             <div class="status-column">
