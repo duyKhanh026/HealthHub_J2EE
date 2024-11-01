@@ -1,5 +1,6 @@
 package com.healthhub.hospital.Repository;
 
+import com.healthhub.hospital.Entity.BenhNhan;
 import com.healthhub.hospital.Entity.TaiKhoan;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,4 +12,5 @@ public interface TaiKhoanRepository  extends JpaRepository<TaiKhoan, Integer> {
 
     TaiKhoan getAccountByTenDN(String tenDN);
 
+//    BenhNhan findByBenhNhan_TenDN(String MaBN);
 }

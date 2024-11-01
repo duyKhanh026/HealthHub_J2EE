@@ -3,8 +3,11 @@ package com.healthhub.hospital.controller.User;
 import com.healthhub.hospital.Entity.BenhNhan;
 import com.healthhub.hospital.Entity.ChiTietLichKham;
 import com.healthhub.hospital.Entity.LichKham;
+import com.healthhub.hospital.Entity.TaiKhoan;
 import com.healthhub.hospital.service.ChiTietLichKhamService;
 import com.healthhub.hospital.service.LichKhamService;
+import com.healthhub.hospital.service.TaiKhoanService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +26,12 @@ public class DatLichKhamController {
     private LichKhamService lichKhamService;
 
     private ChiTietLichKhamService chiTietLichKhamService;
+
+    private TaiKhoanService taiKhoanService;
+
+    private BenhNhan benhNhan = new BenhNhan();
+
+    private Authentication authentication;
 
     public DatLichKhamController(LichKhamService lichKhamService, ChiTietLichKhamService chiTietLichKhamService) {
         this.lichKhamService = lichKhamService;
@@ -44,8 +53,11 @@ public class DatLichKhamController {
 
         System.out.println("data về");
 
-        BenhNhan benhNhan = new BenhNhan();
         benhNhan.setMaBN(1);
+
+
+//        benhNhan = taiKhoanService.getBenhNhan(authentication.getName());
+
 
         lichkham.setBenhNhan(benhNhan); // Thay the bang benhnhan hien dang dang nhap
         lichkham.setTrangThai("Chưa khám");
