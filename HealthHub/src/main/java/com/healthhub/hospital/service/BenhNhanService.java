@@ -17,7 +17,6 @@ public class BenhNhanService {
 
     @Autowired
     private BenhNhanRepository benhNhanrepo;
-    private TaiKhoanRepository tkRepo;
 
     public BenhNhanService(BenhNhanRepository benhNhanrepo) {
         this.benhNhanrepo = benhNhanrepo;
