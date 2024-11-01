@@ -25,23 +25,23 @@ import java.util.List;
 public class DatLichKhamController {
     private LichKhamService lichKhamService;
 
-    private ChiTietLichKhamService chiTietLichKhamService;
-
     private TaiKhoanService taiKhoanService;
-
-    private BenhNhan benhNhan = new BenhNhan();
 
     private Authentication authentication;
 
-    public DatLichKhamController(LichKhamService lichKhamService, ChiTietLichKhamService chiTietLichKhamService) {
+    private BenhNhan benhNhan = new BenhNhan();
+
+    public DatLichKhamController(LichKhamService lichKhamService,
+                                 TaiKhoanService taiKhoanService) {
         this.lichKhamService = lichKhamService;
-        this.chiTietLichKhamService = chiTietLichKhamService;
+        this.taiKhoanService = taiKhoanService;
     }
 
 
     @GetMapping({ "/DatLichKham" })
-    public String datlichKham(Model model) {
+    public String datlichKham(Model model, Authentication authentication) {
         model.addAttribute("lichKham", new LichKham() );
+        this.authentication = authentication;
         return "User/DatLichKham";
     }
 
@@ -53,11 +53,7 @@ public class DatLichKhamController {
 
         System.out.println("data về");
 
-        benhNhan.setMaBN(1);
-
-
-//        benhNhan = taiKhoanService.getBenhNhan(authentication.getName());
-
+        benhNhan = taiKhoanService.getBenhNhanByTenDN(authentication.getName());
 
         lichkham.setBenhNhan(benhNhan); // Thay the bang benhnhan hien dang dang nhap
         lichkham.setTrangThai("Chưa khám");
