@@ -48,7 +48,4 @@ public class LichKham {
     
     
 
-//    public Integer getMaLK() {
-//        return chiTietLichKham != null ? chiTietLichKham.getMaLK() : null;
-//    }
 }

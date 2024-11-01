@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Lịch khám bệnh sắp tới</title>
+  <title>Lịch khám bệnh</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -32,7 +32,9 @@
 
   <!-- jQuery và Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+
+
 
   <!-- Thêm CSS và JS cho Bootstrap -->
 
@@ -42,25 +44,55 @@
 
   <!-- Main CSS File -->
   <link th:href="@{assets/css/main.css}" rel="stylesheet">
+  <style>
+    .status-column {
+      display: flex;
+      justify-content: center;
+      align-items: center; /* Đảm bảo badge được căn giữa theo chiều dọc */
+      width: 150px; /* Đảm bảo mỗi cột trạng thái có cùng chiều rộng */
+    }
 
-  <!-- =======================================================
-  * Template Name: Medilab
-  * Template URL: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    .badge {
+      font-size: 1.1rem; /* Tăng kích thước chữ */
+      padding: 10px 15px; /* Tăng kích thước padding */
+      width: 100%; /* Đảm bảo badge chiếm toàn bộ chiều rộng của cột */
+      text-align: center;
+    }
+  </style>
+
 </head>
 
 <body >
 <th:block th:replace="header :: headerFragment"></th:block>
 
+  <div class="container mt-5">
+    <h2 class="mb-4">Danh sách Lịch Khám</h2>
+    <div class="list-group">
+      <th:block th:each="lichKham : ${lichKhamList}">
+        <div class="list-group-item">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h5 th:text="${#dates.format(lichKham.ngayGioDatKham, 'yyyy-MM-dd HH:mm:ss')}">Ngày giờ đặt khám</h5>
+              <p>Mã: <span th:text="${lichKham.maLK}">Mã Lịch Khám</span></p>
+            </div>
+            <div class="status-column">
+              <span th:classappend="${lichKham.trangThai == 'Confirmed' ? 'bg-success' : (lichKham.trangThai == 'Pending' ? 'bg-danger' : 'bg-secondary')}" class="badge" th:text="${lichKham.trangThai}">Trạng thái</span>
+            </div>
+            <a class="btn btn-primary btn-sm">Xem Chi Tiết</a>
+          </div>
+        </div>
+      </th:block>
+    </div>
+  </div>
 
+<div style="margin-top: 50px;">
+  <th:block th:replace="footer :: footerFragment"></th:block>
+</div>
 
 <!-- Vendor JS Files -->
 <script th:src="@{assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
-<th:block th:replace="footer :: footerFragment"></th:block>
+
 </body>
 
 </html>

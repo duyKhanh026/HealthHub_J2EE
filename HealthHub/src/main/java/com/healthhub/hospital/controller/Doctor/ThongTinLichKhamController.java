@@ -5,7 +5,6 @@ import com.healthhub.hospital.Entity.ChiTietLichKham;
 import com.healthhub.hospital.Entity.LichKham;
 import com.healthhub.hospital.service.BenhNhanService;
 import com.healthhub.hospital.service.ChiTietLichKhamService;
-import com.healthhub.hospital.service.LichKhamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
 
 @Controller
 public class ThongTinLichKhamController {
