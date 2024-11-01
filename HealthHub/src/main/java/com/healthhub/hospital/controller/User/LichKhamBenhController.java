@@ -1,7 +1,7 @@
 package com.healthhub.hospital.controller.User;
 
 import com.healthhub.hospital.Entity.LichKham;
-import com.healthhub.hospital.service.LichKhamBenhService;
+import com.healthhub.hospital.service.LichKhamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +12,7 @@ import java.util.List;
 @Controller
 public class LichKhamBenhController {
     @Autowired
-    private LichKhamBenhService LKBService;
+    private LichKhamService LKBService;
 
     @GetMapping("/lichkhambenh")
     public String danhSachLichKham(Model model) {

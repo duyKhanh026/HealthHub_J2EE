@@ -16,4 +16,6 @@ public interface LichKhamRepository extends JpaRepository<LichKham, Integer> {
 	List<LichKham> findByBenhNhan_MaBN(Integer maBN);
 
 	List<LichKham> findByNgayGioDatKhamBetween(LocalDateTime startOfDay, LocalDateTime endOfDay);
+
+	List<LichKham> findByBenhNhan_MaBN(int maBN);
 }

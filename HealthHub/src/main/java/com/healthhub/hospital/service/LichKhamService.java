@@ -37,4 +37,10 @@ public class LichKhamService {
         return lichKhamRepository.save(lichKham);
     }
 
+
+    // Lấy lịch khám của bệnh nhân theo MaBN
+    public List<LichKham> getLichKhamByMaBN(int maBN) {
+        return lichKhamRepository.findByBenhNhan_MaBN(maBN);
+    }
+
 }
