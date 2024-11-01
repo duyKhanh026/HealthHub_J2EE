@@ -17,11 +17,9 @@ public class LichKhamController {
 
     @GetMapping("/lichkhambenh")
     public String danhSachLichKham(Model model) {
-        System.out.println("Method danhSachLichKham is called.");
         int currentUserId = 9; // Tôi để 9 có sẵn trong database để test
         List<LichKham> lichKhamList = LKBService.getLichKhamByMaBN(currentUserId);
-        System.out.println("Test:");
-        System.out.println(lichKhamList);
+
         model.addAttribute("lichKhamList", lichKhamList);
         return "User/LichKhamBenh"; // Tên của view HTML bạn muốn render
     }

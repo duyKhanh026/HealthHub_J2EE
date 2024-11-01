@@ -21,14 +21,4 @@ public class TaiKhoanService {
         return tkRepo.getAccountByTenDN(tenDN);
     }
 
-
-    @Autowired
-    private TaiKhoanRepository taiKhoanRepository;
-
-//    public BenhNhan getBenhNhan(String tendn){
-//       return taiKhoanRepository.findByBenhNhan_TenDN(tendn);
-//    }
-
-
-
 }

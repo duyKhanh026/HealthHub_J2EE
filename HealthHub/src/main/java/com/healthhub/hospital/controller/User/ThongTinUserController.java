@@ -28,14 +28,10 @@ public class ThongTinUserController {
     private BenhNhan benhnhan;
     @GetMapping
     public String getUserInfo(Model model, Authentication authentication) {
-        System.out.println(authentication.getName());
 
         TaiKhoan tk = taiKhoanService.GetTKByID(authentication.getName());
 
         benhnhan = benhnhanService.getBenhNhanById(tk.getBenhNhan().getMaBN());
-        System.out.println(benhnhan.getSDT());
-
-        System.out.println(benhnhan);
 
         model.addAttribute("benhnhan", benhnhan);
 
