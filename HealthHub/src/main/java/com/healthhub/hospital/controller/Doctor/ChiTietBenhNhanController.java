@@ -1,17 +1,12 @@
 package com.healthhub.hospital.controller.Doctor;
 
-import com.healthhub.hospital.Repository.BenhNhanRepository;
-import com.healthhub.hospital.Repository.ChiTietLichKhamRepository;
-import com.healthhub.hospital.Repository.LichKhamRepository;
 import com.healthhub.hospital.Entity.BenhNhan;
-import com.healthhub.hospital.Entity.ChiTietLichKham;
 import com.healthhub.hospital.Entity.LichKham;
 import com.healthhub.hospital.service.BenhNhanService;
 import com.healthhub.hospital.service.ChiTietLichKhamService;
 import com.healthhub.hospital.service.LichKhamService;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
