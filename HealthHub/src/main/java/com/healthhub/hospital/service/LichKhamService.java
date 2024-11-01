@@ -32,4 +32,9 @@ public class LichKhamService {
         return lichKhamRepository.findByNgayGioDatKhamBetween(
                 date.atStartOfDay(), date.plusDays(1).atStartOfDay());
     }
+
+    public LichKham updateLichKham(LichKham lichKham){
+        return lichKhamRepository.save(lichKham);
+    }
+
 }

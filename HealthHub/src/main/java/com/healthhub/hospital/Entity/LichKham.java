@@ -1,10 +1,12 @@
 package com.healthhub.hospital.Entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Data
@@ -31,24 +33,15 @@ public class LichKham {
     private String note;
 
     @Column(name = "Ngaygiodatkham", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date ngayGioDatKham;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime ngayGioDatKham;
 
     @Column(name = "Trangthai", nullable = false)
     private String trangThai;
 
     // Many-to-one relationship with BenhNhan
     @ManyToOne
-    @JoinColumn(name = "MaBN", insertable = false, updatable = false)
+    @JoinColumn(name = "MaBN")
     private BenhNhan benhNhan;
 
-    // One-to-one relationship with ChiTietLichKham
-    @OneToOne(mappedBy = "lichKham")
-    private ChiTietLichKham chiTietLichKham;
-    
-    
-
-//    public Integer getMaLK() {
-//        return chiTietLichKham != null ? chiTietLichKham.getMaLK() : null;
-//    }
 }

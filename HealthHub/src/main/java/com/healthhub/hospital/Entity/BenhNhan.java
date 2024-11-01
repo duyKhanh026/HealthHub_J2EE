@@ -44,6 +44,13 @@ public class BenhNhan {
     private String tiensubenh;
 
 
-
+    public BenhNhan(String hoTen, String gioitinh, String SDT, String email, String diachi, String tiensubenh) {
+        this.hoTen = hoTen;
+        this.gioitinh = gioitinh;
+        this.SDT = SDT;
+        this.email = email;
+        this.diachi = diachi;
+        this.tiensubenh = tiensubenh;
+    }
 
 }
