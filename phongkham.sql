@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 31, 2024 at 01:57 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th10 02, 2024 lúc 02:48 AM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Phiên bản PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `phongkham`
+-- Cơ sở dữ liệu: `phongkham`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `benhnhan`
+-- Cấu trúc bảng cho bảng `benhnhan`
 --
 
 CREATE TABLE `benhnhan` (
@@ -39,21 +39,23 @@ CREATE TABLE `benhnhan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `benhnhan`
+-- Đang đổ dữ liệu cho bảng `benhnhan`
 --
 
 INSERT INTO `benhnhan` (`MaBN`, `Hoten`, `Ngaysinh`, `Gioitinh`, `SDT`, `Email`, `Diachi`, `Tiensubenh`) VALUES
-(1, 'Nguyen Van A', '1990-01-15', 'Nam', '0905123456', 'nguyenvana@gmail.com', '123 Le Loi, Quan 1, HCM', 'Tieu duong'),
+(1, 'Nguyen Van A', '2090-01-15', 'adf', '0905123456', 'nguyenvana@gmail.com', '123 Le Loi, Quan 1, HCM', '123'),
 (2, 'Le Thi B', '1985-05-20', 'Nu', '0912345678', 'lethib@gmail.com', '456 Hai Ba Trung, Quan 3, HCM', 'Cao huyet ap'),
 (3, 'Tran Van C', '1978-11-30', 'Nam', '0987654321', 'tranvanc@gmail.com', '789 Tran Hung Dao, Quan 5, HCM', 'Tim mach'),
 (4, 'Pham Thi D', '1995-07-10', 'Nu', '0938765432', 'phamthid@gmail.com', '101 Nguyen Trai, Quan 2, HCM', 'Hen suyen'),
 (5, 'Vo Van E', '1988-03-22', 'Nam', '0945123789', 'vovane@gmail.com', '202 Bach Dang, Quan Binh Thanh, HCM', 'Tieu duong'),
-(8, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(8, '123', '2000-11-11', '1', '1', 'c@gmail.com', '1', '1'),
+(9, 'Abc', '2024-10-04', 'b', '1', 'c@gmail.com', 's', 'Tim mach 123'),
+(10, 'Abc', '2024-10-05', 'a', '0085', 'c@gmail.com', 's', 'd');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chitietlichkham`
+-- Cấu trúc bảng cho bảng `chitietlichkham`
 --
 
 CREATE TABLE `chitietlichkham` (
@@ -65,18 +67,23 @@ CREATE TABLE `chitietlichkham` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `chitietlichkham`
+-- Đang đổ dữ liệu cho bảng `chitietlichkham`
 --
 
 INSERT INTO `chitietlichkham` (`MaHS`, `MaLK`, `Chuandoan`, `Donthuoc`, `Ghichuthem`) VALUES
 (201, 101, 'Viêm họng', 'Paracetamol 500mg, Amoxicillin 500mg', 'Uống nhiều nước, nghỉ ngơi'),
 (202, 102, 'Đau dạ dày', 'Omeprazole 20mg, Metronidazole 500mg', 'Tránh ăn đồ cay nóng'),
-(203, 103, 'Cảm cúm', 'Vitamin C, Ibuprofen 200mg', 'Nghỉ ngơi, uống nước ấm');
+(203, 103, 'Cảm cúm', 'Vitamin C, Ibuprofen 200mg', 'Nghỉ ngơi, uống nước ấm'),
+(204, 104, 'a', 'bv', 'c'),
+(205, 105, NULL, NULL, NULL),
+(206, 106, NULL, NULL, NULL),
+(207, 107, NULL, NULL, NULL),
+(208, 108, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lichkham`
+-- Cấu trúc bảng cho bảng `lichkham`
 --
 
 CREATE TABLE `lichkham` (
@@ -91,7 +98,7 @@ CREATE TABLE `lichkham` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `lichkham`
+-- Đang đổ dữ liệu cho bảng `lichkham`
 --
 
 INSERT INTO `lichkham` (`MaLK`, `MaBN`, `Ngaygiodatkham`, `Trangthai`, `Hoten`, `Email`, `SDT`, `Note`) VALUES
@@ -107,7 +114,7 @@ INSERT INTO `lichkham` (`MaLK`, `MaBN`, `Ngaygiodatkham`, `Trangthai`, `Hoten`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `taikhoan`
+-- Cấu trúc bảng cho bảng `taikhoan`
 --
 
 CREATE TABLE `taikhoan` (
@@ -119,7 +126,7 @@ CREATE TABLE `taikhoan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `taikhoan`
+-- Đang đổ dữ liệu cho bảng `taikhoan`
 --
 
 INSERT INTO `taikhoan` (`MaTK`, `TenDN`, `Matkhau`, `MaBN`, `Vaitro`) VALUES
@@ -127,76 +134,82 @@ INSERT INTO `taikhoan` (`MaTK`, `TenDN`, `Matkhau`, `MaBN`, `Vaitro`) VALUES
 (2, 'nam', '$2a$10$NhmJEDaPls4Xb1Rc.UlhAORqSLw4UjgRon6LbnpyI8jLLngE/rdMO', 8, 'user');
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `benhnhan`
+-- Chỉ mục cho bảng `benhnhan`
 --
 ALTER TABLE `benhnhan`
   ADD PRIMARY KEY (`MaBN`);
 
 --
--- Indexes for table `chitietlichkham`
+-- Chỉ mục cho bảng `chitietlichkham`
 --
 ALTER TABLE `chitietlichkham`
   ADD PRIMARY KEY (`MaHS`),
   ADD KEY `MaLK` (`MaLK`);
 
 --
--- Indexes for table `lichkham`
+-- Chỉ mục cho bảng `lichkham`
 --
 ALTER TABLE `lichkham`
   ADD PRIMARY KEY (`MaLK`),
   ADD KEY `MaBN` (`MaBN`);
 
 --
--- Indexes for table `taikhoan`
+-- Chỉ mục cho bảng `taikhoan`
 --
 ALTER TABLE `taikhoan`
   ADD PRIMARY KEY (`MaTK`),
   ADD KEY `MaBN` (`MaBN`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `benhnhan`
+-- AUTO_INCREMENT cho bảng `benhnhan`
 --
 ALTER TABLE `benhnhan`
-  MODIFY `MaBN` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `MaBN` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `lichkham`
+-- AUTO_INCREMENT cho bảng `chitietlichkham`
+--
+ALTER TABLE `chitietlichkham`
+  MODIFY `MaHS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=210;
+
+--
+-- AUTO_INCREMENT cho bảng `lichkham`
 --
 ALTER TABLE `lichkham`
-  MODIFY `MaLK` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `MaLK` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
 
 --
--- AUTO_INCREMENT for table `taikhoan`
+-- AUTO_INCREMENT cho bảng `taikhoan`
 --
 ALTER TABLE `taikhoan`
   MODIFY `MaTK` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `chitietlichkham`
+-- Các ràng buộc cho bảng `chitietlichkham`
 --
 ALTER TABLE `chitietlichkham`
   ADD CONSTRAINT `chitietlichkham_ibfk_1` FOREIGN KEY (`MaLK`) REFERENCES `lichkham` (`MaLK`);
 
 --
--- Constraints for table `lichkham`
+-- Các ràng buộc cho bảng `lichkham`
 --
 ALTER TABLE `lichkham`
   ADD CONSTRAINT `lichkham_ibfk_1` FOREIGN KEY (`MaBN`) REFERENCES `benhnhan` (`MaBN`);
 
 --
--- Constraints for table `taikhoan`
+-- Các ràng buộc cho bảng `taikhoan`
 --
 ALTER TABLE `taikhoan`
   ADD CONSTRAINT `MaBN` FOREIGN KEY (`MaBN`) REFERENCES `benhnhan` (`MaBN`);
