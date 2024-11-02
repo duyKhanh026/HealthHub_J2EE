@@ -17,13 +17,13 @@ public class ChiTietLichKham {
     @Column(name = "MaHS")
     private int maHS;
 
-    @Column(name = "Chuandoan", nullable = false)
+    @Column(name = "Chuandoan", nullable = true)
     private String chuanDoan;
 
-    @Column(name = "Donthuoc", nullable = false)
+    @Column(name = "Donthuoc", nullable = true)
     private String donThuoc;
 
-    @Column(name = "Ghichuthem", nullable = false)
+    @Column(name = "Ghichuthem", nullable = true)
     private String ghiChuThem;
 
     // Quan hệ One-to-One với LichKham

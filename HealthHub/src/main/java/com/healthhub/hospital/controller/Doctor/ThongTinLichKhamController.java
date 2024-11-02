@@ -61,6 +61,7 @@ public class ThongTinLichKhamController {
 
         // Thiết lập LichKham cho ChiTietLichKham
         LichKham lichKham = lichKhamService.getLichKhambyID(maLK); // Lấy LichKham dựa trên maLK
+        lichKham.setTrangThai("Đã khám");
         chiTietLichKham.setLichKham(lichKham);
 
         // Gọi service để cập nhật thông tin chi tiết lịch khám

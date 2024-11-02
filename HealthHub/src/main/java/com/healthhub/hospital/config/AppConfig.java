@@ -33,7 +33,8 @@ public class AppConfig{
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/","/anhcuatao/**", "/index", "/assets2/**", "/css/**", "/assets/**"
-                                ,"DSLichKham","/ChiTietBenhNhan","/ThongTinLichKham","/register","/send_email","/ThongTinUser","/DatLichKham").permitAll()
+                                ,"DSLichKham","/ChiTietBenhNhan","/ThongTinLichKham","/register","/send_email","/ThongTinUser","/DatLichKham"
+                                ,"/DSBenhNhan").permitAll()
                         .requestMatchers("/forgot_password").permitAll()
                         .anyRequest().authenticated()
                 )

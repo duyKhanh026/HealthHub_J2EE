@@ -27,14 +27,20 @@ public class DatLichKhamController {
 
     private TaiKhoanService taiKhoanService;
 
+    private ChiTietLichKhamService chiTietLichKhamService;
+
     private Authentication authentication;
 
     private BenhNhan benhNhan = new BenhNhan();
 
-    public DatLichKhamController(LichKhamService lichKhamService,
+    private ChiTietLichKham chiTietLichKham = new ChiTietLichKham();
+
+    public DatLichKhamController(LichKhamService lichKhamService, ChiTietLichKhamService chiTietLichKhamService,
                                  TaiKhoanService taiKhoanService) {
         this.lichKhamService = lichKhamService;
+        this.chiTietLichKhamService = chiTietLichKhamService;
         this.taiKhoanService = taiKhoanService;
+
     }
 
 
@@ -53,12 +59,22 @@ public class DatLichKhamController {
 
         System.out.println("data về");
 
+        // Lấy thông tin bệnh nhân dựa trên tài khoản đăng nhập
         benhNhan = taiKhoanService.getBenhNhanByTenDN(authentication.getName());
-
-        lichkham.setBenhNhan(benhNhan); // Thay the bang benhnhan hien dang dang nhap
+        lichkham.setBenhNhan(benhNhan); // Thay thế bằng bệnh nhân hiện đang đăng nhập
         lichkham.setTrangThai("Chưa khám");
 
+        // Lưu `LichKham` trước để có ID (MaLK)
         lichKhamService.updateLichKham(lichkham);
+
+        // Gán `LichKham` đã lưu vào `ChiTietLichKham`
+        chiTietLichKham.setLichKham(lichkham);
+
+        // Lưu `ChiTietLichKham` sau khi `LichKham` đã được lưu
+        chiTietLichKhamService.updateChiTietLichKham(chiTietLichKham);
+
+        // Cập nhật `ChiTietLichKham` cho `LichKham`
+        lichkham.setChiTietLichKham(chiTietLichKham);
         return "redirect:/DatLichKham";
     }
 }

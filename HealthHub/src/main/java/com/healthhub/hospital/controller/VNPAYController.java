@@ -16,7 +16,8 @@ public class VNPAYController {
 
     @GetMapping( "/vnpay")
     public String loadvnpay(){
-        return "createOrder";
+
+        return "vnpay/createOrder";
     }
 
     // Chuyển hướng người dùng đến cổng thanh toán VNPAY
@@ -44,6 +45,6 @@ public class VNPAYController {
         model.addAttribute("paymentTime", paymentTime);
         model.addAttribute("transactionId", transactionId);
 
-        return paymentStatus == 1 ? "ordersuccess" : "orderfail";
+        return paymentStatus == 1 ? "vnpay/ordersuccess" : "vnpay/orderfail";
     }
 }

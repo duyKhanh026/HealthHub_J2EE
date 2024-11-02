@@ -209,7 +209,7 @@
                                     <td><input type="checkbox" class="checkbox_ID larger-checkbox"/></td>
                                     <td th:text="${lichkham.maLK}"></td>
                                     <td th:text="${lichkham.chiTietLichKham.MaHS}"></td>
-                                    <td th:text="${#dates.format(lichkham.ngayGioDatKham, 'yyyy-MM-dd HH:mm')}"></td>
+                                    <td th:text="${#temporals.format(lichkham.ngayGioDatKham, 'dd-MM-yyyy HH:mm')}"></td>
                                     <td th:text="${lichkham.chiTietLichKham.chuanDoan}"></td>
                                     <td th:text="${lichkham.chiTietLichKham.donThuoc}"></td>
                                     <td th:text="${lichkham.chiTietLichKham.ghiChuThem}"></td>

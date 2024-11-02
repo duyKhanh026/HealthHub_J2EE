@@ -22,4 +22,5 @@ public class ChiTietLichKhamService {
     public void updateChiTietLichKham(ChiTietLichKham chiTietLichKham) {
         chiTietLichKhamRepository.save(chiTietLichKham); // This will update if the entity ID already exists
     }
+
 }

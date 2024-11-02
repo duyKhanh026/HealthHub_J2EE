@@ -44,4 +44,6 @@ public class LichKham {
     @JoinColumn(name = "MaBN")
     private BenhNhan benhNhan;
 
+    @OneToOne(mappedBy = "lichKham")
+    private ChiTietLichKham chiTietLichKham;
 }
