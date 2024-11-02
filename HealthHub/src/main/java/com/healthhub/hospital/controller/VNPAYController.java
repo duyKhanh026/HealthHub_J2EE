@@ -1,5 +1,7 @@
 package com.healthhub.hospital.controller;
 
+import com.healthhub.hospital.Entity.BenhNhan;
+import com.healthhub.hospital.service.BenhNhanService;
 import com.healthhub.hospital.service.VNPAYService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,22 @@ public class VNPAYController {
     @Autowired
     private VNPAYService vnPayService;
 
-    @GetMapping( "/vnpay")
-    public String loadvnpay(){
+    private BenhNhanService benhNhanService;
+
+    public VNPAYController(BenhNhanService benhNhanService) {
+        this.benhNhanService = benhNhanService;
+    }
+
+    @GetMapping("/vnpay")
+    public String loadvnpay(@RequestParam("idbn") Integer idbn, Model model) {
+        // Giả sử có repository lấy thông tin bệnh nhân dựa trên idbn
+        BenhNhan benhNhan = benhNhanService.getBenhNhanById(idbn);
+
+        if (benhNhan != null) {
+            // Thêm thông tin bệnh nhân vào model
+            model.addAttribute("orderInfo", benhNhan.getHoTen() + " chuyển khoản viện phí");
+            model.addAttribute("idbn", idbn); // Để tham khảo trong view nếu cần
+        }
 
         return "vnpay/createOrder";
     }

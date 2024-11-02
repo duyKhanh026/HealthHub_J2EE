@@ -187,7 +187,10 @@
                             <input type="hidden" class="form-control" th:value="${lichkhams.maLK}" name="maLK" />
 <!--                            Có dòng này thì nó mới truyền malk qua được-->
                             <button type="submit" class="btn btn-primary">Lưu</button>
-                            <button type="button" class="btn btn-primary" onclick="window.location.href='vnpay';">Thanh toán</button>
+                            <button type="button" class="btn btn-primary"
+                                    th:onclick="'window.location.href=\'/vnpay?idbn=' + ${benhNhan.maBN} + '\''">
+                                Thanh toán
+                            </button>
                         </form>
                     </div>
 
