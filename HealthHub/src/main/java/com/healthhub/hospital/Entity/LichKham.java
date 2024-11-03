@@ -46,4 +46,7 @@ public class LichKham {
 
     @OneToOne(mappedBy = "lichKham")
     private ChiTietLichKham chiTietLichKham;
+
+    @OneToOne(mappedBy = "lichKham")
+    private ThanhToan thanhToan;
 }

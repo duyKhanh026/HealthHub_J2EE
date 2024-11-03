@@ -3,18 +3,17 @@ package com.healthhub.hospital.controller.Doctor;
 import com.healthhub.hospital.Entity.BenhNhan;
 import com.healthhub.hospital.Entity.ChiTietLichKham;
 import com.healthhub.hospital.Entity.LichKham;
+import com.healthhub.hospital.Entity.ThanhToan;
 import com.healthhub.hospital.service.BenhNhanService;
 import com.healthhub.hospital.service.ChiTietLichKhamService;
 import com.healthhub.hospital.service.LichKhamService;
 
+import com.healthhub.hospital.service.ThanhToanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ThongTinLichKhamController {
@@ -25,27 +24,22 @@ public class ThongTinLichKhamController {
 
     private BenhNhanService benhNhanService;
 
+    private ThanhToanService thanhToanService;
+
     @Autowired
-    public ThongTinLichKhamController(ChiTietLichKhamService chiTietLichKhamService, LichKhamService lichKhamService, BenhNhanService benhNhanService){
+    public ThongTinLichKhamController(ChiTietLichKhamService chiTietLichKhamService, LichKhamService lichKhamService, BenhNhanService benhNhanService, ThanhToanService thanhToanService){
         this.chiTietLichKhamService = chiTietLichKhamService;
         this.lichKhamService = lichKhamService;
         this.benhNhanService = benhNhanService;
+        this.thanhToanService = thanhToanService;
     }
 
     @GetMapping("/ThongTinLichKham")
-    public String chiTietBenhNhan(@RequestParam("id") Integer id, @RequestParam("idbn") Integer idbn,Model model) {
-
-        LichKham lichKhams = lichKhamService.getLichKhambyID(id);
+    public String chiTietBenhNhan(@RequestParam("id") Integer id, Model model) {
 
         ChiTietLichKham chiTietList = chiTietLichKhamService.getChiTietLichKhamByMaLK(id);
 
-        BenhNhan benhNhan = benhNhanService.getBenhNhanById(idbn);
-
-        model.addAttribute("benhNhan", benhNhan);
-
         model.addAttribute("chiTiet", chiTietList);
-
-        model.addAttribute("lichkhams", lichKhams);
 
         System.out.println(id);
 
@@ -68,8 +62,26 @@ public class ThongTinLichKhamController {
         chiTietLichKhamService.updateChiTietLichKham(chiTietLichKham);
 
         Integer maBN = lichKham.getBenhNhan().getMaBN(); // Lấy mã bệnh nhân từ LichKham
-        return "redirect:/ThongTinLichKham?id=" + maLK + "&idbn=" + maBN;
+        return "redirect:/ThongTinLichKham?id=" + maLK;
     }
+
+//    @PutMapping("/ThongTinLichKham")
+//    public String editThanhToan(@ModelAttribute("thanhToan") ThanhToan thanhToan, BindingResult result,
+//                                @RequestParam("maLK") Integer maLK) {
+//        if (result.hasErrors()) {
+//            return "Doctor/404";
+//        }
+//
+//        // Lấy LichKham dựa trên maLK để thiết lập cho đối tượng ThanhToan
+//        LichKham lichKham = lichKhamService.getLichKhambyID(maLK);
+//        thanhToan.setLichKham(lichKham); // Liên kết thanh toán với lịch khám
+//
+//        // Cập nhật thông tin thanh toán trong cơ sở dữ liệu
+//        thanhToanService.updateThanhToan(thanhToan);
+//
+//        Integer maBN = lichKham.getBenhNhan().getMaBN(); // Lấy mã bệnh nhân từ LichKham
+//        return "redirect:/ThongTinLichKham?id=" + maLK + "&idbn=" + maBN;
+//    }
 
 
 
