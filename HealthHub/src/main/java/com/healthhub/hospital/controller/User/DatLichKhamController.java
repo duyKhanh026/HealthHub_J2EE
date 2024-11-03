@@ -1,12 +1,10 @@
 package com.healthhub.hospital.controller.User;
 
-import com.healthhub.hospital.Entity.BenhNhan;
-import com.healthhub.hospital.Entity.ChiTietLichKham;
-import com.healthhub.hospital.Entity.LichKham;
-import com.healthhub.hospital.Entity.TaiKhoan;
+import com.healthhub.hospital.Entity.*;
 import com.healthhub.hospital.service.ChiTietLichKhamService;
 import com.healthhub.hospital.service.LichKhamService;
 import com.healthhub.hospital.service.TaiKhoanService;
+import com.healthhub.hospital.service.ThanhToanService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,17 +27,22 @@ public class DatLichKhamController {
 
     private ChiTietLichKhamService chiTietLichKhamService;
 
+    private ThanhToanService thanhToanService;
+
     private Authentication authentication;
 
     private BenhNhan benhNhan = new BenhNhan();
 
     private ChiTietLichKham chiTietLichKham = new ChiTietLichKham();
 
+    private ThanhToan thanhToan = new ThanhToan();
+
     public DatLichKhamController(LichKhamService lichKhamService, ChiTietLichKhamService chiTietLichKhamService,
-                                 TaiKhoanService taiKhoanService) {
+                                 TaiKhoanService taiKhoanService, ThanhToanService thanhToanService) {
         this.lichKhamService = lichKhamService;
         this.chiTietLichKhamService = chiTietLichKhamService;
         this.taiKhoanService = taiKhoanService;
+        this.thanhToanService = thanhToanService;
 
     }
 
@@ -69,9 +72,13 @@ public class DatLichKhamController {
 
         // Gán `LichKham` đã lưu vào `ChiTietLichKham`
         chiTietLichKham.setLichKham(lichkham);
+        thanhToan.setLichKham(lichkham);
+
 
         // Lưu `ChiTietLichKham` sau khi `LichKham` đã được lưu
         chiTietLichKhamService.updateChiTietLichKham(chiTietLichKham);
+
+        thanhToanService.updateThanhToan(thanhToan);
 
         // Cập nhật `ChiTietLichKham` cho `LichKham`
         lichkham.setChiTietLichKham(chiTietLichKham);

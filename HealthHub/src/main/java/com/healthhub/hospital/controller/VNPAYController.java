@@ -1,15 +1,20 @@
 package com.healthhub.hospital.controller;
 
 import com.healthhub.hospital.Entity.BenhNhan;
+import com.healthhub.hospital.Entity.ThanhToan;
 import com.healthhub.hospital.service.BenhNhanService;
+import com.healthhub.hospital.service.ThanhToanService;
 import com.healthhub.hospital.service.VNPAYService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.time.LocalDateTime;
 
 @Controller
 public class VNPAYController {
@@ -18,8 +23,14 @@ public class VNPAYController {
 
     private BenhNhanService benhNhanService;
 
-    public VNPAYController(BenhNhanService benhNhanService) {
+    private ThanhToanService thanhToanService;
+
+    private HttpSession session;
+
+    public VNPAYController(BenhNhanService benhNhanService, ThanhToanService thanhToanService, HttpSession session) {
         this.benhNhanService = benhNhanService;
+        this.thanhToanService = thanhToanService;
+        this.session = session;
     }
 
     @GetMapping("/vnpay")
@@ -61,6 +72,23 @@ public class VNPAYController {
         model.addAttribute("paymentTime", paymentTime);
         model.addAttribute("transactionId", transactionId);
 
-        return paymentStatus == 1 ? "vnpay/ordersuccess" : "vnpay/orderfail";
+        Integer maTT = (Integer) session.getAttribute("maTT");
+
+        ThanhToan thanhToan = thanhToanService.findbyid_thanhtoan(maTT);
+
+
+
+        if (paymentStatus == 1){
+
+            thanhToan.setSoTien(Integer.parseInt(totalPrice));
+            thanhToan.setNgayThanhToan(LocalDateTime.now());
+            thanhToan.setHinhThucThanhToan("VNPAY");
+            thanhToanService.updateThanhToan(thanhToan);
+            return "vnpay/ordersuccess";
+        }else {
+            return "vnpay/orderfail";
+        }
+
+
     }
 }

@@ -188,58 +188,19 @@
                             <input type="hidden" class="form-control" th:value="${chiTiet.lichKham.maLK}" name="maLK" />
 <!--                            Có dòng này thì nó mới truyền malk qua được-->
                             <button type="submit" class="btn btn-primary">Lưu</button>
-                            <button type="button" class="btn btn-primary"
-                                    th:onclick="'window.location.href=\'/vnpay?idbn=' + ${chiTiet.lichKham.benhNhan.maBN} + '\''">
-                                Thanh toán
-                            </button>
+<!--                            <button type="button" class="btn btn-primary"-->
+<!--                                    th:onclick="'window.location.href=\'/vnpay?idbn=' + ${chiTiet.lichKham.benhNhan.maBN} + '\''">-->
+<!--                                Thanh toán-->
+<!--                            </button>-->
+                            <a th:href="@{/ThanhToan(id=${chiTiet.lichKham.thanhToan.maTT}, maLK=${chiTiet.lichKham.maLK})}" class="btn btn-info btn-circle btn-lg">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
+
                         </form>
                     </div>
                 </div>
             </div>
 
-            <div class="container-fluid mt-4">
-                <!-- DataTales Example -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h2 class="m-0 font-weight-bold text-primary">Thanh toán</h2>
-                            </div>
-                            <div class="col-auto">
-                                <div class="icon-container">
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <form th:action="@{/ThongTinLichKham}" th:object="${thanhToan}" method="post">
-                            <div class="form-group">
-                                <label>Mã TT</label>
-                                <input type="text" class="form-control" th:value="${chiTiet.lichKham.thanhToan.maTT}" />
-                            </div>
-                            <div class="form-group">
-                                <label>Số tiền</label>
-                                <input type="text" class="form-control" th:value="${chiTiet.lichKham.thanhToan.soTien}" />
-                            </div>
-                            <div class="form-group">
-                                <label>Thời gian thanh toán</label>
-                                <input type="text"  class="form-control"  th:value="${#temporals.format(chiTiet.lichKham.thanhToan.ngayThanhToan, 'dd-MM-yyyy HH:mm')}"  >
-                            </div>
-                            <div class="form-group">
-                                <label>Hình thức thanh toán</label>
-                                <input type="text" class="form-control" th:value="${chiTiet.lichKham.thanhToan.hinhThucThanhToan}" />
-                            </div>
-
-                        </form>
-                    </div>
-
-
-                </div>
-
-
-            </div>
 
         </div>
 

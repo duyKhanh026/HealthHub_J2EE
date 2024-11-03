@@ -22,6 +22,10 @@ public class ThanhToanService {
         return thanhToanRepository.findAll();
     }
 
+    public ThanhToan findbyid_thanhtoan(int id){
+        return thanhToanRepository.findById(id).orElse(null);
+    }
+
     public ThanhToan updateThanhToan(ThanhToan thanhToan){
         return thanhToanRepository.save(thanhToan);
     }
