@@ -43,15 +43,19 @@
                                 </div>
                                 <form class="user" method="POST" th:action="@{/login}">
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user"
-                                               id="username" name="username" placeholder="Enter Username..." required>
+                                        <input type="text" class="form-control form-control-user" id="username" name="username"
+                                               placeholder="Enter Username..." th:value="${username}" required>
                                     </div>
 
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user"
                                                id="password" name="password" placeholder="Password" required>
                                     </div>
-
+                                    <!-- Checkbox Remember Me -->
+                                    <div class="form-group">
+                                            <input type="checkbox"  id="remember-me" name="rememberMe">
+                                            <label class="form-check-label" for="remember-me">Remember Me</label>
+                                    </div>
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
                                         Login
                                     </button>
@@ -59,7 +63,7 @@
 
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="QuenMatKhau.html">Forgot Password?</a>
+                                    <a class="small" href="/forgot_password">Forgot Password?</a>
                                 </div>
                                 <div class="text-center">
                                     <a class="small" href="/register">Create an Account!</a>
@@ -76,6 +80,27 @@
 
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Lấy thông tin từ cookie
+        const username = getCookie("username");
+        const password = getCookie("password");
+
+        // Nếu cookie tồn tại, tự động điền vào các trường
+        if (username) {
+            document.getElementById("username").value = username;
+        }
+        if (password) {
+            document.getElementById("password").value = password;
+        }
+    });
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+</script>
 
 </body>
 

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BenhNhanRepository extends JpaRepository<BenhNhan, Integer>{
-
+    BenhNhan findByEmail(String email);
 
 
 }

@@ -14,4 +14,5 @@ public interface TaiKhoanRepository  extends JpaRepository<TaiKhoan, Integer> {
 
     TaiKhoan findByTenDN(String tenDN);  // Tìm kiếm TaiKhoan theo tên đăng nhập
 
+    boolean existsByEmail(String email); // Phương thức kiểm tra email có tồn tại
 }
