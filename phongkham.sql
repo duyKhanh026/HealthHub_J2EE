@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 02, 2024 lúc 02:48 AM
+-- Thời gian đã tạo: Th10 03, 2024 lúc 06:42 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -48,9 +48,7 @@ INSERT INTO `benhnhan` (`MaBN`, `Hoten`, `Ngaysinh`, `Gioitinh`, `SDT`, `Email`,
 (3, 'Tran Van C', '1978-11-30', 'Nam', '0987654321', 'tranvanc@gmail.com', '789 Tran Hung Dao, Quan 5, HCM', 'Tim mach'),
 (4, 'Pham Thi D', '1995-07-10', 'Nu', '0938765432', 'phamthid@gmail.com', '101 Nguyen Trai, Quan 2, HCM', 'Hen suyen'),
 (5, 'Vo Van E', '1988-03-22', 'Nam', '0945123789', 'vovane@gmail.com', '202 Bach Dang, Quan Binh Thanh, HCM', 'Tieu duong'),
-(8, '123', '2000-11-11', '1', '1', 'c@gmail.com', '1', '1'),
-(9, 'Abc', '2024-10-04', 'b', '1', 'c@gmail.com', 's', 'Tim mach 123'),
-(10, 'Abc', '2024-10-05', 'a', '0085', 'c@gmail.com', 's', 'd');
+(8, '123', '2000-11-11', '1', '1', 'c@gmail.com', '1', '1');
 
 -- --------------------------------------------------------
 
@@ -76,9 +74,10 @@ INSERT INTO `chitietlichkham` (`MaHS`, `MaLK`, `Chuandoan`, `Donthuoc`, `Ghichut
 (203, 103, 'Cảm cúm', 'Vitamin C, Ibuprofen 200mg', 'Nghỉ ngơi, uống nước ấm'),
 (204, 104, 'a', 'bv', 'c'),
 (205, 105, NULL, NULL, NULL),
-(206, 106, NULL, NULL, NULL),
+(206, 106, 'a', 'bv', 'c'),
 (207, 107, NULL, NULL, NULL),
-(208, 108, NULL, NULL, NULL);
+(208, 108, NULL, NULL, NULL),
+(210, 123, '12', '12333', '12');
 
 -- --------------------------------------------------------
 
@@ -102,14 +101,15 @@ CREATE TABLE `lichkham` (
 --
 
 INSERT INTO `lichkham` (`MaLK`, `MaBN`, `Ngaygiodatkham`, `Trangthai`, `Hoten`, `Email`, `SDT`, `Note`) VALUES
-(101, 1, '2024-10-20 09:00:00', 'Đã Khám', NULL, NULL, NULL, NULL),
+(101, 1, '2024-10-20 09:00:00', 'Đã khám', NULL, NULL, NULL, NULL),
 (102, 2, '2024-10-21 14:30:00', 'Chưa Khám', NULL, NULL, NULL, NULL),
 (103, 1, '2024-10-22 11:15:00', 'Đã Khám', NULL, NULL, NULL, NULL),
 (104, 1, '2024-10-31 08:00:00', 'Pending', 'Nguyen Van A', 'nguyenvana@example.com', '0123456789', 'First consultation'),
 (105, 2, '2024-11-01 09:30:00', 'Confirmed', 'Le Thi B', 'lethib@example.com', '0987654321', 'Follow-up visit'),
-(106, 3, '2024-11-02 14:00:00', 'Pending', 'Tran Van C', 'tranvanc@example.com', '0912345678', 'Routine check-up'),
+(106, 3, '2024-11-02 14:00:00', 'Đã khám', 'Tran Van C', 'tranvanc@example.com', '0912345678', 'Routine check-up'),
 (107, 4, '2024-11-03 10:00:00', 'Confirmed', 'Pham Thi D', 'phamthid@example.com', '0901234567', 'Monthly health check'),
-(108, 5, '2024-11-04 16:30:00', 'Cancelled', 'Hoang Van E', 'hoangvane@example.com', '0981234567', 'Consultation rescheduled');
+(108, 5, '2024-11-04 16:30:00', 'Cancelled', 'Hoang Van E', 'hoangvane@example.com', '0981234567', 'Consultation rescheduled'),
+(123, 8, '2024-11-20 08:53:00', 'Đã khám', 'Danh', 'xuandanh1010@gmail.com', '123', 'abcxyz');
 
 -- --------------------------------------------------------
 
@@ -132,6 +132,28 @@ CREATE TABLE `taikhoan` (
 INSERT INTO `taikhoan` (`MaTK`, `TenDN`, `Matkhau`, `MaBN`, `Vaitro`) VALUES
 (1, 'Bacsi', '$2a$10$J40ipm.8yk21aUqWBiphzO68dP8Rm40NAgKo9rVa6P71Kr57W5KkO', NULL, 'bacsi'),
 (2, 'nam', '$2a$10$NhmJEDaPls4Xb1Rc.UlhAORqSLw4UjgRon6LbnpyI8jLLngE/rdMO', 8, 'user');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `thanhtoan`
+--
+
+CREATE TABLE `thanhtoan` (
+  `MaTT` int(50) NOT NULL,
+  `MaLK` int(50) NOT NULL,
+  `Sotien` int(20) DEFAULT NULL,
+  `Ngaythanhtoan` datetime DEFAULT NULL,
+  `Hinhthucthanhtoan` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `thanhtoan`
+--
+
+INSERT INTO `thanhtoan` (`MaTT`, `MaLK`, `Sotien`, `Ngaythanhtoan`, `Hinhthucthanhtoan`) VALUES
+(301, 101, 200000, '2024-11-06 11:14:23', 'VNPAY'),
+(302, 102, 500000, '2024-11-20 11:14:23', 'Tiền mặt');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -165,6 +187,13 @@ ALTER TABLE `taikhoan`
   ADD KEY `MaBN` (`MaBN`);
 
 --
+-- Chỉ mục cho bảng `thanhtoan`
+--
+ALTER TABLE `thanhtoan`
+  ADD PRIMARY KEY (`MaTT`),
+  ADD KEY `MaLK` (`MaLK`);
+
+--
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
@@ -178,19 +207,25 @@ ALTER TABLE `benhnhan`
 -- AUTO_INCREMENT cho bảng `chitietlichkham`
 --
 ALTER TABLE `chitietlichkham`
-  MODIFY `MaHS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=210;
+  MODIFY `MaHS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
 
 --
 -- AUTO_INCREMENT cho bảng `lichkham`
 --
 ALTER TABLE `lichkham`
-  MODIFY `MaLK` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
+  MODIFY `MaLK` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
 -- AUTO_INCREMENT cho bảng `taikhoan`
 --
 ALTER TABLE `taikhoan`
   MODIFY `MaTK` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT cho bảng `thanhtoan`
+--
+ALTER TABLE `thanhtoan`
+  MODIFY `MaTT` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=303;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -213,6 +248,12 @@ ALTER TABLE `lichkham`
 --
 ALTER TABLE `taikhoan`
   ADD CONSTRAINT `MaBN` FOREIGN KEY (`MaBN`) REFERENCES `benhnhan` (`MaBN`);
+
+--
+-- Các ràng buộc cho bảng `thanhtoan`
+--
+ALTER TABLE `thanhtoan`
+  ADD CONSTRAINT `thanhtoan_ibfk_1` FOREIGN KEY (`MaLK`) REFERENCES `lichkham` (`MaLK`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
