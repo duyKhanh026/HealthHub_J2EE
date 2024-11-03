@@ -30,7 +30,7 @@ public class ThongTinUserController {
     public String getUserInfo(Model model, Authentication authentication) {
 
         TaiKhoan tk = taiKhoanService.GetTKByID(authentication.getName());
-
+        
         benhnhan = benhnhanService.getBenhNhanById(tk.getBenhNhan().getMaBN());
 
         model.addAttribute("benhnhan", benhnhan);

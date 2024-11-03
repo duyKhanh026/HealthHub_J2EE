@@ -52,19 +52,14 @@ public class RegisterController {
         // Tạo và lưu bệnh nhân mới với các trường trống
         BenhNhan benhNhan = new BenhNhan();
         benhNhanRepository.save(benhNhan);
-        System.out.println("Mã bệnh nhân: " + benhNhan.getMaBN());
-
-
 
         // Tạo tài khoản mới
         TaiKhoan taiKhoan = new TaiKhoan();
         taiKhoan.setTenDN(username);
         taiKhoan.setMatkhau(passwordEncoder.encode(password)); // Mã hóa mật khẩu
         taiKhoan.setVaitro("user"); // Gán vai trò mặc định
-        taiKhoan.setBenhNhan(benhNhan); // Gán mã bệnh nhân
-
+        taiKhoan.setBenhNhan(benhNhan);
         taiKhoanRepository.save(taiKhoan);
-        System.out.println("Mã bệnh nhân đã gán: " + taiKhoan.getBenhNhan().getMaBN());
 
         // Chuyển hướng tới trang đăng nhập sau khi đăng ký thành công
         return "redirect:/login";

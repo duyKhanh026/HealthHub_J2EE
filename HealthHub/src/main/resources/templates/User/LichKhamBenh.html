@@ -58,6 +58,14 @@
       width: 100%; /* Đảm bảo badge chiếm toàn bộ chiều rộng của cột */
       text-align: center;
     }
+    .custom-line {
+      border-top: 1px solid #ddd; /* Màu và độ dày của đường kẻ */
+      margin: 10px 0;             /* Khoảng cách trên dưới của đường kẻ */
+    }
+    .custom-title {
+      color: #007bff; /* Màu sắc bạn muốn sử dụng, thay đổi nếu cần */
+      font-weight: bold;
+    }
   </style>
 
 </head>
@@ -73,16 +81,46 @@
           <div class="d-flex justify-content-between align-items-center">
             <div>
               <h5 th:text="${#temporals.format(lichKham.ngayGioDatKham, 'yyyy-MM-dd HH:mm:ss')}">Ngày giờ đặt khám</h5>
-
               <p>Mã: <span th:text="${lichKham.maLK}">Mã Lịch Khám</span></p>
             </div>
             <div class="status-column">
               <span th:classappend="${lichKham.trangThai == 'Confirmed' ? 'bg-success' : (lichKham.trangThai == 'Pending' ? 'bg-danger' : 'bg-secondary')}" class="badge" th:text="${lichKham.trangThai}">Trạng thái</span>
             </div>
-            <a class="btn btn-primary btn-sm">Xem Chi Tiết</a>
+            <a class="btn btn-primary btn-sm" th:attr="data-id=${lichKham.maLK}" onclick="viewDetails(this)">Xem Chi Tiết</a>
           </div>
         </div>
       </th:block>
+    </div>
+  </div>
+
+  <!-- Modal hiển thị chi tiết lịch khám-->
+  <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="detailModalLabel">Chi Tiết Lịch Khám</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Mã Lịch Khám:</strong> <span id="maLK"></span></p>
+          <p><strong>Họ Tên:</strong> <span id="hoTen"></span></p>
+          <p><strong>Email:</strong> <span id="email"></span></p>
+          <p><strong>Số Điện Thoại:</strong> <span id="sdt"></span></p>
+          <p><strong>Ghi Chú:</strong> <span id="note"></span></p>
+          <p><strong>Ngày Giờ Đặt Khám:</strong> <span id="ngayGioDatKham"></span></p>
+          <p><strong>Trạng Thái:</strong> <span id="trangThai"></span></p>
+
+          <!-- Thông tin chi tiết chỉ hiển thị khi đã khám -->
+          <div id="chiTietConfirmed" style="display: none;">
+            <div class="custom-line"></div> <!-- Đường kẻ tùy chỉnh -->
+            <p class="custom-title"><strong>Thông tin hồ sơ sau khi khám:</strong></p>
+            <p><strong>Mã hồ sơ:</strong> <span id="maHS"></span></p>
+            <p><strong>Chuẩn đoán:</strong> <span id="chuanDoan"></span></p>
+            <p><strong>Đơn thuốc:</strong> <span id="donThuoc"></span></p>
+            <p><strong>Dặn dò của bác sĩ:</strong> <span id="danDo"></span></p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -90,9 +128,42 @@
   <th:block th:replace="footer :: footerFragment"></th:block>
 </div>
 
+<!-- JavaScript để mở modal khi bấm Xem Chi Tiết -->
+<script>
+  function viewDetails(button) {
+    const maLK = button.getAttribute("data-id");
+    fetch(`/lichkham/details/${maLK}`)
+            .then(response => response.json())
+            .then(data => {
+              document.getElementById("maLK").textContent = data.maLK;
+              document.getElementById("hoTen").textContent = data.hoten;
+              document.getElementById("email").textContent = data.email;
+              document.getElementById("sdt").textContent = data.sDT;
+              document.getElementById("note").textContent = data.note;
+              document.getElementById("ngayGioDatKham").textContent = data.ngayGioDatKham;
+              document.getElementById("trangThai").textContent = data.trangThai;
+
+              // Hiển thị chi tiết chỉ khi trạng thái là "Confirmed"
+              if (data.trangThai === "Confirmed") {
+                document.getElementById("maHS").textContent = data.maHS;
+                document.getElementById("chuanDoan").textContent = data.chuandoan;
+                document.getElementById("donThuoc").textContent = data.donthuoc;
+                document.getElementById("danDo").textContent = data.dando;
+                // Hiển thị chi tiết
+                document.getElementById("chiTietConfirmed").style.display = "block"; // Đảm bảo hiển thị div
+              } else {
+                document.getElementById("chiTietConfirmed").style.display = "none";
+              }
+
+              // Mở modal
+              new bootstrap.Modal(document.getElementById("detailModal")).show();
+            })
+            .catch(error => console.error("Error:", error));
+  }
+</script>
+
 <!-- Vendor JS Files -->
 <script th:src="@{assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-
 
 </body>
 

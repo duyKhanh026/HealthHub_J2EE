@@ -24,12 +24,10 @@ public class TaiKhoan {
 
 
     @OneToOne
-    @JoinColumn(name = "MaBN", insertable = false, updatable = false)
+    @JoinColumn(name = "MaBN", referencedColumnName = "MaBN")
     private BenhNhan benhNhan;
 
     @Column(name = "Vaitro")
     private String vaitro;
-
-
 
 }
