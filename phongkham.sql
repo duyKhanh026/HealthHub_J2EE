@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 03, 2024 lúc 06:42 AM
--- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.2.12
+-- Host: 127.0.0.1
+-- Generation Time: Nov 04, 2024 at 03:20 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `phongkham`
+-- Database: `phongkham`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `benhnhan`
+-- Table structure for table `benhnhan`
 --
 
 CREATE TABLE `benhnhan` (
@@ -39,7 +39,7 @@ CREATE TABLE `benhnhan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `benhnhan`
+-- Dumping data for table `benhnhan`
 --
 
 INSERT INTO `benhnhan` (`MaBN`, `Hoten`, `Ngaysinh`, `Gioitinh`, `SDT`, `Email`, `Diachi`, `Tiensubenh`) VALUES
@@ -48,12 +48,13 @@ INSERT INTO `benhnhan` (`MaBN`, `Hoten`, `Ngaysinh`, `Gioitinh`, `SDT`, `Email`,
 (3, 'Tran Van C', '1978-11-30', 'Nam', '0987654321', 'tranvanc@gmail.com', '789 Tran Hung Dao, Quan 5, HCM', 'Tim mach'),
 (4, 'Pham Thi D', '1995-07-10', 'Nu', '0938765432', 'phamthid@gmail.com', '101 Nguyen Trai, Quan 2, HCM', 'Hen suyen'),
 (5, 'Vo Van E', '1988-03-22', 'Nam', '0945123789', 'vovane@gmail.com', '202 Bach Dang, Quan Binh Thanh, HCM', 'Tieu duong'),
-(8, '123', '2000-11-11', '1', '1', 'c@gmail.com', '1', '1');
+(8, 'Le Hoai Nam', '2000-11-11', 'Nam', '1234567899', 'namhoaile2003@gmail.com', 'q12', 'trầm cảm'),
+(19, 'Lee', '2024-11-14', 'Nam', '0937888555', 'namhoaile203@gmail.com', 'q1', 'Đau đầu ');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `chitietlichkham`
+-- Table structure for table `chitietlichkham`
 --
 
 CREATE TABLE `chitietlichkham` (
@@ -65,7 +66,7 @@ CREATE TABLE `chitietlichkham` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `chitietlichkham`
+-- Dumping data for table `chitietlichkham`
 --
 
 INSERT INTO `chitietlichkham` (`MaHS`, `MaLK`, `Chuandoan`, `Donthuoc`, `Ghichuthem`) VALUES
@@ -77,12 +78,12 @@ INSERT INTO `chitietlichkham` (`MaHS`, `MaLK`, `Chuandoan`, `Donthuoc`, `Ghichut
 (206, 106, 'a', 'bv', 'c'),
 (207, 107, NULL, NULL, NULL),
 (208, 108, NULL, NULL, NULL),
-(210, 123, '12', '12333', '12');
+(211, 125, 'Bị khùng', 'Vaccin 108', 'Nhớ uống thuốc đầy đủ');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `lichkham`
+-- Table structure for table `lichkham`
 --
 
 CREATE TABLE `lichkham` (
@@ -97,7 +98,7 @@ CREATE TABLE `lichkham` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `lichkham`
+-- Dumping data for table `lichkham`
 --
 
 INSERT INTO `lichkham` (`MaLK`, `MaBN`, `Ngaygiodatkham`, `Trangthai`, `Hoten`, `Email`, `SDT`, `Note`) VALUES
@@ -109,12 +110,47 @@ INSERT INTO `lichkham` (`MaLK`, `MaBN`, `Ngaygiodatkham`, `Trangthai`, `Hoten`, 
 (106, 3, '2024-11-02 14:00:00', 'Đã khám', 'Tran Van C', 'tranvanc@example.com', '0912345678', 'Routine check-up'),
 (107, 4, '2024-11-03 10:00:00', 'Confirmed', 'Pham Thi D', 'phamthid@example.com', '0901234567', 'Monthly health check'),
 (108, 5, '2024-11-04 16:30:00', 'Cancelled', 'Hoang Van E', 'hoangvane@example.com', '0981234567', 'Consultation rescheduled'),
-(123, 8, '2024-11-20 08:53:00', 'Đã khám', 'Danh', 'xuandanh1010@gmail.com', '123', 'abcxyz');
+(124, 8, '2024-11-06 15:34:45', 'Pending', 'Le Hoai Nam', 'nam@gmail.com', '0939804455', 'đi khám đúng giờ'),
+(125, 8, '2024-10-09 15:35:56', 'Confirmed', 'Le Hoai Nam', 'nam@gmail.com', '0939804455', 'tt'),
+(126, 8, '2024-07-24 15:36:30', 'Cancelled', 'Le Hoai Nam', 'nam@gmail.com', '0939804455', 'rr');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `taikhoan`
+-- Table structure for table `password_reset_token`
+--
+
+CREATE TABLE `password_reset_token` (
+  `id` int(11) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `expiry_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `password_reset_token`
+--
+
+INSERT INTO `password_reset_token` (`id`, `token`, `user_id`, `expiry_date`) VALUES
+(1, '54a66724-30b8-48c7-b3d0-8c33923d4bae', 8, '2024-11-04 02:16:49'),
+(2, 'b5d90a54-adee-4114-abeb-cd900beacdcb', 8, '2024-11-04 02:18:37'),
+(3, '8b50ba17-7ee0-4851-ae46-24e2de4f82e8', 8, '2024-11-04 02:20:30'),
+(4, '69b5aacf-b6e2-4340-8567-7d861cab4c16', 8, '2024-11-04 02:25:36'),
+(5, 'adb1e2b7-93c5-4e69-a8d7-8f9ee2113cd5', 8, '2024-11-04 02:28:05'),
+(6, '11b5c3f4-b1fe-40e0-ae33-37333240c783', 8, '2024-11-04 02:33:29'),
+(7, 'daec33cf-a6f3-49aa-ad90-d8b7f5ec79d5', 8, '2024-11-04 02:35:13'),
+(8, 'dc8a8457-5f94-42c2-8a9d-c98a8d1a35e1', 8, '2024-11-04 02:36:15'),
+(9, 'c808c944-0a7b-4a0c-934c-3d40efe871aa', 8, '2024-11-04 02:40:39'),
+(10, 'c2b6a745-995c-4292-a134-0a92b6d7071a', 8, '2024-11-04 02:44:08'),
+(11, '522948b1-39c6-4b44-ba11-33dbbf89056b', 8, '2024-11-04 02:48:21'),
+(12, '35e52584-31df-4919-b99d-890de445ac97', 8, '2024-11-04 02:51:18'),
+(15, '212d7c5f-661b-427a-aeff-0ae16ae0f3ef', 8, '2024-11-04 03:04:53'),
+(17, '1b76759b-d9dd-412e-b226-f6e15c665afa', 8, '2024-11-04 03:13:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `taikhoan`
 --
 
 CREATE TABLE `taikhoan` (
@@ -126,17 +162,18 @@ CREATE TABLE `taikhoan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `taikhoan`
+-- Dumping data for table `taikhoan`
 --
 
 INSERT INTO `taikhoan` (`MaTK`, `TenDN`, `Matkhau`, `MaBN`, `Vaitro`) VALUES
 (1, 'Bacsi', '$2a$10$J40ipm.8yk21aUqWBiphzO68dP8Rm40NAgKo9rVa6P71Kr57W5KkO', NULL, 'bacsi'),
-(2, 'nam', '$2a$10$NhmJEDaPls4Xb1Rc.UlhAORqSLw4UjgRon6LbnpyI8jLLngE/rdMO', 8, 'user');
+(2, 'nam', '$2a$10$3pMce0/rGLXcxyTp5.uve.DM4ji2sjGPY9gB1dybuUBDNOGgjTyqy', 8, 'user'),
+(10, 'lee', '$2a$10$U4leUvb3FF4JkLem5vuGQez4FGBY9euoPEay1HHd6YKLM7M8vDsOK', 19, 'user');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `thanhtoan`
+-- Table structure for table `thanhtoan`
 --
 
 CREATE TABLE `thanhtoan` (
@@ -148,7 +185,7 @@ CREATE TABLE `thanhtoan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `thanhtoan`
+-- Dumping data for table `thanhtoan`
 --
 
 INSERT INTO `thanhtoan` (`MaTT`, `MaLK`, `Sotien`, `Ngaythanhtoan`, `Hinhthucthanhtoan`) VALUES
@@ -156,101 +193,120 @@ INSERT INTO `thanhtoan` (`MaTT`, `MaLK`, `Sotien`, `Ngaythanhtoan`, `Hinhthuctha
 (302, 102, 500000, '2024-11-20 11:14:23', 'Tiền mặt');
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `benhnhan`
+-- Indexes for table `benhnhan`
 --
 ALTER TABLE `benhnhan`
   ADD PRIMARY KEY (`MaBN`);
 
 --
--- Chỉ mục cho bảng `chitietlichkham`
+-- Indexes for table `chitietlichkham`
 --
 ALTER TABLE `chitietlichkham`
   ADD PRIMARY KEY (`MaHS`),
   ADD KEY `MaLK` (`MaLK`);
 
 --
--- Chỉ mục cho bảng `lichkham`
+-- Indexes for table `lichkham`
 --
 ALTER TABLE `lichkham`
   ADD PRIMARY KEY (`MaLK`),
   ADD KEY `MaBN` (`MaBN`);
 
 --
--- Chỉ mục cho bảng `taikhoan`
+-- Indexes for table `password_reset_token`
+--
+ALTER TABLE `password_reset_token`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_user` (`user_id`);
+
+--
+-- Indexes for table `taikhoan`
 --
 ALTER TABLE `taikhoan`
   ADD PRIMARY KEY (`MaTK`),
   ADD KEY `MaBN` (`MaBN`);
 
 --
--- Chỉ mục cho bảng `thanhtoan`
+-- Indexes for table `thanhtoan`
 --
 ALTER TABLE `thanhtoan`
   ADD PRIMARY KEY (`MaTT`),
   ADD KEY `MaLK` (`MaLK`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `benhnhan`
+-- AUTO_INCREMENT for table `benhnhan`
 --
 ALTER TABLE `benhnhan`
-  MODIFY `MaBN` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `MaBN` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT cho bảng `chitietlichkham`
+-- AUTO_INCREMENT for table `chitietlichkham`
 --
 ALTER TABLE `chitietlichkham`
-  MODIFY `MaHS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
+  MODIFY `MaHS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=212;
 
 --
--- AUTO_INCREMENT cho bảng `lichkham`
+-- AUTO_INCREMENT for table `lichkham`
 --
 ALTER TABLE `lichkham`
-  MODIFY `MaLK` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `MaLK` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
--- AUTO_INCREMENT cho bảng `taikhoan`
+-- AUTO_INCREMENT for table `password_reset_token`
+--
+ALTER TABLE `password_reset_token`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `taikhoan`
 --
 ALTER TABLE `taikhoan`
-  MODIFY `MaTK` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `MaTK` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT cho bảng `thanhtoan`
+-- AUTO_INCREMENT for table `thanhtoan`
 --
 ALTER TABLE `thanhtoan`
   MODIFY `MaTT` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=303;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `chitietlichkham`
+-- Constraints for table `chitietlichkham`
 --
 ALTER TABLE `chitietlichkham`
   ADD CONSTRAINT `chitietlichkham_ibfk_1` FOREIGN KEY (`MaLK`) REFERENCES `lichkham` (`MaLK`);
 
 --
--- Các ràng buộc cho bảng `lichkham`
+-- Constraints for table `lichkham`
 --
 ALTER TABLE `lichkham`
   ADD CONSTRAINT `lichkham_ibfk_1` FOREIGN KEY (`MaBN`) REFERENCES `benhnhan` (`MaBN`);
 
 --
--- Các ràng buộc cho bảng `taikhoan`
+-- Constraints for table `password_reset_token`
+--
+ALTER TABLE `password_reset_token`
+  ADD CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `benhnhan` (`MaBN`);
+
+--
+-- Constraints for table `taikhoan`
 --
 ALTER TABLE `taikhoan`
   ADD CONSTRAINT `MaBN` FOREIGN KEY (`MaBN`) REFERENCES `benhnhan` (`MaBN`);
 
 --
--- Các ràng buộc cho bảng `thanhtoan`
+-- Constraints for table `thanhtoan`
 --
 ALTER TABLE `thanhtoan`
   ADD CONSTRAINT `thanhtoan_ibfk_1` FOREIGN KEY (`MaLK`) REFERENCES `lichkham` (`MaLK`) ON DELETE CASCADE ON UPDATE CASCADE;
