@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        TaiKhoan taiKhoan = userRepository.getAccountByTenDN(username);
+        TaiKhoan taiKhoan = userRepository.findByTenDN(username);
         if (taiKhoan == null) {
             throw new UsernameNotFoundException("User not found");
         }

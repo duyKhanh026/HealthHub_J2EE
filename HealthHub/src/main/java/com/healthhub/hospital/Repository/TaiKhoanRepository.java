@@ -7,12 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface TaiKhoanRepository  extends JpaRepository<TaiKhoan, Integer> {
 
-    TaiKhoan getAccountByTenDN(String tenDN);
-
     TaiKhoan findByTenDN(String tenDN);  // Tìm kiếm TaiKhoan theo tên đăng nhập
+    TaiKhoan findByBenhNhan(BenhNhan benhnhan);
 
-    boolean existsByEmail(String email); // Phương thức kiểm tra email có tồn tại
 }

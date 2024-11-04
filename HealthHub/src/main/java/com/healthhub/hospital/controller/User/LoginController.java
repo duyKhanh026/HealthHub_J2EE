@@ -24,9 +24,7 @@ public class LoginController {
                 }
             }
         }
-        System.out.println("Test1:"+username);
         model.addAttribute("username", username); // Gửi username vào model
-        System.out.println("Test2:"+username);
         return "User/DangNhap"; // Trả về trang đăng nhập
     }
 

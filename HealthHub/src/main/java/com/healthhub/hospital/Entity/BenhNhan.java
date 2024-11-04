@@ -43,7 +43,8 @@ public class BenhNhan {
     @Column(name = "Tiensubenh")
     private String tiensubenh;
 
-
+    @OneToOne(mappedBy = "benhNhan")
+    private TaiKhoan taiKhoan;
     public BenhNhan(String hoTen, String gioitinh, String SDT, String email, String diachi, String tiensubenh) {
         this.hoTen = hoTen;
         this.gioitinh = gioitinh;

@@ -22,7 +22,7 @@ public class TaiKhoanService {
     }
 
     public TaiKhoan GetTKByID(String tenDN){
-        return taiKhoanRepository.getAccountByTenDN(tenDN);
+        return taiKhoanRepository.findByTenDN(tenDN);
     }
 
 }

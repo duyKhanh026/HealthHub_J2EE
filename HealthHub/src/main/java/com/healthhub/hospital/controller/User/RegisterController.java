@@ -43,7 +43,7 @@ public class RegisterController {
         }
 
         // Kiểm tra xem tên đăng nhập đã tồn tại chưa
-        TaiKhoan existingAccount = taiKhoanRepository.getAccountByTenDN(username);
+        TaiKhoan existingAccount = taiKhoanRepository.findByTenDN(username);
         if (existingAccount != null) {
             model.addAttribute("error", "Tên đăng nhập đã tồn tại!");
             return "User/DangKy";
