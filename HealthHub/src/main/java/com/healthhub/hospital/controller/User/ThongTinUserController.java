@@ -40,7 +40,11 @@ public class ThongTinUserController {
     }
     @PostMapping
     public String updateUser(@ModelAttribute("benhnhan") BenhNhan bn, RedirectAttributes redirectAttributes) {
-
+        // Kiểm tra xem số điện thoại đã tồn tại trong cơ sở dữ liệu hay chưa
+        if (benhnhanService.isSDTExist(bn.getSDT())) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Số điện thoại đã tồn tại trong hệ thống!");
+            return "redirect:/thongtinuser"; // Chuyển hướng lại trang thông tin người dùng với thông báo lỗi
+        }
 
         benhnhan.setHoTen(bn.getHoTen());
         benhnhan.setNgaySinh(bn.getNgaySinh());
@@ -55,4 +59,6 @@ public class ThongTinUserController {
         // Chuyển hướng về trang cập nhật thông tin hoặc một trang khác
         return "redirect:/thongtinuser"; // Đường dẫn redirect về trang bạn muốn
     }
+
+
 }

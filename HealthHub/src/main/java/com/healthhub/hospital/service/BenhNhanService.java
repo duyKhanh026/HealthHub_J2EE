@@ -41,5 +41,11 @@ public class BenhNhanService {
     }
 
 
+    public boolean isSDTExist(String sdt) {
+        // Giả sử bạn sử dụng repository hoặc DAO để truy vấn cơ sở dữ liệu
+        BenhNhan benhNhan = benhNhanrepo.findBySDT(sdt);  // Phương thức tìm bệnh nhân theo số điện thoại
+        return benhNhan != null;  // Nếu tìm thấy bệnh nhân, tức là số điện thoại đã tồn tại
+    }
+
 
 }

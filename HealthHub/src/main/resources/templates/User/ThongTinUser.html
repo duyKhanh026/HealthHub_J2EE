@@ -61,6 +61,10 @@
         <div th:if="${message}" class="alert alert-success" role="alert">
             <span th:text="${message}"></span>
         </div>
+        <!-- Hiển thị thông báo lỗi nếu có -->
+        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+            <span th:text="${errorMessage}"></span>
+        </div>
         <form th:action="@{/thongtinuser}" method="post" th:object="${benhnhan}" class="row g-3">
             <div class="col-md-6">
                 <label for="hoTen" class="form-label">Họ và Tên</label>
