@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2024 at 03:20 AM
+-- Generation Time: Nov 07, 2024 at 04:34 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -166,9 +166,9 @@ CREATE TABLE `taikhoan` (
 --
 
 INSERT INTO `taikhoan` (`MaTK`, `TenDN`, `Matkhau`, `MaBN`, `Vaitro`) VALUES
-(1, 'Bacsi', '$2a$10$J40ipm.8yk21aUqWBiphzO68dP8Rm40NAgKo9rVa6P71Kr57W5KkO', NULL, 'bacsi'),
-(2, 'nam', '$2a$10$3pMce0/rGLXcxyTp5.uve.DM4ji2sjGPY9gB1dybuUBDNOGgjTyqy', 8, 'user'),
-(10, 'lee', '$2a$10$U4leUvb3FF4JkLem5vuGQez4FGBY9euoPEay1HHd6YKLM7M8vDsOK', 19, 'user');
+(1, 'Bacsi', '$2a$10$J40ipm.8yk21aUqWBiphzO68dP8Rm40NAgKo9rVa6P71Kr57W5KkO', NULL, 'BACSI'),
+(2, 'nam', '$2a$10$Ly.ahGjAwnJL5BhRoG9mwuqZxk/KKRg9jHN0.k2Y1s2AIRLu19io2', 8, 'USER'),
+(10, 'lee', '$2a$10$U4leUvb3FF4JkLem5vuGQez4FGBY9euoPEay1HHd6YKLM7M8vDsOK', 19, 'USER');
 
 -- --------------------------------------------------------
 
@@ -190,7 +190,7 @@ CREATE TABLE `thanhtoan` (
 
 INSERT INTO `thanhtoan` (`MaTT`, `MaLK`, `Sotien`, `Ngaythanhtoan`, `Hinhthucthanhtoan`) VALUES
 (301, 101, 200000, '2024-11-06 11:14:23', 'VNPAY'),
-(302, 102, 500000, '2024-11-20 11:14:23', 'Tiền mặt');
+(302, 102, 500000, '2024-11-07 07:50:32', 'Tiền mặt');
 
 --
 -- Indexes for dumped tables
@@ -245,7 +245,7 @@ ALTER TABLE `thanhtoan`
 -- AUTO_INCREMENT for table `benhnhan`
 --
 ALTER TABLE `benhnhan`
-  MODIFY `MaBN` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `MaBN` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `chitietlichkham`
@@ -263,13 +263,13 @@ ALTER TABLE `lichkham`
 -- AUTO_INCREMENT for table `password_reset_token`
 --
 ALTER TABLE `password_reset_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `taikhoan`
 --
 ALTER TABLE `taikhoan`
-  MODIFY `MaTK` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `MaTK` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `thanhtoan`
