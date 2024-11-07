@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
+@SessionAttributes("hoTen")
 public class DatLichKhamController {
     private LichKhamService lichKhamService;
 

@@ -27,7 +27,8 @@ public class TaiKhoan {
     @JoinColumn(name = "MaBN", referencedColumnName = "MaBN")
     private BenhNhan benhNhan;
 
+    @Enumerated(EnumType.STRING)  // Lưu giá trị enum dưới dạng String trong DB
     @Column(name = "Vaitro")
-    private String vaitro;
+    private Role vaitro;
 
 }

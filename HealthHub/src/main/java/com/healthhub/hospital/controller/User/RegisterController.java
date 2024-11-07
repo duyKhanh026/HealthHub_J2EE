@@ -1,6 +1,7 @@
 package com.healthhub.hospital.controller.User;
 
 import com.healthhub.hospital.Entity.BenhNhan;
+import com.healthhub.hospital.Entity.Role;
 import com.healthhub.hospital.Repository.BenhNhanRepository;
 import com.healthhub.hospital.Repository.TaiKhoanRepository;
 import com.healthhub.hospital.Entity.TaiKhoan;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class RegisterController {
@@ -35,33 +37,47 @@ public class RegisterController {
     public String registerUser(@RequestParam("username") String username,
                                @RequestParam("password") String password,
                                @RequestParam("confirmPassword") String confirmPassword,
-                               Model model) {
+                               @RequestParam("SDT") String SDT,
+                               RedirectAttributes redirectAttributes) {
         // Kiểm tra mật khẩu và mật khẩu xác nhận có trùng nhau không
         if (!password.equals(confirmPassword)) {
-            model.addAttribute("error", "Mật khẩu không khớp!");
-            return "User/DangKy"; // Đưa người dùng trở lại trang đăng ký nếu có lỗi
+            redirectAttributes.addFlashAttribute("modalMessage", "Mật khẩu không khớp!");
+            redirectAttributes.addFlashAttribute("modalType", "danger"); // error
+            return "redirect:/register";
         }
 
         // Kiểm tra xem tên đăng nhập đã tồn tại chưa
         TaiKhoan existingAccount = taiKhoanRepository.findByTenDN(username);
         if (existingAccount != null) {
-            model.addAttribute("error", "Tên đăng nhập đã tồn tại!");
-            return "User/DangKy";
+            redirectAttributes.addFlashAttribute("modalMessage", "Tên đăng nhập đã tồn tại!");
+            redirectAttributes.addFlashAttribute("modalType", "danger");
+            return "redirect:/register";
+        }
+
+        // Kiểm tra xem số điện thoại đã tồn tại chưa
+        BenhNhan existingBenhNhan = benhNhanRepository.findBySDT(SDT);
+        if (existingBenhNhan != null) {
+            redirectAttributes.addFlashAttribute("modalMessage", "Số điện thoại đã tồn tại!");
+            redirectAttributes.addFlashAttribute("modalType", "danger");
+            return "redirect:/register";
         }
 
         // Tạo và lưu bệnh nhân mới với các trường trống
         BenhNhan benhNhan = new BenhNhan();
+        benhNhan.setSDT(SDT);
         benhNhanRepository.save(benhNhan);
 
         // Tạo tài khoản mới
         TaiKhoan taiKhoan = new TaiKhoan();
         taiKhoan.setTenDN(username);
         taiKhoan.setMatkhau(passwordEncoder.encode(password)); // Mã hóa mật khẩu
-        taiKhoan.setVaitro("user"); // Gán vai trò mặc định
+        taiKhoan.setVaitro(Role.USER); // Gán vai trò mặc định
         taiKhoan.setBenhNhan(benhNhan);
         taiKhoanRepository.save(taiKhoan);
 
-        // Chuyển hướng tới trang đăng nhập sau khi đăng ký thành công
+        // Thêm thông báo thành công và redirect đến trang đăng nhập
+        redirectAttributes.addFlashAttribute("modalMessage", "Đăng ký thành công!");
+        redirectAttributes.addFlashAttribute("modalType", "success");
         return "redirect:/login";
     }
 

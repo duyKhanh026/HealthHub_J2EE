@@ -12,5 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface BenhNhanRepository extends JpaRepository<BenhNhan, Integer>{
     BenhNhan findByEmail(String email);
 
+    BenhNhan findBySDT(String SDT);
 
 }
