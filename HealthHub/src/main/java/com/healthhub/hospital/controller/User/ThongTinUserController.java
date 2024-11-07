@@ -35,6 +35,8 @@ public class ThongTinUserController {
 
         model.addAttribute("benhnhan", benhnhan);
 
+
+
         // Trả về tên view
         return "User/ThongTinUser";
     }
