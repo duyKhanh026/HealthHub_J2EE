@@ -104,7 +104,7 @@ public class DatLichKhamController {
         // Lấy danh sách các giờ đã đặt
         List<LocalTime> bookedTimes = lichKhamService.getBookedTimesByDate(selectedDate);
         // Lấy danh sách các ngày nghỉ
-        List<LocalTime> holidayTimes = lichKhamService.getHolidayTimes();
+        List<LocalTime> holidayTimes = lichKhamService.getHolidayTimesByDate(selectedDate);
 
         // Lọc các giờ còn trống
         List<String> availableTimes = new ArrayList<>();

@@ -1,5 +1,6 @@
 package com.healthhub.hospital.Repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,6 +18,9 @@ public interface LichKhamRepository extends JpaRepository<LichKham, Integer> {
 	List<LichKham> findByNgayGioDatKhamBetween(LocalDateTime startOfDay, LocalDateTime endOfDay);
 
 	List<LichKham> findByBenhNhan_MaBN(int maBN);
+
+	@Query("SELECT l FROM LichKham l WHERE DATE(l.ngayGioDatKham) = :selectedDate AND l.trangThai = :trangThai")
+	List<LichKham> findByNgayGioDatKhamAndTrangThai(@Param("selectedDate") LocalDate selectedDate, @Param("trangThai") String trangThai);
 
 	List<LichKham> findByTrangThai(String date);
 }

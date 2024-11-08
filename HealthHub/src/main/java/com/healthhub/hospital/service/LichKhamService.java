@@ -54,9 +54,9 @@ public class LichKhamService {
                 .collect(Collectors.toList());
     }
 
-    public List<LocalTime> getHolidayTimes() {
+    public List<LocalTime> getHolidayTimesByDate(LocalDate selectedDate) {
         // Truy vấn các lịch khám có trạng thái 'Nghỉ' trong ngày đã chọn
-        List<LichKham> holidayLichKhams = lichKhamRepository.findByTrangThai("DayOff");
+        List<LichKham> holidayLichKhams = lichKhamRepository.findByNgayGioDatKhamAndTrangThai(selectedDate, "Nghỉ");
 
         // Chuyển đổi các thời gian nghỉ từ LichKham thành LocalTime
         List<LocalTime> holidayTimes = new ArrayList<>();
