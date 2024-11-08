@@ -17,4 +17,6 @@ public interface LichKhamRepository extends JpaRepository<LichKham, Integer> {
 	List<LichKham> findByNgayGioDatKhamBetween(LocalDateTime startOfDay, LocalDateTime endOfDay);
 
 	List<LichKham> findByBenhNhan_MaBN(int maBN);
+
+	List<LichKham> findByTrangThai(String date);
 }

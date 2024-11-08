@@ -53,6 +53,12 @@ public class DSLichKhamController {
 
     @GetMapping({ "/NgayNghi" })
 	public String ListNgayNghi(Model model) {
+        List<LichKham> lichnghi;
+
+        lichnghi = lichKhamService.getAllDayOffAppointments();
+
+        model.addAttribute("lichNghiList", lichnghi);
+
 
 		return "Doctor/Ngaynghi";
 	}

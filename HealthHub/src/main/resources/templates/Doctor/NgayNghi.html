@@ -142,13 +142,13 @@
                                 </thead>
 
                                 <tbody>
-                                <tr th:each="lichkham : ${lichkhamList}"><td><input type="checkbox"  class="checkbox_ID larger-checkbox"/></td>
-                                    <td th:text="${lichkham.maLK}">MaLK</td>
-                                    <td th:text="${#dates.format(lichkham.ngayGioDatKham, 'yyyy-MM-dd HH:mm')}">NgayGioDatKham</td>
-                                    <td th:text="${lichkham.trangThai}">Trangthai</td>
+                                <tr th:each="lichnghi : ${lichNghiList}"><td><input type="checkbox"  class="checkbox_ID larger-checkbox"/></td>
+                                    <td th:text="${lichnghi.maLK}">MaLK</td>
+                                    <td th:text="${#temporals.format(lichnghi.ngayGioDatKham, 'dd-MM-yyyy HH:mm')}">NgayGioDatKham</td>
+                                    <td th:text="${lichnghi.trangThai}">Trangthai</td>
                                     <td>
-                                        <a th:href="" class="btn btn-info btn-circle btn-lg">
-                                            <i class="fas fa-info-circle"></i>
+                                        <a class="btn btn-danger btn-circle btn-lg">
+                                            <i class="fas fa-trash-alt"></i> <!-- Xóa -->
                                         </a>
                                     </td>
 
