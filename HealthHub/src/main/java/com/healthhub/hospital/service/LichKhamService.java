@@ -27,10 +27,11 @@ public class LichKhamService {
         return lichKhamRepository.findById(id).orElse(null);
     }
 
-    public List<LichKham> getLichKhamByDate(LocalDate date) {
-        return lichKhamRepository.findByNgayGioDatKhamBetween(
-                date.atStartOfDay(), date.plusDays(1).atStartOfDay());
+    public List<LichKham> getLichKhamByDate_NotOff(LocalDate date) {
+        return lichKhamRepository.findByNgayGioDatKhamBetweenAndTrangThaiNot(
+                date.atStartOfDay(), date.plusDays(1).atStartOfDay(), "DayOff");
     }
+
 
     public LichKham updateLichKham(LichKham lichKham){
         return lichKhamRepository.save(lichKham);
@@ -68,5 +69,14 @@ public class LichKhamService {
 
     public List<LichKham> getAllDayOffAppointments() {
         return lichKhamRepository.findByTrangThai("DayOff");
+    }
+
+    public List<LichKham> findAllnotDayoff(String tt){
+        return lichKhamRepository.findByTrangThaiNot(tt);
+    }
+
+    public void deleteLichKhamById(Integer id) {
+        lichKhamRepository.deleteById(id);
+
     }
 }

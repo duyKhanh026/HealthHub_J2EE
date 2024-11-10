@@ -28,12 +28,7 @@
     <!-- Custom styles for this template -->
     <link th:href="@{assets2/css/tablescumtom.css}" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link th:href="@{assets2/css/Css_TB/FormSuaTB.css}" rel="stylesheet">
-
-
-    <!-- Custom styles for this template -->
-    <link th:href="@{assets2/css/Css_TB/FormThemTB.css}" rel="stylesheet">
+    <link th:href="@{assets2/css/Css_BN/FormThemBN.css}" rel="stylesheet">
 
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -120,10 +115,15 @@
                             <div class="col">
                                 <h2 class="m-0 font-weight-bold text-primary">Danh sách ngày nghỉ</h2>
                             </div>
-                            <form action="/DSLichKham" method="get" id="dateForm_healing" class="form-inline">
-                                <label for="selectedDate2" class="mr-2">Chọn ngày nghỉ:</label>
-                                <input type="date" id="selectedDate2" class="form-control" name="selectedDate" onchange="document.getElementById('dateForm').submit();" />
-                            </form>
+                            <div class="col-auto">
+                                <div class="icon-container">
+                                    <a class="btn btn-primary btn-circle btn-lg" id="addButton">
+                                        <i class="fas fa-plus"></i> <!-- Thêm -->
+                                    </a>
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
 
@@ -147,9 +147,14 @@
                                     <td th:text="${#temporals.format(lichnghi.ngayGioDatKham, 'dd-MM-yyyy HH:mm')}">NgayGioDatKham</td>
                                     <td th:text="${lichnghi.trangThai}">Trangthai</td>
                                     <td>
-                                        <a class="btn btn-danger btn-circle btn-lg">
-                                            <i class="fas fa-trash-alt"></i> <!-- Xóa -->
-                                        </a>
+                                        <form th:action="@{/NgayNghi/xoa}" method="post">
+                                            <input type="hidden" name="_method" value="delete" />
+                                            <input type="hidden" name="id" th:value="${lichnghi.maLK}" />
+                                            <button type="submit" class="btn btn-danger btn-circle btn-lg" onclick="return confirm('Bạn có chắc chắn muốn xóa?');">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+
                                     </td>
 
                                 </tr>
@@ -208,7 +213,50 @@
 
 
 
+<!--Form them benh nhan-->
+<div class="container">
+    <div id="addForm" class="add-form">
+        <h2>Thêm thời gian nghỉ</h2>
+        <form th:action="@{/NgayNghi}" method="post" >
+            <input type="hidden" name="action" value="add" />
+            <div class="row">
+                <!-- Cột bên trái -->
+                <div class="col-md-12">
 
+                    <div class="form-group">
+                        <label for="ngayNghi">Chọn ngày nghỉ:</label>
+                        <input type="date" class="form-control" id="ngayNghi" name="ngayNghi" />
+                    </div>
+
+                    <!-- Input chọn khoảng thời gian bắt đầu -->
+                    <section>
+                        <div class="form-group">
+                            <label for="thoiGianNghi">Thời gian nghỉ:</label>
+                            <select class="form-control" id="thoiGianNghi" name="thoiGianNghi">
+                                <option value="08:00">8:00</option>
+                                <option value="08:30">8:30</option>
+                                <option value="09:00">9:00</option>
+                                <option value="09:30">9:30</option>
+                                <option value="10:00">10:00</option>
+                                <option value="10:30">10:30</option>
+                                <option value="11:00">11:00</option>
+                                <option value="14:00">14:00</option>
+                                <option value="14:30">14:30</option>
+                                <option value="15:00">15:30</option>
+                                <option value="15:30">15:30</option>
+                                <option value="16:00">16:00</option>
+                                <option value="16:30">16:30</option>
+                            </select>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" onclick="saveAdd()">Lưu thay đổi</button>
+            <button type="button" class="btn btn-secondary" onclick="closeFormAdd()">Đóng</button>
+        </form>
+    </div>
+</div>
 
 
 
@@ -228,8 +276,28 @@
 <!-- Page level custom scripts -->
 <script src="assets2/js/demo/datatables-demo.js"></script>
 
+<!--<script th:src="@{assets2/js/LichNghiLN.js}"></script>-->
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    function openFormAdd() {
+
+    document.getElementById("addForm").style.display = "block";
+}
+
+function closeFormAdd() {
+
+    document.getElementById("addForm").style.display = "none";
+}
+
+var addButton = document.getElementById('addButton');
+
+addButton.addEventListener('click', function(event) {
+
+    openFormAdd();
+});
+</script>
 
 </body>
 

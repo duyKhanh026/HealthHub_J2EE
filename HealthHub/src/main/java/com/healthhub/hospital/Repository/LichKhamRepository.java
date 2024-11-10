@@ -23,4 +23,10 @@ public interface LichKhamRepository extends JpaRepository<LichKham, Integer> {
 	List<LichKham> findByNgayGioDatKhamAndTrangThai(@Param("selectedDate") LocalDate selectedDate, @Param("trangThai") String trangThai);
 
 	List<LichKham> findByTrangThai(String date);
+
+	List<LichKham> findByTrangThaiNot(String trangThai);
+
+	List<LichKham> findByNgayGioDatKhamBetweenAndTrangThaiNot(LocalDateTime startOfDay, LocalDateTime endOfDay, String trangThai);
+
+
 }

@@ -136,7 +136,7 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th style="width: 50px;"><input type="checkbox" name="selectedItems" id="checkAll" class="larger-checkbox" style="margin-top: 5px;"/></th>
+<!--                                    <th style="width: 50px;"><input type="checkbox" name="selectedItems" id="checkAll" class="larger-checkbox" style="margin-top: 5px;"/></th>-->
                                     <th>Mã lịch khám</th>
                                     <th>Tên bệnh nhân</th>
                                     <th>Ngày khám</th>
@@ -147,7 +147,8 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr th:each="lichkham : ${lichkhamList}"><td><input type="checkbox"  class="checkbox_ID larger-checkbox"/></td>
+                                    <tr th:each="lichkham : ${lichkhamList}">
+<!--                                        <td><input type="checkbox"  class="checkbox_ID larger-checkbox"/></td>-->
                                     <td th:text="${lichkham.maLK}">MaLK</td>
                                     <td th:text="${lichkham.hoten}">MaBN</td>
                                         <td th:text="${#temporals.format(lichkham.ngayGioDatKham, 'dd-MM-yyyy HH:mm')}">NgayGioDatKham</td>
