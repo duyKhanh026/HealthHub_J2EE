@@ -68,7 +68,8 @@ public class AppConfig{
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/","/anhcuatao/**", "/index", "/assets2/**", "/css/**", "/assets/**"
                                 ,"DSLichKham","/ChiTietBenhNhan","/ThongTinLichKham","/register","/send_email","/ThongTinUser","/DatLichKham"
-                                ,"/DSBenhNhan", "/ThanhToan","/forgot_password","/reset_password","/api/getAvailableTimes","/NgayNghi","/NgayNghi/xoa").permitAll()
+                                ,"/DSBenhNhan", "/ThanhToan","/forgot_password","/reset_password","/api/getAvailableTimes","/NgayNghi","/NgayNghi/xoa"
+                                ,"/send_html_email").permitAll()
                         .requestMatchers("/forgot_password").permitAll()
                         .anyRequest().authenticated()
                 )

@@ -1,10 +1,12 @@
 package com.healthhub.hospital.controller.User;
 
 import com.healthhub.hospital.Entity.*;
+import com.healthhub.hospital.controller.EmailController;
 import com.healthhub.hospital.service.ChiTietLichKhamService;
 import com.healthhub.hospital.service.LichKhamService;
 import com.healthhub.hospital.service.TaiKhoanService;
 import com.healthhub.hospital.service.ThanhToanService;
+import jakarta.mail.MessagingException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,12 +39,15 @@ public class DatLichKhamController {
 
     private ThanhToan thanhToan = new ThanhToan();
 
+    private EmailController emailController;
+
     public DatLichKhamController(LichKhamService lichKhamService, ChiTietLichKhamService chiTietLichKhamService,
-                                 TaiKhoanService taiKhoanService, ThanhToanService thanhToanService) {
+                                 TaiKhoanService taiKhoanService, ThanhToanService thanhToanService, EmailController emailController) {
         this.lichKhamService = lichKhamService;
         this.chiTietLichKhamService = chiTietLichKhamService;
         this.taiKhoanService = taiKhoanService;
         this.thanhToanService = thanhToanService;
+        this.emailController = emailController;
 
     }
 
@@ -56,7 +61,7 @@ public class DatLichKhamController {
 
     @PostMapping("/DatLichKham")
     public String addlichkham(@ModelAttribute("lichKham") LichKham lichkham,@RequestParam("date") String date,
-                              @RequestParam("time") String time, BindingResult result, Model model) {
+                              @RequestParam("time") String time, BindingResult result, Model model) throws MessagingException {
         if (result.hasErrors()) {
             return "404";
         }
@@ -86,6 +91,12 @@ public class DatLichKhamController {
         chiTietLichKhamService.updateChiTietLichKham(chiTietLichKham);
 
         thanhToanService.updateThanhToan(thanhToan);
+
+        emailController.sendHtmlEmail2("danh123098@gmail.com",
+                "Xác nhận đặt lịch khám thành công",
+                date +" " + time);       // Gửi mail khi đặt lịch thành công
+
+
 
         // Cập nhật `ChiTietLichKham` cho `LichKham`
         lichkham.setChiTietLichKham(chiTietLichKham);
