@@ -92,7 +92,7 @@ public class DatLichKhamController {
 
         thanhToanService.updateThanhToan(thanhToan);
 
-        emailController.sendHtmlEmail2("danh123098@gmail.com",
+        emailController.sendHtmlEmail2(lichkham.getEmail(),
                 "Xác nhận đặt lịch khám thành công",
                 date +" " + time);       // Gửi mail khi đặt lịch thành công
 
