@@ -566,9 +566,159 @@
     </div>
 
   </section><!-- /Contact Section -->
-
+	
 </main>
+<div class="fixed-box">
+	<div class="messaging">
+				<div class="inbox_msg">
 
+					<div class="mesgs">
+						<div class="msg_history" id="chatbox">
+							<div class="incoming_msg">
+								<div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" style="max-width: 100%;"> </div>
+								<div class="received_msg">
+									<div class="received_withd_msg">
+										<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+										<span class="time_date"> 11:01 AM    |    June 9</span></div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<form class="chat-input" onsubmit="return false;">
+	      <input type="text" id="chatInput" autocomplete="on" placeholder="Type a message" />
+	      <button id="sendmm">
+	                    <svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="rgba(0,0,0,.38)" d="M17,12L12,17V14H8V10H12V7L17,12M21,16.5C21,16.88 20.79,17.21 20.47,17.38L12.57,21.82C12.41,21.94 12.21,22 12,22C11.79,22 11.59,21.94 11.43,21.82L3.53,17.38C3.21,17.21 3,16.88 3,16.5V7.5C3,7.12 3.21,6.79 3.53,6.62L11.43,2.18C11.59,2.06 11.79,2 12,2C12.21,2 12.41,2.06 12.57,2.18L20.47,6.62C20.79,6.79 21,7.12 21,7.5V16.5M12,4.15L5,8.09V15.91L12,19.85L19,15.91V8.09L12,4.15Z" /></svg>
+	                </button>
+	    </form>
+							<script>
+								$('.chat-input input').keyup(function(e) {
+								  if ($(this).val() == '')
+								    $(this).removeAttr('good');
+								  else
+								    $(this).attr('good', '');
+								});
+
+								$('#sendmm').click(function() {
+									sendd();
+								});
+
+							document.getElementById("chatInput").addEventListener("keydown", function(event) {
+								if (event.key === "Enter") {
+									event.preventDefault(); // Ngăn form submit nếu có
+									sendd();
+								}
+							});
+
+							function sendd() {
+								// Lấy nội dung từ input
+									const inputContent = document.getElementById("chatInput").value.trim();
+
+									// Kiểm tra xem input có trống hay không
+									if (inputContent !== "") {
+										// Tạo một phần tử div mới với class "item"
+										const newItem = document.createElement("div");
+										newItem.classList.add("outgoing_msg");
+
+										const now = new Date();
+
+										// Thiết lập nội dung HTML cho newItem
+										newItem.innerHTML = `
+											<div class="sent_msg">
+												<p>${inputContent}</p>
+												<span class="time_date"> ` + now.getHours() + `:` + now.getMinutes() + `    |    Today</span>
+											</div>
+										`;
+
+										// Thêm phần tử mới vào trong div có class "box"
+										document.getElementById("chatbox").appendChild(newItem);
+										
+										senddd(inputContent);
+
+										// Xóa nội dung trong input sau khi nhấn Enter
+										document.getElementById("chatInput").value = "";
+										scrollToBottom();
+								    	$('.chat-input input').removeAttr('good');
+
+									}
+							}
+							function senddd(inputContent) {
+							    if (inputContent !== "") {
+							        // Hiển thị thông báo chờ
+							        const loadingMessageDiv = document.createElement("div");
+							        loadingMessageDiv.classList.add("incoming_msg");
+							        loadingMessageDiv.setAttribute("id", "loadingMessage");
+							        loadingMessageDiv.innerHTML = `
+							            <div class="incoming_msg_img">
+							                <img src="https://ptetutorials.com/images/user-profile.png" style="max-width: 100%;" alt="sunil">
+							            </div>
+							            <div class="received_msg">
+							                <div class="received_withd_msg">
+							                    <p><b class="blinking">Đang trả lời...</b></p>
+							                    <span class="time_date">${new Date().getHours()}:${new Date().getMinutes()} | Today</span>
+							                </div>
+							            </div>
+							        `;
+							        document.getElementById("chatbox").appendChild(loadingMessageDiv);
+							        scrollToBottom();
+
+							        // Gửi dữ liệu đến REST API
+							        fetch("/hitOpenaiApi", {
+							            method: "POST",
+							            headers: {
+							                "Content-Type": "application/json"
+							            },
+							            body: JSON.stringify(inputContent)
+							        })
+							        .then(response => response.text()) // Lấy dữ liệu phản hồi từ API
+							        .then(data => {
+							            // Xóa thông báo chờ khi có phản hồi từ server
+							            document.getElementById("loadingMessage").remove();
+
+							            // Xử lý phản hồi từ server (API OpenAI)
+							            const responseMessage = data;
+
+							            // Tạo một phần tử div mới với class "incoming_msg" cho tin nhắn phản hồi
+							            const responseMessageDiv = document.createElement("div");
+							            responseMessageDiv.classList.add("incoming_msg");
+							            responseMessageDiv.innerHTML = `
+							                <div class="incoming_msg_img">
+							                    <img src="https://ptetutorials.com/images/user-profile.png" style="max-width: 100%;" alt="sunil">
+							                </div>
+							                <div class="received_msg">
+							                    <div class="received_withd_msg">
+							                        <p>${responseMessage}</p>
+							                        <span class="time_date">${new Date().getHours()}:${new Date().getMinutes()} | Today</span>
+							                    </div>
+							                </div>
+							            `;
+							            document.getElementById("chatbox").appendChild(responseMessageDiv);
+							            scrollToBottom();
+
+							            // Xóa nội dung trong input sau khi nhấn Enter
+							            document.getElementById("chatInput").value = "";
+							        })
+							        .catch(error => {
+							            console.error("Error:", error);
+							            // Xóa thông báo chờ trong trường hợp có lỗi
+							            document.getElementById("loadingMessage").remove();
+							        });
+							    }
+							}
+							document.querySelector('.msg_history').scrollTop = document.querySelector('.msg_history').scrollHeight;
+
+							// Cuộn đến cuối mỗi khi có thay đổi (ví dụ khi thêm tin nhắn mới)
+							function scrollToBottom() {
+							    const msgHistory = document.querySelector('.msg_history');
+							    msgHistory.scrollTop = msgHistory.scrollHeight;
+							}
+
+							</script>
+						</div>
+					</div>
+				</div>
+				
+		</div>
+</div>
 
 
 <!-- Scroll Top -->
