@@ -3,6 +3,7 @@ package com.healthhub.hospital.controller.Doctor;
 import com.healthhub.hospital.Entity.LichKham;
 import com.healthhub.hospital.service.LichKhamService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,9 @@ public class DSLichKhamController {
     public String ListLichKham(
             @RequestParam(value = "selectedDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate selectedDate,
             @RequestParam(value = "action", required = false) String action, // Nhận giá trị từ nút bấm
-            Model model) {
+            Model model, HttpServletRequest request) {
+
+        model.addAttribute("requestURI", request.getRequestURI());  // Thêm URI vào model thay vì trực tiếp sử dụng #request
 
         List<LichKham> lichKhamList;
 

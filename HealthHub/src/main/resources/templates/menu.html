@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Sidebar</title>
+    <!-- Các thư viện cần thiết (ví dụ Bootstrap, FontAwesome) -->
+</head>
+<body>
+<div th:fragment="menuFragment">
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-stethoscope"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">Doctor</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Lịch khám -->
+        <li class="nav-item" th:classappend="${requestURI == '/DSLichKham' ? ' active' : ''}">
+            <a class="nav-link" th:href="@{/DSLichKham}">
+                <i class="fas fa-fw fa-calendar-check"></i>
+                <span>Lịch khám</span>
+            </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Ngày nghỉ -->
+        <li class="nav-item" th:classappend="${requestURI == '/NgayNghi' ? ' active' : ''}">
+            <a class="nav-link" th:href="@{/NgayNghi}">
+                <i class="fas fa-fw fa-calendar-times"></i>
+                <span>Ngày nghỉ</span>
+            </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Bệnh nhân -->
+        <li class="nav-item" th:classappend="${requestURI == '/DSBenhNhan' ? ' active' : ''}">
+            <a class="nav-link" th:href="@{/DSBenhNhan}">
+                <i class="fas fa-fw fa-user-injured"></i>
+                <span>Bệnh nhân</span>
+            </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Thống kê -->
+        <li class="nav-item" th:classappend="${requestURI == '/ThongKe' ? ' active' : ''}">
+            <a class="nav-link" th:href="@{/ThongKe}">
+                <i class="fas fa-fw fa-chart-line"></i>
+                <span>Thống kê</span>
+            </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Đăng xuất -->
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/logout}">
+                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                <span>Đăng xuất</span>
+            </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+    </ul>
+</div>
+</body>
+</html>

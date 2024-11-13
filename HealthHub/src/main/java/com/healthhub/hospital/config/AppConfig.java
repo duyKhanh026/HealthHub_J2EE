@@ -17,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.io.IOException;
 
@@ -79,8 +80,11 @@ public class AppConfig{
                         .permitAll()
                 )
                 .logout((logout) -> logout
-                        .logoutSuccessUrl("/index")
-                        .permitAll())
+                        .logoutUrl("/logout")  // Xác định rõ URL logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))  // Cho phép dùng phương thức GET
+                        .logoutSuccessUrl("/index")  // Điều hướng đến trang index sau khi đăng xuất
+                        .permitAll()
+                )
                 .rememberMe((rememberMe) -> rememberMe
                         .key("5bZUZjoAB21JT1gYRkfm")  // Khóa dùng để mã hóa cookie remember-me
                         .tokenValiditySeconds(86400)  // Thời gian hiệu lực của cookie (ở đây là 24 giờ)

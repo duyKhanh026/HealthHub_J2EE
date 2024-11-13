@@ -45,10 +45,10 @@
                     <span th:text="${hoTen}">Tên người dùng</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="userDropdown">
-                    <li><a class="dropdown-item" href="/thongtinuser">Profile</a></li>
+                    <li><a class="dropdown-item" href="/thongtinuser">Thông tin cá nhân</a></li>
                     <li><a class="dropdown-item" href="/lichkhambenh">Lich kham</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal" style="cursor: pointer;">Logout</a></li>
+                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal" style="cursor: pointer;">Đăng xuất</a></li>
                 </ul>
             </div>
 
@@ -65,7 +65,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                            <form th:action="@{/logout}" method="post" style="display: inline;">
+                            <form th:action="@{/logout}" style="display: inline;">
                                 <input type="submit" class="btn btn-danger" value="Đăng xuất"/>
                             </form>
                         </div>

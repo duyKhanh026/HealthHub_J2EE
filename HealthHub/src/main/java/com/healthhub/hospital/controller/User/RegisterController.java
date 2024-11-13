@@ -54,25 +54,26 @@ public class RegisterController {
             return "redirect:/register";
         }
 
-        // Kiểm tra xem số điện thoại đã tồn tại chưa
+        // Kiểm tra xem số điện thoại đã tồn tại trong bảng BenhNhan chưa
         BenhNhan existingBenhNhan = benhNhanRepository.findBySDT(SDT);
+        BenhNhan benhNhan;
+
         if (existingBenhNhan != null) {
-            redirectAttributes.addFlashAttribute("modalMessage", "Số điện thoại đã tồn tại!");
-            redirectAttributes.addFlashAttribute("modalType", "danger");
-            return "redirect:/register";
+            // Nếu số điện thoại đã tồn tại, sử dụng BenhNhan hiện có
+            benhNhan = existingBenhNhan;
+        } else {
+            // Nếu số điện thoại chưa tồn tại, tạo một BenhNhan mới với SDT
+            benhNhan = new BenhNhan();
+            benhNhan.setSDT(SDT);
+            benhNhanRepository.save(benhNhan);
         }
 
-        // Tạo và lưu bệnh nhân mới với các trường trống
-        BenhNhan benhNhan = new BenhNhan();
-        benhNhan.setSDT(SDT);
-        benhNhanRepository.save(benhNhan);
-
-        // Tạo tài khoản mới
+        // Tạo tài khoản mới và ánh xạ với BenhNhan tương ứng
         TaiKhoan taiKhoan = new TaiKhoan();
         taiKhoan.setTenDN(username);
         taiKhoan.setMatkhau(passwordEncoder.encode(password)); // Mã hóa mật khẩu
         taiKhoan.setVaitro(Role.USER); // Gán vai trò mặc định
-        taiKhoan.setBenhNhan(benhNhan);
+        taiKhoan.setBenhNhan(benhNhan); // Ánh xạ với BenhNhan tương ứng
         taiKhoanRepository.save(taiKhoan);
 
         // Thêm thông báo thành công và redirect đến trang đăng nhập
