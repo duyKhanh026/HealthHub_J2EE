@@ -28,5 +28,16 @@ public interface LichKhamRepository extends JpaRepository<LichKham, Integer> {
 
 	List<LichKham> findByNgayGioDatKhamBetweenAndTrangThaiNot(LocalDateTime startOfDay, LocalDateTime endOfDay, String trangThai);
 
+	// Đếm số lịch khám trong ngày
+	long countByNgayGioDatKhamBetween(LocalDateTime startDate, LocalDateTime endDate);
 
+	// Đếm số lịch khám trong tuần
+	@Query("SELECT COUNT(l) FROM LichKham l WHERE YEAR(l.ngayGioDatKham) = :year AND WEEK(l.ngayGioDatKham) = :week")
+	long countByWeek(@Param("year") int year, @Param("week") int week);
+
+	// Đếm số lịch khám trong tháng
+	long countByNgayGioDatKhamBetweenAndTrangThai(LocalDateTime startDate, LocalDateTime endDate, String trangThai);
+
+	// Đếm số lịch khám theo trạng thái (Confirmed, Pending, etc.)
+	long countByTrangThai(String trangThai);
 }

@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -79,4 +81,28 @@ public class LichKhamService {
         lichKhamRepository.deleteById(id);
 
     }
+
+    public long countByDate(LocalDate date) {
+        // Tính toán bắt đầu và kết thúc ngày
+        LocalDateTime startOfDay = date.atStartOfDay();
+        LocalDateTime endOfDay = startOfDay.plusDays(1).minusNanos(1);
+        return lichKhamRepository.countByNgayGioDatKhamBetween(startOfDay, endOfDay);
+    }
+
+    public long countByWeek(LocalDate date) {
+        int week = date.get(ChronoField.ALIGNED_WEEK_OF_YEAR);
+        int year = date.getYear();
+        return lichKhamRepository.countByWeek(year, week);
+    }
+
+    public long countByMonth(LocalDate date) {
+        LocalDateTime startOfMonth = date.withDayOfMonth(1).atStartOfDay();
+        LocalDateTime endOfMonth = startOfMonth.plusMonths(1).minusNanos(1);
+        return lichKhamRepository.countByNgayGioDatKhamBetween(startOfMonth, endOfMonth);
+    }
+
+    public long countByStatus(String status) {
+        return lichKhamRepository.countByTrangThai(status);
+    }
+
 }

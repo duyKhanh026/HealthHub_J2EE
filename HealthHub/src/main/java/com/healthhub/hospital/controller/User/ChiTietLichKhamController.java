@@ -36,7 +36,7 @@ public class ChiTietLichKhamController {
             response.put("note", lichKham.get().getNote());
             response.put("ngayGioDatKham", lichKham.get().getNgayGioDatKham());
             response.put("trangThai", lichKham.get().getTrangThai());
-            if ("Confirmed".equals(lichKham.get().getTrangThai())) {
+            if ("Đã khám".equals(lichKham.get().getTrangThai())) {
                 ChiTietLichKham chiTiet = chiTietLichKhamRepository.findByLichKham_MaLK(lichKham.get().getMaLK());
                 if (chiTiet != null) {
                     response.put("maHS", chiTiet.getMaHS());

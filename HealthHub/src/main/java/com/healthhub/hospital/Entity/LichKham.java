@@ -1,5 +1,6 @@
 package com.healthhub.hospital.Entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import jakarta.persistence.*;
@@ -49,4 +50,15 @@ public class LichKham {
 
     @OneToOne(mappedBy = "lichKham")
     private ThanhToan thanhToan;
+    public LocalDate getNgayKham() {
+        return ngayGioDatKham.toLocalDate();  // Trả về chỉ phần ngày (yyyy-MM-dd)
+    }
+
+    public int getWeek() {
+        return ngayGioDatKham.getYear() * 100 + ngayGioDatKham.getDayOfYear() / 7; // Tính tuần trong năm
+    }
+
+    public int getMonth() {
+        return ngayGioDatKham.getMonthValue();  // Trả về tháng (1 - 12)
+    }
 }

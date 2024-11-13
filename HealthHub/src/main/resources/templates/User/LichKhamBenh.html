@@ -84,7 +84,7 @@
               <p>Mã: <span th:text="${lichKham.maLK}">Mã Lịch Khám</span></p>
             </div>
             <div class="status-column">
-              <span th:classappend="${lichKham.trangThai == 'Confirmed' ? 'bg-success' : (lichKham.trangThai == 'Pending' ? 'bg-danger' : 'bg-secondary')}" class="badge" th:text="${lichKham.trangThai}">Trạng thái</span>
+              <span th:classappend="${lichKham.trangThai == 'Đã khám' ? 'bg-success' : (lichKham.trangThai == 'Chưa khám' ? 'bg-danger' : 'bg-secondary')}" class="badge" th:text="${lichKham.trangThai}">Trạng thái</span>
             </div>
             <a class="btn btn-primary btn-sm" th:attr="data-id=${lichKham.maLK}" onclick="viewDetails(this)">Xem Chi Tiết</a>
           </div>
@@ -143,8 +143,8 @@
               document.getElementById("ngayGioDatKham").textContent = data.ngayGioDatKham;
               document.getElementById("trangThai").textContent = data.trangThai;
 
-              // Hiển thị chi tiết chỉ khi trạng thái là "Confirmed"
-              if (data.trangThai === "Confirmed") {
+              // Hiển thị chi tiết chỉ khi trạng thái là "Đã khám"
+              if (data.trangThai === "Đã khám") {
                 document.getElementById("maHS").textContent = data.maHS;
                 document.getElementById("chuanDoan").textContent = data.chuandoan;
                 document.getElementById("donThuoc").textContent = data.donthuoc;
