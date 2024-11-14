@@ -105,4 +105,8 @@ public class LichKhamService {
         return lichKhamRepository.countByTrangThai(status);
     }
 
+
+    public long countByStatusAndDate(String status, LocalDate date) {
+        return lichKhamRepository.countByStatusAndDate(status, date);
+    }
 }

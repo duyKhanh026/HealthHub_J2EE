@@ -40,4 +40,6 @@ public interface LichKhamRepository extends JpaRepository<LichKham, Integer> {
 
 	// Đếm số lịch khám theo trạng thái (Confirmed, Pending, etc.)
 	long countByTrangThai(String trangThai);
+	@Query("SELECT COUNT(l) FROM LichKham l WHERE l.trangThai = :status AND DATE(l.ngayGioDatKham) = :date")
+	long countByStatusAndDate(@Param("status") String status, @Param("date") LocalDate date);
 }
