@@ -54,8 +54,17 @@ public class DatLichKhamController {
 
     @GetMapping({ "/DatLichKham" })
     public String datlichKham(Model model, Authentication authentication) {
-        model.addAttribute("lichKham", new LichKham() );
         this.authentication = authentication;
+
+        BenhNhan benhNhan1;
+        benhNhan1 = taiKhoanService.getBenhNhanByTenDN(authentication.getName());
+
+        LichKham lichKham = new LichKham();
+        lichKham.setHoten(benhNhan1.getHoTen());
+        lichKham.setEmail(benhNhan1.getEmail());
+        lichKham.setSDT(benhNhan1.getSDT());
+
+        model.addAttribute("lichKham", lichKham);
         return "User/DatLichKham";
     }
 
