@@ -8,6 +8,8 @@ import com.healthhub.hospital.service.BenhNhanService;
 import com.healthhub.hospital.service.TaiKhoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,26 +28,39 @@ public class ThongTinUserController {
     private BenhNhan benhnhan;
     @GetMapping
     public String getUserInfo(Model model, Authentication authentication) {
+        // Kiểm tra xem người dùng đang đăng nhập bằng tài khoản Google hay tài khoản mật khẩu thông thường
+        if (authentication.getPrincipal() instanceof OAuth2User) {
+            // Nếu đăng nhập bằng Google, lấy thông tin từ OAuth2User
+            OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
+            String email = oauth2User.getAttribute("email");
 
-        TaiKhoan tk = taiKhoanService.GetTKByID(authentication.getName());
-        
-        benhnhan = benhnhanService.getBenhNhanById(tk.getBenhNhan().getMaBN());
+            // Tìm bệnh nhân theo email từ Google
+            benhnhan = benhnhanService.findByEmail(email);
+        } else {
+            // Nếu đăng nhập bằng tài khoản mật khẩu thông thường
+            TaiKhoan tk = taiKhoanService.findByTenDN(authentication.getName());
+            benhnhan = benhnhanService.getBenhNhanById(tk.getBenhNhan().getMaBN());
+        }
 
+
+        // Thêm thông tin bệnh nhân vào mô hình
         model.addAttribute("benhnhan", benhnhan);
-
-
 
         // Trả về tên view
         return "User/ThongTinUser";
     }
     @PostMapping
     public String updateUser(@ModelAttribute("benhnhan") BenhNhan bn, RedirectAttributes redirectAttributes) {
-        // Kiểm tra xem số điện thoại đã tồn tại trong cơ sở dữ liệu hay chưa
-        if (benhnhanService.isSDTExist(bn.getSDT())) {
+        // Lấy số điện thoại hiện tại của bệnh nhân
+        String currentPhoneNumber = benhnhan.getSDT();
+
+        // Nếu số điện thoại mới khác số điện thoại hiện tại, kiểm tra xem nó có tồn tại trong cơ sở dữ liệu không
+        if (!bn.getSDT().equals(currentPhoneNumber) && benhnhanService.isSDTExist(bn.getSDT())) {
             redirectAttributes.addFlashAttribute("errorMessage", "Số điện thoại đã tồn tại trong hệ thống!");
             return "redirect:/thongtinuser"; // Chuyển hướng lại trang thông tin người dùng với thông báo lỗi
         }
-
+        System.out.println("test: "+bn);
+        System.out.println("test 2: "+benhnhan.getHoTen());
         benhnhan.setHoTen(bn.getHoTen());
         benhnhan.setNgaySinh(bn.getNgaySinh());
         benhnhan.setGioitinh(bn.getGioitinh());
@@ -59,6 +74,5 @@ public class ThongTinUserController {
         // Chuyển hướng về trang cập nhật thông tin hoặc một trang khác
         return "redirect:/thongtinuser"; // Đường dẫn redirect về trang bạn muốn
     }
-
 
 }

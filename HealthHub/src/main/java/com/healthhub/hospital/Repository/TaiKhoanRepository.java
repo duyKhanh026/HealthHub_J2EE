@@ -15,4 +15,6 @@ public interface TaiKhoanRepository  extends JpaRepository<TaiKhoan, Integer> {
     TaiKhoan findByTenDN(String tenDN);  // Tìm kiếm TaiKhoan theo tên đăng nhập
     TaiKhoan findByBenhNhan(BenhNhan benhnhan);
 
+
+
 }

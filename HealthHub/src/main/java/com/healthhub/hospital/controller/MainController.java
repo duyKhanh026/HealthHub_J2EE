@@ -33,16 +33,16 @@ public class MainController {
 		return "User/index";
 	}
 
-	@ModelAttribute
-	public void addHoTenToModel(Model model, Authentication authentication) {
-		authentication = SecurityContextHolder.getContext().getAuthentication();
-
-		// Kiểm tra nếu người dùng đã đăng nhập
-		if (authentication != null && authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken)) {
-			TaiKhoan tk = taiKhoanService.GetTKByID(authentication.getName());
-			BenhNhan benhnhan = benhnhanService.getBenhNhanById(tk.getBenhNhan().getMaBN());
-			model.addAttribute("hoTen", benhnhan.getHoTen());
-		}
-	}
+//	@ModelAttribute
+//	public void addHoTenToModel(Model model, Authentication authentication) {
+//		authentication = SecurityContextHolder.getContext().getAuthentication();
+//
+//		// Kiểm tra nếu người dùng đã đăng nhập
+//		if (authentication != null && authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken)) {
+//			TaiKhoan tk = taiKhoanService.GetTKByID(authentication.getName());
+//			BenhNhan benhnhan = benhnhanService.getBenhNhanById(tk.getBenhNhan().getMaBN());
+//			model.addAttribute("hoTen", benhnhan.getHoTen());
+//		}
+//	}
 
 }

@@ -5,6 +5,8 @@ import com.healthhub.hospital.Entity.Role;
 import com.healthhub.hospital.Repository.BenhNhanRepository;
 import com.healthhub.hospital.Repository.TaiKhoanRepository;
 import com.healthhub.hospital.Entity.TaiKhoan;
+import com.healthhub.hospital.service.BenhNhanService;
+import com.healthhub.hospital.service.TaiKhoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,10 +24,10 @@ public class RegisterController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private TaiKhoanRepository taiKhoanRepository;
+    private TaiKhoanService taiKhoanService;
 
     @Autowired
-    private BenhNhanRepository benhNhanRepository; // Thêm BenhNhanRepository
+    private BenhNhanService benhnhanService;
 
     @GetMapping({ "/register" })
     public String register(Model model) {
@@ -47,7 +49,7 @@ public class RegisterController {
         }
 
         // Kiểm tra xem tên đăng nhập đã tồn tại chưa
-        TaiKhoan existingAccount = taiKhoanRepository.findByTenDN(username);
+        TaiKhoan existingAccount = taiKhoanService.findByTenDN(username);
         if (existingAccount != null) {
             redirectAttributes.addFlashAttribute("modalMessage", "Tên đăng nhập đã tồn tại!");
             redirectAttributes.addFlashAttribute("modalType", "danger");
@@ -55,7 +57,7 @@ public class RegisterController {
         }
 
         // Kiểm tra xem số điện thoại đã tồn tại trong bảng BenhNhan chưa
-        BenhNhan existingBenhNhan = benhNhanRepository.findBySDT(SDT);
+        BenhNhan existingBenhNhan = benhnhanService.findBySDT(SDT);
         BenhNhan benhNhan;
 
         if (existingBenhNhan != null) {
@@ -65,7 +67,7 @@ public class RegisterController {
             // Nếu số điện thoại chưa tồn tại, tạo một BenhNhan mới với SDT
             benhNhan = new BenhNhan();
             benhNhan.setSDT(SDT);
-            benhNhanRepository.save(benhNhan);
+            benhnhanService.LuuTTBenhNhan(benhNhan);
         }
 
         // Tạo tài khoản mới và ánh xạ với BenhNhan tương ứng
@@ -74,7 +76,7 @@ public class RegisterController {
         taiKhoan.setMatkhau(passwordEncoder.encode(password)); // Mã hóa mật khẩu
         taiKhoan.setVaitro(Role.USER); // Gán vai trò mặc định
         taiKhoan.setBenhNhan(benhNhan); // Ánh xạ với BenhNhan tương ứng
-        taiKhoanRepository.save(taiKhoan);
+        taiKhoanService.LuuTTTaiKhoan(taiKhoan);
 
         // Thêm thông báo thành công và redirect đến trang đăng nhập
         redirectAttributes.addFlashAttribute("modalMessage", "Đăng ký thành công!");

@@ -92,7 +92,12 @@ public class AppConfig{
                         .rememberMeParameter("remember-me")  // Tên tham số của checkbox "Remember Me"
                         .userDetailsService(userDetailsService())  // Thêm UserDetailsService cho Remember Me
                 )
-  		      .csrf(AbstractHttpConfigurer::disable);;
+                .oauth2Login(oauth2login->{
+                    oauth2login
+                            .loginPage("/login")
+                            .successHandler((request, response, authentication) -> response.sendRedirect("/login-success"));
+                })
+  		      .csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
 }

@@ -21,8 +21,18 @@ public class TaiKhoanService {
         return null;  // Nếu không có tài khoản nào khớp, trả về null
     }
 
-    public TaiKhoan GetTKByID(String tenDN){
-        return taiKhoanRepository.findByTenDN(tenDN);
+
+
+
+    public void LuuTTTaiKhoan(TaiKhoan taiKhoan) {
+        taiKhoanRepository.save(taiKhoan);
     }
 
+    public TaiKhoan findByMaBN(BenhNhan BN) {
+        return taiKhoanRepository.findByBenhNhan(BN);
+    }
+
+    public TaiKhoan findByTenDN(String username) {
+        return taiKhoanRepository.findByTenDN(username);
+    }
 }

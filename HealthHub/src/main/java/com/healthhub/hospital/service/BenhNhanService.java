@@ -48,4 +48,12 @@ public class BenhNhanService {
     }
 
 
+    public BenhNhan findByEmail(String email) {
+        return benhNhanrepo.findByEmail(email);
+    }
+
+
+    public BenhNhan findBySDT(String sdt) {
+        return benhNhanrepo.findBySDT(sdt);
+    }
 }
