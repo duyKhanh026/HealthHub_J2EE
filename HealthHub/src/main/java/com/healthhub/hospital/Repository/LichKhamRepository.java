@@ -28,18 +28,23 @@ public interface LichKhamRepository extends JpaRepository<LichKham, Integer> {
 
 	List<LichKham> findByNgayGioDatKhamBetweenAndTrangThaiNot(LocalDateTime startOfDay, LocalDateTime endOfDay, String trangThai);
 
-	// Đếm số lịch khám trong ngày
-	long countByNgayGioDatKhamBetween(LocalDateTime startDate, LocalDateTime endDate);
+	// Thống kê theo khoảng thời gian (sử dụng LocalDateTime)
+	@Query("SELECT DATE_FORMAT(l.ngayGioDatKham, '%d/%m'), COUNT(l) " +
+			"FROM LichKham l " +
+			"WHERE l.ngayGioDatKham BETWEEN :startDate AND :endDate " +
+			"GROUP BY DATE_FORMAT(l.ngayGioDatKham, '%d/%m') " +
+			"ORDER BY l.ngayGioDatKham")
+	List<Object[]> findStatisticsByDateRange(@Param("startDate") LocalDateTime startDate,
+											 @Param("endDate") LocalDateTime endDate);
 
-	// Đếm số lịch khám trong tuần
-	@Query("SELECT COUNT(l) FROM LichKham l WHERE YEAR(l.ngayGioDatKham) = :year AND WEEK(l.ngayGioDatKham) = :week")
-	long countByWeek(@Param("year") int year, @Param("week") int week);
-
-	// Đếm số lịch khám trong tháng
-	long countByNgayGioDatKhamBetweenAndTrangThai(LocalDateTime startDate, LocalDateTime endDate, String trangThai);
-
-	// Đếm số lịch khám theo trạng thái (Confirmed, Pending, etc.)
-	long countByTrangThai(String trangThai);
-	@Query("SELECT COUNT(l) FROM LichKham l WHERE l.trangThai = :status AND DATE(l.ngayGioDatKham) = :date")
-	long countByStatusAndDate(@Param("status") String status, @Param("date") LocalDate date);
+	// Thống kê theo khoảng thời gian và trạng thái (sử dụng LocalDateTime)
+	@Query("SELECT DATE_FORMAT(l.ngayGioDatKham, '%d/%m'), COUNT(l) " +
+			"FROM LichKham l " +
+			"WHERE l.ngayGioDatKham BETWEEN :startDate AND :endDate " +
+			"AND l.trangThai = :status " +
+			"GROUP BY DATE_FORMAT(l.ngayGioDatKham, '%d/%m') " +
+			"ORDER BY l.ngayGioDatKham")
+	List<Object[]> findStatisticsByDateRangeAndStatus(@Param("startDate") LocalDateTime startDate,
+													  @Param("endDate") LocalDateTime endDate,
+													  @Param("status") String status);
 }

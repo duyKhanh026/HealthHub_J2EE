@@ -86,15 +86,15 @@
 
 <!-- Custom script for Chart.js -->
 <script>
-  // Thiết lập dữ liệu mẫu cho biểu đồ đường
+  // Cấu hình biểu đồ
   const ctx = document.getElementById('myLineChart').getContext('2d');
   let myLineChart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: [], // Các ngày được chọn
+      labels: [],
       datasets: [{
         label: 'Số lượng lịch khám',
-        data: [], // Dữ liệu sẽ được cập nhật sau
+        data: [],
         backgroundColor: 'rgba(78, 115, 223, 0.05)',
         borderColor: 'rgba(78, 115, 223, 1)',
         pointBackgroundColor: 'rgba(78, 115, 223, 1)',
@@ -102,7 +102,7 @@
         pointHoverBackgroundColor: 'rgba(78, 115, 223, 1)',
         pointHoverBorderColor: 'rgba(78, 115, 223, 1)',
         fill: true,
-        tension: 0.4 // Độ cong của biểu đồ
+        tension: 0.4
       }]
     },
     options: {
@@ -125,21 +125,32 @@
     }
   });
 
-  // Xử lý khi nhấn nút "Lọc"
-  document.getElementById('filterButton').addEventListener('click', function() {
+ // Xử lý nút "Lọc"
+  document.getElementById('filterButton').addEventListener('click', async function() {
     const startDate = document.getElementById('startDate').value;
     const endDate = document.getElementById('endDate').value;
     const status = document.getElementById('status').value;
 
-    // Đây là nơi bạn sẽ gọi API để lấy dữ liệu theo khoảng thời gian và trạng thái
-    // Ví dụ dữ liệu mẫu
-    const labels = ['01/11', '02/11', '03/11', '04/11', '05/11'];
-    const data = [10, 12, 8, 15, 20];
+    // Chuyển ngày tháng về định dạng 'yyyy-MM-dd'T'HH:mm:ss'
+    const startDateTime = new Date(startDate).toISOString().slice(0, 19); // Bỏ phần 'Z' và giữ lại yyyy-MM-dd'T'HH:mm:ss
+    const endDateTime = new Date(endDate).toISOString().slice(0, 19);   // Bỏ phần 'Z' và giữ lại yyyy-MM-dd'T'HH:mm:ss
 
-    // Cập nhật dữ liệu vào biểu đồ
-    myLineChart.data.labels = labels;
-    myLineChart.data.datasets[0].data = data;
-    myLineChart.update();
+
+    try {
+      // Gửi yêu cầu API
+      const response = await fetch(`/ThongKe/data?startDate=${startDateTime}&endDate=${endDateTime}&status=${status}`);
+      if (!response.ok) throw new Error('Lỗi khi lấy dữ liệu từ API.');
+
+      const data = await response.json();
+
+      // Cập nhật biểu đồ với dữ liệu mới
+      myLineChart.data.labels = data.labels; // Gán nhãn (ngày tháng)
+      myLineChart.data.datasets[0].data = data.data; // Gán giá trị (số lượng lịch khám)
+      myLineChart.update();
+    } catch (error) {
+      console.error('Có lỗi xảy ra:', error);
+      alert('Không thể tải dữ liệu. Vui lòng thử lại sau.');
+    }
   });
 </script>
 </body>

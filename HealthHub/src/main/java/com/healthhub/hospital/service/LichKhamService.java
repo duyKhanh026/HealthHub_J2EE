@@ -82,31 +82,13 @@ public class LichKhamService {
 
     }
 
-    public long countByDate(LocalDate date) {
-        // Tính toán bắt đầu và kết thúc ngày
-        LocalDateTime startOfDay = date.atStartOfDay();
-        LocalDateTime endOfDay = startOfDay.plusDays(1).minusNanos(1);
-        return lichKhamRepository.countByNgayGioDatKhamBetween(startOfDay, endOfDay);
-    }
-
-    public long countByWeek(LocalDate date) {
-        int week = date.get(ChronoField.ALIGNED_WEEK_OF_YEAR);
-        int year = date.getYear();
-        return lichKhamRepository.countByWeek(year, week);
-    }
-
-    public long countByMonth(LocalDate date) {
-        LocalDateTime startOfMonth = date.withDayOfMonth(1).atStartOfDay();
-        LocalDateTime endOfMonth = startOfMonth.plusMonths(1).minusNanos(1);
-        return lichKhamRepository.countByNgayGioDatKhamBetween(startOfMonth, endOfMonth);
-    }
-
-    public long countByStatus(String status) {
-        return lichKhamRepository.countByTrangThai(status);
-    }
-
-
-    public long countByStatusAndDate(String status, LocalDate date) {
-        return lichKhamRepository.countByStatusAndDate(status, date);
+    public List<Object[]> getStatisticsByDateRangeAndStatus(LocalDateTime startDate, LocalDateTime endDate, String status) {
+        if (status == null || status.isEmpty()) {
+            // Gọi phương thức repository với LocalDateTime
+            return lichKhamRepository.findStatisticsByDateRange(startDate, endDate);
+        } else {
+            // Gọi phương thức repository với LocalDateTime và status
+            return lichKhamRepository.findStatisticsByDateRangeAndStatus(startDate, endDate, status);
+        }
     }
 }
