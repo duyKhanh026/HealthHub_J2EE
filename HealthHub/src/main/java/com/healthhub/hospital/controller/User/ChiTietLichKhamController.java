@@ -2,13 +2,17 @@ package com.healthhub.hospital.controller.User;
 
 import com.healthhub.hospital.Entity.ChiTietLichKham;
 import com.healthhub.hospital.Entity.LichKham;
+import com.healthhub.hospital.Entity.ThanhToan;
 import com.healthhub.hospital.Repository.ChiTietLichKhamRepository;
 import com.healthhub.hospital.Repository.LichKhamRepository;
+import com.healthhub.hospital.Repository.ThanhToanRepository;
+import com.healthhub.hospital.service.ThanhToanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
@@ -21,6 +25,8 @@ public class ChiTietLichKhamController {
     private LichKhamRepository lichKhamRepository;
     @Autowired
     private ChiTietLichKhamRepository chiTietLichKhamRepository;
+    @Autowired
+    private ThanhToanRepository thanhToanRepository;
 
     @GetMapping("/lichkham/details/{maLK}")
     @ResponseBody
@@ -51,4 +57,37 @@ public class ChiTietLichKhamController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PostMapping("/lichkham/delete/{maLK}")
+    @ResponseBody
+    public ResponseEntity<String> deleteLichKham(@PathVariable int maLK) {
+        System.out.println("Test 1 : " + maLK);
+
+        // Tìm lịch khám theo maLK
+        Optional<LichKham> lichKham = lichKhamRepository.findById(maLK);
+
+        if (lichKham.isPresent()) {
+            // Xóa thông tin thanh toán liên quan (nếu có)
+            ThanhToan thanhToan = thanhToanRepository.findByLichKham(lichKham.get());
+            if (thanhToan != null) {
+                thanhToanRepository.delete(thanhToan);
+                System.out.println("Đã xóa thanh toán với MaTT: " + thanhToan.getMaTT());
+            }
+
+            // Xóa chi tiết lịch khám trước
+            ChiTietLichKham chiTiet = chiTietLichKhamRepository.findByLichKham_MaLK(maLK);
+            if (chiTiet != null) {
+                chiTietLichKhamRepository.delete(chiTiet);
+            }
+
+            // Sau đó xóa lịch khám
+            lichKhamRepository.delete(lichKham.get());
+            return ResponseEntity.ok("Lịch khám, thanh toán và các chi tiết liên quan đã được xóa.");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+
 }
