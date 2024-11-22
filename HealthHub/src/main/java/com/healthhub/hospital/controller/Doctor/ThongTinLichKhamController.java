@@ -65,24 +65,4 @@ public class ThongTinLichKhamController {
         return "redirect:/ThongTinLichKham?id=" + maLK;
     }
 
-//    @PutMapping("/ThongTinLichKham")
-//    public String editThanhToan(@ModelAttribute("thanhToan") ThanhToan thanhToan, BindingResult result,
-//                                @RequestParam("maLK") Integer maLK) {
-//        if (result.hasErrors()) {
-//            return "Doctor/404";
-//        }
-//
-//        // Lấy LichKham dựa trên maLK để thiết lập cho đối tượng ThanhToan
-//        LichKham lichKham = lichKhamService.getLichKhambyID(maLK);
-//        thanhToan.setLichKham(lichKham); // Liên kết thanh toán với lịch khám
-//
-//        // Cập nhật thông tin thanh toán trong cơ sở dữ liệu
-//        thanhToanService.updateThanhToan(thanhToan);
-//
-//        Integer maBN = lichKham.getBenhNhan().getMaBN(); // Lấy mã bệnh nhân từ LichKham
-//        return "redirect:/ThongTinLichKham?id=" + maLK + "&idbn=" + maBN;
-//    }
-
-
-
 }

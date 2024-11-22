@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form th:action="@{/ThanhToan}" th:object="${thanhToan}" method="post">
+                        <form th:action="@{/ThanhToan}" th:object="${thanhToan}" method="post" id="updateForm">
                             <div class="form-group">
                                 <label>Mã TT</label>
                                 <input type="text" class="form-control" th:field="*{maTT}" readonly/>
@@ -83,7 +83,7 @@
                             <button type="button" class="btn btn-primary" th:onclick="'window.location.href=\'/vnpay?idbn=' + ${lichKham.benhNhan.maBN} + '\''">
                                 Thanh toán với VNPAY
                             </button>
-                            <button type="submit" class="btn btn-success">Cập nhật thông tin thanh toán</button>
+                            <button type="button" class="btn btn-success" onclick="savethanhtoan()">Cập nhật thông tin thanh toán</button>
                         </form>
                     </div>
 
@@ -152,6 +152,9 @@
 <script src="../js/demo/datatables-demo.js"></script>
 <!-- SweetAlert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script th:src="@{assets2/js/LichKham/ThongTinLichKham.js}"></script>
+
 
 </body>
 

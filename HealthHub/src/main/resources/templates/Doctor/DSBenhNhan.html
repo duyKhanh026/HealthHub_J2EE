@@ -157,7 +157,7 @@
 <div class="container">
     <div id="addForm" class="add-form">
         <h2>Thêm bệnh nhân</h2>
-        <form th:action="@{/DSBenhNhan}" th:object="${benhNhan}" method="post">
+        <form th:action="@{/DSBenhNhan}" th:object="${benhNhan}" method="post" id="updateForm">
             <input type="hidden" name="action" value="add" />
             <div class="row">
                 <!-- Cột bên trái -->
@@ -201,11 +201,15 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary" onclick="saveAdd()">Lưu thay đổi</button>
+            <button type="button" class="btn btn-primary" onclick="saveEdit()">Lưu thay đổi</button>
             <button type="button" class="btn btn-secondary" onclick="closeFormAdd()">Đóng</button>
         </form>
     </div>
 </div>
+
+<script>
+
+</script>
 
 <script th:src="@{assets2/vendor/jquery/jquery.min.js}"></script>
 <script th:src="@{assets2/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>

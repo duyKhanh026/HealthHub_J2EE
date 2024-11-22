@@ -28,12 +28,7 @@
     <!-- Custom styles for this template -->
     <link th:href="@{assets2/css/tablescumtom.css}" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link th:href="@{assets2/css/Css_TB/FormSuaTB.css}" rel="stylesheet">
-
-
-    <!-- Custom styles for this template -->
-    <link th:href="@{assets2/css/Css_TB/FormThemTB.css}" rel="stylesheet">
+    <link th:href="@{assets2/css/Css_BN/FormThemBN.css}" rel="stylesheet">
 
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -66,6 +61,11 @@
                         <div class="row align-items-center">
                             <div class="col">
                                 <h2 class="m-0 font-weight-bold text-primary">Danh sách lịch khám</h2>
+                            </div>
+                            <div class="icon-container">
+                                <a class="btn btn-primary btn-circle btn-lg" id="addButton">
+                                    <i class="fas fa-plus"></i> <!-- Thêm -->
+                                </a>
                             </div>
                             <form action="/DSLichKham" method="get" id="dateForm" class="form-inline mr-2">
                                 <button type="submit" class="btn btn-primary mr-2" name="action" value="viewAll">Xem toàn bộ lịch khám</button>
@@ -161,6 +161,45 @@
     </div>
 </div>
 
+<div class="container">
+    <div id="addForm" class="add-form">
+        <h2>Thêm lịch khám</h2>
+        <form th:action="@{/DSLichKham}" method="post" id="updateForm">
+            <input type="hidden" name="action" value="add" />
+            <div class="row">
+                <!-- Cột bên trái -->
+                <div class="col-md-12">
+
+                    <div class="form-group">
+                        <label for="ten">Tên</label>
+                        <input type="text" class="form-control" id="ten" name="ten" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sdt">Số điện thoại</label>
+                        <input type="text" class="form-control" id="sdt" name="sdt" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Ngày khám:</label>
+                        <input type="date" class="form-control" id="date" name="date" />
+                    </div>
+
+                    <!-- Input chọn khoảng thời gian bắt đầu -->
+                    <section>
+                        <div class="form-group">
+                            <label for="time">Thời gian khám:</label>
+                            <select class="form-control" id="time" name="time"></select>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-primary" onclick="saveEdit()">Lưu thay đổi</button>
+            <button type="button" class="btn btn-secondary" onclick="closeFormAdd()">Đóng</button>
+        </form>
+    </div>
+</div>
 
 <script src="assets2/vendor/jquery/jquery.min.js"></script>
 <script src="assets2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -180,6 +219,82 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!--<script th:src="@{assets2/js/LichKham/LichKham.js}"></script>-->
+
+<script>
+    function openFormAdd() {
+
+        document.getElementById("addForm").style.display = "block";
+    }
+
+    function closeFormAdd() {
+
+        document.getElementById("addForm").style.display = "none";
+    }
+
+    var addButton = document.getElementById('addButton');
+
+    addButton.addEventListener('click', function(event) {
+
+        openFormAdd();
+    });
+</script>
+
+<script>
+    document.getElementById("date").addEventListener("change", function() {
+    const selectedDate = this.value;
+
+    alert("chon ngay thanh cong" + selectedDate);
+
+
+    fetch(`api/getAvailableTimes?date=${selectedDate}`)
+        .then(response => response.json())
+        .then(data => {
+            const timeSelect = document.getElementById("time");
+            timeSelect.innerHTML = ""; // Xóa các option cũ
+
+            // Lọc các thời gian không phải là "Nghỉ"
+            const availableTimes = data.filter(time => time.trangThai !== 'Nghỉ');
+
+            // Thêm các giờ trống vào select
+            data.forEach(time => {
+                const option = document.createElement("option");
+                option.value = time;
+                option.textContent = time;
+                timeSelect.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error fetching available times:', error));
+});
+
+    document.addEventListener("DOMContentLoaded", function() {
+    const dateInput = document.getElementById("date");
+
+    // Lấy ngày hiện tại dưới dạng 'YYYY-MM-DD'
+    const today = new Date();
+    const formattedDate = today.toISOString().split('T')[0]; // Chuyển đổi thành định dạng 'YYYY-MM-DD'
+
+    // Cập nhật thuộc tính 'min' để chỉ cho phép chọn ngày từ hôm nay trở đi
+    dateInput.setAttribute("min", formattedDate);
+});
+</script>
+
+<script>
+    function saveEdit() {
+    // Hiển thị thông báo trước khi gửi form
+    Swal.fire({
+        title: "Thành công",
+        text: "Đặt lịch khám thành công!",
+        icon: "success",
+        confirmButtonText: "OK"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Khi người dùng nhấn OK, gửi form
+            document.getElementById("updateForm").submit();
+        }
+    });
+}
+</script>
 
 </body>
 

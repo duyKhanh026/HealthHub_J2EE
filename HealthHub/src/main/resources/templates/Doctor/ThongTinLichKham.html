@@ -113,7 +113,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form th:action="@{/ThongTinLichKham}" th:object="${chiTiet}" method="post">
+                        <form th:action="@{/ThongTinLichKham}" th:object="${chiTiet}" method="post" id="updateForm">
                             <div class="form-group">
                                 <label>Ma chi tiết lịch khám</label>
                                 <input type="text" class="form-control" th:field="*{maHS}" readonly/>
@@ -133,21 +133,25 @@
 
                             <input type="hidden" class="form-control" th:value="${chiTiet.lichKham.maLK}" name="maLK" />
 <!--                            Có dòng này thì nó mới truyền malk qua được-->
-                            <button type="submit" class="btn btn-primary">Lưu</button>
-<!--                            <button type="button" class="btn btn-primary"-->
-<!--                                    th:onclick="'window.location.href=\'/vnpay?idbn=' + ${chiTiet.lichKham.benhNhan.maBN} + '\''">-->
-<!--                                Thanh toán-->
-<!--                            </button>-->
-                            <a th:href="@{/ThanhToan(id=${chiTiet.lichKham.thanhToan.maTT}, maLK=${chiTiet.lichKham.maLK})}" class="btn btn-info btn-circle btn-lg">
-                                <i class="fas fa-info-circle"></i>
-                            </a>
+                            <div class="d-flex justify-content-between">
+                                <!-- Nút Lưu bên trái -->
+                                <button type="button" class="btn btn-primary" onclick="saveEdit()">Cập nhật</button>
+
+                                <!-- Thanh toán bên phải -->
+                                <div class="form-group d-flex align-items-center">
+                                    <label class="mr-2 mb-0">Thanh toán</label>
+                                    <a th:href="@{/ThanhToan(id=${chiTiet.lichKham.thanhToan.maTT}, maLK=${chiTiet.lichKham.maLK})}"
+                                       class="btn btn-info btn-circle btn-lg">
+                                        <i class="fas fa-dollar-sign"></i>
+                                    </a>
+                                </div>
+                            </div>
+
 
                         </form>
                     </div>
                 </div>
             </div>
-
-
         </div>
 
 
@@ -207,6 +211,9 @@
 <script src="../js/demo/datatables-demo.js"></script>
 <!-- SweetAlert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script th:src="@{assets2/js/LichKham/ThongTinLichKham.js}"></script>
+
 
 </body>
 

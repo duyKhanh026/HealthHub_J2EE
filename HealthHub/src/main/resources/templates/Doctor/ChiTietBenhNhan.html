@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form th:action="@{/ChiTietBenhNhan}" th:object="${benhnhan}" method="post" onsubmit="return validateForm()">
+                        <form th:action="@{/ChiTietBenhNhan}" th:object="${benhnhan}" method="post" onsubmit="return validateForm()" id="updateForm">
                             <div class="form-group">
                                 <label>Mã bệnh nhân</label>
                                 <input type="text" id="maBN" class="form-control" th:field="*{MaBN}" readonly />
@@ -74,7 +74,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Ngày sinh</label>
-                                <input type="text" id="ngaysinh" class="form-control" th:field="*{NgaySinh}">
+                                <input type="date" id="ngaysinh" class="form-control" th:field="*{NgaySinh}">
                             </div>
                             <div class="form-group">
                                 <label>Giới tính</label>
@@ -96,7 +96,7 @@
                                 <label>Tiền sử bệnh</label>
                                 <input type="text" id="benh" class="form-control" th:field="*{Tiensubenh}">
                             </div>
-                            <button type="submit" class="btn btn-primary " >Chỉnh sửa</button>
+                            <button type="button" class="btn btn-primary" onclick="saveEdit()" >Chỉnh sửa</button>
                         </form>
                     </div>
 
@@ -223,33 +223,18 @@
 <!-- SweetAlert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script src="../js/ChiTietBenhNhan.js"></script>
+<script th:src="@{assets2/js/BenhNhan/ChitietBenhNhan.js}"></script>
+
 
 <!-- vẫn chưa nhận được file script-->
 
+<!--Check input-->
 <script>
-    function validateForm() {
-        // Lấy các trường dữ liệu cần kiểm tra
-        const fields = [
-            document.getElementById("ten"),
-            document.getElementById("ngaysinh"),
-            document.getElementById("gioitinh"),
-            document.getElementById("sdt"),
-            document.getElementById("email"),
-            document.getElementById("address"),
-            document.getElementById("benh")
-        ];
 
-        // Kiểm tra nếu có trường nào bị bỏ trống
-        for (let field of fields) {
-            if (field.value.trim() === "") {
-                alert("Vui lòng điền đầy đủ thông tin vào tất cả các trường.");
-                field.focus(); // Đưa con trỏ đến trường bị thiếu
-                return false; // Ngăn form gửi đi
-            }
-        }
-        return true; // Cho phép form gửi đi nếu tất cả các trường đã điền đủ
-    }
+</script>
+
+<script>
+
 </script>
 
 </body>
