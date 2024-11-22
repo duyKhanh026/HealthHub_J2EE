@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.healthhub.hospital.Entity.ChatCompletionReponse;
-import com.healthhub.hospital.Entity.ChatCompletionRequest;
+import com.healthhub.hospital.Entity.ChatBox.ChatCompletionReponse;
+import com.healthhub.hospital.Entity.ChatBox.ChatCompletionRequest;
 
 @CrossOrigin(origins = "*") 
 @RestController

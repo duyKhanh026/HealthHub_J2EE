@@ -1,4 +1,4 @@
-package com.healthhub.hospital.Entity;
+package com.healthhub.hospital.Entity.ChatBox;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
