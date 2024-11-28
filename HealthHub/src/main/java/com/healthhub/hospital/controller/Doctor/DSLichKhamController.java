@@ -11,6 +11,9 @@ import com.healthhub.hospital.service.LichKhamService;
 import com.healthhub.hospital.service.ThanhToanService;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -123,7 +127,93 @@ public class DSLichKhamController {
         return "redirect:/DSLichKham";
     }
 
+    //Xuat Excel
+    @GetMapping("/exportLichKhamExcel")
+    public void exportToExcelLichKham(HttpServletResponse response) throws IOException {
+        // Thiết lập thông tin response
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setHeader("Content-Disposition", "attachment; filename=DanhSachLichKham.xlsx");
 
+        // Tạo workbook và sheet
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Danh sách Lịch Khám");
 
+        // Tạo style cho header
+        CellStyle headerStyle = workbook.createCellStyle();
+        Font headerFont = workbook.createFont();
+        headerFont.setBold(true); // Chữ đậm
+        headerFont.setFontHeightInPoints((short) 12); // Kích thước chữ
+        headerStyle.setFont(headerFont);
+        headerStyle.setAlignment(HorizontalAlignment.CENTER); // Căn giữa
+        headerStyle.setVerticalAlignment(VerticalAlignment.CENTER); // Căn giữa dọc
+        headerStyle.setFillForegroundColor(IndexedColors.LIGHT_YELLOW.getIndex()); // Màu nền
+        headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        headerStyle.setBorderBottom(BorderStyle.THIN);
+        headerStyle.setBorderTop(BorderStyle.THIN);
+        headerStyle.setBorderRight(BorderStyle.THIN);
+        headerStyle.setBorderLeft(BorderStyle.THIN);
+
+        // Tiêu đề cột
+        String[] headers = {"Mã Lịch Khám", "Mã bệnh nhân", "Tên bệnh nhân", "Số Điện Thoại", "Email", "Ngày Khám", "Ghi chú", "Trạng Thái"};
+        Row headerRow = sheet.createRow(0);
+
+        // Tạo các ô trong dòng tiêu đề
+        for (int i = 0; i < headers.length; i++) {
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(headers[i]);
+            cell.setCellStyle(headerStyle);
+        }
+
+        // Lấy danh sách lịch khám từ service
+        List<LichKham> lichKhams = lichKhamService.getAllLichKham();
+
+        // Style cho dữ liệu
+        CellStyle dataStyle = workbook.createCellStyle();
+        dataStyle.setWrapText(true);
+        dataStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        dataStyle.setBorderBottom(BorderStyle.THIN);
+        dataStyle.setBorderTop(BorderStyle.THIN);
+        dataStyle.setBorderRight(BorderStyle.THIN);
+        dataStyle.setBorderLeft(BorderStyle.THIN);
+
+        int rowNum = 1;
+        for (LichKham lichKham : lichKhams) {
+            Row row = sheet.createRow(rowNum++);
+            createCell(row, 0, lichKham.getMaLK(), dataStyle);
+            createCell(row, 1, lichKham.getBenhNhan().getMaBN(), dataStyle);
+            createCell(row, 2, lichKham.getHoten(), dataStyle);
+            createCell(row, 3, lichKham.getSDT(), dataStyle);
+            createCell(row, 4, lichKham.getEmail(), dataStyle);
+            createCell(row, 5, lichKham.getNgayKham().toString(), dataStyle);
+            createCell(row, 6, lichKham.getNote(), dataStyle);
+            createCell(row, 7, lichKham.getTrangThai(), dataStyle);
+        }
+
+        // Tự động điều chỉnh cột
+        for (int i = 0; i < headers.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+
+        // Ghi workbook vào response
+        workbook.write(response.getOutputStream());
+        workbook.close();
+    }
+
+    // Hàm hỗ trợ tạo ô
+    private void createCell(Row row, int column, Object value, CellStyle style) {
+        Cell cell = row.createCell(column);
+        if (value instanceof Integer) {
+            cell.setCellValue((Integer) value);
+        } else if (value instanceof String) {
+            cell.setCellValue((String) value);
+        } else if (value instanceof LocalDate) {
+            cell.setCellValue(value.toString());
+        } else if (value != null) {
+            cell.setCellValue(value.toString());
+        } else {
+            cell.setCellValue("");
+        }
+        cell.setCellStyle(style);
+    }
 
 }
