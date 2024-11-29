@@ -109,7 +109,7 @@ public class DatLichKhamController {
 
         // Cập nhật `ChiTietLichKham` cho `LichKham`
         lichkham.setChiTietLichKham(chiTietLichKham);
-        return "redirect:/DatLichKham";
+        return "redirect:/lichkhambenh";
     }
 
     @GetMapping("/api/getAvailableTimes")
