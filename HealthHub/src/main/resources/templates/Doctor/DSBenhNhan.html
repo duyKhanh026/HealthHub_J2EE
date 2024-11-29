@@ -57,25 +57,24 @@
                                 <h2 class="m-0 font-weight-bold text-primary">Bệnh nhân</h2>
                             </div>
                             <div class="col-auto">
+                                <div class="d-flex align-items-center">
+                                    <!-- Form tìm kiếm -->
+                                    <form th:action="@{/DSBenhNhan}" method="get" class="d-flex align-items-center mr-5">
+                                        <input type="text" name="sdt" class="form-control mr-2" placeholder="Tìm bệnh nhân theo SĐT..." required/>
+                                        <button type="submit" class="btn btn-primary" style="height: 40px; width: 150px;">Tìm kiếm</button>
+                                    </form>
 
-                                <form th:action="@{/DSBenhNhan/search}" method="get">
-                                    <input type="text" name="sdt" placeholder="Nhập số điện thoại..." required/>
-                                    <button type="submit">Tìm kiếm</button>
-                                </form>
-
-                                <div class="icon-container">
-                                    <a class="btn btn-primary btn-circle btn-lg" id="addButton">
-                                        <i class="fas fa-plus"></i> <!-- Thêm -->
-                                    </a>
-<!--                                    <a class="btn btn-danger btn-circle btn-lg" >-->
-<!--                                        <i class="fas fa-trash-alt"></i> &lt;!&ndash; Xóa &ndash;&gt;-->
-<!--                                    </a>-->
-                                    <!-- Nút Xuất Excel -->
-                                    <a href="/exportBenhNhanExcel" class="btn btn-success btn-circle btn-lg" id="exportButton">
-                                        <i class="fas fa-file-excel"></i> <!-- Xuất Excel -->
-                                    </a>
+                                    <!-- Container cho các nút -->
+                                    <div class="icon-container d-flex">
+                                        <a class="btn btn-primary btn-circle btn-lg me-2" id="addButton">
+                                            <i class="fas fa-plus"></i> <!-- Thêm -->
+                                        </a>
+                                        <!-- Nút Xuất Excel -->
+                                        <a href="/exportBenhNhanExcel" class="btn btn-success btn-circle btn-lg" id="exportButton">
+                                            <i class="fas fa-file-excel"></i> <!-- Xuất Excel -->
+                                        </a>
+                                    </div>
                                 </div>
-								
                             </div>
                         </div>
                     </div>

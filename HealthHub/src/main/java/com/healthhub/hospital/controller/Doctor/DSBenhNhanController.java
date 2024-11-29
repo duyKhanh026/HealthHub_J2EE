@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -28,16 +29,18 @@ public class DSBenhNhanController {
     }
 
     @GetMapping("/DSBenhNhan")
-    public String listBenhNhan(Model model) {
-        List<BenhNhan> benhnhans = benhNhanService.getRecent10BenhNhan();
-        model.addAttribute("benhnhans", benhnhans);
-        model.addAttribute("benhNhan", new BenhNhan());
-        return "Doctor/DSBenhNhan";
-    }
+    public String listBenhNhan(@RequestParam(value = "sdt", required = false) String sdt, Model model) {
+        List<BenhNhan> benhnhans;
 
-    @GetMapping("/DSBenhNhan/search")
-    public String benhnhan_bysdt(@RequestParam("sdt") String sdt, Model model) {
-        BenhNhan benhnhans = benhNhanService.findBySDT(sdt);
+        if (sdt != null && !sdt.isEmpty()) {
+            // Tìm bệnh nhân theo số điện thoại nếu sdt được cung cấp
+            BenhNhan benhNhan = benhNhanService.findBySDT(sdt);
+            benhnhans = benhNhan != null ? List.of(benhNhan) : Collections.emptyList();
+        } else {
+            // Lấy 10 bệnh nhân gần đây nhất nếu không có sdt
+            benhnhans = benhNhanService.getRecent10BenhNhan();
+        }
+
         model.addAttribute("benhnhans", benhnhans);
         model.addAttribute("benhNhan", new BenhNhan());
         return "Doctor/DSBenhNhan";
