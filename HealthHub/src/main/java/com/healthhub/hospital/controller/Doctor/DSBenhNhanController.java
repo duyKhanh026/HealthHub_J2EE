@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +29,15 @@ public class DSBenhNhanController {
 
     @GetMapping("/DSBenhNhan")
     public String listBenhNhan(Model model) {
-        List<BenhNhan> benhnhans = benhNhanService.getAllBenhNhan();
+        List<BenhNhan> benhnhans = benhNhanService.getRecent10BenhNhan();
+        model.addAttribute("benhnhans", benhnhans);
+        model.addAttribute("benhNhan", new BenhNhan());
+        return "Doctor/DSBenhNhan";
+    }
+
+    @GetMapping("/DSBenhNhan/search")
+    public String benhnhan_bysdt(@RequestParam("sdt") String sdt, Model model) {
+        BenhNhan benhnhans = benhNhanService.findBySDT(sdt);
         model.addAttribute("benhnhans", benhnhans);
         model.addAttribute("benhNhan", new BenhNhan());
         return "Doctor/DSBenhNhan";

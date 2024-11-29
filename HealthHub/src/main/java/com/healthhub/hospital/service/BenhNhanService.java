@@ -4,6 +4,8 @@ import com.healthhub.hospital.Repository.BenhNhanRepository;
 import com.healthhub.hospital.Entity.BenhNhan;
 import com.healthhub.hospital.Repository.TaiKhoanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +26,10 @@ public class BenhNhanService {
 
     public List<BenhNhan> getAllBenhNhan() {
     	return benhNhanrepo.findAll();
+    }
+
+    public List<BenhNhan> getRecent10BenhNhan() {
+        return benhNhanrepo.findTop10ByOrderByMaBNDesc();
     }
 
     public void updateBenhNhan(BenhNhan benhNhan) {
