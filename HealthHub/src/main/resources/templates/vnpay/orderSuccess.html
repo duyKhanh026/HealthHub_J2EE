@@ -39,7 +39,9 @@
                 </tr>
                 </tbody>
             </table>
-            <a href="/" class="btn btn-primary">Về trang chủ</a>
+            <a th:href="@{'/ThanhToan?id=' + ${orderId} + '&maLK=' + ${maLK}}" class="btn btn-primary">
+                Về trang thanh toán
+            </a>
         </div>
     </div>
 </div>

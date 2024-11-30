@@ -56,6 +56,17 @@ public class EmailController {
         System.out.println("Gửi thành công");
     }
 
+    public String sendInvoiceEmail(String to, String subject, String text, byte[] pdfBytes, String filename) {
+        try {
+            emailService.sendEmailWithAttachment(to, subject, text, pdfBytes, filename);
+            return "Email sent successfully!";
+        } catch (MessagingException e) {
+            return "Error sending email: " + e.getMessage();
+        }
+    }
+
+
+
     // Trong EmailController hoặc EmailService
     public String getHtmlTemplate(String date) {
         return "<!DOCTYPE html>" +
@@ -93,7 +104,4 @@ public class EmailController {
                 "</body>" +
                 "</html>";
     }
-
-
-
 }

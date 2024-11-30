@@ -26,3 +26,11 @@ function savethanhtoan(){
             }
         });
 }
+
+function makeReadonly() {
+    // Lấy phần tử input số tiền và đặt readonly
+    const soTienInput = document.querySelector('input[name="soTien"]');
+    if (soTienInput) {
+        soTienInput.readOnly = true;
+    }
+}

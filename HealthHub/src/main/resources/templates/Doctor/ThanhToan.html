@@ -74,16 +74,37 @@
                             </div>
                             <div class="form-group">
                                 <label>Thời gian thanh toán</label>
-                                <input type="text" class="form-control" th:field="*{ngayThanhToan}" />
+                                <input type="text" class="form-control" th:field="*{ngayThanhToan}" readonly/>
                             </div>
                             <div class="form-group">
                                 <label>Hình thức thanh toán</label>
-                                <input type="text" class="form-control" th:field="*{hinhThucThanhToan}" />
+                                <input type="text" class="form-control" th:field="*{hinhThucThanhToan}" readonly/>
                             </div>
-                            <button type="button" class="btn btn-primary" th:onclick="'window.location.href=\'/vnpay?idbn=' + ${lichKham.benhNhan.maBN} + '\''">
-                                Thanh toán với VNPAY
-                            </button>
-                            <button type="button" class="btn btn-success" onclick="savethanhtoan()">Cập nhật thông tin thanh toán</button>
+                            <div class="d-flex justify-content-around mt-4">
+
+                                <!-- Nút Cập nhật thông tin thanh toán -->
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-success" onclick="savethanhtoan()">
+                                        <i class="fas fa-save"></i><br> <!-- Icon cập nhật -->
+                                        Thanh toán tiền mặt
+                                    </button>
+                                </div>
+                                <!-- Nút Thanh toán VNPAY -->
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-primary" th:onclick="'window.location.href=\'/vnpay?idbn=' + ${lichKham.benhNhan.maBN} + '\''">
+                                        <i class="fas fa-credit-card"></i><br> <!-- Icon thanh toán -->
+                                        Thanh toán với VNPAY
+                                    </button>
+                                </div>
+
+                                <!-- Nút Xuất hóa đơn PDF -->
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-warning" th:onclick="'window.location.href=\'/export-pdf?id=' + ${thanhToan.maTT} + '\''">
+                                        <i class="fas fa-file-pdf"></i><br> <!-- Icon PDF -->
+                                        Xuất hóa đơn PDF
+                                    </button>
+                                </div>
+                            </div>
                         </form>
                     </div>
 

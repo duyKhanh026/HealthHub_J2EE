@@ -78,6 +78,9 @@ public class VNPAYController {
 
 
 
+        model.addAttribute("orderId", thanhToan.getMaTT());
+        model.addAttribute("maLK", thanhToan.getLichKham().getMaLK());
+
         if (paymentStatus == 1){
 
             thanhToan.setSoTien(Integer.parseInt(totalPrice));
