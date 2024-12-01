@@ -1,27 +1,45 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Create ZaloPay Order</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>ZaloPay</title>
 </head>
+
 <body>
-<h1>Create ZaloPay Order</h1>
-<form th:action="@{/payment/create-order}" method="post">
-    <div>
-        <label for="appUser">App User:</label>
-        <input type="text" id="appUser" name="appUser" required>
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <img th:src="@{../anhcuatao/zalopay.png}" style="width: 200px">
+                    <h2 class="card-title">Xác nhận thông tin thanh toán</h2>
+                    <form th:action="@{/payment/create-order}" method="post">
+                        <div class="form-group">
+                            <label for="appUser">App User:</label>
+                            <input type="text" class="form-control" id="appUser" name="appUser" th:value="${Name}" required readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Amount:</label>
+                            <input type="number" class="form-control" id="amount" name="amount" required >
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description:</label>
+                            <input type="text" class="form-control" id="description" name="description" th:value="${Name} + ' thanh toán qua Zalopay'" required readonly>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Thanh toán</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <label for="amount">Amount:</label>
-        <input type="number" id="amount" name="amount" required>
-    </div>
-    <div>
-        <label for="description">Description:</label>
-        <input type="text" id="description" name="description" required>
-    </div>
-    <div>
-        <button type="submit">Submit</button>
-    </div>
-</form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
+
 </html>

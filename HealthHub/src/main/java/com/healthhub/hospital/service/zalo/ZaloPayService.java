@@ -21,13 +21,6 @@ import java.util.List;
 @Service
 public class ZaloPayService {
 
-//    private static final Map<String, String> CONFIG = new HashMap<>() {{
-//        put("app_id", "2554");
-//        put("key1", "sdngKKJmqEMzvh5QQcdD2A9XBSKUNaYn");
-//        put("key2", "trMrHtvjo6myautxDUiAcYsVtaeQ8nhf");
-//        put("endpoint", "https://sb-openapi.zalopay.vn/v2/create");
-//    }};
-
     static String app_id = "2554";
     static String key1 = "sdngKKJmqEMzvh5QQcdD2A9XBSKUNaYn";
     static String create_order_url = "https://sb-openapi.zalopay.vn/v2/create";
@@ -52,7 +45,7 @@ public class ZaloPayService {
             put("app_id", app_id);
             put("app_user", "user123");
             put("app_time", String.valueOf(System.currentTimeMillis())); // miliseconds
-            put("amount", String.valueOf(50000));
+            put("amount", String.valueOf(amount));
             put("app_trans_id", getCurrentTimeString("yyMMdd") +"_"+ random_id); // translation missing: vi.docs.shared.sample_code.comments.app_trans_id
             put("embed_data", new JSONObject(embed_data).toString());
             put("item", "[]");
@@ -117,15 +110,4 @@ public class ZaloPayService {
         }
     }
 
-    // Hàm mở link trong trình duyệt
-    public void openLink(String url) {
-        try {
-            Desktop desktop = Desktop.getDesktop();
-            if (Desktop.isDesktopSupported() && desktop.isSupported(Desktop.Action.BROWSE)) {
-                desktop.browse(new URI(url));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

@@ -51,7 +51,7 @@
     border-radius: 3px;
     cursor: pointer;
     color: white;
-    background-color:red
+    background-color:green;
 }
 .close_button.x {
     background-color: red;

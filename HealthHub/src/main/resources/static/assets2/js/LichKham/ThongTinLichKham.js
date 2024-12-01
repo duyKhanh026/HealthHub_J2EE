@@ -34,3 +34,12 @@ function makeReadonly() {
         soTienInput.readOnly = true;
     }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+        const trangThaiInput = document.getElementById("trangThaiInput");
+        const soTienInput = document.getElementById("soTienInput");
+
+        if (trangThaiInput.value === "Đã thanh toán") {
+            soTienInput.setAttribute("readonly", "true");
+        }
+    });
