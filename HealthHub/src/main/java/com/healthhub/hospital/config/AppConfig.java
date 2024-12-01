@@ -69,12 +69,19 @@ public class AppConfig{
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/","/anhcuatao/**", "/index", "/assets2/**", "/css/**", "/assets/**"
-                                ,"DSLichKham","/ChiTietBenhNhan","/ThongTinLichKham","/register","/send_email","/ThongTinUser"
+                                ,"DSLichKham","/ChiTietBenhNhan","/ThongTinLichKham","/register","/send_email","/forgot_password"
                                 ,"/DSBenhNhan", "/ThanhToan","/forgot_password","/reset_password","/api/getAvailableTimes","/NgayNghi","/NgayNghi/xoa"
+
+
                                 ,"/send_html_email","/ThongKe", "/hitOpenaiApi","/export-pdf").permitAll()
+
+
+
+                                ,"/send_html_email","/ThongKe", "/hitOpenaiApi","/export-pdf","/zalopay","payment/create-order").permitAll()
                         .requestMatchers("/forgot_password").permitAll()
+
                         .anyRequest().authenticated()
-                )
+                
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .successHandler(myAuthenticationSuccessHandler())

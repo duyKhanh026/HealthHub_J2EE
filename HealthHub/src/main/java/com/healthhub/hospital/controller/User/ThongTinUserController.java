@@ -59,8 +59,6 @@ public class ThongTinUserController {
             redirectAttributes.addFlashAttribute("errorMessage", "Số điện thoại đã tồn tại trong hệ thống!");
             return "redirect:/thongtinuser"; // Chuyển hướng lại trang thông tin người dùng với thông báo lỗi
         }
-        System.out.println("test: "+bn);
-        System.out.println("test 2: "+benhnhan.getHoTen());
         benhnhan.setHoTen(bn.getHoTen());
         benhnhan.setNgaySinh(bn.getNgaySinh());
         benhnhan.setGioitinh(bn.getGioitinh());
