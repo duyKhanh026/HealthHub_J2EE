@@ -80,6 +80,10 @@
                                 <label>Hình thức thanh toán</label>
                                 <input type="text" class="form-control" th:field="*{hinhThucThanhToan}" readonly/>
                             </div>
+                            <div class="form-group">
+                                <label>Trạng thái</label>
+                                <input type="text" class="form-control" th:field="*{trangthai}" readonly/>
+                            </div>
                             <div class="d-flex justify-content-around mt-4">
 
                                 <!-- Nút Cập nhật thông tin thanh toán -->
@@ -99,7 +103,7 @@
 
                                 <!-- Nút Thanh toán VNPAY -->
                                 <div class="text-center">
-                                    <button type="button" class="btn btn-info" onclick="createOrder()">
+                                    <button type="button" class="btn btn-info" th:onclick="'window.location.href=\'/zalopay\''">
                                         <i class="fas fa-credit-card"></i><br> <!-- Icon thanh toán -->
                                         Thanh toán với ZaloPay
                                     </button>

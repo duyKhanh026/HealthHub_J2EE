@@ -88,6 +88,7 @@ public class ThanhToanController {
         thanhToan.setLichKham(lichKham);
         thanhToan.setHinhThucThanhToan("Tiền mặt");
         thanhToan.setNgayThanhToan(LocalDateTime.now());
+        thanhToan.setTrangthai("Đã thanh toán");
         // Cập nhật thông tin thanh toán trong cơ sở dữ liệu
         thanhToanService.updateThanhToan(thanhToan);
 

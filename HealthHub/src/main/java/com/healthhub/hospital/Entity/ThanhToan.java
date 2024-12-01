@@ -27,6 +27,9 @@ public class ThanhToan {
     @Column(name = "Hinhthucthanhtoan", nullable = true)
     private String hinhThucThanhToan;
 
+    @Column(name = "Trangthai", nullable = true)
+    private String trangthai;
+
     // One-to-One relationship with LichKham
     @OneToOne
     @JoinColumn(name = "MaLK", nullable = false)

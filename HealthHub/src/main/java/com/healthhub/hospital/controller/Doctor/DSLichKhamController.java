@@ -114,7 +114,7 @@ public class DSLichKhamController {
 
         chiTietLichKham.setLichKham(lichkham);
         thanhToan.setLichKham(lichkham);
-
+        thanhToan.setTrangthai("Chưa thanh toán");
 
         // Lưu `ChiTietLichKham` sau khi `LichKham` đã được lưu
         chiTietLichKhamService.updateChiTietLichKham(chiTietLichKham);
