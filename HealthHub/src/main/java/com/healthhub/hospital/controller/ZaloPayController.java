@@ -25,12 +25,14 @@ public class ZaloPayController {
                               Model model) {
         try {
             JSONObject response = zaloPayService.createOrder(appUser, amount, description);
-            model.addAttribute("response", response.toString());
-            return "order-success"; // Trỏ đến trang hiển thị kết quả
+            String orderUrl = response.getString("order_url"); // Extract the order_url
+            model.addAttribute("orderUrl", orderUrl); // Pass the extracted URL to the model
+            return "order-success"; // Points to the HTML page
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("error", e.getMessage());
-            return "order-error"; // Trỏ đến trang báo lỗi
+            return "order-error";
         }
     }
+
 }

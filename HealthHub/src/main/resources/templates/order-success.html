@@ -3,9 +3,31 @@
 <head>
     <title>Order Success</title>
 </head>
-<body>
+<body onload="openOrderUrl()">
 <h1>Order Created Successfully!</h1>
-<pre th:text="${response}"></pre>
+
+<!-- Display the order URL for reference -->
+<pre th:text="${orderUrl}"></pre>
+
+<!-- Textbox to display the order URL (optional) -->
+<input type="text" id="orderUrl" th:value="${orderUrl}" readonly />
+
+<!-- Link to create another order -->
 <a href="/payment/form">Create another order</a>
+
+<script>
+    // Automatically open the order URL
+    function openOrderUrl() {
+        // Get the order URL from the page
+        const orderUrl = document.getElementById("orderUrl").value;
+
+        // Check if there's a value, then navigate
+        if (orderUrl && orderUrl !== '') {
+            window.location.href = orderUrl; // Redirect to the URL
+        } else {
+            console.error("Order URL is missing.");
+        }
+    }
+</script>
 </body>
 </html>
