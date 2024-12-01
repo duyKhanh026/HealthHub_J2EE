@@ -1,4 +1,4 @@
-package com.healthhub.hospital.controller.Doctor;
+package com.healthhub.hospital.controller;
 
 import com.healthhub.hospital.service.zalo.ZaloPayService;
 import org.json.JSONObject;
