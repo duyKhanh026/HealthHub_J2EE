@@ -35,8 +35,8 @@ public class ZaloPayService {
     public JSONObject createOrder(String appUser, int amount, String description) throws Exception {
         Random rand = new Random();
         int random_id = rand.nextInt(1000000);
-
         final Map embed_data = new HashMap(){{}};
+
         final Map[] item = {
                 new HashMap(){{}}
         };
