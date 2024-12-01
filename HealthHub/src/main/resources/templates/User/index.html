@@ -494,11 +494,51 @@
       <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
     </div><!-- End Section Title -->
 
-    <div class="mb-5" data-aos="fade-up" data-aos-delay="200">
-      <iframe style="border:0; width: 100%; height: 270px;"
-              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyACUD3W5txXqJP6-yDvKEPWzuyfWqlRpo4&q=Tr%C6%B0%E1%BB%9Dng+%C4%90%E1%BA%A1i+h%E1%BB%8Dc+S%C3%A0i+G%C3%B2n"
-              frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
+    <div class="container aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+
+		<div class="container section-title aos-init aos-animate" data-aos="fade-up">
+		    <h2>Xem Đường</h2>
+			<form id="directionsForm">
+				<div class="row mb-4">
+					<div class="col-md-4 form-group">
+						<label for="startLocation" style="width: 100%; text-align: left;">Vị trí của bạn: </label>
+				        <input class="form-control" type="text" id="startLocation" placeholder="Nhập địa chỉ hoặc tọa độ" required>
+					</div>
+					<div class="col-md-4 form-group mt-3 mt-md-0" style="display: none;">
+						<label for="endLocation">Vị trí kết thúc:</label>
+						<input type="text" id="endLocation" placeholder="Nhập địa chỉ hoặc tọa độ" value="273 Đ. An Dương Vương, Phường 3, Quận 5, Hồ Chí Minh 700000, Việt Nam">
+					</div>
+					<div class="col-md-4 form-group mt-3 mt-md-0" style="padding-top: 24px;">
+						<button class="btn btn-primary" style="width: 30%;" type="submit">Đường Đi</button>
+					</div>
+				</div>
+		        
+		    </form>
+
+		    <div class="map-container" style="margin-top: 20px;">
+		        <iframe
+		            id="mapFrame"
+		            style="border:0; width: 100%; height: 400px;"
+		            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyACUD3W5txXqJP6-yDvKEPWzuyfWqlRpo4&q=Tr%C6%B0%E1%BB%9Dng+%C4%90%E1%BA%A1i+h%E1%BB%8Dc+S%C3%A0i+G%C3%B2n"
+		            frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+		        </iframe>
+		    </div>
+		</div>
+	    
+	    <script>
+	        const form = document.getElementById('directionsForm');
+	        const mapFrame = document.getElementById('mapFrame');
+
+	        form.addEventListener('submit', (e) => {
+	            e.preventDefault();
+	            const startLocation = document.getElementById('startLocation').value;
+	            const endLocation = document.getElementById('endLocation').value;
+	            const apiKey = "AIzaSyACUD3W5txXqJP6-yDvKEPWzuyfWqlRpo4"; // Thay bằng API key của bạn
+	            const directionsUrl = `https://www.google.com/maps/embed/v1/directions?key=${apiKey}&origin=${encodeURIComponent(startLocation)}&destination=${encodeURIComponent(endLocation)}`;
+	            mapFrame.src = directionsUrl;
+	        });
+	    </script>
+	  
     </div>
 
     <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -508,7 +548,7 @@
             <i class="bi bi-geo-alt flex-shrink-0"></i>
             <div>
               <h3>Location</h3>
-              <p>A108 Adam Street, New York, NY 535022</p>
+              <p>273 Đ. An Dương Vương, Phường 3, Quận 5, Hồ Chí Minh 700000, Việt Nam</p>
             </div>
           </div><!-- End Info Item -->
 
@@ -536,10 +576,10 @@
 
 
 </main>
-<div class="fixed-box">
+<div class="fixed-box hidden">
 	<div class="chatbox_header">
 		<span class="chat_title">Chat với Bot</span>
-		<button class="close_button">X</button>
+		<button class="close_button o">O</button>
 	</div>
 	<div class="messaging">
 		<div class="inbox_msg">
@@ -588,27 +628,20 @@
 	updateTimeDate();
 	document.querySelector('.close_button').addEventListener('click', function() {
 	    const chatboxHeader = document.querySelector('.fixed-box');
-	    chatboxHeader.classList.toggle('hidden'); // Thêm hoặc bỏ class 'hidden'
-	});
-	document.querySelector('.close_button').addEventListener('click', function() {
-	    const chatboxHeader = document.querySelector('.chatbox_header');
-	    const button = document.querySelector('.close_button');
-	    
-	    chatboxHeader.classList.toggle('hidden'); // Thêm hoặc xóa class 'hidden'
-	    
-	    if (chatboxHeader.classList.contains('hidden')) {
-	        button.textContent = 'O'; // Nếu hidden, đổi nút thành 'O'
-	        button.classList.remove('x'); // Xóa class 'x' (đỏ)
-	        button.classList.add('o'); // Thêm class 'o' (xanh)
+		chatboxHeader.classList.toggle('hidden'); // Thêm hoặc xóa class 'hidden'
+			    
+		const chatboxbtn = document.querySelector('.close_button');
+	    if (chatboxbtn.classList.contains('x')) {
+	        chatboxbtn.textContent = 'O'; // Nếu hidden, đổi nút thành 'O'
+	        chatboxbtn.classList.remove('x'); // Xóa class 'x' (đỏ)
+	        chatboxbtn.classList.add('o'); // Thêm class 'o' (xanh)
 	    } else {
-	        button.textContent = 'X'; // Nếu không hidden, đổi nút thành 'X'
-	        button.classList.remove('o'); // Xóa class 'o' (xanh)
-	        button.classList.add('x'); // Thêm class 'x' (đỏ)
+	        chatboxbtn.textContent = 'X'; // Nếu không hidden, đổi nút thành 'X'
+	        chatboxbtn.classList.remove('o'); // Xóa class 'o' (xanh)
+	        chatboxbtn.classList.add('x'); // Thêm class 'x' (đỏ)
 	    }
 	});
 
-
-	
 	$('.chat-input input').keyup(function(e) {
 	  if ($(this).val() == '')
 	    $(this).removeAttr('good');
@@ -749,7 +782,9 @@
 
 <th:block th:replace="footer :: footerFragment"></th:block>
 
+<!--
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACUD3W5txXqJP6-yDvKEPWzuyfWqlRpo4&callback=initMap&libraries=directions&loading=async" async defer></script>
+-->
 
 </body>
 
