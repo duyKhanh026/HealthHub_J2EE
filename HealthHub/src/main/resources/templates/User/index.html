@@ -537,7 +537,10 @@
 
 </main>
 <div class="fixed-box">
-	<div class="chatbox_header">Chat với Bot</div>
+	<div class="chatbox_header">
+		<span class="chat_title">Chat với Bot</span>
+		<button class="close_button">X</button>
+	</div>
 	<div class="messaging">
 		<div class="inbox_msg">
 			<div class="mesgs">
@@ -546,8 +549,8 @@
 						<div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" style="max-width: 100%;"> </div>
 						<div class="received_msg">
 							<div class="received_withd_msg">
-								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-								<span class="time_date"> 11:01 AM    |    June 9</span></div>
+								<p>Chào quý khách! quý khách cần hỗ trợ gì?</p>
+								<span class="time_date"></span></div>
 						</div>
 					</div>
 				</div>
@@ -563,6 +566,49 @@
 </div>
 
 <script>
+	const timeDateElement = document.querySelector('.time_date');
+
+	// Hàm lấy thời gian hiện tại và định dạng
+	function updateTimeDate() {
+	    const now = new Date();
+	    const hours = now.getHours();
+	    const minutes = now.getMinutes();
+	    const ampm = hours >= 12 ? 'PM' : 'AM';
+	    const formattedHours = hours % 12 || 12; // Chuyển đổi sang 12 giờ
+	    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes; // Thêm '0' nếu cần
+	    const month = now.toLocaleString('en-US', { month: 'long' }); // Tên tháng
+	    const day = now.getDate(); // Ngày
+
+	    // Chuỗi thời gian định dạng
+	    const timeString = `${formattedHours}:${formattedMinutes} ${ampm} | ${month} ${day}`;
+	    timeDateElement.textContent = timeString;
+	}
+
+	// Gọi hàm để cập nhật thời gian khi tải trang
+	updateTimeDate();
+	document.querySelector('.close_button').addEventListener('click', function() {
+	    const chatboxHeader = document.querySelector('.fixed-box');
+	    chatboxHeader.classList.toggle('hidden'); // Thêm hoặc bỏ class 'hidden'
+	});
+	document.querySelector('.close_button').addEventListener('click', function() {
+	    const chatboxHeader = document.querySelector('.chatbox_header');
+	    const button = document.querySelector('.close_button');
+	    
+	    chatboxHeader.classList.toggle('hidden'); // Thêm hoặc xóa class 'hidden'
+	    
+	    if (chatboxHeader.classList.contains('hidden')) {
+	        button.textContent = 'O'; // Nếu hidden, đổi nút thành 'O'
+	        button.classList.remove('x'); // Xóa class 'x' (đỏ)
+	        button.classList.add('o'); // Thêm class 'o' (xanh)
+	    } else {
+	        button.textContent = 'X'; // Nếu không hidden, đổi nút thành 'X'
+	        button.classList.remove('o'); // Xóa class 'o' (xanh)
+	        button.classList.add('x'); // Thêm class 'x' (đỏ)
+	    }
+	});
+
+
+	
 	$('.chat-input input').keyup(function(e) {
 	  if ($(this).val() == '')
 	    $(this).removeAttr('good');
