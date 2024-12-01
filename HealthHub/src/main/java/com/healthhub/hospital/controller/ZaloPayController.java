@@ -16,6 +16,7 @@ public class ZaloPayController {
 
     private HttpSession session;
     private ThanhToanService thanhToanService;
+    private ThanhToan thanhToan;
 
     public ZaloPayController(ThanhToanService thanhToanService, HttpSession session) {
 
@@ -31,7 +32,7 @@ public class ZaloPayController {
 
         Integer maTT = (Integer) session.getAttribute("maTT");
 
-        ThanhToan thanhToan = thanhToanService.findbyid_thanhtoan(maTT);
+        thanhToan = thanhToanService.findbyid_thanhtoan(maTT);
 
         model.addAttribute("Name", thanhToan.getLichKham().getHoten());
         System.out.println(thanhToan.getLichKham().getHoten());
@@ -44,6 +45,12 @@ public class ZaloPayController {
                               @RequestParam int amount,
                               @RequestParam String description,
                               Model model) {
+
+        thanhToan.setSoTien(amount);
+        thanhToan.setHinhThucThanhToan("ZaloPay");
+        thanhToan.setTrangthai("Đã thanh toán");
+        thanhToanService.updateThanhToan(thanhToan);
+
         try {
             JSONObject response = zaloPayService.createOrder(appUser, amount, description);
             String orderUrl = response.getString("order_url"); // Extract the order_url

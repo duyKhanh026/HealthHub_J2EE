@@ -21,13 +21,6 @@ import java.util.List;
 @Service
 public class ZaloPayService {
 
-//    private static final Map<String, String> CONFIG = new HashMap<>() {{
-//        put("app_id", "2554");
-//        put("key1", "sdngKKJmqEMzvh5QQcdD2A9XBSKUNaYn");
-//        put("key2", "trMrHtvjo6myautxDUiAcYsVtaeQ8nhf");
-//        put("endpoint", "https://sb-openapi.zalopay.vn/v2/create");
-//    }};
-
     static String app_id = "2554";
     static String key1 = "sdngKKJmqEMzvh5QQcdD2A9XBSKUNaYn";
     static String create_order_url = "https://sb-openapi.zalopay.vn/v2/create";
