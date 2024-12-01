@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoField;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -91,4 +92,24 @@ public class LichKhamService {
             return lichKhamRepository.findStatisticsByDateRangeAndStatus(startDate, endDate, status);
         }
     }
+
+    public List<LichKham> filterLichKhamByDateRange(LocalDate startDate, LocalDate endDate,int maBN) {
+        // Log để kiểm tra xem ngày bắt đầu và kết thúc có đúng không
+        System.out.println("Filtering with startDate: " + startDate + " and endDate: " + endDate);
+
+        // Kiểm tra nếu các giá trị này có thực sự không null và hợp lệ
+        if (startDate != null && endDate != null) {
+            // Lọc lịch khám của người dùng hiện tại trong khoảng thời gian
+
+            return lichKhamRepository.findByBenhNhan_MaBNAndNgayGioDatKhamBetween(maBN, startDate.atStartOfDay(), endDate.atTime(23, 59, 59));
+        }
+        return Collections.emptyList(); // Trả về danh sách rỗng nếu không có dữ liệu hợp lệ
+    }
+
+//    public List<LichKham> getAllLichKham() {
+//        return lichKhamRepository.findAll()
+//                .stream()
+//                .map(lichKham -> new LichKham(lichKham))
+//                .collect(Collectors.toList());
+//    }
 }
