@@ -31,11 +31,36 @@
 }
 
 	.chatbox_header {
+    	display: flex;
 		color: black;
-		font-size: 14pt;
+		font-size: 16pt;
 		background-color: white;
+		
+    	justify-content: space-between; /* Đẩy các phần tử sang 2 bên */
 		padding-left: 10px;
 	}
+	.chat_title {
+    margin: 0; /* Đảm bảo không có khoảng trống thừa */
+    font-weight: bold;
+}
+
+.close_button {
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 3px;
+    cursor: pointer;
+    color: white;
+    background-color:red
+}
+.close_button.x {
+    background-color: red;
+}
+
+/* Màu xanh khi là O */
+.close_button.o {
+    background-color: green;
+}
 
 		.inbox_msg {
 			border: 1px solid #c4c4c4;
@@ -232,4 +257,25 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 9999; /* Đặt z-index cao để phần tử nằm trên cùng */
+}
+
+.form-container {
+    position: fixed;
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    display: none;
+    z-index: 9999; /* Đặt z-index cao để phần tử nằm trên cùng */
+}
+.toggle-button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    z-index: 9999; /* Đặt z-index cao để phần tử nằm trên cùng */
+}
+
+
+.fixed-box.hidden {
+    bottom: -456px; /* Thụt xuống 100px */
 }
