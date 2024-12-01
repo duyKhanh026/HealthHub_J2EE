@@ -71,7 +71,7 @@ public class AppConfig{
                         .requestMatchers("/","/anhcuatao/**", "/index", "/assets2/**", "/css/**", "/assets/**"
                                 ,"DSLichKham","/ChiTietBenhNhan","/ThongTinLichKham","/register","/send_email","/ThongTinUser"
                                 ,"/DSBenhNhan", "/ThanhToan","/forgot_password","/reset_password","/api/getAvailableTimes","/NgayNghi","/NgayNghi/xoa"
-                                ,"/send_html_email","/ThongKe", "/hitOpenaiApi","/export-pdf","/zalopay","payment/create-order").permitAll()
+                                ,"/send_html_email","/ThongKe", "/hitOpenaiApi","/export-pdf").permitAll()
                         .requestMatchers("/forgot_password").permitAll()
                         .anyRequest().authenticated()
                 )
