@@ -73,7 +73,9 @@ public class AppConfig{
                                 ,"/DSBenhNhan", "/ThanhToan","/forgot_password","/reset_password","/api/getAvailableTimes","/NgayNghi","/NgayNghi/xoa"
 
 
+
                                 ,"/send_html_email","/ThongKe", "/hitOpenaiApi","/export-pdf").permitAll()
+
 
 
 
