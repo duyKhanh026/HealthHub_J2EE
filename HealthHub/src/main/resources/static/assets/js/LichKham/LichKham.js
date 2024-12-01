@@ -35,6 +35,38 @@
     dateInput.setAttribute("min", formattedDate);
 });
 
+function checkinput(){
+const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const date = document.getElementById("date").value.trim();
+        const time = document.getElementById("time").value.trim();
+
+        // Kiểm tra từng trường
+        if (!name) {
+            alert("⚠️ Vui lòng nhập tên người khám.");
+            return;
+        }
+        if (!email) {
+            alert("⚠️ Vui lòng nhập email.");
+            return;
+        }
+        if (!phone) {
+            alert("⚠️ Vui lòng nhập số điện thoại.");
+            return;
+        }
+        if (!date) {
+            alert("⚠️ Vui lòng chọn ngày đặt khám.");
+            return;
+        }
+        if (!time) {
+            alert("⚠️ Vui lòng chọn giờ đặt khám.");
+            return;
+        }
+
+        // Nếu tất cả trường hợp lệ, gửi form
+        saveEdit();
+}
 
 function saveEdit() {
         // Hiển thị thông báo trước khi gửi form
