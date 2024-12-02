@@ -66,6 +66,14 @@
       color: #007bff; /* Màu sắc bạn muốn sử dụng, thay đổi nếu cần */
       font-weight: bold;
     }
+    .btn-primary.me-2 {
+      margin-left: 50px;
+      margin-top: 25px;
+    }
+    .btn-secondary {
+      margin-left: 10px;
+      margin-top: 25px;
+    }
   </style>
 
 </head>
@@ -75,6 +83,21 @@
 
   <div class="container mt-5">
     <h2 class="mb-4">Danh sách Lịch Khám</h2>
+    <!-- Form lọc lịch khám -->
+    <div class="mb-4">
+      <form id="filterForm" class="d-flex align-items-center">
+        <div class="me-3">
+          <label for="startDate" class="form-label">Từ ngày:</label>
+          <input type="date" id="startDate" class="form-control">
+        </div>
+        <div class="me-3" style="margin-left: 50px;">
+          <label for="endDate" class="form-label">Đến ngày:</label>
+          <input type="date" id="endDate" class="form-control">
+        </div>
+        <button type="button" class="btn btn-primary me-2"  onclick="filterLichKham()" >Lọc</button>
+        <button type="button" class="btn btn-secondary" onclick="viewAllLichKham()">Xem toàn bộ</button>
+      </form>
+    </div>
     <div class="list-group">
       <th:block th:each="lichKham : ${lichKhamList}">
         <div class="list-group-item">
@@ -196,6 +219,60 @@
         .catch(error => console.error("Error:", error));
     }
   }
+  function filterLichKham() {
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+
+    const url = `/api/lich-kham/filter?startDate=${startDate}&endDate=${endDate}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            updateLichKhamList(data); // Cập nhật danh sách lịch khám với dữ liệu đã lọc
+        })
+        .catch(error => console.error('Error filtering Lich Kham:', error));
+  }
+
+
+  function viewAllLichKham() {
+    fetch("/lichkham/all")
+      .then(response => response.json())
+      .then(data => {
+        console.log(data); // Log để xem dữ liệu trả về từ API
+        updateLichKhamList(data);
+      })
+      .catch(error => console.error("Error:", error));
+  }
+
+  function updateLichKhamList(data) {
+    const lichKhamList = document.querySelector('.list-group'); // Sử dụng class list-group thay vì id
+    if (lichKhamList) {
+        // Tiến hành cập nhật
+        lichKhamList.innerHTML = ""; // Xóa list trước khi làm
+
+        data.forEach(lichKham => {
+        const listItem = `
+          <div class="list-group-item">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h5>${lichKham.ngayGioDatKham}</h5>
+                <p>Mã: ${lichKham.maLK}</p>
+              </div>
+              <div class="status-column">
+                <span class="badge ${lichKham.trangThai === 'Đã khám' ? 'bg-success' : (lichKham.trangThai === 'Chưa khám' ? 'bg-danger' : 'bg-secondary')}">
+                  ${lichKham.trangThai}
+                </span>
+              </div>
+              <a class="btn btn-primary btn-sm" data-id="${lichKham.maLK}" onclick="viewDetails(this)">Xem Chi Tiết</a>
+            </div>
+          </div>`;
+        lichKhamList.insertAdjacentHTML("beforeend", listItem);
+       });
+    } else {
+        console.error('Không tìm thấy phần tử với lớp list-group');
+    }
+  }
+
 </script>
 
 <!-- Vendor JS Files -->

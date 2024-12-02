@@ -47,4 +47,9 @@ public interface LichKhamRepository extends JpaRepository<LichKham, Integer> {
 	List<Object[]> findStatisticsByDateRangeAndStatus(@Param("startDate") LocalDateTime startDate,
 													  @Param("endDate") LocalDateTime endDate,
 													  @Param("status") String status);
+
+
+	List<LichKham> findByBenhNhan_MaBNAndNgayGioDatKhamBetween(int maBN, LocalDateTime startDate, LocalDateTime endDate);
+
+
 }
