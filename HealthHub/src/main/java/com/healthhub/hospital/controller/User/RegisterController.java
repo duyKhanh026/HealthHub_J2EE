@@ -40,48 +40,122 @@ public class RegisterController {
                                @RequestParam("password") String password,
                                @RequestParam("confirmPassword") String confirmPassword,
                                @RequestParam("SDT") String SDT,
-                               RedirectAttributes redirectAttributes) {
+                               Model model, RedirectAttributes redirectAttributes) {
+
+        // Kiểm tra các trường không được để trống
+        if (username == null || username.trim().isEmpty()) {
+            model.addAttribute("username", username);
+            model.addAttribute("SDT", SDT);
+            model.addAttribute("password", password);
+            model.addAttribute("confirmPassword", confirmPassword);
+            model.addAttribute("modalMessage", "Tên đăng nhập không được để trống!");
+            model.addAttribute("modalType", "error");
+            return "User/DangKy";
+        }
+        if (password == null || password.trim().isEmpty()) {
+            model.addAttribute("username", username);
+            model.addAttribute("SDT", SDT);
+            model.addAttribute("password", password);
+            model.addAttribute("confirmPassword", confirmPassword);
+            model.addAttribute("modalMessage", "Mật khẩu không được để trống!");
+            model.addAttribute("modalType", "error");
+            return "User/DangKy";
+        }
+        if (confirmPassword == null || confirmPassword.trim().isEmpty()) {
+            model.addAttribute("username", username);
+            model.addAttribute("SDT", SDT);
+            model.addAttribute("password", password);
+            model.addAttribute("confirmPassword", confirmPassword);
+            model.addAttribute("modalMessage", "Mật khẩu xác nhận không được để trống!");
+            model.addAttribute("modalType", "error");
+            return "User/DangKy";
+        }
+        if (SDT == null || SDT.trim().isEmpty()) {
+            model.addAttribute("username", username);
+            model.addAttribute("SDT", SDT);
+            model.addAttribute("password", password);
+            model.addAttribute("confirmPassword", confirmPassword);
+            model.addAttribute("modalMessage", "Số điện thoại không được để trống!");
+            model.addAttribute("modalType", "error");
+            return "User/DangKy";
+        }
+
         // Kiểm tra mật khẩu và mật khẩu xác nhận có trùng nhau không
         if (!password.equals(confirmPassword)) {
-            redirectAttributes.addFlashAttribute("modalMessage", "Mật khẩu không khớp!");
-            redirectAttributes.addFlashAttribute("modalType", "danger"); // error
-            return "redirect:/register";
+            model.addAttribute("username", username);
+            model.addAttribute("SDT", SDT);
+            model.addAttribute("password", password);
+            model.addAttribute("confirmPassword", confirmPassword);
+            model.addAttribute("modalMessage", "Mật khẩu không khớp!");
+            model.addAttribute("modalType", "error");
+            return "User/DangKy";
         }
 
-        // Kiểm tra xem tên đăng nhập đã tồn tại chưa
+        // Kiểm tra tên đăng nhập đã tồn tại chưa
         TaiKhoan existingAccount = taiKhoanService.findByTenDN(username);
         if (existingAccount != null) {
-            redirectAttributes.addFlashAttribute("modalMessage", "Tên đăng nhập đã tồn tại!");
-            redirectAttributes.addFlashAttribute("modalType", "danger");
-            return "redirect:/register";
+            model.addAttribute("username", username);
+            model.addAttribute("SDT", SDT);
+            model.addAttribute("password", password);
+            model.addAttribute("confirmPassword", confirmPassword);
+            model.addAttribute("modalMessage", "Tên đăng nhập đã tồn tại!");
+            model.addAttribute("modalType", "error");
+            return "User/DangKy";
         }
+        System.out.println("So dt 1: "+ SDT);
 
-        // Kiểm tra xem số điện thoại đã tồn tại trong bảng BenhNhan chưa
+        // Kiểm tra số điện thoại đã tồn tại trong bảng BenhNhan
         BenhNhan existingBenhNhan = benhnhanService.findBySDT(SDT);
+        System.out.println("So dt 2: "+ existingBenhNhan.getSDT());
         BenhNhan benhNhan;
 
         if (existingBenhNhan != null) {
-            // Nếu số điện thoại đã tồn tại, sử dụng BenhNhan hiện có
+            // Nếu số điện thoại đã có trong hệ thống, kiểm tra xem đã có tài khoản chưa
+            TaiKhoan existingTaiKhoan = taiKhoanService.findByMaBN(existingBenhNhan);
+
+            if (existingTaiKhoan != null) {
+                // Nếu đã có tài khoản cho bệnh nhân này, giữ lại tài khoản cũ
+                System.out.println("Tài khoản đã tồn tại!");
+                model.addAttribute("modalMessage", "Số điện thoại này đã được đăng ký tài khoản.");
+                model.addAttribute("modalType", "error");
+                return "User/DangKy";
+            }
+
+            // Nếu chưa có tài khoản, tạo tài khoản mới
             benhNhan = existingBenhNhan;
         } else {
-            // Nếu số điện thoại chưa tồn tại, tạo một BenhNhan mới với SDT
+            // Nếu số điện thoại chưa có trong hệ thống, tạo bệnh nhân mới
+            if (!isValidPhoneNumber(SDT)) {
+                model.addAttribute("username", username); // Giữ lại tên đăng nhập
+                model.addAttribute("SDT", SDT); // Giữ lại số điện thoại
+                model.addAttribute("modalMessage", "Số điện thoại không hợp lệ!");
+                model.addAttribute("modalType", "error");
+                return "User/DangKy";
+            }
+
             benhNhan = new BenhNhan();
             benhNhan.setSDT(SDT);
             benhnhanService.LuuTTBenhNhan(benhNhan);
         }
 
-        // Tạo tài khoản mới và ánh xạ với BenhNhan tương ứng
         TaiKhoan taiKhoan = new TaiKhoan();
         taiKhoan.setTenDN(username);
         taiKhoan.setMatkhau(passwordEncoder.encode(password)); // Mã hóa mật khẩu
         taiKhoan.setVaitro(Role.USER); // Gán vai trò mặc định
-        taiKhoan.setBenhNhan(benhNhan); // Ánh xạ với BenhNhan tương ứng
+        taiKhoan.setBenhNhan(benhNhan); // Ánh xạ với BenhNhan
         taiKhoanService.LuuTTTaiKhoan(taiKhoan);
 
         // Thêm thông báo thành công và redirect đến trang đăng nhập
         redirectAttributes.addFlashAttribute("modalMessage", "Đăng ký thành công!");
         redirectAttributes.addFlashAttribute("modalType", "success");
         return "redirect:/login";
+    }
+
+    // Hàm kiểm tra số điện thoại có hợp lệ không
+    private boolean isValidPhoneNumber(String phoneNumber) {
+        // Kiểm tra số điện thoại có đúng định dạng (ví dụ: 10 chữ số)
+        String regex = "^\\d{10}$";
+        return phoneNumber.matches(regex);
     }
 
 }
