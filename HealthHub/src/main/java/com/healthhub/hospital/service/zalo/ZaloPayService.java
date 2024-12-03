@@ -14,9 +14,11 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Service
 public class ZaloPayService {
@@ -41,6 +43,8 @@ public class ZaloPayService {
                 new HashMap(){{}}
         };
 
+        String description1 = removeVietnameseAccents(description);
+
         Map<String, String> order = new HashMap<>(){{
             put("app_id", app_id);
             put("app_user", "user123");
@@ -49,7 +53,7 @@ public class ZaloPayService {
             put("app_trans_id", getCurrentTimeString("yyMMdd") +"_"+ random_id); // translation missing: vi.docs.shared.sample_code.comments.app_trans_id
             put("embed_data", new JSONObject(embed_data).toString());
             put("item", "[]");
-            put("description", "Lazada - Payment for the order #"+random_id);
+            put("description", description1);
             put("bank_code", "zalopayapp");
 
 
@@ -108,6 +112,13 @@ public class ZaloPayService {
             e.printStackTrace();
             throw new RuntimeException("Error while handling response", e);
         }
+    }
+
+    // Phương thức loại bỏ dấu tiếng Việt
+    private String removeVietnameseAccents(String text) {
+        String normalized = Normalizer.normalize(text, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(normalized).replaceAll("").replace("đ", "d").replace("Đ", "D");
     }
 
 }

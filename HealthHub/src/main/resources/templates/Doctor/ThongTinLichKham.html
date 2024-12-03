@@ -79,12 +79,20 @@
                                 <input type="text"  class="form-control" th:value="${chiTiet.lichKham.hoten}" readonly >
                             </div>
                             <div class="form-group">
+                                <label>Số điện thoại</label>
+                                <input type="text"  class="form-control" th:value="${chiTiet.lichKham.sDT}" readonly >
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="text"  class="form-control" th:value="${chiTiet.lichKham.email}" readonly >
+                            </div>
+                            <div class="form-group">
                                 <label>Ngày khám</label>
                                 <input type="text"  class="form-control"  th:value="${#temporals.format(chiTiet.lichKham.ngayGioDatKham, 'dd-MM-yyyy HH:mm')}" readonly >
                             </div>
                             <div class="form-group">
                                 <label>Trạng thái</label>
-                                <input type="text"  class="form-control" th:value="${chiTiet.lichKham.trangThai}" readonly >
+                                <input type="text" id="trangThaiInput" class="form-control" th:value="${chiTiet.lichKham.trangThai}" readonly>
                             </div>
                         </form>
                     </div>
@@ -120,15 +128,15 @@
                             </div>
                             <div class="form-group">
                                 <label>Chuẩn đoán</label>
-                                <input type="text" class="form-control" th:field="*{chuanDoan}" />
+                                <input type="text" id="chuanDoanInput" class="form-control" th:field="*{chuanDoan}">
                             </div>
                             <div class="form-group">
                                 <label>Đơn thuốc</label>
-                                <input type="text" class="form-control" th:field="*{donThuoc}" />
+                                <input type="text" id="donThuocInput" class="form-control" th:field="*{donThuoc}">
                             </div>
                             <div class="form-group">
                                 <label>Ghi chú thêm</label>
-                                <input type="text" class="form-control" th:field="*{ghiChuThem}" />
+                                <input type="text" id="ghiChuThemInput" class="form-control" th:field="*{ghiChuThem}">
                             </div>
 
                             <input type="hidden" class="form-control" th:value="${chiTiet.lichKham.maLK}" name="maLK" />
