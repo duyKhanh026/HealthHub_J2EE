@@ -103,14 +103,21 @@
                     <label for="message">Ghi chú:</label>
                     <textarea class="form-control" name="message" id="message" rows="5" th:field="*{note}" placeholder="Message (Optional)"></textarea>
                 </div>
+
+				<div class="g-recaptcha" 
+			         th:data-sitekey="${recaptchaKey}" 
+			         data-callback="enableButton"
+			         data-expired-callback="disableButton">
+			    </div>
+
+				<div class="recaptcha-error-message" style="color: red; display: none;">Please verify that you are not a robot.</div>
                 <div class="mt-3">
 <!--                    <div class="loading">Loading</div>-->
 <!--                    <div class="error-message"></div>-->
 <!--                    <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>-->
-                    <div class="text-center"><button type="button" class="btn btn-primary" onclick="checkinput()">Make an Appointment</button></div>
+                    <div class="text-center"><button type="button" class="btn btn-primary" id="submitButton" onclick="checkinput()" disabled>Make an Appointment</button></div>
                 </div>
             </form>
-
         </div>
 
     </section><!-- /Appointment Section -->
@@ -134,6 +141,9 @@
     <script th:src="@{assets/vendor/purecounter/purecounter_vanilla.js}"></script>
     <script th:src="@{assets/vendor/swiper/swiper-bundle.min.js}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	
+
+	<script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
 
     <!-- Main JS File -->
     <script th:src="@{assets/js/main.js}"></script>

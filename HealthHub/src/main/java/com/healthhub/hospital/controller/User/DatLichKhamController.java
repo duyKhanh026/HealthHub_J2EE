@@ -7,6 +7,10 @@ import com.healthhub.hospital.service.LichKhamService;
 import com.healthhub.hospital.service.TaiKhoanService;
 import com.healthhub.hospital.service.ThanhToanService;
 import jakarta.mail.MessagingException;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +27,10 @@ import java.util.List;
 
 @Controller
 public class DatLichKhamController {
+
+    @Value("${google.recaptcha.key}")
+    private String recaptchaKey;
+	
     private LichKhamService lichKhamService;
 
     private TaiKhoanService taiKhoanService;
@@ -65,15 +73,21 @@ public class DatLichKhamController {
         lichKham.setSDT(benhNhan1.getSDT());
 
         model.addAttribute("lichKham", lichKham);
+        model.addAttribute("recaptchaKey", recaptchaKey);
         return "User/DatLichKham";
     }
 
     @PostMapping("/DatLichKham")
     public String addlichkham(@ModelAttribute("lichKham") LichKham lichkham,@RequestParam("date") String date,
-                              @RequestParam("time") String time, BindingResult result, Model model) throws MessagingException {
+    							@RequestParam("g-recaptcha-response") String recaptchaResponse,
+    							@RequestParam("time") String time, BindingResult result, Model model) throws MessagingException {
         if (result.hasErrors()) {
             return "404";
         }
+//        if (!verifyCaptcha(recaptchaResponse)) {
+//            model.addAttribute("captchaError", "Please complete the CAPTCHA verification.");
+//            return "DatLichKham"; // Trả về trang đặt lịch nếu CAPTCHA không hợp lệ
+//        }
 
         System.out.println("data về");
 
@@ -135,5 +149,14 @@ public class DatLichKhamController {
         }
         System.out.println(availableTimes);
         return availableTimes;
+    }
+
+    @GetMapping("/checkDate")
+    public ResponseEntity<Boolean> checkDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+
+        benhNhan = taiKhoanService.getBenhNhanByTenDN(authentication.getName());
+
+        boolean hasAppointment = lichKhamService.hasAppointmentOnDate(benhNhan.getMaBN(), date);
+        return ResponseEntity.ok(hasAppointment);
     }
 }

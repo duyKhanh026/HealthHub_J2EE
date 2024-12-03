@@ -18,10 +18,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @Controller
 @SessionAttributes("hoTen")
 public class MainController {
-	@Value("${welcome.message}")
-	private String message;
-	@Value("${error.message}")
-	private String errorMessage;
 	@Autowired
 	private TaiKhoanService taiKhoanService;
 	@Autowired

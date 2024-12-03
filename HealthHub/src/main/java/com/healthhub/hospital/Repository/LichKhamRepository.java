@@ -51,5 +51,6 @@ public interface LichKhamRepository extends JpaRepository<LichKham, Integer> {
 
 	List<LichKham> findByBenhNhan_MaBNAndNgayGioDatKhamBetween(int maBN, LocalDateTime startDate, LocalDateTime endDate);
 
+	boolean existsByBenhNhan_MaBNAndNgayGioDatKhamBetween(int benhNhanId, LocalDateTime start, LocalDateTime end);
 
 }

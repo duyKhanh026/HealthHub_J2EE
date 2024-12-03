@@ -18,8 +18,6 @@ addButton.addEventListener('click', function(event) {
 document.getElementById("date").addEventListener("change", function() {
     const selectedDate = this.value;
 
-    alert("chon ngay thanh cong" + selectedDate);
-
 
     fetch(`api/getAvailableTimes?date=${selectedDate}`)
         .then(response => response.json())

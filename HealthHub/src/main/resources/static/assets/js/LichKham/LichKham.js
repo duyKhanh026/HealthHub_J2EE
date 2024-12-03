@@ -1,8 +1,20 @@
-    document.getElementById("date").addEventListener("change", function() {
+//Biến toàn cục kiểm tra captcha
+let captcha_solved = false;
+
+function enableButton() {
+	captcha_solved = true;
+}
+
+// Hàm được gọi khi reCAPTCHA hết hạn
+function disableButton() {
+    captcha_solved = false;
+}
+
+
+document.getElementById("date").addEventListener("change", function () {
     const selectedDate = this.value;
-
-<!--    alert("chon ngay thanh cong" + selectedDate);-->
-
+    const currentDate = new Date();
+    const currentTime = currentDate.getHours() * 60 + currentDate.getMinutes(); // Thời gian hiện tại tính bằng phút
 
     fetch(`api/getAvailableTimes?date=${selectedDate}`)
         .then(response => response.json())
@@ -10,11 +22,22 @@
             const timeSelect = document.getElementById("time");
             timeSelect.innerHTML = ""; // Xóa các option cũ
 
-            // Lọc các thời gian không phải là "Nghỉ"
-            const availableTimes = data.filter(time => time.trangThai !== 'Nghỉ');
+            // Lọc các giờ không phải "Nghỉ" và lớn hơn giờ hiện tại
+            const availableTimes = data.filter(time => {
+                // Chuyển giờ từ chuỗi sang phút
+                const [hours, minutes] = time.split(":").map(Number);
+                const timeInMinutes = hours * 60 + minutes;
 
-            // Thêm các giờ trống vào select
-            data.forEach(time => {
+                // Loại bỏ giờ đã qua nếu là ngày hiện tại
+                if (new Date(selectedDate).toDateString() === currentDate.toDateString()) {
+                    return timeInMinutes > currentTime && time.trangThai !== 'Nghỉ';
+                }
+
+                return time.trangThai !== 'Nghỉ'; // Nếu không phải ngày hiện tại, chỉ lọc trạng thái "Nghỉ"
+            });
+
+            // Thêm các giờ hợp lệ vào select
+            availableTimes.forEach(time => {
                 const option = document.createElement("option");
                 option.value = time;
                 option.textContent = time;
@@ -23,6 +46,7 @@
         })
         .catch(error => console.error('Error fetching available times:', error));
 });
+
 
     document.addEventListener("DOMContentLoaded", function() {
     const dateInput = document.getElementById("date");
@@ -36,7 +60,13 @@
 });
 
 function checkinput(){
-const name = document.getElementById("name").value.trim();
+		
+		if (!captcha_solved) {
+    		document.querySelector(".recaptcha-error-message").style.display = "block"; 
+			return;
+		}
+		
+		const name = document.getElementById("name").value.trim();
         const email = document.getElementById("email").value.trim();
         const phone = document.getElementById("phone").value.trim();
         const date = document.getElementById("date").value.trim();
@@ -106,3 +136,28 @@ function saveEdit() {
                 }
             });
 }
+
+
+document.getElementById("date").addEventListener("change", function () {
+    const selectedDate = this.value;
+
+    fetch(`/checkDate?date=${selectedDate}`)
+        .then(response => response.json())
+        .then(hasAppointment => {
+            if (hasAppointment) {
+                // Hiển thị thông báo
+                Swal.fire({
+                    icon: "warning",
+                    title: "Lịch đã tồn tại",
+                    text: "Bạn đã có lịch khám trong ngày này. Vui lòng hủy lịch cũ trước khi đặt lịch mới.",
+                });
+
+                // Vô hiệu hóa nút "Make an Appointment"
+                document.getElementById("submitButton").disabled = true;
+            } else {
+                // Bật lại nút "Make an Appointment"
+                document.getElementById("submitButton").disabled = false;
+            }
+        })
+        .catch(error => console.error("Error checking date:", error));
+});

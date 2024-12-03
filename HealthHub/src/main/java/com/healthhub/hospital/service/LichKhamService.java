@@ -112,4 +112,12 @@ public class LichKhamService {
 //                .map(lichKham -> new LichKham(lichKham))
 //                .collect(Collectors.toList());
 //    }
+
+    public boolean hasAppointmentOnDate(int idBenhNhan, LocalDate date) {
+        return lichKhamRepository.existsByBenhNhan_MaBNAndNgayGioDatKhamBetween(
+                idBenhNhan,
+                date.atStartOfDay(),
+                date.atTime(23, 59, 59)
+        );
+    }
 }

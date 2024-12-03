@@ -81,7 +81,7 @@
                                     <th style="width: 50px;"><input type="checkbox" name="selectedItems" id="checkAll" class="larger-checkbox" style="margin-top: 5px;"/></th>
                                     <th>Mã lịch</th>
                                     <th>Ngày nghỉ</th>
-                                    <th>Trạng thái</th>
+<!--                                    <th>Trạng thái</th>-->
                                     <th>Xóa</th>
                                 </tr>
                                 </thead>
@@ -90,7 +90,7 @@
                                 <tr th:each="lichnghi : ${lichNghiList}"><td><input type="checkbox"  class="checkbox_ID larger-checkbox"/></td>
                                     <td th:text="${lichnghi.maLK}">MaLK</td>
                                     <td th:text="${#temporals.format(lichnghi.ngayGioDatKham, 'dd-MM-yyyy HH:mm')}">NgayGioDatKham</td>
-                                    <td th:text="${lichnghi.trangThai}">Trangthai</td>
+<!--                                    <td th:text="${lichnghi.trangThai}">Trangthai</td>-->
                                     <td>
                                         <form th:action="@{/NgayNghi/xoa}" method="post">
                                             <input type="hidden" name="_method" value="delete" />
