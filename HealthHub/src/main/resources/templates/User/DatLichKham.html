@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Index - Medilab Bootstrap Template</title>
+    <title>Đặt lịch khám</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -25,19 +25,15 @@
     <link th:href="@{assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
     <link th:href="@{assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
 
+    <!-- CSS quan trọng phải có mỗi trang -->
+    <link th:href="@{/css/logout.css}" rel="stylesheet">
+
     <!-- Main CSS File -->
     <link th:href="@{assets/css/main.css}" rel="stylesheet">
 
-    <!-- =======================================================
-    * Template Name: Medilab
-    * Template URL: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/
-    * Updated: Aug 07 2024 with Bootstrap v5.3.3
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
 </head>
 
-<body class="index-page">
+<body>
 
     <th:block th:replace="header :: headerFragment"></th:block>
 
@@ -150,13 +146,6 @@
 
     <script th:src="@{assets/js/LichKham/LichKham.js}"></script>
 
-<script>
-
-</script>
-
-    <script>
-
-    </script>
 </body>
 
 </html>

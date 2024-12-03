@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
   <meta charset="utf-8">
@@ -24,6 +24,8 @@
   <link th:href="@{/assets/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet">
   <link th:href="@{/assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
   <link th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+
+  <!-- CSS quan trọng phải có mỗi trang -->
   <link th:href="@{/css/logout.css}" rel="stylesheet">
 
   <!-- Bootstrap CSS -->
@@ -41,289 +43,98 @@
 
   <!-- Main CSS File -->
   <link th:href="@{assets/css/main.css}" rel="stylesheet">
-  <style>
-    .status-column {
-      display: flex;
-      justify-content: center;
-      align-items: center; /* Đảm bảo badge được căn giữa theo chiều dọc */
-      width: 150px; /* Đảm bảo mỗi cột trạng thái có cùng chiều rộng */
-    }
+  <link th:href="@{/css/LichKhamBenh.css}" rel="stylesheet">
 
-    .badge {
-      font-size: 1.1rem; /* Tăng kích thước chữ */
-      padding: 10px 15px; /* Tăng kích thước padding */
-      width: 100%; /* Đảm bảo badge chiếm toàn bộ chiều rộng của cột */
-      text-align: center;
-    }
-    .custom-line {
-      border-top: 1px solid #ddd; /* Màu và độ dày của đường kẻ */
-      margin: 10px 0;             /* Khoảng cách trên dưới của đường kẻ */
-    }
-    .custom-title {
-      color: #007bff; /* Màu sắc bạn muốn sử dụng, thay đổi nếu cần */
-      font-weight: bold;
-    }
-    .btn-primary.me-2 {
-      margin-left: 50px;
-      margin-top: 25px;
-    }
-    .btn-secondary {
-      margin-left: 10px;
-      margin-top: 25px;
-    }
-  </style>
+
+  <!-- JS Files -->
+  <script th:src="@{assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/js/LichKhamBenh.js}"></script>
 
 </head>
 
-<body >
-<th:block th:replace="header :: headerFragment"></th:block>
-
-  <div class="container mt-5">
-    <h2 class="mb-4">Danh sách Lịch Khám</h2>
-    <!-- Form lọc lịch khám -->
-    <div class="mb-4">
-      <form id="filterForm" class="d-flex align-items-center">
-        <div class="me-3">
-          <label for="startDate" class="form-label">Từ ngày:</label>
-          <input type="date" id="startDate" class="form-control">
-        </div>
-        <div class="me-3" style="margin-left: 50px;">
-          <label for="endDate" class="form-label">Đến ngày:</label>
-          <input type="date" id="endDate" class="form-control">
-        </div>
-        <button type="button" class="btn btn-primary me-2"  onclick="filterLichKham()" >Lọc</button>
-        <button type="button" class="btn btn-secondary" onclick="viewAllLichKham()">Xem toàn bộ</button>
-      </form>
-    </div>
-    <div class="list-group">
-      <th:block th:each="lichKham : ${lichKhamList}">
-        <div class="list-group-item">
-          <div class="d-flex justify-content-between align-items-center">
-            <div>
-              <h5 th:text="${#temporals.format(lichKham.ngayGioDatKham, 'yyyy-MM-dd HH:mm:ss')}">Ngày giờ đặt khám</h5>
-              <p>Mã: <span th:text="${lichKham.maLK}">Mã Lịch Khám</span></p>
-            </div>
-            <div class="status-column">
-              <span th:classappend="${lichKham.trangThai == 'Đã khám' ? 'bg-success' : (lichKham.trangThai == 'Chưa khám' ? 'bg-danger' : 'bg-secondary')}" class="badge" th:text="${lichKham.trangThai}">Trạng thái</span>
-            </div>
-            <a class="btn btn-primary btn-sm" th:attr="data-id=${lichKham.maLK}" onclick="viewDetails(this)">Xem Chi Tiết</a>
+<body class="index-page">
+  <th:block th:replace="header :: headerFragment"></th:block>
+  <main class="main">
+    <div class="container mt-5">
+      <h2 class="mb-4">Danh sách Lịch Khám</h2>
+      <!-- Form lọc lịch khám -->
+      <div class="mb-4">
+        <form id="filterForm" class="d-flex align-items-center">
+          <div class="me-3">
+            <label for="startDate" class="form-label">Từ ngày:</label>
+            <input type="date" id="startDate" class="form-control">
           </div>
-        </div>
-      </th:block>
-    </div>
-  </div>
-
-  <!-- Modal hiển thị chi tiết lịch khám-->
-  <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="detailModalLabel">Chi Tiết Lịch Khám</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-
-          <p><strong>Mã Lịch Khám:</strong> <span id="maLK"></span></p>
-          <p><strong>Họ Tên:</strong> <span id="hoTen"></span></p>
-          <p><strong>Email:</strong> <span id="email"></span></p>
-          <p><strong>Số Điện Thoại:</strong> <span id="sdt"></span></p>
-          <p><strong>Ghi Chú:</strong> <span id="note"></span></p>
-          <p><strong>Ngày Giờ Đặt Khám:</strong> <span id="ngayGioDatKham"></span></p>
-          <p><strong>Trạng Thái:</strong> <span id="trangThai"></span></p>
-
-          <!-- Thông tin chi tiết chỉ hiển thị khi đã khám -->
-          <div id="chiTietConfirmed" style="display: none;">
-            <div class="custom-line"></div> <!-- Đường kẻ tùy chỉnh -->
-            <p class="custom-title"><strong>Thông tin hồ sơ sau khi khám:</strong></p>
-            <p><strong>Mã hồ sơ:</strong> <span id="maHS"></span></p>
-            <p><strong>Chuẩn đoán:</strong> <span id="chuanDoan"></span></p>
-            <p><strong>Đơn thuốc:</strong> <span id="donThuoc"></span></p>
-            <p><strong>Dặn dò của bác sĩ:</strong> <span id="danDo"></span></p>
+          <div class="me-3" style="margin-left: 50px;">
+            <label for="endDate" class="form-label">Đến ngày:</label>
+            <input type="date" id="endDate" class="form-control">
           </div>
-
-          <!-- Nút hủy lịch khám -->
-          <div id="cancelButtonContainer" style="display: none; margin-top: 40px;">
-            <div class="d-flex justify-content-center">
-              <button class="btn btn-danger" onclick="cancelLichKham()">Hủy Lịch Khám</button>
-            </div>
-          </div>
-
-
-        </div>
+          <button type="button" class="btn btn-primary me-2"  onclick="filterLichKham()" >Lọc</button>
+          <button type="button" class="btn btn-primary me-2" onclick="viewAllLichKham()">Xem toàn bộ</button>
+        </form>
       </div>
-    </div>
-  </div>
-
-<div style="margin-top: 50px;">
-  <th:block th:replace="footer :: footerFragment"></th:block>
-</div>
-
-<!-- JavaScript để mở modal khi bấm Xem Chi Tiết -->
-<script>
-  function viewDetails(button) {
-    const maLK = button.getAttribute("data-id");
-    fetch(`/lichkham/details/${maLK}`)
-            .then(response => response.json())
-            .then(data => {
-              document.getElementById("maLK").textContent = data.maLK;
-              document.getElementById("hoTen").textContent = data.hoten;
-              document.getElementById("email").textContent = data.email;
-              document.getElementById("sdt").textContent = data.sDT;
-              document.getElementById("note").textContent = data.note;
-              document.getElementById("ngayGioDatKham").textContent = data.ngayGioDatKham;
-              document.getElementById("trangThai").textContent = data.trangThai;
-
-              // Hiển thị chi tiết chỉ khi trạng thái là "Đã khám"
-              if (data.trangThai === "Đã khám") {
-                document.getElementById("maHS").textContent = data.maHS;
-                document.getElementById("chuanDoan").textContent = data.chuandoan;
-                document.getElementById("donThuoc").textContent = data.donthuoc;
-                document.getElementById("danDo").textContent = data.dando;
-                // Hiển thị chi tiết
-                document.getElementById("chiTietConfirmed").style.display = "block"; // Đảm bảo hiển thị div
-              } else {
-                document.getElementById("chiTietConfirmed").style.display = "none";
-              }
-
-              // Hiển thị nút hủy nếu trạng thái là "Chưa khám"
-              if (data.trangThai === "Chưa khám") {
-                document.getElementById("cancelButtonContainer").style.display = "block";
-              } else {
-                document.getElementById("cancelButtonContainer").style.display = "none";
-              }
-
-              // Mở modal
-              new bootstrap.Modal(document.getElementById("detailModal")).show();
-
-            })
-            .catch(error => console.error("Error:", error));
-  }
-
-  function cancelLichKham() {
-    const maLK = document.getElementById("maLK").textContent;
-    // Hiển thị hộp thoại xác nhận hủy
-    Swal.fire({
-        title: 'Bạn có chắc chắn muốn hủy lịch khám này?',
-        showCancelButton: true,
-        confirmButtonText: 'Hủy lịch',
-        cancelButtonText: 'Quay lại',
-        icon: 'warning',
-        reverseButtons: true
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Gửi yêu cầu hủy lịch khám
-            fetch(`/lichkham/delete/${maLK}`, {
-                method: "POST"
-            })
-            .then(response => {
-                if (response.ok) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Lịch khám đã được hủy thành công.',
-                        showConfirmButton: false,
-                        timer: 1500 // Hiển thị thông báo thành công trong 1.5 giây
-                    }).then(() => {
-                        window.location.reload(); // Reload lại trang sau khi hủy
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Hủy lịch khám thất bại.',
-                        text: 'Vui lòng thử lại.',
-                        showConfirmButton: true
-                    });
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Lỗi',
-                    text: 'Đã có lỗi xảy ra. Vui lòng thử lại.',
-                    showConfirmButton: true
-                });
-            });
-        }
-    });
-  }
-
-  function filterLichKham() {
-    const startDate = document.getElementById('startDate').value;
-    const endDate = document.getElementById('endDate').value;
-
-    // Kiểm tra nếu người dùng chưa chọn đầy đủ ngày
-    if (!startDate || !endDate) {
-        Swal.fire({
-            icon: 'warning',
-            title: 'Thiếu thông tin',
-            text: 'Vui lòng chọn đầy đủ Ngày bắt đầu và Ngày kết thúc!'
-        });
-        return; // Dừng thực thi nếu chưa chọn ngày
-    }
-
-    // Kiểm tra nếu ngày kết thúc bé hơn ngày bắt đầu
-    if (new Date(endDate) < new Date(startDate)) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Lỗi ngày chọn',
-            text: 'Ngày kết thúc không được nhỏ hơn Ngày bắt đầu!'
-        });
-        return; // Dừng thực thi nếu điều kiện không hợp lệ
-    }
-
-    const url = `/api/lich-kham/filter?startDate=${startDate}&endDate=${endDate}`;
-
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            updateLichKhamList(data); // Cập nhật danh sách lịch khám với dữ liệu đã lọc
-        })
-        .catch(error => console.error('Error filtering Lich Kham:', error));
-  }
-
-  function viewAllLichKham() {
-    fetch("/lichkham/all")
-      .then(response => response.json())
-      .then(data => {
-        console.log(data); // Log để xem dữ liệu trả về từ API
-        updateLichKhamList(data);
-      })
-      .catch(error => console.error("Error:", error));
-  }
-
-  function updateLichKhamList(data) {
-    const lichKhamList = document.querySelector('.list-group'); // Sử dụng class list-group thay vì id
-    if (lichKhamList) {
-        // Tiến hành cập nhật
-        lichKhamList.innerHTML = ""; // Xóa list trước khi làm
-
-        data.forEach(lichKham => {
-        const listItem = `
+      <div class="list-group">
+        <th:block th:each="lichKham : ${lichKhamList}">
           <div class="list-group-item">
             <div class="d-flex justify-content-between align-items-center">
               <div>
-                <h5>${lichKham.ngayGioDatKham}</h5>
-                <p>Mã: ${lichKham.maLK}</p>
+                <h5 th:text="${#temporals.format(lichKham.ngayGioDatKham, 'yyyy-MM-dd HH:mm:ss')}">Ngày giờ đặt khám</h5>
+                <p>Mã: <span th:text="${lichKham.maLK}">Mã Lịch Khám</span></p>
               </div>
               <div class="status-column">
-                <span class="badge ${lichKham.trangThai === 'Đã khám' ? 'bg-success' : (lichKham.trangThai === 'Chưa khám' ? 'bg-danger' : 'bg-secondary')}">
-                  ${lichKham.trangThai}
-                </span>
+                <span th:classappend="${lichKham.trangThai == 'Đã khám' ? 'bg-success' : (lichKham.trangThai == 'Chưa khám' ? 'bg-danger' : 'bg-secondary')}" class="badge" th:text="${lichKham.trangThai}">Trạng thái</span>
               </div>
-              <a class="btn btn-primary btn-sm" data-id="${lichKham.maLK}" onclick="viewDetails(this)">Xem Chi Tiết</a>
+              <a class="btn btn-primary btn-sm" th:attr="data-id=${lichKham.maLK}" onclick="viewDetails(this)">Xem Chi Tiết</a>
             </div>
-          </div>`;
-        lichKhamList.insertAdjacentHTML("beforeend", listItem);
-       });
-    } else {
-        console.error('Không tìm thấy phần tử với lớp list-group');
-    }
-  }
+          </div>
+        </th:block>
+      </div>
+    </div>
 
-</script>
+    <!-- Modal hiển thị chi tiết lịch khám-->
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detailModalLabel">Chi Tiết Lịch Khám</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
 
-<!-- Vendor JS Files -->
-<script th:src="@{assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+            <p><strong>Mã Lịch Khám:</strong> <span id="maLK"></span></p>
+            <p><strong>Họ Tên:</strong> <span id="hoTen"></span></p>
+            <p><strong>Email:</strong> <span id="email"></span></p>
+            <p><strong>Số Điện Thoại:</strong> <span id="sdt"></span></p>
+            <p><strong>Ghi Chú:</strong> <span id="note"></span></p>
+            <p><strong>Ngày Giờ Đặt Khám:</strong> <span id="ngayGioDatKham"></span></p>
+            <p><strong>Trạng Thái:</strong> <span id="trangThai"></span></p>
+
+            <!-- Thông tin chi tiết chỉ hiển thị khi đã khám -->
+            <div id="chiTietConfirmed" style="display: none;">
+              <div class="custom-line"></div> <!-- Đường kẻ tùy chỉnh -->
+              <p class="custom-title"><strong>Thông tin hồ sơ sau khi khám:</strong></p>
+              <p><strong>Mã hồ sơ:</strong> <span id="maHS"></span></p>
+              <p><strong>Chuẩn đoán:</strong> <span id="chuanDoan"></span></p>
+              <p><strong>Đơn thuốc:</strong> <span id="donThuoc"></span></p>
+              <p><strong>Dặn dò của bác sĩ:</strong> <span id="danDo"></span></p>
+            </div>
+
+            <!-- Nút hủy lịch khám -->
+            <div id="cancelButtonContainer" style="display: none; margin-top: 40px;">
+              <div class="d-flex justify-content-center">
+                <button class="btn btn-danger" onclick="cancelLichKham()">Hủy Lịch Khám</button>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div style="margin-top: 50px;">
+    <th:block th:replace="footer :: footerFragment"></th:block>
+  </div>
 
 </body>
 
