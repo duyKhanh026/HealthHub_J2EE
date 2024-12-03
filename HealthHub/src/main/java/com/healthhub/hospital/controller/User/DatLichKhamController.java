@@ -2,16 +2,15 @@ package com.healthhub.hospital.controller.User;
 
 import com.healthhub.hospital.Entity.*;
 import com.healthhub.hospital.controller.EmailController;
-import com.healthhub.hospital.service.ChiTietLichKhamService;
-import com.healthhub.hospital.service.LichKhamService;
-import com.healthhub.hospital.service.TaiKhoanService;
-import com.healthhub.hospital.service.ThanhToanService;
+import com.healthhub.hospital.service.*;
 import jakarta.mail.MessagingException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -59,23 +58,44 @@ public class DatLichKhamController {
 
     }
 
+    @Autowired
+    private BenhNhanService benhnhanService;
 
     @GetMapping({ "/DatLichKham" })
     public String datlichKham(Model model, Authentication authentication) {
-        this.authentication = authentication;
+        BenhNhan benhNhan1 = null;
 
-        BenhNhan benhNhan1;
-        benhNhan1 = taiKhoanService.getBenhNhanByTenDN(authentication.getName());
+        // Kiểm tra xem người dùng đang đăng nhập bằng tài khoản Google hay tài khoản mật khẩu thông thường
+        if (authentication.getPrincipal() instanceof OAuth2User) {
+            // Nếu đăng nhập bằng Google, lấy thông tin từ OAuth2User
+            OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
+            String email = oauth2User.getAttribute("email");
 
-        LichKham lichKham = new LichKham();
-        lichKham.setHoten(benhNhan1.getHoTen());
-        lichKham.setEmail(benhNhan1.getEmail());
-        lichKham.setSDT(benhNhan1.getSDT());
+            // Tìm bệnh nhân theo email từ Google
+            benhNhan1 = benhnhanService.findByEmail(email);
+        } else {
+            // Nếu đăng nhập bằng tài khoản mật khẩu thông thường
+            TaiKhoan tk = taiKhoanService.findByTenDN(authentication.getName());
+            if (tk != null && tk.getBenhNhan() != null) {
+                benhNhan1 = benhnhanService.getBenhNhanById(tk.getBenhNhan().getMaBN());
+            }
+        }
 
-        model.addAttribute("lichKham", lichKham);
+        // Nếu tìm thấy bệnh nhân, thiết lập thông tin vào đối tượng LichKham
+        if (benhNhan1 != null) {
+            LichKham lichKham = new LichKham();
+            lichKham.setHoten(benhNhan1.getHoTen());
+            lichKham.setEmail(benhNhan1.getEmail());
+            lichKham.setSDT(benhNhan1.getSDT());
+
+            // Thêm đối tượng LichKham và recaptchaKey vào model
+            model.addAttribute("lichKham", lichKham);
+        }
+
         model.addAttribute("recaptchaKey", recaptchaKey);
-        return "User/DatLichKham";
+        return "User/DatLichKham"; 
     }
+
 
     @PostMapping("/DatLichKham")
     public String addlichkham(@ModelAttribute("lichKham") LichKham lichkham,@RequestParam("date") String date,
