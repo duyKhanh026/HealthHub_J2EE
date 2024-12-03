@@ -35,7 +35,6 @@ public class LichKhamController {
 
     @GetMapping("/lichkhambenh")
     public String danhSachLichKham(Model model, Authentication authentication) {
-//        TaiKhoan tk = taiKhoanService.GetTKByID(authentication.getName());
         // Kiểm tra xem người dùng đang đăng nhập bằng tài khoản Google hay tài khoản mật khẩu thông thường
         if (authentication.getPrincipal() instanceof OAuth2User) {
             // Nếu đăng nhập bằng Google, lấy thông tin từ OAuth2User
@@ -50,11 +49,7 @@ public class LichKhamController {
             benhnhan = benhnhanService.getBenhNhanById(tk.getBenhNhan().getMaBN());
         }
         List<LichKham> lichKhamList = LKBService.getLichKhamByMaBN(benhnhan.getMaBN());
-        // In ra danh sách lịch khám
-        System.out.println("List lich 111: ");
-        for (LichKham lichKham : lichKhamList) {
-            System.out.println(lichKham.toString()); // In đối tượng LichKham, bạn có thể override toString() trong LichKham để in chi tiết
-        }
+
         model.addAttribute("lichKhamList", lichKhamList);
         return "User/LichKhamBenh"; // Tên của view HTML bạn muốn render
     }
@@ -73,25 +68,23 @@ public class LichKhamController {
             TaiKhoan tk = taiKhoanService.findByTenDN(authentication.getName());
             benhnhan = benhnhanService.getBenhNhanById(tk.getBenhNhan().getMaBN());
 
+            List<LichKham> lichKhamList = LKBService.filterLichKhamByDateRange(startDate, endDate, benhnhan.getMaBN());
 
-            List<LichKham> lichKhamList1 = LKBService.filterLichKhamByDateRange(startDate, endDate, benhnhan.getMaBN());
-            // Log dữ liệu trước khi trả về
-            System.out.println("List lich 222: ");
-            for (LichKham lichKham : lichKhamList1) {
-                System.out.println(lichKham.toString()); // In đối tượng LichKham, bạn có thể override toString() trong LichKham để in chi tiết
-            }
-            return ResponseEntity.ok(lichKhamList1); // Trả về danh sách các lịch khám
+            return ResponseEntity.ok(lichKhamList); // Trả về danh sách các lịch khám
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build(); // Trả về lỗi nếu có vấn đề
         }
     }
 
-
     @GetMapping("/lichkham/all")
     public ResponseEntity<List<LichKham>> getAllLichKham() {
-        List<LichKham> allLichKham = LKBService.getAllLichKham();
-        return ResponseEntity.ok(allLichKham);
+        // Lấy thông tin người dùng hiện tại
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        TaiKhoan tk = taiKhoanService.findByTenDN(authentication.getName());
+        benhnhan = benhnhanService.getBenhNhanById(tk.getBenhNhan().getMaBN());
+        List<LichKham> lichKhamList = LKBService.getLichKhamByMaBN(benhnhan.getMaBN());
+        return ResponseEntity.ok(lichKhamList);
     }
 
 }
