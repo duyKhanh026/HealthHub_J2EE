@@ -7,6 +7,8 @@ import com.healthhub.hospital.service.LichKhamService;
 import com.healthhub.hospital.service.TaiKhoanService;
 import com.healthhub.hospital.service.ThanhToanService;
 import jakarta.mail.MessagingException;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -140,5 +142,14 @@ public class DatLichKhamController {
         }
         System.out.println(availableTimes);
         return availableTimes;
+    }
+
+    @GetMapping("/checkDate")
+    public ResponseEntity<Boolean> checkDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+
+        benhNhan = taiKhoanService.getBenhNhanByTenDN(authentication.getName());
+
+        boolean hasAppointment = lichKhamService.hasAppointmentOnDate(benhNhan.getMaBN(), date);
+        return ResponseEntity.ok(hasAppointment);
     }
 }
