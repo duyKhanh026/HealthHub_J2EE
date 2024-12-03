@@ -91,6 +91,7 @@
                                     <th>Mã lịch khám</th>
                                     <th>Tên bệnh nhân</th>
                                     <th>Ngày khám</th>
+                                    <th>Ghi chú</th>
                                     <th>Trạng thái</th>
                                     <th>Chi tiết</th>
 
@@ -103,7 +104,7 @@
                                     <td th:text="${lichkham.maLK}">MaLK</td>
                                     <td th:text="${lichkham.hoten}">MaBN</td>
                                         <td th:text="${#temporals.format(lichkham.ngayGioDatKham, 'dd-MM-yyyy HH:mm')}">NgayGioDatKham</td>
-
+                                        <td th:text="${lichkham.note}"></td>
                                         <td th:text="${lichkham.trangThai}">Trangthai</td>
                                         <td>
                                             <a th:href="@{/ThongTinLichKham(id=${lichkham.maLK})}" class="btn btn-info btn-circle btn-lg">

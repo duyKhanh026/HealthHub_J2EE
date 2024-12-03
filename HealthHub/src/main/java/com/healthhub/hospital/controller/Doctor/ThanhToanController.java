@@ -33,9 +33,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.Normalizer;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Controller
 public class ThanhToanController {
@@ -105,13 +107,13 @@ public class ThanhToanController {
         ThanhToan thanhToan = thanhToanService.findbyid_thanhtoan(id);
         LichKham lichKham = lichKhamService.getLichKhambyID(Malk);
 
-        String hoTen = lichKham.getHoten();
-        String sdt = lichKham.getSDT();
-        String email = lichKham.getEmail();
-        String ngayKham = lichKham.getNgayKham().toString();
-        String chuanDoan = lichKham.getChiTietLichKham().getChuanDoan();
-        String donThuoc = lichKham.getChiTietLichKham().getDonThuoc();
-        String ghiChuThem = lichKham.getChiTietLichKham().getGhiChuThem();
+        String hoTen = removeVietnameseAccents(lichKham.getHoten() != null ? lichKham.getHoten() : "");
+        String sdt = removeVietnameseAccents(lichKham.getSDT() != null ? lichKham.getSDT() : "");
+        String email = removeVietnameseAccents(lichKham.getEmail() != null ? lichKham.getEmail() : "");
+        String ngayKham = removeVietnameseAccents(lichKham.getNgayKham() != null ? lichKham.getNgayKham().toString() : "");
+        String chuanDoan = removeVietnameseAccents(lichKham.getChiTietLichKham().getChuanDoan() != null ? lichKham.getChiTietLichKham().getChuanDoan() : "");
+        String donThuoc = removeVietnameseAccents(lichKham.getChiTietLichKham().getDonThuoc() != null ? lichKham.getChiTietLichKham().getDonThuoc() : "");
+        String ghiChuThem = removeVietnameseAccents(lichKham.getChiTietLichKham().getGhiChuThem() != null ? lichKham.getChiTietLichKham().getGhiChuThem() : "");
 
         // Tạo PDF trong bộ nhớ
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -158,7 +160,7 @@ public class ThanhToanController {
         table.addCell("Payment Time:");
         table.addCell(thanhToan.getNgayThanhToan().toString());
         table.addCell("Payment Method:");
-        table.addCell(thanhToan.getHinhThucThanhToan());
+        table.addCell(removeVietnameseAccents(thanhToan.getHinhThucThanhToan()));
         document.add(table);
 
         // Footer Note
@@ -175,9 +177,16 @@ public class ThanhToanController {
             responseOutputStream.write(pdfBytes);
         }
 
+        if (lichKham.getEmail() != null)
+        {
+            emailService.sendEmailWithAttachment(email, "Payment Invoice", "Please find your invoice attached.", pdfBytes, "invoice.pdf");
+        }
         // Gửi email với file PDF đính kèm
-        emailService.sendEmailWithAttachment(email, "Payment Invoice", "Please find your invoice attached.", pdfBytes, "invoice.pdf");
     }
 
-
+    private String removeVietnameseAccents(String text) {
+        String normalized = Normalizer.normalize(text, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(normalized).replaceAll("").replace("đ", "d").replace("Đ", "D");
+    }
 }
