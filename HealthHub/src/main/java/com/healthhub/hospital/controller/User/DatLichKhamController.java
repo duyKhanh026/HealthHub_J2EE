@@ -38,7 +38,6 @@ public class DatLichKhamController {
 
     private ThanhToanService thanhToanService;
 
-    private Authentication authentication;
 
     private BenhNhan benhNhan = new BenhNhan();
 
@@ -93,14 +92,15 @@ public class DatLichKhamController {
         }
 
         model.addAttribute("recaptchaKey", recaptchaKey);
-        return "User/DatLichKham"; 
+        return "User/DatLichKham";
     }
 
 
     @PostMapping("/DatLichKham")
     public String addlichkham(@ModelAttribute("lichKham") LichKham lichkham,@RequestParam("date") String date,
     							@RequestParam("g-recaptcha-response") String recaptchaResponse,
-    							@RequestParam("time") String time, BindingResult result, Model model) throws MessagingException {
+    							@RequestParam("time") String time, BindingResult result, Model model,
+                              Authentication authentication) throws MessagingException {
         if (result.hasErrors()) {
             return "404";
         }
@@ -172,7 +172,7 @@ public class DatLichKhamController {
     }
 
     @GetMapping("/checkDate")
-    public ResponseEntity<Boolean> checkDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+    public ResponseEntity<Boolean> checkDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,Authentication authentication) {
 
         benhNhan = taiKhoanService.getBenhNhanByTenDN(authentication.getName());
 
