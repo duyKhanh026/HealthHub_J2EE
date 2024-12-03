@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @Controller
 public class ZaloPayController {
 
@@ -48,6 +50,7 @@ public class ZaloPayController {
 
         thanhToan.setSoTien(amount);
         thanhToan.setHinhThucThanhToan("ZaloPay");
+        thanhToan.setNgayThanhToan(LocalDateTime.now());
         thanhToan.setTrangthai("Đã thanh toán");
         thanhToanService.updateThanhToan(thanhToan);
 

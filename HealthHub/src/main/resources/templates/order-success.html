@@ -13,21 +13,34 @@
 <input type="text" id="orderUrl" th:value="${orderUrl}" readonly />
 
 <!-- Link to create another order -->
-<a href="/payment/form">Create another order</a>
+<!--<a href="/payment/form">Create another order</a>-->
 
 <script>
-    // Automatically open the order URL
-    function openOrderUrl() {
-        // Get the order URL from the page
+    // Automatically open the order URL in a new tab and navigate back in the current tab
+    function openOrderUrlAndGoBack() {
+        // Lấy URL thanh toán từ input
         const orderUrl = document.getElementById("orderUrl").value;
 
-        // Check if there's a value, then navigate
-        if (orderUrl && orderUrl !== '') {
-            window.location.href = orderUrl; // Redirect to the URL
-        } else {
-            console.error("Order URL is missing.");
-        }
+    if (orderUrl && orderUrl !== '') {
+        // Mở link thanh toán trong tab mới
+        window.open(orderUrl, '_blank');
+
+        // Tab hiện tại quay lại 2 bước
+        setTimeout(() => {
+            history.go(-2);
+
+            // Sau khi quay lại, tự động làm mới trang
+            setTimeout(() => {
+                location.reload();
+            }, 1000); // Đợi 1 giây để đảm bảo trang đã quay lại trước khi reload
+        }, 1000);
+    } else {
+        console.error("Order URL is missing.");
     }
+    }
+
+    // Gọi hàm khi trang được tải
+    document.addEventListener("DOMContentLoaded", openOrderUrlAndGoBack);
 </script>
 </body>
 </html>

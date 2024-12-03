@@ -35,20 +35,23 @@ function makeReadonly() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const trangThaiInput = document.getElementById("trangThaiInput");
-    const thanhToanBtns = document.querySelectorAll(".btn-thanh-toan");
-    const xuatPdfBtn = document.querySelector(".btn-xuat-pdf");
-
-    if (trangThaiInput.value === "Đã thanh toán") {
-        // Ẩn các nút thanh toán
-        thanhToanBtns.forEach(btn => btn.style.display = "none");
-        // Hiện nút xuất PDF
-        xuatPdfBtn.style.display = "block";
-    } else {
-        // Hiện các nút thanh toán
-        thanhToanBtns.forEach(btn => btn.style.display = "block");
-        // Ẩn nút xuất PDF
-        xuatPdfBtn.style.display = "none";
-    }
-});
+//document.addEventListener("DOMContentLoaded", function () {
+//    const trangThaiInput = document.getElementById("trangThaiInput");
+//    const thanhToanBtns = document.querySelectorAll(".btn-thanh-toan");
+//    const xuatPdfBtn = document.querySelector(".btn-xuat-pdf");
+//        const soTienInput = document.getElementById("soTienInput");
+//
+//    if (trangThaiInput.value === "Đã thanh toán") {
+//
+//    soTienInput.setAttribute("readonly", "true");
+//        // Ẩn các nút thanh toán
+//        thanhToanBtns.forEach(btn => btn.style.display = "none");
+//        // Hiện nút xuất PDF
+//        xuatPdfBtn.style.display = "block";
+//    } else {
+//        // Hiện các nút thanh toán
+//        thanhToanBtns.forEach(btn => btn.style.display = "block");
+//        // Ẩn nút xuất PDF
+//        xuatPdfBtn.style.display = "none";
+//    }
+//});
