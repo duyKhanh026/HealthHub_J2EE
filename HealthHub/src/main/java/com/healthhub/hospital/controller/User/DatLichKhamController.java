@@ -70,10 +70,15 @@ public class DatLichKhamController {
 
     @PostMapping("/DatLichKham")
     public String addlichkham(@ModelAttribute("lichKham") LichKham lichkham,@RequestParam("date") String date,
-                              @RequestParam("time") String time, BindingResult result, Model model) throws MessagingException {
+    							@RequestParam("g-recaptcha-response") String recaptchaResponse,
+    							@RequestParam("time") String time, BindingResult result, Model model) throws MessagingException {
         if (result.hasErrors()) {
             return "404";
         }
+//        if (!verifyCaptcha(recaptchaResponse)) {
+//            model.addAttribute("captchaError", "Please complete the CAPTCHA verification.");
+//            return "DatLichKham"; // Trả về trang đặt lịch nếu CAPTCHA không hợp lệ
+//        }
 
         System.out.println("data về");
 
