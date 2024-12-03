@@ -105,7 +105,7 @@
                 </div>
 
 				<div class="g-recaptcha" 
-			         data-sitekey="6Lf3f5AqAAAAAGAXGcsvy9_fJgC1iAbebDBxra49" 
+			         th:data-sitekey="${recaptchaKey}" 
 			         data-callback="enableButton"
 			         data-expired-callback="disableButton">
 			    </div>
@@ -115,10 +115,9 @@
 <!--                    <div class="loading">Loading</div>-->
 <!--                    <div class="error-message"></div>-->
 <!--                    <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>-->
-                    <div class="text-center"><button type="button" class="btn btn-primary" id="submitButton" onclick="checkinput()">Make an Appointment</button></div>
+                    <div class="text-center"><button type="button" class="btn btn-primary" id="submitButton" onclick="checkinput()" disabled>Make an Appointment</button></div>
                 </div>
             </form>
-
         </div>
 
     </section><!-- /Appointment Section -->

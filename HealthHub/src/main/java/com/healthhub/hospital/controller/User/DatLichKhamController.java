@@ -7,6 +7,8 @@ import com.healthhub.hospital.service.LichKhamService;
 import com.healthhub.hospital.service.TaiKhoanService;
 import com.healthhub.hospital.service.ThanhToanService;
 import jakarta.mail.MessagingException;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -25,6 +27,10 @@ import java.util.List;
 
 @Controller
 public class DatLichKhamController {
+
+    @Value("${google.recaptcha.key}")
+    private String recaptchaKey;
+	
     private LichKhamService lichKhamService;
 
     private TaiKhoanService taiKhoanService;
@@ -67,6 +73,7 @@ public class DatLichKhamController {
         lichKham.setSDT(benhNhan1.getSDT());
 
         model.addAttribute("lichKham", lichKham);
+        model.addAttribute("recaptchaKey", recaptchaKey);
         return "User/DatLichKham";
     }
 

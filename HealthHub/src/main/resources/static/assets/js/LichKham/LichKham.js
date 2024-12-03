@@ -1,3 +1,16 @@
+//Biến toàn cục kiểm tra captcha
+let captcha_solved = false;
+
+function enableButton() {
+	captcha_solved = true;
+}
+
+// Hàm được gọi khi reCAPTCHA hết hạn
+function disableButton() {
+    captcha_solved = false;
+}
+
+
 document.getElementById("date").addEventListener("change", function () {
     const selectedDate = this.value;
     const currentDate = new Date();
@@ -47,7 +60,13 @@ document.getElementById("date").addEventListener("change", function () {
 });
 
 function checkinput(){
-const name = document.getElementById("name").value.trim();
+		
+		if (!captcha_solved) {
+    		document.querySelector(".recaptcha-error-message").style.display = "block"; 
+			return;
+		}
+		
+		const name = document.getElementById("name").value.trim();
         const email = document.getElementById("email").value.trim();
         const phone = document.getElementById("phone").value.trim();
         const date = document.getElementById("date").value.trim();

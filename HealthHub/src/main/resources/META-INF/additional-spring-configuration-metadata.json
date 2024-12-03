@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "openai.key",
+    "type": "java.lang.String",
+    "description": "A description for 'openai.key'"
+  },
+  {
+    "name": "google.recaptcha.key",
+    "type": "java.lang.String",
+    "description": "A description for 'google.recaptcha.key'"
+  },
+  {
+    "name": "google.cloud.project-id",
+    "type": "java.lang.String",
+    "description": "A description for 'google.cloud.project-id'"
+  }
+]}
