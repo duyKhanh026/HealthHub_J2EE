@@ -20,12 +20,13 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body id="page-top">
 <!-- Page Wrapper -->
 <div id="wrapper">
-  <th:block th:replace="Doctor/menu :: menuFragment"></th:block>
+  <th:block th:replace="~{Doctor/menu :: menuFragment}"></th:block>
 
   <!-- Content Wrapper -->
   <div id="content-wrapper" class="d-flex flex-column">
@@ -35,7 +36,7 @@
       <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
         <h1 class="h3 mb-0 text-gray-800">Thống kê lịch khám</h1>
       </nav>
-
+      
       <!-- Page Content -->
       <div class="container-fluid">
         <!-- Form chọn thời gian và trạng thái -->
@@ -84,75 +85,7 @@
 <script src="assets2/vendor/jquery-easing/jquery.easing.min.js"></script>
 <script src="assets2/js/sb-admin-2.min.js"></script>
 
-<!-- Custom script for Chart.js -->
-<script>
-  // Cấu hình biểu đồ
-  const ctx = document.getElementById('myLineChart').getContext('2d');
-  let myLineChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: [],
-      datasets: [{
-        label: 'Số lượng lịch khám',
-        data: [],
-        backgroundColor: 'rgba(78, 115, 223, 0.05)',
-        borderColor: 'rgba(78, 115, 223, 1)',
-        pointBackgroundColor: 'rgba(78, 115, 223, 1)',
-        pointBorderColor: 'rgba(78, 115, 223, 1)',
-        pointHoverBackgroundColor: 'rgba(78, 115, 223, 1)',
-        pointHoverBorderColor: 'rgba(78, 115, 223, 1)',
-        fill: true,
-        tension: 0.4
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: 'Ngày'
-          }
-        },
-        y: {
-          title: {
-            display: true,
-            text: 'Số lượng lịch khám'
-          },
-          beginAtZero: true
-        }
-      }
-    }
-  });
-
- // Xử lý nút "Lọc"
-  document.getElementById('filterButton').addEventListener('click', async function() {
-    const startDate = document.getElementById('startDate').value;
-    const endDate = document.getElementById('endDate').value;
-    const status = document.getElementById('status').value;
-
-    // Chuyển ngày tháng về định dạng 'yyyy-MM-dd'T'HH:mm:ss'
-    const startDateTime = new Date(startDate).toISOString().slice(0, 19); // Bỏ phần 'Z' và giữ lại yyyy-MM-dd'T'HH:mm:ss
-    const endDateTime = new Date(endDate).toISOString().slice(0, 19);   // Bỏ phần 'Z' và giữ lại yyyy-MM-dd'T'HH:mm:ss
-
-
-    try {
-      // Gửi yêu cầu API
-      const response = await fetch(`/ThongKe/data?startDate=${startDateTime}&endDate=${endDateTime}&status=${status}`);
-      if (!response.ok) throw new Error('Lỗi khi lấy dữ liệu từ API.');
-
-      const data = await response.json();
-
-      // Cập nhật biểu đồ với dữ liệu mới
-      myLineChart.data.labels = data.labels; // Gán nhãn (ngày tháng)
-      myLineChart.data.datasets[0].data = data.data; // Gán giá trị (số lượng lịch khám)
-      myLineChart.update();
-    } catch (error) {
-      console.error('Có lỗi xảy ra:', error);
-      alert('Không thể tải dữ liệu. Vui lòng thử lại sau.');
-    }
-  });
-</script>
+<script th:src="@{/js/ThongKe.js}"></script>
 </body>
 
 </html>

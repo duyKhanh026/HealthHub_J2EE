@@ -2,6 +2,7 @@ package com.healthhub.hospital.service;
 
 import com.healthhub.hospital.Repository.LichKhamRepository;
 import com.healthhub.hospital.Entity.LichKham;
+import com.healthhub.hospital.Repository.ThanhToanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,8 @@ import java.util.stream.Collectors;
 public class LichKhamService {
     @Autowired
     private LichKhamRepository lichKhamRepository;
+    @Autowired
+    private ThanhToanRepository thanhToanRepository;
 
     public List<LichKham> getAllLichKham() {
         return lichKhamRepository.findAll();

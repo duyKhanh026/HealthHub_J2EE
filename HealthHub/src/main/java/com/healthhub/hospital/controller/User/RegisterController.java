@@ -102,11 +102,9 @@ public class RegisterController {
             model.addAttribute("modalType", "error");
             return "User/DangKy";
         }
-        System.out.println("So dt 1: "+ SDT);
 
         // Kiểm tra số điện thoại đã tồn tại trong bảng BenhNhan
         BenhNhan existingBenhNhan = benhnhanService.findBySDT(SDT);
-        System.out.println("So dt 2: "+ existingBenhNhan.getSDT());
         BenhNhan benhNhan;
 
         if (existingBenhNhan != null) {
@@ -115,7 +113,6 @@ public class RegisterController {
 
             if (existingTaiKhoan != null) {
                 // Nếu đã có tài khoản cho bệnh nhân này, giữ lại tài khoản cũ
-                System.out.println("Tài khoản đã tồn tại!");
                 model.addAttribute("modalMessage", "Số điện thoại này đã được đăng ký tài khoản.");
                 model.addAttribute("modalType", "error");
                 return "User/DangKy";

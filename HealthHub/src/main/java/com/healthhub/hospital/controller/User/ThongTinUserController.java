@@ -54,6 +54,11 @@ public class ThongTinUserController {
         // Lấy số điện thoại hiện tại của bệnh nhân
         String currentPhoneNumber = benhnhan.getSDT();
 
+        // Kiểm tra độ dài của số điện thoại
+        if (bn.getSDT().length() != 10 || !bn.getSDT().matches("\\d+")) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Số điện thoại phải bao gồm đúng 10 chữ số!");
+            return "redirect:/thongtinuser"; // Chuyển hướng lại trang thông tin người dùng với thông báo lỗi
+        }
         // Nếu số điện thoại mới khác số điện thoại hiện tại, kiểm tra xem nó có tồn tại trong cơ sở dữ liệu không
         if (!bn.getSDT().equals(currentPhoneNumber) && benhnhanService.isSDTExist(bn.getSDT())) {
             redirectAttributes.addFlashAttribute("errorMessage", "Số điện thoại đã tồn tại trong hệ thống!");
