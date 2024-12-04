@@ -120,13 +120,7 @@
           <h3>About Us</h3>
           <p th:text="${page.about_us}"></p>
           <ul>
-            <li th:each="abu : ${aboutus}">
-              <i th:class="'fa-solid ' + ${abu.iconlink}"></i>
-              <div>
-                <h5 th:text="${abu.title}"></h5>
-                <p th:text="${abu.content}"></p>
-              </div>
-            </li>
+            
 			
           </ul>
         </div>
@@ -282,14 +276,13 @@
 
   </section>-->
 
-  <!-- Doctors Section -->
+  <!-- 
   <section id="doctors" class="doctors section">
 
-    <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
       <h2>Doctors</h2>
       <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-    </div><!-- End Section Title -->
+    </div>
 
     <div class="container">
 
@@ -310,22 +303,21 @@
               </div>
             </div>
           </div>
-        </div><!-- End Team Member -->
+        </div>
 
       </div>
 
     </div>
 
-  </section><!-- /Doctors Section -->
+  </section>Doctors Section -->
 
-  <!-- Gallery Section -->
+  <!-- Gallery Section 
   <section id="gallery" class="gallery section">
 
-    <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
       <h2>Gallery</h2>
       <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-    </div><!-- End Section Title -->
+    </div>
 
     <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
 
@@ -337,13 +329,13 @@
               <img th:src="@{${gallery.url}}" alt="" class="img-fluid">
             </a>
           </div>
-        </div><!-- End Gallery Item -->
+        </div>
 
       </div>
 
     </div>
 
-  </section><!-- /Gallery Section -->
+  </section> -->
 
   <!-- Contact Section -->
   <section id="contact" class="contact section">

@@ -18,7 +18,6 @@ import lombok.NoArgsConstructor;
 public class PageCustomIndex_1 {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment ID
     private Long id_b;
 
     @Column(nullable = false) // Box name should be a required field

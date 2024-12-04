@@ -58,8 +58,8 @@
 		    <div class="topbar d-flex align-items-center">
 		        <div class="container d-flex justify-content-center justify-content-md-between">
 		            <div class="contact-info d-flex align-items-center">
-		                <i class="bi bi-envelope d-flex align-items-center"><a><input type="text" th:value="${page.email}"></a></i>
-		                <i class="bi bi-phone d-flex align-items-center ms-4"><span><input type="text" th:value="${page.phone}"></span></i>
+		                <i class="bi bi-envelope d-flex align-items-center"><a><input id="txtemail" type="text" th:value="${page.email}"></a></i>
+		                <i class="bi bi-phone d-flex align-items-center ms-4"><span><input id="txtphone" type="text" th:value="${page.phone}"></span></i>
 		            </div>
 		            <div class="social-links d-none d-md-flex align-items-center">
 		                <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
@@ -76,7 +76,7 @@
 		            <a class="logo d-flex align-items-center me-auto">
 		                <!-- Uncomment the line below if you also wish to use an image logo -->
 		                <!-- <img th:src="@{assets/img/logo.png}" alt=""> -->
-						<input type="text" th:value="${page.pageName}">
+						<input id="txtpagename" type="text" th:value="${page.pageName}">
 		            </a>
 
 		            <nav id="navmenu" class="navmenu">
@@ -84,7 +84,7 @@
 		                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
 		            </nav>
 
-					<button class="btn btn-primary">Update</button>
+					<button class="btn btn-primary" id="updatebtn">Update</button>
 
 
 		            <!-- Modal Xác Nhận Đăng Xuất -->
@@ -126,19 +126,19 @@
 		        <div class="container position-relative">
 
 		            <div class="welcome position-relative" data-aos="fade-down" data-aos-delay="100">
-		                <h2><input type="text" th:value="${page.welcomeLine}"></h2>
-						<textarea style="width: 600px; height: 30%;" th:text="${page.welcomeLine1}"></textarea>
+		                <h2><input id="txtwelcome" type="text" th:value="${page.welcomeLine}"></h2>
+						<textarea id="txtwelcome1" style="width: 600px; height: 30%;" th:text="${page.welcomeLine1}"></textarea>
 		            </div><!-- End Welcome -->
 
 		            <div class="content row gy-4">
 		                <div class="col-lg-4 d-flex align-items-stretch">
-		                    <div class="why-box" data-aos="zoom-out" >
-		                        <h3><input th:value="${page.box1_1}"></h3>
-		                       <textarea style="width: 100%; height: 50%;" th:text="${page.box1_2}"></textarea>
+		                    <div class="why-box" data-aos="zoom-out" style="width: 100%;">
+		                        <h3 ><input id="txtbox1_1" th:value="${page.box1_1}"  style="width: 100%;"></h3>
+		                       <textarea id="txtbox1_2" style="width: 100%; height: 50%;" th:text="${page.box1_2}"></textarea>
 		                        
 		                    </div>
 		                </div><!-- End Why Box -->
-
+ 
 		                <div class="col-lg-8 d-flex align-items-stretch">
 		                    <div class="d-flex flex-column justify-content-center">
 		                        <div class="row gy-4">
@@ -146,8 +146,8 @@
 		                            <div class="col-xl-4 d-flex align-items-stretch" style="width: 350px;">
 		                                <div class="icon-box" data-aos="zoom-out" data-aos-delay="300">
 		                                    <i class="bi bi-clipboard-data"></i>
-											<button class="btn btn-primary">Add</button>
-											<button class="btn btn-primary">Edit</button>
+											<button class="btn btn-primary" onclick="addRow()">Add</button>
+											<button class="btn btn-primary" onclick="saveChanges()">Edit</button>
 		                                    <h4><input id="boxName"></h4>
 											<textarea id="boxContent" style="width: 100%; height: 50%;" ></textarea>
 		                                </div>
@@ -159,7 +159,7 @@
 		                </div>
 		            </div><!-- End  Content-->
 					<br>
-					<table style="border: 1px solid black; width: 100%; background-color: white;">
+					<table id="dataTable" style="border: 1px solid black; width: 100%; background-color: white;">
 				        <thead>
 				            <tr>
 				                <th>id_b</th>
@@ -180,6 +180,49 @@
 				        </tbody>
 				    </table>
 					<script>
+						
+						
+						let currentRow = null;
+						
+						function addRow() {
+				            // Lấy giá trị từ form
+							const boxName = document.getElementById('boxName').value;
+							const boxContent = document.getElementById('boxContent').value;
+
+				            if (!boxName || !boxContent) {
+				                alert('Please fill in all fields before adding a row.');
+				                return;
+				            }
+
+				            // Tạo hàng mới
+				            const table = document.querySelector('table tbody');
+				            const newRow = document.createElement('tr');
+				            newRow.innerHTML = `
+				                <td></td>
+				                <td>${boxName}</td>
+				                <td>${boxContent}</td>
+				                <td>
+				                    <button class="edit-btn" onclick="editRow(this)">Edit</button>
+				                    <button class="remove-btn" onclick="removeRow(this)" >Del</button>
+				                </td>
+				            `;
+
+				            // Thêm hàng vào bảng
+				            table.appendChild(newRow);
+				            updateRowNumbers();
+
+				            // Xóa form sau khi thêm
+				            document.getElementById('boxName').value = '';
+				            document.getElementById('boxContent').value = '';
+				        }
+
+				        function updateRowNumbers() {
+				            const rows = document.querySelectorAll('table tbody tr');
+				            rows.forEach((row, index) => {
+				                row.cells[0].innerText = index + 1;
+				            });
+				        }
+						
 						function editRow(button) {
 				            // Lấy dòng hiện tại
 				            const row = button.closest('tr');
@@ -192,6 +235,17 @@
 				            // Đổ dữ liệu lên form
 				            document.getElementById('boxName').value = boxName;
 				            document.getElementById('boxContent').value = boxContent;
+				        }
+						function saveChanges() {
+				            if (!currentRow) return;
+
+				            const boxName = document.getElementById('boxName').value;
+				            const boxContent = document.getElementById('boxContent').value;
+
+				            currentRow.cells[1].innerText = boxName;
+				            currentRow.cells[2].innerText = boxContent;
+
+				            currentRow = null;
 				        }
 						function removeRow(button) {
 				            if (confirm('Are you sure you want to remove this row?')) {
@@ -206,11 +260,8 @@
 
 		    <!-- About Section -->
 		    <section id="about" class="about section">
-
 		        <div class="container">
-
 		            <div class="row gy-4 gx-5">
-
 		                <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="200">
 		                    <img th:src="@{assets/img/about.jpg}" class="img-fluid" alt="">
 		                    <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn"></a>
@@ -218,225 +269,116 @@
 
 		                <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
 		                    <h3>About Us</h3>
-		                    <p>
-		                        Dolor iure expedita id fuga asperiores qui sunt consequatur minima. Quidem voluptas deleniti. Sit quia molestiae quia quas qui magnam itaque veritatis dolores. Corrupti totam ut eius incidunt reiciendis veritatis asperiores placeat.
-		                    </p>
+								<textarea id="txtabout_us" th:text="${page.about_us}" style="width: 100%;height: 100%;"></textarea>
 		                    <ul>
-		                        <li>
-		                            <i class="fa-solid fa-vial-circle-check"></i>
-		                            <div>
-		                                <h5>Ullamco laboris nisi ut aliquip consequat</h5>
-		                                <p>Magni facilis facilis repellendus cum excepturi quaerat praesentium libre trade</p>
-		                            </div>
-		                        </li>
-		                        <li>
-		                            <i class="fa-solid fa-pump-medical"></i>
-		                            <div>
-		                                <h5>Magnam soluta odio exercitationem reprehenderi</h5>
-		                                <p>Quo totam dolorum at pariatur aut distinctio dolorum laudantium illo direna pasata redi</p>
-		                            </div>
-		                        </li>
-		                        <li>
-		                            <i class="fa-solid fa-heart-circle-xmark"></i>
-		                            <div>
-		                                <h5>Voluptatem et qui exercitationem</h5>
-		                                <p>Et velit et eos maiores est tempora et quos dolorem autem tempora incidunt maxime veniam</p>
-		                            </div>
-		                        </li>
 		                    </ul>
 		                </div>
-
 		            </div>
-
 		        </div>
-
 		    </section><!-- /About Section -->
 
-		    
+			
+			<section id="contact" class="contact section">
+			    <!-- Section Title 
+			    <div class="container section-title" data-aos="fade-up">
+			      <h2>Contact</h2>
+			      <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+			    </div> End Section Title -->
 
-		    
+			    <div class="container aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
 
-		    
+					<div class="container section-title aos-init aos-animate" data-aos="fade-up">
+					    <h2>Xem Đường</h2>
+				  
+			    	</div>
 
+			    <div class="container" data-aos="fade-up" data-aos-delay="100">
+			      <div class="row gy-4">
+			        <div class="col-lg-4">
+			          <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+			            <i class="bi bi-geo-alt flex-shrink-0"></i>
+			            <div  style="width: 100%;">
+			              <h3>Location</h3>
+			              <p ><input id="txtLocation" th:value="${page.Location}" style="width: 100%;"></p>
+			            </div>
+			          </div><!-- End Info Item -->
 
-		    <!-- Doctors Section -->
-		    <section id="doctors" class="doctors section">
+			        </div>
+			      </div>
+			    </div>
 
-		        <!-- Section Title -->
-		        <div class="container section-title" data-aos="fade-up">
-		            <h2>Doctors</h2>
-		            <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-		        </div><!-- End Section Title -->
-
-		        <div class="container">
-
-		            <div class="row gy-4">
-
-		                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-		                    <div class="team-member d-flex align-items-start">
-		                        <div class="pic"><img th:src="@{assets/img/doctors/doctors-1.jpg}" class="img-fluid" alt=""></div>
-		                        <div class="member-info">
-		                            <h4>Walter White</h4>
-		                            <span>Chief Medical Officer</span>
-		                            <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
-		                            <div class="social">
-		                                <a href=""><i class="bi bi-twitter-x"></i></a>
-		                                <a href=""><i class="bi bi-facebook"></i></a>
-		                                <a href=""><i class="bi bi-instagram"></i></a>
-		                                <a href=""> <i class="bi bi-linkedin"></i> </a>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </div><!-- End Team Member -->
-
-		                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-		                    <div class="team-member d-flex align-items-start">
-		                        <div class="pic"><img th:src="@{assets/img/doctors/doctors-2.jpg}" class="img-fluid" alt=""></div>
-		                        <div class="member-info">
-		                            <h4>Sarah Jhonson</h4>
-		                            <span>Anesthesiologist</span>
-		                            <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
-		                            <div class="social">
-		                                <a href=""><i class="bi bi-twitter-x"></i></a>
-		                                <a href=""><i class="bi bi-facebook"></i></a>
-		                                <a href=""><i class="bi bi-instagram"></i></a>
-		                                <a href=""> <i class="bi bi-linkedin"></i> </a>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </div><!-- End Team Member -->
-
-		                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-		                    <div class="team-member d-flex align-items-start">
-		                        <div class="pic"><img th:src="@{assets/img/doctors/doctors-3.jpg}" class="img-fluid" alt=""></div>
-		                        <div class="member-info">
-		                            <h4>William Anderson</h4>
-		                            <span>Cardiology</span>
-		                            <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
-		                            <div class="social">
-		                                <a href=""><i class="bi bi-twitter-x"></i></a>
-		                                <a href=""><i class="bi bi-facebook"></i></a>
-		                                <a href=""><i class="bi bi-instagram"></i></a>
-		                                <a href=""> <i class="bi bi-linkedin"></i> </a>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </div><!-- End Team Member -->
-
-		                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
-		                    <div class="team-member d-flex align-items-start">
-		                        <div class="pic"><img th:src="@{assets/img/doctors/doctors-4.jpg}" class="img-fluid" alt=""></div>
-		                        <div class="member-info">
-		                            <h4>Amanda Jepson</h4>
-		                            <span>Neurosurgeon</span>
-		                            <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
-		                            <div class="social">
-		                                <a href=""><i class="bi bi-twitter-x"></i></a>
-		                                <a href=""><i class="bi bi-facebook"></i></a>
-		                                <a href=""><i class="bi bi-instagram"></i></a>
-		                                <a href=""> <i class="bi bi-linkedin"></i> </a>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </div><!-- End Team Member -->
-
-		            </div>
-
-		        </div>
-
-		    </section><!-- /Doctors Section -->
-
-
-		    
-
-		    <!-- Gallery Section -->
-		    <section id="gallery" class="gallery section">
-
-		        <!-- Section Title -->
-		        <div class="container section-title" data-aos="fade-up">
-		            <h2>Gallery</h2>
-		            <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-		        </div><!-- End Section Title -->
-
-		        <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
-
-		            <div class="row g-0">
-
-		                <div class="col-lg-3 col-md-4">
-		                    <div class="gallery-item">
-		                        <a th:href="@{assets/img/gallery/gallery-1.jpg}" class="glightbox" data-gallery="images-gallery">
-		                            <img th:src="@{assets/img/gallery/gallery-1.jpg}" alt="" class="img-fluid">
-		                        </a>
-		                    </div>
-		                </div><!-- End Gallery Item -->
-
-		                <div class="col-lg-3 col-md-4">
-		                    <div class="gallery-item">
-		                        <a th:href="@{assets/img/gallery/gallery-2.jpg}" class="glightbox" data-gallery="images-gallery">
-		                            <img th:src="@{assets/img/gallery/gallery-2.jpg}" alt="" class="img-fluid">
-		                        </a>
-		                    </div>
-		                </div><!-- End Gallery Item -->
-
-		                <div class="col-lg-3 col-md-4">
-		                    <div class="gallery-item">
-		                        <a th:href="@{assets/img/gallery/gallery-3.jpg}" class="glightbox" data-gallery="images-gallery">
-		                            <img th:src="@{assets/img/gallery/gallery-3.jpg}" alt="" class="img-fluid">
-		                        </a>
-		                    </div>
-		                </div><!-- End Gallery Item -->
-
-		                <div class="col-lg-3 col-md-4">
-		                    <div class="gallery-item">
-		                        <a th:href="@{assets/img/gallery/gallery-4.jpg}" class="glightbox" data-gallery="images-gallery">
-		                            <img th:src="@{assets/img/gallery/gallery-4.jpg}" alt="" class="img-fluid">
-		                        </a>
-		                    </div>
-		                </div><!-- End Gallery Item -->
-
-		                <div class="col-lg-3 col-md-4">
-		                    <div class="gallery-item">
-		                        <a th:href="@{assets/img/gallery/gallery-5.jpg}" class="glightbox" data-gallery="images-gallery">
-		                            <img th:src="@{assets/img/gallery/gallery-5.jpg}" alt="" class="img-fluid">
-		                        </a>
-		                    </div>
-		                </div><!-- End Gallery Item -->
-
-		                <div class="col-lg-3 col-md-4">
-		                    <div class="gallery-item">
-		                        <a th:href="@{assets/img/gallery/gallery-6.jpg}" class="glightbox" data-gallery="images-gallery">
-		                            <img th:src="@{assets/img/gallery/gallery-6.jpg}" alt="" class="img-fluid">
-		                        </a>
-		                    </div>
-		                </div><!-- End Gallery Item -->
-
-		                <div class="col-lg-3 col-md-4">
-		                    <div class="gallery-item">
-		                        <a th:href="@{assets/img/gallery/gallery-7.jpg}" class="glightbox" data-gallery="images-gallery">
-		                            <img th:src="@{assets/img/gallery/gallery-7.jpg}" alt="" class="img-fluid">
-		                        </a>
-		                    </div>
-		                </div><!-- End Gallery Item -->
-
-		                <div class="col-lg-3 col-md-4">
-		                    <div class="gallery-item">
-		                        <a th:href="@{assets/img/gallery/gallery-8.jpg}" class="glightbox" data-gallery="images-gallery">
-		                            <img th:src="@{assets/img/gallery/gallery-8.jpg}" alt="" class="img-fluid">
-		                        </a>
-		                    </div>
-		                </div><!-- End Gallery Item -->
-
-		            </div>
-
-		        </div>
-
-		    </section><!-- /Gallery Section -->
+			  </section><!-- /Contact Section -->
 
 		    
 
 		</main>
 
-		
+		<th:block th:replace="footer :: footerFragment"></th:block>
+		<script>
+			document.getElementById('updatebtn').addEventListener('click', function() {
+	            // Lấy giá trị của các input
+	            var temail    = document.getElementById('txtemail').value;
+	            var tphone    = document.getElementById('txtphone').value;
+				var tpagename = document.getElementById('txtpagename').value;
+				var twelcome  = document.getElementById('txtwelcome').value;
+				var twelcome1 = document.getElementById('txtwelcome1').value;
+				var tbox1_1   = document.getElementById('txtbox1_1').value;
+				var tbox1_2   = document.getElementById('txtbox1_2').value;
+				var tabout_us   = document.getElementById('txtabout_us').value;
+				var tLocation   = document.getElementById('txtLocation').value;
+
+				var table = document.getElementById('dataTable');
+				var tableData = [];
+
+			    // Duyệt qua các dòng của bảng (bỏ qua dòng tiêu đề)
+			    for (var i = 1, row; row = table.rows[i]; i++) {
+			        var rowData = {
+			            id_b: row.cells[0].innerText,
+			            boxName: row.cells[1].innerText,
+						boxContent: row.cells[2].innerText
+			        };
+			        tableData.push(rowData);
+			    }
+				
+				var data = {
+			        pageCustomIndex: {
+						id: 0,
+				        email: temail,
+				        phone: tphone,
+				        pageName: tpagename,
+				        welcomeLine: twelcome,
+				        welcomeLine1: twelcome1,
+				        box1_1: tbox1_1,
+				        box1_2: tbox1_2,
+				        about_us: tabout_us,
+				        location: tLocation
+			        },
+			        pageCustomIndex_1: tableData
+			    };
+				
+				fetch('/Custom', {
+				    method: 'POST',
+				    headers: {
+				        'Content-Type': 'application/json',
+				    },
+				    body: JSON.stringify(data)
+				})
+				.then(response => {
+				    // Kiểm tra nếu response trả về status code 200
+				    if (!response.ok) {
+				        throw new Error('Network response was not ok');
+				    }
+				    return response.json(); // Chuyển phản hồi thành JSON
+				})
+				.then(data => {
+					location.reload();
+				})
+				.catch((error) => {
+					location.reload();
+				});
+
+	        });
+		</script>
 
 		<!-- Scroll Top -->
 		<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

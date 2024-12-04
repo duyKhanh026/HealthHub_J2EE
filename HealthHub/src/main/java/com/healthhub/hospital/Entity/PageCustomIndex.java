@@ -13,7 +13,10 @@ import lombok.NoArgsConstructor;
 public class PageCustomIndex {
 
     @Id
-    @Column(name = "Email", nullable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
+    
+    @Column(name = "Email")
     private String email;
 
     @Column(name = "Phone")

@@ -34,5 +34,8 @@ public class PageCustomIndex_1Service {
     public void deleteById(Long id) {
     	repository.deleteById(id);
     }
+    public void deleteAll() {
+        repository.deleteAll();
+    }
 }
 
