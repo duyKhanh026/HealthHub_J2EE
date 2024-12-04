@@ -28,6 +28,7 @@ public class ChiTietLichKhamController {
     @Autowired
     private ThanhToanRepository thanhToanRepository;
 
+
     @GetMapping("/lichkham/details/{maLK}")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> getLichKhamDetail(@PathVariable int maLK) {

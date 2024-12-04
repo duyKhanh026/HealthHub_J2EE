@@ -47,6 +47,11 @@ public class DatLichKhamController {
 
     private EmailController emailController;
 
+    @Autowired
+    private PageCustomIndexService pageCustomIndexService;
+    @Autowired
+    private PageCustomIndex_1Service pageCustomIndex_1Service;
+
     public DatLichKhamController(LichKhamService lichKhamService, ChiTietLichKhamService chiTietLichKhamService,
                                  TaiKhoanService taiKhoanService, ThanhToanService thanhToanService, EmailController emailController) {
         this.lichKhamService = lichKhamService;
@@ -92,6 +97,12 @@ public class DatLichKhamController {
         }
 
         model.addAttribute("recaptchaKey", recaptchaKey);
+        PageCustomIndex page = pageCustomIndexService.getFirstPageCustomIndex();
+        List<PageCustomIndex_1> page_1 = pageCustomIndex_1Service.findAll();
+
+        model.addAttribute("page", page);
+
+        model.addAttribute("page_1", page_1);
         return "User/DatLichKham";
     }
 
@@ -116,10 +127,33 @@ public class DatLichKhamController {
         LocalDateTime ngayGioDatKham = LocalDateTime.of(selectedDate, selectedTime);
         lichkham.setNgayGioDatKham(ngayGioDatKham);
 
-
-        // Lấy thông tin bệnh nhân dựa trên tài khoản đăng nhập
         benhNhan = taiKhoanService.getBenhNhanByTenDN(authentication.getName());
-        lichkham.setBenhNhan(benhNhan); // Thay thế bằng bệnh nhân hiện đang đăng nhập
+        BenhNhan benhNhan1 = null;
+
+        try {
+            OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
+            String email = oauth2User.getAttribute("email");
+
+            benhNhan1 = benhnhanService.findByEmail(email);
+
+            if (benhNhan1 != null) {
+                lichkham.setBenhNhan(benhNhan1);
+            } else {
+                lichkham.setBenhNhan(benhNhan);
+            }
+        } catch (Exception e) {
+            System.err.println("Error fetching patient information: " + e.getMessage());
+            lichkham.setBenhNhan(benhNhan); // Sử dụng thông tin bệnh nhân từ tên đăng nhập nếu xảy ra lỗi
+        }
+        // Lấy thông tin bệnh nhân dựa trên tài khoản đăng nhập
+
+//        if (benhNhan1 == null){
+//            lichkham.setBenhNhan(benhNhan);
+//        }else{
+//            lichkham.setBenhNhan(benhNhan1);
+//        }
+
+         // Thay thế bằng bệnh nhân hiện đang đăng nhập
         lichkham.setTrangThai("Chưa khám");
 
         // Lưu `LichKham` trước để có ID (MaLK)
@@ -171,12 +205,12 @@ public class DatLichKhamController {
         return availableTimes;
     }
 
-    @GetMapping("/checkDate")
-    public ResponseEntity<Boolean> checkDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,Authentication authentication) {
-
-        benhNhan = taiKhoanService.getBenhNhanByTenDN(authentication.getName());
-
-        boolean hasAppointment = lichKhamService.hasAppointmentOnDate(benhNhan.getMaBN(), date);
-        return ResponseEntity.ok(hasAppointment);
-    }
+//    @GetMapping("/checkDate")
+//    public ResponseEntity<Boolean> checkDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,Authentication authentication) {
+//
+//        benhNhan = taiKhoanService.getBenhNhanByTenDN(authentication.getName());
+//
+//        boolean hasAppointment = lichKhamService.hasAppointmentOnDate(benhNhan.getMaBN(), date);
+//        return ResponseEntity.ok(hasAppointment);
+//    }
 }

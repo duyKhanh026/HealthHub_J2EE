@@ -1,12 +1,8 @@
 package com.healthhub.hospital.controller.User;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.healthhub.hospital.Entity.BenhNhan;
-import com.healthhub.hospital.Entity.LichKham;
-import com.healthhub.hospital.Entity.TaiKhoan;
-import com.healthhub.hospital.service.BenhNhanService;
-import com.healthhub.hospital.service.LichKhamService;
-import com.healthhub.hospital.service.TaiKhoanService;
+import com.healthhub.hospital.Entity.*;
+import com.healthhub.hospital.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +29,11 @@ public class LichKhamController {
     private BenhNhanService benhnhanService;
     private BenhNhan benhnhan;
 
+    @Autowired
+    private PageCustomIndexService pageCustomIndexService;
+    @Autowired
+    private PageCustomIndex_1Service pageCustomIndex_1Service;
+
     @GetMapping("/lichkhambenh")
     public String danhSachLichKham(Model model, Authentication authentication) {
         // Kiểm tra xem người dùng đang đăng nhập bằng tài khoản Google hay tài khoản mật khẩu thông thường
@@ -51,6 +52,12 @@ public class LichKhamController {
         List<LichKham> lichKhamList = LKBService.getLichKhamByMaBN(benhnhan.getMaBN());
 
         model.addAttribute("lichKhamList", lichKhamList);
+        PageCustomIndex page = pageCustomIndexService.getFirstPageCustomIndex();
+        List<PageCustomIndex_1> page_1 = pageCustomIndex_1Service.findAll();
+
+        model.addAttribute("page", page);
+
+        model.addAttribute("page_1", page_1);
         return "User/LichKhamBenh"; // Tên của view HTML bạn muốn render
     }
 

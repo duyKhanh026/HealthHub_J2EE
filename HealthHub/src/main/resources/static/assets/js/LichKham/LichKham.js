@@ -138,26 +138,26 @@ function saveEdit() {
 }
 
 
-document.getElementById("date").addEventListener("change", function () {
-    const selectedDate = this.value;
-
-    fetch(`/checkDate?date=${selectedDate}`)
-        .then(response => response.json())
-        .then(hasAppointment => {
-            if (hasAppointment) {
-                // Hiển thị thông báo
-                Swal.fire({
-                    icon: "warning",
-                    title: "Lịch đã tồn tại",
-                    text: "Bạn đã có lịch khám trong ngày này. Vui lòng hủy lịch cũ trước khi đặt lịch mới.",
-                });
-
-                // Vô hiệu hóa nút "Make an Appointment"
-                document.getElementById("submitButton").disabled = true;
-            } else {
-                // Bật lại nút "Make an Appointment"
-                document.getElementById("submitButton").disabled = false;
-            }
-        })
-        .catch(error => console.error("Error checking date:", error));
-});
+//document.getElementById("date").addEventListener("change", function () {
+//    const selectedDate = this.value;
+//
+//    fetch(`/checkDate?date=${selectedDate}`)
+//        .then(response => response.json())
+//        .then(hasAppointment => {
+//            if (hasAppointment) {
+//                // Hiển thị thông báo
+//                Swal.fire({
+//                    icon: "warning",
+//                    title: "Lịch đã tồn tại",
+//                    text: "Bạn đã có lịch khám trong ngày này. Vui lòng hủy lịch cũ trước khi đặt lịch mới.",
+//                });
+//
+//                // Vô hiệu hóa nút "Make an Appointment"
+//                document.getElementById("submitButton").disabled = true;
+//            } else {
+//                // Bật lại nút "Make an Appointment"
+//                document.getElementById("submitButton").disabled = false;
+//            }
+//        })
+//        .catch(error => console.error("Error checking date:", error));
+//});

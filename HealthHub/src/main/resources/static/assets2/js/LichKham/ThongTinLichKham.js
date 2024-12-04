@@ -45,14 +45,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     soTienInput.setAttribute("readonly", "true");
         // Ẩn các nút thanh toán
-        thanhToanBtns.forEach(btn => btn.style.display = "none");
-        // Hiện nút xuất PDF
-        xuatPdfBtn.style.display = "block";
+//        thanhToanBtns.forEach(btn => btn.style.display = "none");
+//        // Hiện nút xuất PDF
+//        xuatPdfBtn.style.display = "block";
     } else {
         // Hiện các nút thanh toán
-        thanhToanBtns.forEach(btn => btn.style.display = "block");
-        // Ẩn nút xuất PDF
-        xuatPdfBtn.style.display = "none";
+//        thanhToanBtns.forEach(btn => btn.style.display = "block");
+//        // Ẩn nút xuất PDF
+//        xuatPdfBtn.style.display = "none";
     }
 });
 
