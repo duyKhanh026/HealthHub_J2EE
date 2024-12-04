@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Thiết kế tranh chính</title>
+
+  <!-- Custom fonts for this template -->
+  <link th:href="@{assets2/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link th:href="@{assets2/css/sb-admin-2.min.css}" rel="stylesheet">
+  <link th:href="@{assets2/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <!-- Favicons -->
+  <link th:href="@{assets/img/favicon.png}" rel="icon">
+  <link th:href="@{assets/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link th:href="@{assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <link th:href="@{assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+  <link th:href="@{assets/vendor/aos/aos.css}" rel="stylesheet">
+  <link th:href="@{assets/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet">
+  <link th:href="@{assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
+  <link th:href="@{assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link th:href="@{assets/css/main.css}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+<!-- Page Wrapper -->
+<div id="wrapper">
+<div style="position: fixed;width: 18%;">
+
+	<th:block th:replace="~{Doctor/menu :: menuFragment}"></th:block>
+</div>
+
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Main Content -->
+    <div id="content" style="padding-left: 12%;">
+		<header id="header" class="header sticky-top" xmlns:sec="http://www.w3.org/1999/xhtml" th:fragment="headerFragment"
+		        xmlns:th="http://www.w3.org/1999/xhtml">
+
+		    <div class="topbar d-flex align-items-center">
+		        <div class="container d-flex justify-content-center justify-content-md-between">
+		            <div class="contact-info d-flex align-items-center">
+		                <i class="bi bi-envelope d-flex align-items-center"><a><input type="text" th:value="${page.email}"></a></i>
+		                <i class="bi bi-phone d-flex align-items-center ms-4"><span><input type="text" th:value="${page.phone}"></span></i>
+		            </div>
+		            <div class="social-links d-none d-md-flex align-items-center">
+		                <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+		                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+		                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+		                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+		            </div>
+		        </div>
+		    </div><!-- End Top Bar -->
+
+		    <div class="branding d-flex align-items-center">
+
+		        <div class="container position-relative d-flex align-items-center justify-content-between">
+		            <a class="logo d-flex align-items-center me-auto">
+		                <!-- Uncomment the line below if you also wish to use an image logo -->
+		                <!-- <img th:src="@{assets/img/logo.png}" alt=""> -->
+						<input type="text" th:value="${page.pageName}">
+		            </a>
+
+		            <nav id="navmenu" class="navmenu">
+		                
+		                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+		            </nav>
+
+					<button class="btn btn-primary">Update</button>
+
+
+		            <!-- Modal Xác Nhận Đăng Xuất -->
+		            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+		                <div class="modal-dialog" role="document">
+		                    <div class="modal-content">
+		                        <div class="modal-header">
+		                            <h5 class="modal-title" id="logoutModalLabel">Xác Nhận Đăng Xuất</h5>
+		                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		                        </div>
+		                        <div class="modal-body">
+		                            Bạn có chắc chắn muốn đăng xuất không?
+		                        </div>
+		                        <div class="modal-footer">
+		                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+		                            <form th:action="@{/logout}" style="display: inline;">
+		                                <input type="submit" class="btn btn-danger" value="Đăng xuất"/>
+		                            </form>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+
+		        </div>
+
+		    </div>
+
+
+		</header>
+
+
+		<main class="main">
+
+		    <!-- Hero Section -->
+		    <section id="hero" class="hero section light-background">
+
+		        <img th:src="@{assets/img/hero-bg.jpg}" alt="" data-aos="fade-in">
+
+		        <div class="container position-relative">
+
+		            <div class="welcome position-relative" data-aos="fade-down" data-aos-delay="100">
+		                <h2><input type="text" th:value="${page.welcomeLine}"></h2>
+						<textarea style="width: 600px; height: 30%;" th:text="${page.welcomeLine1}"></textarea>
+		            </div><!-- End Welcome -->
+
+		            <div class="content row gy-4">
+		                <div class="col-lg-4 d-flex align-items-stretch">
+		                    <div class="why-box" data-aos="zoom-out" >
+		                        <h3><input th:value="${page.box1_1}"></h3>
+		                       <textarea style="width: 100%; height: 50%;" th:text="${page.box1_2}"></textarea>
+		                        
+		                    </div>
+		                </div><!-- End Why Box -->
+
+		                <div class="col-lg-8 d-flex align-items-stretch">
+		                    <div class="d-flex flex-column justify-content-center">
+		                        <div class="row gy-4">
+
+		                            <div class="col-xl-4 d-flex align-items-stretch" style="width: 350px;">
+		                                <div class="icon-box" data-aos="zoom-out" data-aos-delay="300">
+		                                    <i class="bi bi-clipboard-data"></i>
+											<button class="btn btn-primary">Add</button>
+											<button class="btn btn-primary">Edit</button>
+		                                    <h4><input id="boxName"></h4>
+											<textarea id="boxContent" style="width: 100%; height: 50%;" ></textarea>
+		                                </div>
+		                            </div><!-- End Icon Box -->
+
+		                        </div>
+		                    </div>
+							
+		                </div>
+		            </div><!-- End  Content-->
+					<br>
+					<table style="border: 1px solid black; width: 100%; background-color: white;">
+				        <thead>
+				            <tr>
+				                <th>id_b</th>
+				                <th>boxName</th>
+				                <th>boxContent</th>
+				            </tr>
+				        </thead>
+				        <tbody>
+				            <tr th:each="pp : ${page_1}">
+				                <td th:text="${pp.id_b}">1</td>
+				                <td th:text="${pp.boxName}"></td>
+								<td th:text="${pp.boxContent}"></td>
+								<td>
+				                    <button class="add-btn" onclick="editRow(this)">Edit</button>
+				                    <button class="remove-btn" onclick="removeRow(this)" >Del</button>
+				                </td>
+				            </tr>
+				        </tbody>
+				    </table>
+					<script>
+						function editRow(button) {
+				            // Lấy dòng hiện tại
+				            const row = button.closest('tr');
+				            currentRow = row;
+
+				            // Lấy dữ liệu từ dòng
+				            const boxName = row.cells[1].innerText;
+				            const boxContent = row.cells[2].innerText;
+
+				            // Đổ dữ liệu lên form
+				            document.getElementById('boxName').value = boxName;
+				            document.getElementById('boxContent').value = boxContent;
+				        }
+						function removeRow(button) {
+				            if (confirm('Are you sure you want to remove this row?')) {
+				                const row = button.closest('tr');
+				                row.remove();
+				            }
+				        }
+					</script>
+		        </div>							
+				
+		    </section><!-- /Hero Section -->
+
+		    <!-- About Section -->
+		    <section id="about" class="about section">
+
+		        <div class="container">
+
+		            <div class="row gy-4 gx-5">
+
+		                <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="200">
+		                    <img th:src="@{assets/img/about.jpg}" class="img-fluid" alt="">
+		                    <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn"></a>
+		                </div>
+
+		                <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
+		                    <h3>About Us</h3>
+		                    <p>
+		                        Dolor iure expedita id fuga asperiores qui sunt consequatur minima. Quidem voluptas deleniti. Sit quia molestiae quia quas qui magnam itaque veritatis dolores. Corrupti totam ut eius incidunt reiciendis veritatis asperiores placeat.
+		                    </p>
+		                    <ul>
+		                        <li>
+		                            <i class="fa-solid fa-vial-circle-check"></i>
+		                            <div>
+		                                <h5>Ullamco laboris nisi ut aliquip consequat</h5>
+		                                <p>Magni facilis facilis repellendus cum excepturi quaerat praesentium libre trade</p>
+		                            </div>
+		                        </li>
+		                        <li>
+		                            <i class="fa-solid fa-pump-medical"></i>
+		                            <div>
+		                                <h5>Magnam soluta odio exercitationem reprehenderi</h5>
+		                                <p>Quo totam dolorum at pariatur aut distinctio dolorum laudantium illo direna pasata redi</p>
+		                            </div>
+		                        </li>
+		                        <li>
+		                            <i class="fa-solid fa-heart-circle-xmark"></i>
+		                            <div>
+		                                <h5>Voluptatem et qui exercitationem</h5>
+		                                <p>Et velit et eos maiores est tempora et quos dolorem autem tempora incidunt maxime veniam</p>
+		                            </div>
+		                        </li>
+		                    </ul>
+		                </div>
+
+		            </div>
+
+		        </div>
+
+		    </section><!-- /About Section -->
+
+		    
+
+		    
+
+		    
+
+
+		    <!-- Doctors Section -->
+		    <section id="doctors" class="doctors section">
+
+		        <!-- Section Title -->
+		        <div class="container section-title" data-aos="fade-up">
+		            <h2>Doctors</h2>
+		            <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+		        </div><!-- End Section Title -->
+
+		        <div class="container">
+
+		            <div class="row gy-4">
+
+		                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+		                    <div class="team-member d-flex align-items-start">
+		                        <div class="pic"><img th:src="@{assets/img/doctors/doctors-1.jpg}" class="img-fluid" alt=""></div>
+		                        <div class="member-info">
+		                            <h4>Walter White</h4>
+		                            <span>Chief Medical Officer</span>
+		                            <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
+		                            <div class="social">
+		                                <a href=""><i class="bi bi-twitter-x"></i></a>
+		                                <a href=""><i class="bi bi-facebook"></i></a>
+		                                <a href=""><i class="bi bi-instagram"></i></a>
+		                                <a href=""> <i class="bi bi-linkedin"></i> </a>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div><!-- End Team Member -->
+
+		                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+		                    <div class="team-member d-flex align-items-start">
+		                        <div class="pic"><img th:src="@{assets/img/doctors/doctors-2.jpg}" class="img-fluid" alt=""></div>
+		                        <div class="member-info">
+		                            <h4>Sarah Jhonson</h4>
+		                            <span>Anesthesiologist</span>
+		                            <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
+		                            <div class="social">
+		                                <a href=""><i class="bi bi-twitter-x"></i></a>
+		                                <a href=""><i class="bi bi-facebook"></i></a>
+		                                <a href=""><i class="bi bi-instagram"></i></a>
+		                                <a href=""> <i class="bi bi-linkedin"></i> </a>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div><!-- End Team Member -->
+
+		                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+		                    <div class="team-member d-flex align-items-start">
+		                        <div class="pic"><img th:src="@{assets/img/doctors/doctors-3.jpg}" class="img-fluid" alt=""></div>
+		                        <div class="member-info">
+		                            <h4>William Anderson</h4>
+		                            <span>Cardiology</span>
+		                            <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
+		                            <div class="social">
+		                                <a href=""><i class="bi bi-twitter-x"></i></a>
+		                                <a href=""><i class="bi bi-facebook"></i></a>
+		                                <a href=""><i class="bi bi-instagram"></i></a>
+		                                <a href=""> <i class="bi bi-linkedin"></i> </a>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div><!-- End Team Member -->
+
+		                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+		                    <div class="team-member d-flex align-items-start">
+		                        <div class="pic"><img th:src="@{assets/img/doctors/doctors-4.jpg}" class="img-fluid" alt=""></div>
+		                        <div class="member-info">
+		                            <h4>Amanda Jepson</h4>
+		                            <span>Neurosurgeon</span>
+		                            <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
+		                            <div class="social">
+		                                <a href=""><i class="bi bi-twitter-x"></i></a>
+		                                <a href=""><i class="bi bi-facebook"></i></a>
+		                                <a href=""><i class="bi bi-instagram"></i></a>
+		                                <a href=""> <i class="bi bi-linkedin"></i> </a>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div><!-- End Team Member -->
+
+		            </div>
+
+		        </div>
+
+		    </section><!-- /Doctors Section -->
+
+
+		    
+
+		    <!-- Gallery Section -->
+		    <section id="gallery" class="gallery section">
+
+		        <!-- Section Title -->
+		        <div class="container section-title" data-aos="fade-up">
+		            <h2>Gallery</h2>
+		            <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+		        </div><!-- End Section Title -->
+
+		        <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
+
+		            <div class="row g-0">
+
+		                <div class="col-lg-3 col-md-4">
+		                    <div class="gallery-item">
+		                        <a th:href="@{assets/img/gallery/gallery-1.jpg}" class="glightbox" data-gallery="images-gallery">
+		                            <img th:src="@{assets/img/gallery/gallery-1.jpg}" alt="" class="img-fluid">
+		                        </a>
+		                    </div>
+		                </div><!-- End Gallery Item -->
+
+		                <div class="col-lg-3 col-md-4">
+		                    <div class="gallery-item">
+		                        <a th:href="@{assets/img/gallery/gallery-2.jpg}" class="glightbox" data-gallery="images-gallery">
+		                            <img th:src="@{assets/img/gallery/gallery-2.jpg}" alt="" class="img-fluid">
+		                        </a>
+		                    </div>
+		                </div><!-- End Gallery Item -->
+
+		                <div class="col-lg-3 col-md-4">
+		                    <div class="gallery-item">
+		                        <a th:href="@{assets/img/gallery/gallery-3.jpg}" class="glightbox" data-gallery="images-gallery">
+		                            <img th:src="@{assets/img/gallery/gallery-3.jpg}" alt="" class="img-fluid">
+		                        </a>
+		                    </div>
+		                </div><!-- End Gallery Item -->
+
+		                <div class="col-lg-3 col-md-4">
+		                    <div class="gallery-item">
+		                        <a th:href="@{assets/img/gallery/gallery-4.jpg}" class="glightbox" data-gallery="images-gallery">
+		                            <img th:src="@{assets/img/gallery/gallery-4.jpg}" alt="" class="img-fluid">
+		                        </a>
+		                    </div>
+		                </div><!-- End Gallery Item -->
+
+		                <div class="col-lg-3 col-md-4">
+		                    <div class="gallery-item">
+		                        <a th:href="@{assets/img/gallery/gallery-5.jpg}" class="glightbox" data-gallery="images-gallery">
+		                            <img th:src="@{assets/img/gallery/gallery-5.jpg}" alt="" class="img-fluid">
+		                        </a>
+		                    </div>
+		                </div><!-- End Gallery Item -->
+
+		                <div class="col-lg-3 col-md-4">
+		                    <div class="gallery-item">
+		                        <a th:href="@{assets/img/gallery/gallery-6.jpg}" class="glightbox" data-gallery="images-gallery">
+		                            <img th:src="@{assets/img/gallery/gallery-6.jpg}" alt="" class="img-fluid">
+		                        </a>
+		                    </div>
+		                </div><!-- End Gallery Item -->
+
+		                <div class="col-lg-3 col-md-4">
+		                    <div class="gallery-item">
+		                        <a th:href="@{assets/img/gallery/gallery-7.jpg}" class="glightbox" data-gallery="images-gallery">
+		                            <img th:src="@{assets/img/gallery/gallery-7.jpg}" alt="" class="img-fluid">
+		                        </a>
+		                    </div>
+		                </div><!-- End Gallery Item -->
+
+		                <div class="col-lg-3 col-md-4">
+		                    <div class="gallery-item">
+		                        <a th:href="@{assets/img/gallery/gallery-8.jpg}" class="glightbox" data-gallery="images-gallery">
+		                            <img th:src="@{assets/img/gallery/gallery-8.jpg}" alt="" class="img-fluid">
+		                        </a>
+		                    </div>
+		                </div><!-- End Gallery Item -->
+
+		            </div>
+
+		        </div>
+
+		    </section><!-- /Gallery Section -->
+
+		    
+
+		</main>
+
+		
+
+		<!-- Scroll Top -->
+		<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+		<!-- Preloader -->
+		<div id="preloader"></div>
+
+		<!-- Vendor JS Files -->
+		<script th:src="@{assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+		<script th:src="@{assets/vendor/php-email-form/validate.js}"></script>
+		<script th:src="@{assets/vendor/aos/aos.js}"></script>
+		<script th:src="@{assets/vendor/glightbox/js/glightbox.min.js}"></script>
+		<script th:src="@{assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+		<script th:src="@{assets/vendor/swiper/swiper-bundle.min.js}"></script>
+
+		<!-- Main JS File -->
+		<script th:src="@{assets/js/main.js}"></script>
+	</div>
+  </div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="assets2/vendor/jquery/jquery.min.js"></script>
+<script src="assets2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets2/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="assets2/js/sb-admin-2.min.js"></script>
+</body>
+
+</html>

@@ -71,7 +71,7 @@ public class AppConfig{
                         .requestMatchers("/","/anhcuatao/**", "/index", "/assets2/**", "/css/**", "/assets/**"
                                 ,"DSLichKham","/ChiTietBenhNhan","/ThongTinLichKham","/register","/send_email","/forgot_password"
                                 ,"/DSBenhNhan", "/ThanhToan","/forgot_password","/reset_password","/api/getAvailableTimes","/NgayNghi","/NgayNghi/xoa"
-                                ,"/send_html_email","/ThongKe", "/hitOpenaiApi","/export-pdf","/zalopay","payment/create-order","/zalopay-callback").permitAll()
+                                ,"/send_html_email","/ThongKe", "/hitOpenaiApi","/export-pdf","/zalopay","payment/create-order","/zalopay-callback", "/Custom").permitAll()
                         .anyRequest().authenticated())
                 .formLogin((form) -> form
                         .loginPage("/login")
