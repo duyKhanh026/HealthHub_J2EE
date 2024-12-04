@@ -126,7 +126,7 @@ CREATE TABLE `page_custom_about_us` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `page_custom_about_us`
+-- Dumping data for table `page_custom_about_us`
 --
 
 INSERT INTO `page_custom_about_us` (`id_b`, `iconlink`, `title`, `content`) VALUES
@@ -174,21 +174,23 @@ CREATE TABLE `page_custom_index` (
   `box1_1` varchar(50) DEFAULT NULL,
   `box1_2` varchar(255) DEFAULT NULL,
   `about_us` varchar(255) NOT NULL,
-  `Location` varchar(100) NOT NULL
+  `Location` varchar(100) NOT NULL,
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `page_custom_index`
+-- Dumping data for table `page_custom_index`
 --
 
-INSERT INTO `page_custom_index` (`Email`, `Phone`, `page_name`, `welcome_line`, `welcome_line_1`, `box1_1`, `box1_2`, `about_us`, `Location`) VALUES
-('healthhub.service.infor@gmail.com', '0342205794', 'HealthHub', 'WELCOME TO HEALTHHUB', 'We are team of talented designers making websites with Bootstrap', 'Why Choose Medilab?', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit Asperiores dolores sed et. Tenetur quia eos. ', 'The pain of the right expedient is that the flight is rougher than those who are of the least consequence. Some kind of pleasure is softened. Let it be because of the troubles, because those who suffer the great pains of the truth. The corrupt as a whole,', '273 Đ. An Dương Vương, Phường 3, Quận 5, Hồ Chí Minh 700000, Việt Nam');
+INSERT INTO `page_custom_index` (`Email`, `Phone`, `page_name`, `welcome_line`, `welcome_line_1`, `box1_1`, `box1_2`, `about_us`, `Location`, `id`) VALUES
+('healthhub.service.infor@gmail.com', '0342205788', 'HealthHub', 'WELCOME TO HEALTHHUB', 'We are team of talented designers making websites with Bootstrap', 'Why Choose Medilab?', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit Asperiores dolores sed et. Tenetur quia eos. ', 'The pain of the right expedient is that the flight is rougher than those who are of the least consequence. Some kind of pleasure is softened. Let it be because of the troubles, because those who suffer the great pains of the truth. The corrupt as a whole,', '273 Đ. An Dương Vương, Phường 3, Quận 5, Hồ Chí Minh 700000, Việt Nam', 0);
 
 -- --------------------------------------------------------
 
 --
 -- Cấu trúc bảng cho bảng `page_custom_index_1`
 --
+
 
 CREATE TABLE `page_custom_index_1` (
   `id_b` int(11) NOT NULL,
@@ -197,11 +199,11 @@ CREATE TABLE `page_custom_index_1` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `page_custom_index_1`
+-- Dumping data for table `page_custom_index_1`
 --
 
 INSERT INTO `page_custom_index_1` (`id_b`, `box_name`, `box_content`) VALUES
-(1, 'Corporis voluptates officia eiusmod', 'Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip'),
+(1, 'Corporis voluptates officia eiusmod', 'Consequuntur'),
 (2, 'Ullamco laboris ladore pan', 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt'),
 (3, 'Labore consequatur incidid dolore', 'Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere');
 
