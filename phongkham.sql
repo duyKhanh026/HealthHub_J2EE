@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 04, 2024 lúc 02:12 PM
--- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.2.12
+-- Host: 127.0.0.1
+-- Generation Time: Dec 04, 2024 at 02:19 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `phongkham`
+-- Database: `phongkham`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `benhnhan`
+-- Table structure for table `benhnhan`
 --
 
 CREATE TABLE `benhnhan` (
@@ -39,7 +39,7 @@ CREATE TABLE `benhnhan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `benhnhan`
+-- Dumping data for table `benhnhan`
 --
 
 INSERT INTO `benhnhan` (`MaBN`, `Hoten`, `Ngaysinh`, `Gioitinh`, `SDT`, `Email`, `Diachi`, `Tiensubenh`) VALUES
@@ -56,7 +56,7 @@ INSERT INTO `benhnhan` (`MaBN`, `Hoten`, `Ngaysinh`, `Gioitinh`, `SDT`, `Email`,
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `chitietlichkham`
+-- Table structure for table `chitietlichkham`
 --
 
 CREATE TABLE `chitietlichkham` (
@@ -68,7 +68,7 @@ CREATE TABLE `chitietlichkham` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `chitietlichkham`
+-- Dumping data for table `chitietlichkham`
 --
 
 INSERT INTO `chitietlichkham` (`MaHS`, `MaLK`, `Chuandoan`, `Donthuoc`, `Ghichuthem`) VALUES
@@ -84,7 +84,7 @@ INSERT INTO `chitietlichkham` (`MaHS`, `MaLK`, `Chuandoan`, `Donthuoc`, `Ghichut
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `lichkham`
+-- Table structure for table `lichkham`
 --
 
 CREATE TABLE `lichkham` (
@@ -99,7 +99,7 @@ CREATE TABLE `lichkham` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `lichkham`
+-- Dumping data for table `lichkham`
 --
 
 INSERT INTO `lichkham` (`MaLK`, `MaBN`, `Ngaygiodatkham`, `Trangthai`, `Hoten`, `Email`, `SDT`, `Note`) VALUES
@@ -115,7 +115,7 @@ INSERT INTO `lichkham` (`MaLK`, `MaBN`, `Ngaygiodatkham`, `Trangthai`, `Hoten`, 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `page_custom_about_us`
+-- Table structure for table `page_custom_about_us`
 --
 
 CREATE TABLE `page_custom_about_us` (
@@ -137,7 +137,7 @@ INSERT INTO `page_custom_about_us` (`id_b`, `iconlink`, `title`, `content`) VALU
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `page_custom_gallery`
+-- Table structure for table `page_custom_gallery`
 --
 
 CREATE TABLE `page_custom_gallery` (
@@ -146,7 +146,7 @@ CREATE TABLE `page_custom_gallery` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `page_custom_gallery`
+-- Dumping data for table `page_custom_gallery`
 --
 
 INSERT INTO `page_custom_gallery` (`id`, `url`) VALUES
@@ -162,7 +162,7 @@ INSERT INTO `page_custom_gallery` (`id`, `url`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `page_custom_index`
+-- Table structure for table `page_custom_index`
 --
 
 CREATE TABLE `page_custom_index` (
@@ -188,9 +188,8 @@ INSERT INTO `page_custom_index` (`Email`, `Phone`, `page_name`, `welcome_line`, 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `page_custom_index_1`
+-- Table structure for table `page_custom_index_1`
 --
-
 
 CREATE TABLE `page_custom_index_1` (
   `id_b` int(11) NOT NULL,
@@ -210,7 +209,7 @@ INSERT INTO `page_custom_index_1` (`id_b`, `box_name`, `box_content`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `password_reset_token`
+-- Table structure for table `password_reset_token`
 --
 
 CREATE TABLE `password_reset_token` (
@@ -221,7 +220,7 @@ CREATE TABLE `password_reset_token` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `password_reset_token`
+-- Dumping data for table `password_reset_token`
 --
 
 INSERT INTO `password_reset_token` (`id`, `token`, `user_id`, `expiry_date`) VALUES
@@ -243,7 +242,7 @@ INSERT INTO `password_reset_token` (`id`, `token`, `user_id`, `expiry_date`) VAL
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `taikhoan`
+-- Table structure for table `taikhoan`
 --
 
 CREATE TABLE `taikhoan` (
@@ -255,7 +254,7 @@ CREATE TABLE `taikhoan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `taikhoan`
+-- Dumping data for table `taikhoan`
 --
 
 INSERT INTO `taikhoan` (`MaTK`, `TenDN`, `Matkhau`, `MaBN`, `Vaitro`) VALUES
@@ -268,7 +267,7 @@ INSERT INTO `taikhoan` (`MaTK`, `TenDN`, `Matkhau`, `MaBN`, `Vaitro`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `thanhtoan`
+-- Table structure for table `thanhtoan`
 --
 
 CREATE TABLE `thanhtoan` (
@@ -281,7 +280,7 @@ CREATE TABLE `thanhtoan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `thanhtoan`
+-- Dumping data for table `thanhtoan`
 --
 
 INSERT INTO `thanhtoan` (`MaTT`, `MaLK`, `Sotien`, `Ngaythanhtoan`, `Hinhthucthanhtoan`, `Trangthai`) VALUES
@@ -295,162 +294,162 @@ INSERT INTO `thanhtoan` (`MaTT`, `MaLK`, `Sotien`, `Ngaythanhtoan`, `Hinhthuctha
 (321, 108, 500000, '2024-11-20 11:14:23', 'Tiền mặt', 'Đã thanh toán');
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `benhnhan`
+-- Indexes for table `benhnhan`
 --
 ALTER TABLE `benhnhan`
   ADD PRIMARY KEY (`MaBN`);
 
 --
--- Chỉ mục cho bảng `chitietlichkham`
+-- Indexes for table `chitietlichkham`
 --
 ALTER TABLE `chitietlichkham`
   ADD PRIMARY KEY (`MaHS`),
   ADD KEY `MaLK` (`MaLK`);
 
 --
--- Chỉ mục cho bảng `lichkham`
+-- Indexes for table `lichkham`
 --
 ALTER TABLE `lichkham`
   ADD PRIMARY KEY (`MaLK`),
   ADD KEY `MaBN` (`MaBN`);
 
 --
--- Chỉ mục cho bảng `page_custom_about_us`
+-- Indexes for table `page_custom_about_us`
 --
 ALTER TABLE `page_custom_about_us`
   ADD PRIMARY KEY (`id_b`);
 
 --
--- Chỉ mục cho bảng `page_custom_gallery`
+-- Indexes for table `page_custom_gallery`
 --
 ALTER TABLE `page_custom_gallery`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `page_custom_index`
+-- Indexes for table `page_custom_index`
 --
 ALTER TABLE `page_custom_index`
-  ADD PRIMARY KEY (`Email`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `page_custom_index_1`
+-- Indexes for table `page_custom_index_1`
 --
 ALTER TABLE `page_custom_index_1`
   ADD PRIMARY KEY (`id_b`);
 
 --
--- Chỉ mục cho bảng `password_reset_token`
+-- Indexes for table `password_reset_token`
 --
 ALTER TABLE `password_reset_token`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_user` (`user_id`);
 
 --
--- Chỉ mục cho bảng `taikhoan`
+-- Indexes for table `taikhoan`
 --
 ALTER TABLE `taikhoan`
   ADD PRIMARY KEY (`MaTK`),
   ADD KEY `MaBN` (`MaBN`);
 
 --
--- Chỉ mục cho bảng `thanhtoan`
+-- Indexes for table `thanhtoan`
 --
 ALTER TABLE `thanhtoan`
   ADD PRIMARY KEY (`MaTT`),
   ADD KEY `MaLK` (`MaLK`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `benhnhan`
+-- AUTO_INCREMENT for table `benhnhan`
 --
 ALTER TABLE `benhnhan`
   MODIFY `MaBN` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT cho bảng `chitietlichkham`
+-- AUTO_INCREMENT for table `chitietlichkham`
 --
 ALTER TABLE `chitietlichkham`
   MODIFY `MaHS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=225;
 
 --
--- AUTO_INCREMENT cho bảng `lichkham`
+-- AUTO_INCREMENT for table `lichkham`
 --
 ALTER TABLE `lichkham`
   MODIFY `MaLK` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
--- AUTO_INCREMENT cho bảng `page_custom_about_us`
+-- AUTO_INCREMENT for table `page_custom_about_us`
 --
 ALTER TABLE `page_custom_about_us`
   MODIFY `id_b` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `page_custom_gallery`
+-- AUTO_INCREMENT for table `page_custom_gallery`
 --
 ALTER TABLE `page_custom_gallery`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT cho bảng `page_custom_index_1`
+-- AUTO_INCREMENT for table `page_custom_index_1`
 --
 ALTER TABLE `page_custom_index_1`
   MODIFY `id_b` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `password_reset_token`
+-- AUTO_INCREMENT for table `password_reset_token`
 --
 ALTER TABLE `password_reset_token`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT cho bảng `taikhoan`
+-- AUTO_INCREMENT for table `taikhoan`
 --
 ALTER TABLE `taikhoan`
   MODIFY `MaTK` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT cho bảng `thanhtoan`
+-- AUTO_INCREMENT for table `thanhtoan`
 --
 ALTER TABLE `thanhtoan`
   MODIFY `MaTT` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=322;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `chitietlichkham`
+-- Constraints for table `chitietlichkham`
 --
 ALTER TABLE `chitietlichkham`
   ADD CONSTRAINT `chitietlichkham_ibfk_1` FOREIGN KEY (`MaLK`) REFERENCES `lichkham` (`MaLK`);
 
 --
--- Các ràng buộc cho bảng `lichkham`
+-- Constraints for table `lichkham`
 --
 ALTER TABLE `lichkham`
   ADD CONSTRAINT `lichkham_ibfk_1` FOREIGN KEY (`MaBN`) REFERENCES `benhnhan` (`MaBN`);
 
 --
--- Các ràng buộc cho bảng `password_reset_token`
+-- Constraints for table `password_reset_token`
 --
 ALTER TABLE `password_reset_token`
   ADD CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `benhnhan` (`MaBN`);
 
 --
--- Các ràng buộc cho bảng `taikhoan`
+-- Constraints for table `taikhoan`
 --
 ALTER TABLE `taikhoan`
   ADD CONSTRAINT `MaBN` FOREIGN KEY (`MaBN`) REFERENCES `benhnhan` (`MaBN`);
 
 --
--- Các ràng buộc cho bảng `thanhtoan`
+-- Constraints for table `thanhtoan`
 --
 ALTER TABLE `thanhtoan`
   ADD CONSTRAINT `thanhtoan_ibfk_1` FOREIGN KEY (`MaLK`) REFERENCES `lichkham` (`MaLK`) ON DELETE CASCADE ON UPDATE CASCADE;
