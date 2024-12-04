@@ -62,7 +62,7 @@
   <!-- Hero Section -->
   <section id="hero" class="hero section light-background">
 
-    <img th:src="@{assets/img/hero-bg.jpg}" alt="" data-aos="fade-in">
+	<img th:src="'data:image/png;base64,' + ${base64Image2}" alt="" data-aos="fade-in">
 
     <div class="container position-relative">
 
@@ -112,8 +112,8 @@
       <div class="row gy-4 gx-5">
 
         <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="200">
-          <img th:src="@{assets/img/about.jpg}" class="img-fluid" alt="">
-          <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn"></a>
+			<img th:src="'data:image/png;base64,' + ${base64Image}" class="img-fluid" alt="">
+            <a th:href="${page.ytburl}" class="glightbox pulsating-play-btn"></a>
         </div>
 
         <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">

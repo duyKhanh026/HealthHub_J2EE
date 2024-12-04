@@ -38,5 +38,13 @@ public class PageCustomIndex {
     private String about_us;
     
     private String Location;
+    
+    private String ytburl;
+    
+    @Lob // Lưu dữ liệu lớn, như file nhị phân
+    private byte[] imgdata;
+    
+    @Lob // Lưu dữ liệu lớn, như file nhị phân
+    private byte[] imgdata2;
 
 }

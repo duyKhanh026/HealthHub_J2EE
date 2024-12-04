@@ -13,6 +13,7 @@ import com.healthhub.hospital.service.PageCustomIndexService;
 import com.healthhub.hospital.service.PageCustomIndex_1Service;
 import com.healthhub.hospital.service.TaiKhoanService;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +45,12 @@ public class MainController {
 	private PageCustomGalleryService pageCustomGalleryService;
 	
 	private BenhNhan benhnhan;
-
+	
+	public String convertImageToBase64(byte[] by) {
+        byte[] imageBytes = by;
+        return Base64.getEncoder().encodeToString(imageBytes);
+    }
+	
 	@GetMapping({ "/", "/index" })
 	public String index(Model model) {
 		PageCustomIndex page = pageCustomIndexService.getFirstPageCustomIndex();
@@ -53,6 +59,13 @@ public class MainController {
 		List<PageCustomAboutUs> aboutus = pageCustomAboutUsService.findAll();
 		
 		List<PageCustomGallery> gallerys = pageCustomGalleryService.findAll();
+
+
+		String base64Image = convertImageToBase64(page.getImgdata());
+        model.addAttribute("base64Image", base64Image);
+        
+        String base64Image2 = convertImageToBase64(page.getImgdata2());
+        model.addAttribute("base64Image2", base64Image2);
 		
 		model.addAttribute("page", page);
 

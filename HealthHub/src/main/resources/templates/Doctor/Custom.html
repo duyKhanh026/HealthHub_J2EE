@@ -120,11 +120,11 @@
 
 		    <!-- Hero Section -->
 		    <section id="hero" class="hero section light-background">
-
-		        <img th:src="@{assets/img/hero-bg.jpg}" alt="" data-aos="fade-in">
+				<img th:src="'data:image/png;base64,' + ${base64Image2}" alt="" data-aos="fade-in">
 
 		        <div class="container position-relative">
 
+					<input id="imgbyte2" type="file" name="image" accept="image/*" required>
 		            <div class="welcome position-relative" data-aos="fade-down" data-aos-delay="100">
 		                <h2><input id="txtwelcome" type="text" th:value="${page.welcomeLine}"></h2>
 						<textarea id="txtwelcome1" style="width: 600px; height: 30%;" th:text="${page.welcomeLine1}"></textarea>
@@ -263,8 +263,10 @@
 		        <div class="container">
 		            <div class="row gy-4 gx-5">
 		                <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="200">
-		                    <img th:src="@{assets/img/about.jpg}" class="img-fluid" alt="">
-		                    <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn"></a>
+		                    <img th:src="'data:image/png;base64,' + ${base64Image}" class="img-fluid" alt="">
+							<input id="imgbyte" type="file" name="image" accept="image/*" required>
+							<input id="txtytburl" type="text" th:value="${page.ytburl}" style="width: 100%;">
+		                    <a th:href="${page.ytburl}" class="glightbox pulsating-play-btn"></a>
 		                </div>
 
 		                <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
@@ -326,6 +328,20 @@
 				var tbox1_2   = document.getElementById('txtbox1_2').value;
 				var tabout_us   = document.getElementById('txtabout_us').value;
 				var tLocation   = document.getElementById('txtLocation').value;
+				var tytburl   = document.getElementById('txtytburl').value;
+				
+				const imgInput = document.getElementById("imgbyte");
+				const imgInput2 = document.getElementById("imgbyte2");
+
+			    // Kiểm tra xem có file được chọn hay không
+			    if (!imgInput.files || imgInput.files.length === 0) {
+			        alert("Vui lòng chọn một ảnh.");
+			        return;
+			    }
+
+			    // Lấy file từ input
+			    const file = imgInput.files[0];
+				const file2 = imgInput2.files[0];
 
 				var table = document.getElementById('dataTable');
 				var tableData = [];
@@ -351,17 +367,24 @@
 				        box1_1: tbox1_1,
 				        box1_2: tbox1_2,
 				        about_us: tabout_us,
-				        location: tLocation
+				        location: tLocation,
+						ytburl: tytburl,
+						imgdata: null,
+						imgdata2: null
 			        },
 			        pageCustomIndex_1: tableData
 			    };
 				
+				
+				
+				const formData = new FormData();
+				formData.append("file", file); // File ảnh
+				formData.append("file2", file2); // File ảnh
+				formData.append("data", JSON.stringify(data)); // Dữ liệu JSON
+
 				fetch('/Custom', {
 				    method: 'POST',
-				    headers: {
-				        'Content-Type': 'application/json',
-				    },
-				    body: JSON.stringify(data)
+				    body: formData,
 				})
 				.then(response => {
 				    // Kiểm tra nếu response trả về status code 200
