@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 04, 2024 at 09:04 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th12 04, 2024 lúc 02:12 PM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Phiên bản PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `phongkham`
+-- Cơ sở dữ liệu: `phongkham`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `benhnhan`
+-- Cấu trúc bảng cho bảng `benhnhan`
 --
 
 CREATE TABLE `benhnhan` (
@@ -39,7 +39,7 @@ CREATE TABLE `benhnhan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `benhnhan`
+-- Đang đổ dữ liệu cho bảng `benhnhan`
 --
 
 INSERT INTO `benhnhan` (`MaBN`, `Hoten`, `Ngaysinh`, `Gioitinh`, `SDT`, `Email`, `Diachi`, `Tiensubenh`) VALUES
@@ -56,7 +56,7 @@ INSERT INTO `benhnhan` (`MaBN`, `Hoten`, `Ngaysinh`, `Gioitinh`, `SDT`, `Email`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chitietlichkham`
+-- Cấu trúc bảng cho bảng `chitietlichkham`
 --
 
 CREATE TABLE `chitietlichkham` (
@@ -68,7 +68,7 @@ CREATE TABLE `chitietlichkham` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `chitietlichkham`
+-- Đang đổ dữ liệu cho bảng `chitietlichkham`
 --
 
 INSERT INTO `chitietlichkham` (`MaHS`, `MaLK`, `Chuandoan`, `Donthuoc`, `Ghichuthem`) VALUES
@@ -76,28 +76,15 @@ INSERT INTO `chitietlichkham` (`MaHS`, `MaLK`, `Chuandoan`, `Donthuoc`, `Ghichut
 (202, 102, 'Đau dạ dày', 'Omeprazole 20mg, Metronidazole 500mg', 'Tránh ăn đồ cay nóng'),
 (203, 103, 'Cảm cúm', 'Vitamin C, Ibuprofen 200mg', 'Nghỉ ngơi, uống nước ấm'),
 (204, 104, 'a', 'bv', 'c'),
-(205, 105, NULL, NULL, NULL),
+(205, 105, 'a', 'a', 'a'),
 (206, 106, 'a', 'bv', 'c'),
-(207, 107, NULL, NULL, NULL),
-(208, 108, NULL, NULL, NULL),
-(211, 125, 'Bị khùng', 'Vaccin 108', 'Nhớ uống thuốc đầy đủ'),
-(212, 127, 'Viêm họng', 'Paracetamol', 'Nghỉ ngơi đầy đủ'),
-(214, 129, NULL, NULL, NULL),
-(215, 130, NULL, NULL, NULL),
-(216, 131, NULL, NULL, NULL),
-(217, 132, NULL, NULL, NULL),
-(218, 134, '1', '1', '1'),
-(219, 143, NULL, NULL, NULL),
-(220, 144, NULL, NULL, NULL),
-(221, 145, NULL, NULL, NULL),
-(222, 146, NULL, NULL, NULL),
-(223, 147, NULL, NULL, NULL),
-(224, 148, NULL, NULL, NULL);
+(207, 107, 'b', 'b', 'b'),
+(208, 108, 'c', 'c', 'c');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lichkham`
+-- Cấu trúc bảng cho bảng `lichkham`
 --
 
 CREATE TABLE `lichkham` (
@@ -112,48 +99,23 @@ CREATE TABLE `lichkham` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `lichkham`
+-- Đang đổ dữ liệu cho bảng `lichkham`
 --
 
 INSERT INTO `lichkham` (`MaLK`, `MaBN`, `Ngaygiodatkham`, `Trangthai`, `Hoten`, `Email`, `SDT`, `Note`) VALUES
-(101, 1, '2024-10-20 09:00:00', 'Đã khám', 'Nguyen Van A', 'a@gmail.com', '123', '123'),
-(102, 2, '2024-10-21 14:30:00', 'Chưa Khám', NULL, NULL, NULL, NULL),
-(103, 1, '2024-10-22 11:15:00', 'Đã Khám', NULL, NULL, NULL, NULL),
-(104, 1, '2024-10-31 08:00:00', 'Pending', 'Nguyen Van A', 'nguyenvana@example.com', '0123456789', 'First consultation'),
-(105, 2, '2024-11-01 09:30:00', 'Confirmed', 'Le Thi B', 'lethib@example.com', '0987654321', 'Follow-up visit'),
-(106, 3, '2024-11-02 14:00:00', 'Đã khám', 'Tran Van C', 'tranvanc@example.com', '0912345678', 'Routine check-up'),
-(107, 4, '2024-11-03 10:00:00', 'Confirmed', 'Pham Thi D', 'phamthid@example.com', '0901234567', 'Monthly health check'),
-(108, 5, '2024-11-04 16:30:00', 'Cancelled', 'Hoang Van E', 'hoangvane@example.com', '0981234567', 'Consultation rescheduled'),
-(124, 8, '2024-11-06 15:34:45', 'Pending', 'Le Hoai Nam', 'nam@gmail.com', '0939804455', 'đi khám đúng giờ'),
-(125, 8, '2024-10-09 15:35:56', 'Confirmed', 'Le Hoai Nam', 'nam@gmail.com', '0939804455', 'tt'),
-(126, 8, '2024-07-24 15:36:30', 'Cancelled', 'Le Hoai Nam', 'nam@gmail.com', '0939804455', 'rr'),
-(127, 22, '2024-11-30 08:00:00', 'Đã khám', 'Danh', 'danh123098@gmail.com', '0947947704', 'đi khám lưng'),
-(128, 22, '2024-12-01 08:00:00', 'Chưa khám', '', '', '', ''),
-(129, 22, '2024-12-19 08:00:00', 'Chưa khám', 'Danh', 'danh123098@gmail.com', '0947947704', ''),
-(130, 23, '2024-12-02 08:00:00', 'Chưa khám', 'Duy', NULL, '5678', NULL),
-(131, 8, '2024-12-02 08:30:00', 'Chưa khám', 'Le Hoai Nam', 'namhoaile2003@gmail.com', '1234567899', 'đau bụng'),
-(132, 23, '2024-12-03 08:00:00', 'Chưa khám', 'Duy', NULL, '5678', NULL),
-(133, NULL, '2024-12-03 08:30:00', 'DayOff', NULL, NULL, NULL, NULL),
-(134, 22, '2024-12-03 09:00:00', 'Đã khám', 'Danh', 'danh123098@gmail.com', '0947947704', 'tôi muốn khám trĩ'),
-(135, 8, '2024-12-03 09:30:00', 'Chưa khám', 'Le Hoai Nam', 'namhoaile2003@gmail.com', '1234567899', ''),
-(136, 8, '2024-12-20 08:00:00', 'Chưa khám', 'Le Hoai Nam', 'namhoaile2003@gmail.com', '1234567899', ''),
-(137, 8, '2024-12-12 08:00:00', 'Chưa khám', 'Le Hoai Nam', 'namhoaile2003@gmail.com', '1234567899', ''),
-(138, 8, '2024-12-12 08:00:00', 'Chưa khám', 'Le Hoai Nam', 'namhoaile2003@gmail.com', '1234567899', ''),
-(139, 8, '2024-12-21 08:00:00', 'Chưa khám', 'Le Hoai Nam', 'namhoaile2003@gmail.com', '1234567899', ''),
-(140, 8, '2024-12-21 08:00:00', 'Chưa khám', 'Le Hoai Nam', 'namhoaile2003@gmail.com', '1234567899', ''),
-(141, 8, '2024-12-25 08:00:00', 'Chưa khám', 'Le Hoai Nam', 'namhoaile2003@gmail.com', '1234567899', ''),
-(142, 8, '2024-12-19 08:30:00', 'Chưa khám', 'Le Hoai Nam', 'namhoaile2003@gmail.com', '1234567899', ''),
-(143, 8, '2024-12-19 09:00:00', 'Chưa khám', 'Le Hoai Nam', 'namhoaile2003@gmail.com', '1234567899', ''),
-(144, 8, '2024-12-12 08:30:00', 'Chưa khám', 'Le Hoai Nam', 'namhoaile2003@gmail.com', '1234567899', ''),
-(145, 8, '2024-12-11 08:00:00', 'Chưa khám', 'Le Hoai Nam', 'namhoaile2003@gmail.com', '1234567899', ''),
-(146, 8, '2024-12-05 08:00:00', 'Chưa khám', 'Le Hoai Nam', 'namhoaile2003@gmail.com', '1234567899', ''),
-(147, 8, '2024-12-04 08:00:00', 'Chưa khám', 'Le Hoai Nam', 'namhoaile2003@gmail.com', '1234567899', ''),
-(148, 8, '2024-12-26 08:00:00', 'Chưa khám', 'Le Hoai Nam', 'namhoaile2003@gmail.com', '1234567899', '');
+(101, 1, '2024-12-01 09:00:00', 'Đã khám', 'Nguyen Van A', 'a@gmail.com', '123', '123'),
+(102, 2, '2024-11-30 14:30:00', 'Đã khám', 'Le Thi B', 'b@gmail.com', '0123456789', 'abc'),
+(103, 1, '2024-12-02 11:15:00', 'Đã Khám', 'Nguyen Van A', 'a@gmail.com', '0939804455', 'khám bệnh'),
+(104, 1, '2024-12-03 08:00:00', 'Đã khám', 'Nguyen Van A', 'nguyenvana@example.com', '0123456789', 'First consultation'),
+(105, 2, '2024-11-04 09:30:00', 'Đã khám', 'Le Thi B', 'lethib@example.com', '0987654321', 'Follow-up visit'),
+(106, 3, '2024-11-29 14:00:00', 'Đã khám', 'Tran Van C', 'tranvanc@example.com', '0912345678', 'Routine check-up'),
+(107, 4, '2024-11-28 10:00:00', 'Đã khám', 'Pham Thi D', 'phamthid@example.com', '0901234567', 'Monthly health check'),
+(108, 5, '2024-11-04 16:30:00', 'Đã khám', 'Hoang Van E', 'hoangvane@example.com', '0981234567', 'Consultation rescheduled');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `page_custom_about_us`
+-- Cấu trúc bảng cho bảng `page_custom_about_us`
 --
 
 CREATE TABLE `page_custom_about_us` (
@@ -164,7 +126,7 @@ CREATE TABLE `page_custom_about_us` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `page_custom_about_us`
+-- Đang đổ dữ liệu cho bảng `page_custom_about_us`
 --
 
 INSERT INTO `page_custom_about_us` (`id_b`, `iconlink`, `title`, `content`) VALUES
@@ -175,7 +137,7 @@ INSERT INTO `page_custom_about_us` (`id_b`, `iconlink`, `title`, `content`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `page_custom_gallery`
+-- Cấu trúc bảng cho bảng `page_custom_gallery`
 --
 
 CREATE TABLE `page_custom_gallery` (
@@ -184,7 +146,7 @@ CREATE TABLE `page_custom_gallery` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `page_custom_gallery`
+-- Đang đổ dữ liệu cho bảng `page_custom_gallery`
 --
 
 INSERT INTO `page_custom_gallery` (`id`, `url`) VALUES
@@ -200,7 +162,7 @@ INSERT INTO `page_custom_gallery` (`id`, `url`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `page_custom_index`
+-- Cấu trúc bảng cho bảng `page_custom_index`
 --
 
 CREATE TABLE `page_custom_index` (
@@ -216,7 +178,7 @@ CREATE TABLE `page_custom_index` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `page_custom_index`
+-- Đang đổ dữ liệu cho bảng `page_custom_index`
 --
 
 INSERT INTO `page_custom_index` (`Email`, `Phone`, `page_name`, `welcome_line`, `welcome_line_1`, `box1_1`, `box1_2`, `about_us`, `Location`) VALUES
@@ -225,7 +187,7 @@ INSERT INTO `page_custom_index` (`Email`, `Phone`, `page_name`, `welcome_line`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `page_custom_index_1`
+-- Cấu trúc bảng cho bảng `page_custom_index_1`
 --
 
 CREATE TABLE `page_custom_index_1` (
@@ -235,7 +197,7 @@ CREATE TABLE `page_custom_index_1` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `page_custom_index_1`
+-- Đang đổ dữ liệu cho bảng `page_custom_index_1`
 --
 
 INSERT INTO `page_custom_index_1` (`id_b`, `box_name`, `box_content`) VALUES
@@ -246,7 +208,7 @@ INSERT INTO `page_custom_index_1` (`id_b`, `box_name`, `box_content`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_reset_token`
+-- Cấu trúc bảng cho bảng `password_reset_token`
 --
 
 CREATE TABLE `password_reset_token` (
@@ -257,7 +219,7 @@ CREATE TABLE `password_reset_token` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `password_reset_token`
+-- Đang đổ dữ liệu cho bảng `password_reset_token`
 --
 
 INSERT INTO `password_reset_token` (`id`, `token`, `user_id`, `expiry_date`) VALUES
@@ -279,7 +241,7 @@ INSERT INTO `password_reset_token` (`id`, `token`, `user_id`, `expiry_date`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `taikhoan`
+-- Cấu trúc bảng cho bảng `taikhoan`
 --
 
 CREATE TABLE `taikhoan` (
@@ -291,7 +253,7 @@ CREATE TABLE `taikhoan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `taikhoan`
+-- Đang đổ dữ liệu cho bảng `taikhoan`
 --
 
 INSERT INTO `taikhoan` (`MaTK`, `TenDN`, `Matkhau`, `MaBN`, `Vaitro`) VALUES
@@ -304,7 +266,7 @@ INSERT INTO `taikhoan` (`MaTK`, `TenDN`, `Matkhau`, `MaBN`, `Vaitro`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `thanhtoan`
+-- Cấu trúc bảng cho bảng `thanhtoan`
 --
 
 CREATE TABLE `thanhtoan` (
@@ -317,182 +279,176 @@ CREATE TABLE `thanhtoan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `thanhtoan`
+-- Đang đổ dữ liệu cho bảng `thanhtoan`
 --
 
 INSERT INTO `thanhtoan` (`MaTT`, `MaLK`, `Sotien`, `Ngaythanhtoan`, `Hinhthucthanhtoan`, `Trangthai`) VALUES
 (301, 101, 900000, '2024-11-06 11:14:23', 'ZaloPay', 'Đã thanh toán'),
 (302, 102, 500000, '2024-12-01 20:47:46', 'Tiền mặt', 'Đã thanh toán'),
-(303, 127, 200000, '2024-11-30 12:25:00', 'Tiền mặt', NULL),
-(305, 129, 0, NULL, NULL, 'Chưa thanh toán'),
-(306, 130, 0, NULL, NULL, 'Chưa thanh toán'),
-(307, 131, 900000, '2024-12-02 07:37:24', 'ZaloPay', 'Đã thanh toán'),
-(308, 132, 0, NULL, NULL, 'Chưa thanh toán'),
-(309, 134, 900000, '2024-12-02 08:06:30', 'Tiền mặt', 'Đã thanh toán'),
-(310, 143, 0, NULL, NULL, 'Chưa thanh toán'),
-(311, 144, 0, NULL, NULL, 'Chưa thanh toán'),
-(312, 145, 0, NULL, NULL, 'Chưa thanh toán'),
-(313, 146, 0, NULL, NULL, 'Chưa thanh toán'),
-(314, 147, 0, NULL, NULL, 'Chưa thanh toán'),
-(315, 148, 0, NULL, NULL, 'Chưa thanh toán');
+(316, 103, 200000, '2024-12-12 20:10:35', 'VNPAY', 'Đã thanh toán'),
+(317, 104, 500000, '2024-11-20 11:14:23', 'Tiền mặt', 'Đã thanh toán'),
+(318, 105, 200000, '2024-12-12 20:10:35', 'VNPAY', 'Đã thanh toán'),
+(319, 106, 500000, '2024-11-20 11:14:23', 'Tiền mặt', 'Đã thanh toán'),
+(320, 107, 200000, '2024-12-12 20:11:42', 'VNPAY', 'Đã thanh toán'),
+(321, 108, 500000, '2024-11-20 11:14:23', 'Tiền mặt', 'Đã thanh toán');
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `benhnhan`
+-- Chỉ mục cho bảng `benhnhan`
 --
 ALTER TABLE `benhnhan`
   ADD PRIMARY KEY (`MaBN`);
 
 --
--- Indexes for table `chitietlichkham`
+-- Chỉ mục cho bảng `chitietlichkham`
 --
 ALTER TABLE `chitietlichkham`
   ADD PRIMARY KEY (`MaHS`),
   ADD KEY `MaLK` (`MaLK`);
 
 --
--- Indexes for table `lichkham`
+-- Chỉ mục cho bảng `lichkham`
 --
 ALTER TABLE `lichkham`
   ADD PRIMARY KEY (`MaLK`),
   ADD KEY `MaBN` (`MaBN`);
 
 --
--- Indexes for table `page_custom_about_us`
+-- Chỉ mục cho bảng `page_custom_about_us`
 --
 ALTER TABLE `page_custom_about_us`
   ADD PRIMARY KEY (`id_b`);
 
 --
--- Indexes for table `page_custom_gallery`
+-- Chỉ mục cho bảng `page_custom_gallery`
 --
 ALTER TABLE `page_custom_gallery`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `page_custom_index`
+-- Chỉ mục cho bảng `page_custom_index`
 --
 ALTER TABLE `page_custom_index`
   ADD PRIMARY KEY (`Email`);
 
 --
--- Indexes for table `page_custom_index_1`
+-- Chỉ mục cho bảng `page_custom_index_1`
 --
 ALTER TABLE `page_custom_index_1`
   ADD PRIMARY KEY (`id_b`);
 
 --
--- Indexes for table `password_reset_token`
+-- Chỉ mục cho bảng `password_reset_token`
 --
 ALTER TABLE `password_reset_token`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_user` (`user_id`);
 
 --
--- Indexes for table `taikhoan`
+-- Chỉ mục cho bảng `taikhoan`
 --
 ALTER TABLE `taikhoan`
   ADD PRIMARY KEY (`MaTK`),
   ADD KEY `MaBN` (`MaBN`);
 
 --
--- Indexes for table `thanhtoan`
+-- Chỉ mục cho bảng `thanhtoan`
 --
 ALTER TABLE `thanhtoan`
   ADD PRIMARY KEY (`MaTT`),
   ADD KEY `MaLK` (`MaLK`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `benhnhan`
+-- AUTO_INCREMENT cho bảng `benhnhan`
 --
 ALTER TABLE `benhnhan`
   MODIFY `MaBN` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `chitietlichkham`
+-- AUTO_INCREMENT cho bảng `chitietlichkham`
 --
 ALTER TABLE `chitietlichkham`
   MODIFY `MaHS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=225;
 
 --
--- AUTO_INCREMENT for table `lichkham`
+-- AUTO_INCREMENT cho bảng `lichkham`
 --
 ALTER TABLE `lichkham`
   MODIFY `MaLK` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
--- AUTO_INCREMENT for table `page_custom_about_us`
+-- AUTO_INCREMENT cho bảng `page_custom_about_us`
 --
 ALTER TABLE `page_custom_about_us`
   MODIFY `id_b` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `page_custom_gallery`
+-- AUTO_INCREMENT cho bảng `page_custom_gallery`
 --
 ALTER TABLE `page_custom_gallery`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `page_custom_index_1`
+-- AUTO_INCREMENT cho bảng `page_custom_index_1`
 --
 ALTER TABLE `page_custom_index_1`
   MODIFY `id_b` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `password_reset_token`
+-- AUTO_INCREMENT cho bảng `password_reset_token`
 --
 ALTER TABLE `password_reset_token`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT for table `taikhoan`
+-- AUTO_INCREMENT cho bảng `taikhoan`
 --
 ALTER TABLE `taikhoan`
   MODIFY `MaTK` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `thanhtoan`
+-- AUTO_INCREMENT cho bảng `thanhtoan`
 --
 ALTER TABLE `thanhtoan`
-  MODIFY `MaTT` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=316;
+  MODIFY `MaTT` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=322;
 
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `chitietlichkham`
+-- Các ràng buộc cho bảng `chitietlichkham`
 --
 ALTER TABLE `chitietlichkham`
   ADD CONSTRAINT `chitietlichkham_ibfk_1` FOREIGN KEY (`MaLK`) REFERENCES `lichkham` (`MaLK`);
 
 --
--- Constraints for table `lichkham`
+-- Các ràng buộc cho bảng `lichkham`
 --
 ALTER TABLE `lichkham`
   ADD CONSTRAINT `lichkham_ibfk_1` FOREIGN KEY (`MaBN`) REFERENCES `benhnhan` (`MaBN`);
 
 --
--- Constraints for table `password_reset_token`
+-- Các ràng buộc cho bảng `password_reset_token`
 --
 ALTER TABLE `password_reset_token`
   ADD CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `benhnhan` (`MaBN`);
 
 --
--- Constraints for table `taikhoan`
+-- Các ràng buộc cho bảng `taikhoan`
 --
 ALTER TABLE `taikhoan`
   ADD CONSTRAINT `MaBN` FOREIGN KEY (`MaBN`) REFERENCES `benhnhan` (`MaBN`);
 
 --
--- Constraints for table `thanhtoan`
+-- Các ràng buộc cho bảng `thanhtoan`
 --
 ALTER TABLE `thanhtoan`
   ADD CONSTRAINT `thanhtoan_ibfk_1` FOREIGN KEY (`MaLK`) REFERENCES `lichkham` (`MaLK`) ON DELETE CASCADE ON UPDATE CASCADE;
