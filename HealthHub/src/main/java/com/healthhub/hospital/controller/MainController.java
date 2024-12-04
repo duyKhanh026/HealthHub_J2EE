@@ -2,11 +2,13 @@ package com.healthhub.hospital.controller;
 
 import com.healthhub.hospital.Entity.BenhNhan;
 import com.healthhub.hospital.Entity.PageCustomAboutUs;
+import com.healthhub.hospital.Entity.PageCustomGallery;
 import com.healthhub.hospital.Entity.PageCustomIndex;
 import com.healthhub.hospital.Entity.PageCustomIndex_1;
 import com.healthhub.hospital.Entity.TaiKhoan;
 import com.healthhub.hospital.service.BenhNhanService;
 import com.healthhub.hospital.service.PageCustomAboutUsService;
+import com.healthhub.hospital.service.PageCustomGalleryService;
 import com.healthhub.hospital.service.PageCustomIndexService;
 import com.healthhub.hospital.service.PageCustomIndex_1Service;
 import com.healthhub.hospital.service.TaiKhoanService;
@@ -38,6 +40,8 @@ public class MainController {
 	private PageCustomIndex_1Service pageCustomIndex_1Service;
 	@Autowired
 	private PageCustomAboutUsService pageCustomAboutUsService;
+	@Autowired
+	private PageCustomGalleryService pageCustomGalleryService;
 	
 	private BenhNhan benhnhan;
 
@@ -48,11 +52,15 @@ public class MainController {
 		
 		List<PageCustomAboutUs> aboutus = pageCustomAboutUsService.findAll();
 		
+		List<PageCustomGallery> gallerys = pageCustomGalleryService.findAll();
+		
 		model.addAttribute("page", page);
 
 		model.addAttribute("page_1", page_1);
 		
 		model.addAttribute("aboutus", aboutus);
+		
+		model.addAttribute("gallerys", gallerys);
 
 		return "User/index";
 	}

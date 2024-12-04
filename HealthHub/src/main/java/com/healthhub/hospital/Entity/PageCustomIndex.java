@@ -33,5 +33,7 @@ public class PageCustomIndex {
     private String box1_2;
     
     private String about_us;
+    
+    private String Location;
 
 }

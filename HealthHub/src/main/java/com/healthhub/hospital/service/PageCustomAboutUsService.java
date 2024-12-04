@@ -17,8 +17,8 @@ public class PageCustomAboutUsService {
     public PageCustomAboutUs createPage(String iconlink, String title, String content) {
         PageCustomAboutUs page = new PageCustomAboutUs();
         page.setIconlink(iconlink);
-        page.setIconlink(title);
-        page.setIconlink(content);
+        page.setTitle(title);
+        page.setContent(content);
         return repository.save(page);
     }
     
