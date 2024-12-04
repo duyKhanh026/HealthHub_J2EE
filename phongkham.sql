@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2024 at 08:07 AM
+-- Generation Time: Dec 04, 2024 at 09:04 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -175,6 +175,31 @@ INSERT INTO `page_custom_about_us` (`id_b`, `iconlink`, `title`, `content`) VALU
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `page_custom_gallery`
+--
+
+CREATE TABLE `page_custom_gallery` (
+  `id` int(11) NOT NULL,
+  `url` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `page_custom_gallery`
+--
+
+INSERT INTO `page_custom_gallery` (`id`, `url`) VALUES
+(1, 'assets/img/gallery/gallery-1.jpg'),
+(2, 'assets/img/gallery/gallery-2.jpg'),
+(3, 'assets/img/gallery/gallery-3.jpg'),
+(4, 'assets/img/gallery/gallery-4.jpg'),
+(5, 'assets/img/gallery/gallery-5.jpg'),
+(6, 'assets/img/gallery/gallery-6.jpg'),
+(7, 'assets/img/gallery/gallery-7.jpg'),
+(8, 'assets/img/gallery/gallery-8.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `page_custom_index`
 --
 
@@ -186,15 +211,16 @@ CREATE TABLE `page_custom_index` (
   `welcome_line_1` varchar(255) DEFAULT NULL,
   `box1_1` varchar(50) DEFAULT NULL,
   `box1_2` varchar(255) DEFAULT NULL,
-  `about_us` varchar(255) NOT NULL
+  `about_us` varchar(255) NOT NULL,
+  `Location` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `page_custom_index`
 --
 
-INSERT INTO `page_custom_index` (`Email`, `Phone`, `page_name`, `welcome_line`, `welcome_line_1`, `box1_1`, `box1_2`, `about_us`) VALUES
-('healthhub.service.infor@gmail.com', '0342205794', 'HealthHub', 'WELCOME TO HEALTHHUB', 'We are team of talented designers making websites with Bootstrap', 'Why Choose Medilab?', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit Asperiores dolores sed et. Tenetur quia eos. ', 'The pain of the right expedient is that the flight is rougher than those who are of the least consequence. Some kind of pleasure is softened. Let it be because of the troubles, because those who suffer the great pains of the truth. The corrupt as a whole,');
+INSERT INTO `page_custom_index` (`Email`, `Phone`, `page_name`, `welcome_line`, `welcome_line_1`, `box1_1`, `box1_2`, `about_us`, `Location`) VALUES
+('healthhub.service.infor@gmail.com', '0342205794', 'HealthHub', 'WELCOME TO HEALTHHUB', 'We are team of talented designers making websites with Bootstrap', 'Why Choose Medilab?', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit Asperiores dolores sed et. Tenetur quia eos. ', 'The pain of the right expedient is that the flight is rougher than those who are of the least consequence. Some kind of pleasure is softened. Let it be because of the troubles, because those who suffer the great pains of the truth. The corrupt as a whole,', '273 Đ. An Dương Vương, Phường 3, Quận 5, Hồ Chí Minh 700000, Việt Nam');
 
 -- --------------------------------------------------------
 
@@ -341,6 +367,12 @@ ALTER TABLE `page_custom_about_us`
   ADD PRIMARY KEY (`id_b`);
 
 --
+-- Indexes for table `page_custom_gallery`
+--
+ALTER TABLE `page_custom_gallery`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `page_custom_index`
 --
 ALTER TABLE `page_custom_index`
@@ -400,6 +432,12 @@ ALTER TABLE `lichkham`
 --
 ALTER TABLE `page_custom_about_us`
   MODIFY `id_b` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `page_custom_gallery`
+--
+ALTER TABLE `page_custom_gallery`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `page_custom_index_1`
