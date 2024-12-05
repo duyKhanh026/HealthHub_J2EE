@@ -43,16 +43,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (trangThaiInput.value === "Đã thanh toán") {
 
-    soTienInput.setAttribute("readonly", "true");
+        soTienInput.setAttribute("readonly", "true");
         // Ẩn các nút thanh toán
 //        thanhToanBtns.forEach(btn => btn.style.display = "none");
 //        // Hiện nút xuất PDF
-//        xuatPdfBtn.style.display = "block";
+        xuatPdfBtn.style.display = "block";
     } else {
         // Hiện các nút thanh toán
 //        thanhToanBtns.forEach(btn => btn.style.display = "block");
 //        // Ẩn nút xuất PDF
-//        xuatPdfBtn.style.display = "none";
+        xuatPdfBtn.style.display = "none";
     }
 });
 
